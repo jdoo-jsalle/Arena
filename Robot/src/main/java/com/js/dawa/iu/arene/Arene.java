@@ -1,13 +1,13 @@
 package com.js.dawa.iu.arene;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.List;
 import java.util.Map;
 
-import com.js.dawa.iu.arene.render.CaseAreneRender;
-import com.js.dawa.iu.arene.render.CaseAreneRenderEmpty;
 import com.js.dawa.iu.console.Console;
+import com.js.dawa.robot.model.Position;
 
 public class Arene {
 	
@@ -16,51 +16,27 @@ public class Arene {
 	int mTotY = 100;
 	Console mConsole;	
 	
-	Map<Integer,CaseArene> mLstCaseArene = new HashMap<>();
+	List<ObjetArene> mLstCaseArene = new ArrayList<ObjetArene>();
 	
 	public Arene (Console pConsole) {
 		mConsole = pConsole;
 	}
 	
-	public void printArene () {
-		for (int li = 0; li < mTotY; li++) {
-			
-			if (li==0) {
-				
-				//mConsole.printHeader("   ",mTotY);
-			}
-		    //	mConsole.printText(pad(Integer.toString(li)) + " ");
-			for (int lj = 0; lj < mTotX; lj++) {
-				int lVal = li*mTotY + lj;
-					CaseAreneRender lRender = new CaseAreneRenderEmpty();
-					CaseArene lCase = mLstCaseArene.get(Integer.valueOf(lVal));
-					
-					if (lCase != null) {
-						  lRender= lCase.getRender(); 
-					}
-				
-				
-				mConsole.printRender(lRender);
-				
-				
-			}
-			mConsole.rc();
-		}
-	}
+
 	
-	public void addCaseArene (int pX, int pY,CaseArene pCaseArene) {
-		int lPos = pY * mTotY + pX;
-		mLstCaseArene.put(Integer.valueOf(lPos),pCaseArene);
-	}
-	
-	String pad (String pVal) {
-		String lRes = pVal;
-		if (pVal.length() < 2) {
-			lRes = "0" + pVal;
-		}
+	public void addObjetArene (int pX, int pY,ObjetArene pObjetArene) {
+		Position lPosition = new Position (pX,pY);
+		pObjetArene.setPosition(lPosition);
 		
-		return lRes;
+		//int lPos = pY * mTotY + pX;
+		mLstCaseArene.add(pObjetArene);
 	}
+	
+	public List<ObjetArene>  getLstCase (){
+		return mLstCaseArene;
+	}
+	
+
 	
 
 

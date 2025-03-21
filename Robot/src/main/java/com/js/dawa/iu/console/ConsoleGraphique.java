@@ -1,34 +1,51 @@
 package com.js.dawa.iu.console;
 
 import java.awt.Font;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import com.js.dawa.iu.arene.render.CaseAreneRender;
+import com.js.dawa.iu.arene.CaseArene;
+import com.js.dawa.iu.arene.ObjetArene;
+import com.js.dawa.iu.arene.render.CaseRender;
+import com.js.dawa.ui.graphique.UIPanel;
 
 public class ConsoleGraphique implements Console {
 	
 	
 	JTextArea textArea = new JTextArea();
+	
+	JFrame frame;
 	 
 	Map<String, String> mProps;
+	
+	List<ObjetArene> mLstCaseArene;
 	 
-	int getProps (String pProps) {
+	int getIntProps (String pProps) {
 		return 0;
+	}
+	
+	
+	public void update() {
+		frame.repaint();
 	}
 	
 	public void init (Map<String, String> pProps) {
 		mProps = pProps;
 		// Création de la fenêtre
-        JFrame frame = new JFrame(pProps.get("titre"));
+        frame = new JFrame(pProps.get("titre"));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(1500, 1500);
         
         // Création de la zone de texte
-        //=> variable global        
+        //=> variable global      
+        
+        UIPanel lPanel = new UIPanel();
+        lPanel.setLstCase(mLstCaseArene);
+        frame.add(lPanel);
        
         
         // Définition de la police monospaces
@@ -36,7 +53,7 @@ public class ConsoleGraphique implements Console {
         textArea.setFont(font);
         
         // Ajout de la zone de texte à la fenêtre
-        frame.add(new JScrollPane(textArea));
+       // frame.add(new JScrollPane(textArea));
         
         // Affichage de la fenêtre
         frame.setVisible(true);
@@ -44,7 +61,7 @@ public class ConsoleGraphique implements Console {
 	}
 
 	@Override
-	public void printRender(CaseAreneRender pCaseRender) {
+	public void printRender(CaseRender pCaseRender) {
 		printText(pCaseRender.getStringRender());
 		
 	}
@@ -58,20 +75,12 @@ public class ConsoleGraphique implements Console {
 	@Override
 	public void printText(String pText) {
 		textArea.append(pText);
-		System.out.print(pText);
+		
 		
 	}
 
-	@Override
-	public void printHeader(String pDecal,int pTot) {
-		printText(pDecal);
-		for (int c = 'a'; c <= 'a' + pTot-1; c++) {
-			
-			printText(Character.toString ((char)c));
 	
-		}
-		rc();
-		    
-		
+	public void setListCase (List<ObjetArene> pLstCaseArene) {
+		mLstCaseArene = pLstCaseArene;
 	}
 }

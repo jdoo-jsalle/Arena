@@ -1,6 +1,6 @@
 package com.js.dawa.iu.arene.render;
 
-public interface CaseAreneRender {
+public interface CaseRender {
 	
 	String getStringRender();
 

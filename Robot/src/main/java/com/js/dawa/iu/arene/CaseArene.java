@@ -4,25 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
-import com.js.dawa.iu.arene.render.CaseAreneRender;
+import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.robot.model.Attribut;
+import com.js.dawa.robot.model.Position;
 
-public class CaseArene {
+public class CaseArene implements ObjetArene{
 	
 	List<Attribut> mLstAttribut = new ArrayList<>();
-	CaseAreneRender mCaseRender = new CaseAreneRenderDefaut();
-	
+	CaseRender mCaseRender = new CaseAreneRenderDefaut();
+	Position mPosition;
 	
 	void addAttribut (Attribut pAttribut) {
 		mLstAttribut.add(pAttribut);
 	}
 	
-	CaseAreneRender getRender () {
+	public CaseRender getRender () {
 		return mCaseRender;
 	}
 	
-	public void setCaseAreneRender (CaseAreneRender pCaseAreneRender) {
+	public void setPosition (Position pPosition) {
+		mPosition = pPosition;
+	}
+	
+	public void setCaseAreneRender (CaseRender pCaseAreneRender) {
 		mCaseRender = pCaseAreneRender;
+	}
+	
+	public Position getPosition () {
+		return mPosition;
 	}
 
 }
