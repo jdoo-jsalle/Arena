@@ -1,7 +1,11 @@
 package com.js.dawa.iu.arene.render;
 
+
+
 public interface CaseRender {
 	
-	String getStringRender();
+	InfoRender getInfoRender();
+	
+	//void executeRender (Graphics g);
 
 }

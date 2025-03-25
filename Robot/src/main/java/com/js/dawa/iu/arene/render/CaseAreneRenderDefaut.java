@@ -1,10 +1,12 @@
 package com.js.dawa.iu.arene.render;
 
 public class CaseAreneRenderDefaut implements CaseRender {
+	
+	InfoRender mInfoRender = new InfoRender("x");
 
 	@Override
-	public String getStringRender() {
-		return "x";
+	public InfoRender getInfoRender() {
+		return mInfoRender;
 	}
 
 }

@@ -8,7 +8,10 @@ public class LstInstruction {
 	List<Instruction> mLstInstruction;
 	
 	
-	void add (Instruction pInstruction) {
+	
+	
+	
+	public void add (Instruction pInstruction) {
 		mLstInstruction.add(pInstruction);
 	}
 }

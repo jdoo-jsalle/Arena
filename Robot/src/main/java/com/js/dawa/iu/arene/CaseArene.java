@@ -2,6 +2,7 @@ package com.js.dawa.iu.arene;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
 import com.js.dawa.iu.arene.render.CaseRender;
@@ -32,6 +33,12 @@ public class CaseArene implements ObjetArene{
 	
 	public Position getPosition () {
 		return mPosition;
+	}
+
+	@Override
+	public Map<String, Attribut> getProps() {
+		//nothing
+		return null;
 	}
 
 }

@@ -2,7 +2,27 @@ package com.js.dawa.robot.model;
 
 public class Attribut {
 	
-	String mNameAttribut;
-	int mValueAttribut;
+	private String mNameAttribut;
+	private int mValueAttribut;
+	private String mValueAttributString;
+	
+	public String getNameAttribut() {
+		return mNameAttribut;
+	}
+	public void setNameAttribut(String pNameAttribut) {
+		this.mNameAttribut = pNameAttribut;
+	}
+	public int getValueAttribut() {
+		return mValueAttribut;
+	}
+	public void setValueAttribut(int pValueAttribut) {
+		this.mValueAttribut = pValueAttribut;
+	}
+	public String getValueAttributString() {
+		return mValueAttributString;
+	}
+	public void setValueAttributString(String pValueAttributString) {
+		this.mValueAttributString = pValueAttributString;
+	}
 
 }

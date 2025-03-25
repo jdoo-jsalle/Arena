@@ -1,18 +1,26 @@
 package com.js.dawa.iu.arene.render;
 
+import com.js.dawa.iu.arene.RobotsProps;
+
 public class RobotRender implements CaseRender {
 	
-	String mSymbole ="?";
 	
-	public RobotRender (String pSymbole) {
-		if (pSymbole != null)
-		    mSymbole = pSymbole;
+	InfoRender mInfoRender = new InfoRender();
+	
+	public RobotRender (RobotsProps pRobotProps) {
+		mInfoRender.setString(pRobotProps.getNom());
+		mInfoRender.setColor(pRobotProps.getColor());
+		
 	}
 
 	@Override
-	public String getStringRender() {
+	public InfoRender getInfoRender() {
 		
-		return mSymbole;
+		return  mInfoRender;
+	}
+	
+	public void setColor (String pColor) {
+		mInfoRender.setColor(pColor);
 	}
 
 }
