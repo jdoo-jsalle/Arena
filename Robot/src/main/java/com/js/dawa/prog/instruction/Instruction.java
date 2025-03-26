@@ -2,16 +2,21 @@ package com.js.dawa.prog.instruction;
 
 import com.js.dawa.iu.arene.Arene;
 import com.js.dawa.iu.arene.Robot;
-import com.js.dawa.robot.model.Position;
+import com.js.dawa.util.DawaException;
+
 
 public interface Instruction {
 	
-	void init(Args pArgsInstruction,Robot pRobot,Arene pArene);
+	void init(Args pArgsInstruction,Robot pRobot,Arene pArene) throws DawaException;
 	
 	/**
-	 * exec, give a new position
+	 * execute instruction
 	 * @return
 	 */
-	Position exec (Args pArgs);
+	void execInstruction ();
+	
+	void setFlag (String pVal);
+	
+	String dump (String pDecal);
 
 }

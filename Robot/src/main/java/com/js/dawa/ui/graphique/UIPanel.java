@@ -53,7 +53,7 @@ public class UIPanel extends JPanel {
 			pg.drawString(lOrdonne,0 + (mDecal-20), li * lSizeCase + mDecal +12);
 		}
 		
-		for (int li =0; li< mSizeArene;li++) {
+		for (int li =0; li< mSizeArene+1;li++) {
 			drawLineDecal (li*lSizeCase,0,li*lSizeCase,lSizeGrid);
 		}
 		

@@ -1,5 +1,6 @@
 package com.js.dawa.prog.instruction;
 
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,8 +9,61 @@ import com.js.dawa.util.DawaException;
 public class ParseLigneCmd implements ParseLigne {
 	 private static final Logger LOGGER =  LogManager.getLogger( ParseLigneCmd.class );
 	
+	 InstructionBlock mMainLstInstruction = new InstructionBlock();
+	 
+	 StackInstruction mPileInstruction = new StackInstruction();
+	 
+	 InstructionLst mCurrentInstruction;
+	 
+	 public ParseLigneCmd () {
+		 mPileInstruction.add(mMainLstInstruction);
+		 mCurrentInstruction = mMainLstInstruction;
+	 }
 	
-	public Args parse (int pNumLigne,String pLigne) throws DawaException {
+	 public void parse (int pNumLigne,String pLigne) throws DawaException {
+		
+		
+		if (pLigne.trim().startsWith("if")) {
+			Args lArgs = getArgs(pNumLigne, pLigne);
+			
+			InstructionLst lInstructionCond = new InstructionCond();
+			lInstructionCond.init(lArgs, null, null);
+			lInstructionCond.setFlag("if");
+			mCurrentInstruction.addInstruction(lInstructionCond);
+			mPileInstruction.add(lInstructionCond);
+			LOGGER.info(">>>Pop {}",lInstructionCond);
+			mCurrentInstruction = lInstructionCond;
+			
+		}
+		else if (pLigne.trim().startsWith("else")){
+			mCurrentInstruction.setFlag("else");
+		
+		}
+		else if (pLigne.trim().startsWith("endif")) {
+			//depile
+			mCurrentInstruction = mPileInstruction.popAndPeek();
+			LOGGER.info("<<<depop {}",mCurrentInstruction);
+			
+		
+		}
+		else {
+			 Args lArgs = getArgs(pNumLigne, pLigne);
+			 Instruction lIns= new InstructionFake();
+			 lIns.init(lArgs, null, null);
+			 mCurrentInstruction.addInstruction(lIns);
+			 
+			 LOGGER.info("<<<Add {} in {}",lIns,mCurrentInstruction);
+			 
+		}
+		
+		
+		
+		
+		
+		
+	}
+	 
+	Args getArgs (int pNumLigne,String pLigne) throws DawaException {
 		int lDeb = pLigne.indexOf("(");
 		int lEnd = pLigne.indexOf(")");
 		if (lDeb == -1 || lEnd == -1) {

@@ -5,7 +5,15 @@ RoboId:
 	ptv (100)
 	energie (100)
 endRobotId.
+affect (x,[rand|chiffre])
+	positionne une valeur dans la variable x.
 	
+si ( cond ) alors
+   instruction ()
+sinon 
+   instruction ()
+finsinon
+
 avancer(x,y) 
 	x = sur l'axe des x (positif ou négatif)
 	y = sur l'axe des y (positif ou négatif)

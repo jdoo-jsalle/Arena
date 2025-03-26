@@ -3,6 +3,8 @@ package com.js.dawa.prog.instruction;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.js.dawa.util.DawaException;
+
 public class Args {
 
 	private String mNameInstruction;
@@ -34,6 +36,23 @@ public class Args {
 	
 	public String getArgs (int pI) {
 		return  mLstArgs.get(pI);
+	}
+	
+	public int getArgsInt (int pI) throws DawaException{
+		String lVal = getArgs(pI);
+		int lRes = -1;
+		try {
+			lRes = Integer.parseInt(lVal);
+		}
+		catch (NumberFormatException le) {
+			throw new DawaException("Args " + Integer.toString(pI) + " must be numeric");
+		}
+		return lRes;
+	}
+	
+	@Override
+	public String toString() {
+		return mNameInstruction + " : " + mLstArgs.toString();
 	}
 	
 	

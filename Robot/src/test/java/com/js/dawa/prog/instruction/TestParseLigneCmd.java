@@ -18,7 +18,7 @@ public class TestParseLigneCmd {
 	public void testParse_erreur() {
 		ParseLigneCmd lParseLigne = new ParseLigneCmd();
 		try {
-			lParseLigne.parse(0, "truc");
+			lParseLigne.getArgs(0, "truc");
 		} catch (DawaException e) {
 			assertEquals("Ligne 0 error must have param beetween ()",e.getMessage());
 					
@@ -29,7 +29,7 @@ public class TestParseLigneCmd {
 	public void testParse_normal_with_args() {
 		ParseLigneCmd lParseLigne = new ParseLigneCmd();
 		try {
-			Args lArgs = lParseLigne.parse(0, "truc (40,bobo)");
+			Args lArgs = lParseLigne.getArgs(0, "truc (40,bobo)");
 			assertEquals("truc", lArgs.getNameInstruction());
 			assertEquals(2, lArgs.sizeArgs());
 			assertEquals("bobo",lArgs.getArgs(1) );
@@ -46,7 +46,7 @@ public class TestParseLigneCmd {
 	public void testParse_normal_without_args() {
 		ParseLigneCmd lParseLigne = new ParseLigneCmd();
 		try {
-			Args lArgs = lParseLigne.parse(0, "truc ()");
+			Args lArgs = lParseLigne.getArgs(0, "truc ()");
 			assertEquals(0, lArgs.sizeArgs());
 		
 			

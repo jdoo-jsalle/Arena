@@ -16,6 +16,7 @@ import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
 import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.prog.instruction.Args;
 import com.js.dawa.prog.instruction.Avancer;
+import com.js.dawa.util.DawaException;
 
 
 public class Launcher {
@@ -71,9 +72,13 @@ public class Launcher {
 		
 		Avancer lAvancer = new Avancer();
 		Args lArgs = new Args();
-		lArgs.addArguments("1");
-		lArgs.addArguments("1");
-		lAvancer.init(lArgs, lRobot, lArene);
+		lArgs.addArguments("-1");
+		lArgs.addArguments("yyyyy");
+		try {
+			lAvancer.init(lArgs, lRobot, lArene);
+		} catch (DawaException e) {
+			LOGGER.error("error interpretor", e);;
+		}
 		
 		while (!lEnd) {
 			
@@ -88,7 +93,7 @@ public class Launcher {
 			
 			lConsole.update();
 			//simule deplacement
-			lAvancer.exec(null);
+			lAvancer.execInstruction();
 			
 			//compute/eval lEnd
 			

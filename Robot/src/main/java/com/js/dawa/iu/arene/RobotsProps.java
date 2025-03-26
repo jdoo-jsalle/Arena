@@ -10,6 +10,7 @@ public class RobotsProps {
 	static String PDV = "PDV";
 	static String NAME ="NAME";
 	static String COLOR= "COLOR";
+	static String VISIBILITE ="visibilite";
 	
 	
 	
@@ -38,6 +39,10 @@ public class RobotsProps {
 		
 	}
 	
+	public int getVisibilite () {
+		return 0;
+	}
+	
 	public void setColor (String pColor) {
 		Attribut lAttribut = new Attribut();
 		lAttribut.setNameAttribut(COLOR);
@@ -57,6 +62,15 @@ public class RobotsProps {
 		lAttribut.setNameAttribut(NAME);
 		lAttribut.setValueAttributString(pNom);
 		mLstAttributs.put(NAME, lAttribut);
+	}
+	
+	
+	
+	public void setVisibilte (String pVisibilite) {
+		Attribut lAttribut = new Attribut();
+		lAttribut.setNameAttribut(VISIBILITE);
+		lAttribut.setValueAttributString(pVisibilite);
+		mLstAttributs.put(VISIBILITE, lAttribut);
 	}
 	
 
