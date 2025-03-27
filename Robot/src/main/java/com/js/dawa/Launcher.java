@@ -10,12 +10,16 @@ import org.apache.logging.log4j.Logger;
 import com.js.dawa.iu.arene.Arene;
 import com.js.dawa.iu.arene.AreneProps;
 import com.js.dawa.iu.arene.CaseArene;
-import com.js.dawa.iu.arene.Robot;
-import com.js.dawa.iu.arene.RobotsProps;
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
 import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.prog.instruction.Args;
-import com.js.dawa.prog.instruction.Avancer;
+import com.js.dawa.prog.instruction.InsAffect;
+import com.js.dawa.prog.instruction.InsAvancer;
+import com.js.dawa.prog.instruction.Instruction;
+import com.js.dawa.prog.instruction.InstructionBlock;
+import com.js.dawa.prog.instruction.InstructionCond;
+import com.js.dawa.robot.model.Robot;
+import com.js.dawa.robot.model.RobotsProps;
 import com.js.dawa.util.DawaException;
 
 
@@ -70,35 +74,74 @@ public class Launcher {
 		
 		boolean lEnd = false;
 		
-		Avancer lAvancer = new Avancer();
-		Args lArgs = new Args();
-		lArgs.addArguments("-1");
-		lArgs.addArguments("yyyyy");
+		
+		
+		
+		
+		InstructionCond lInstructionCond = new InstructionCond();
+		
+		
 		try {
-			lAvancer.init(lArgs, lRobot, lArene);
+
+			lRobot.getRobotData().setVariable("depla", "1");
+			
+			InstructionBlock lPrg = new InstructionBlock();
+			InsAvancer lAvancer1 = new InsAvancer();
+			Args lArgs = new Args(lRobot.getRobotData());
+			lArgs.addArguments("$depla");
+			lArgs.addArguments("0");
+			lAvancer1.init(lArgs, lRobot, lArene);
+			lPrg.addInstruction(lAvancer1);
+			
+			
+			//cond
+			
+			
+			lArgs = new Args(lRobot.getRobotData());
+			lArgs.addArguments("block == true");
+			lInstructionCond.init(lArgs, lRobot, lArene);
+			
+			InsAffect lInsAffect1 = new InsAffect();
+			 lArgs = new Args(lRobot.getRobotData());
+			 lArgs.addArguments("depla");
+			 lArgs.addArguments("-1");
+			lInsAffect1.init(lArgs, lRobot, lArene);
+			lInstructionCond.addInstructionIf(lInsAffect1);
+		
+			
+			
+			
+			
+			
+			lPrg.addInstruction(lInstructionCond);
+			
+			//loop
+			while (!lEnd) {
+				
+				
+				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+			
+					LOGGER.error("error", e);
+				}
+				
+				lConsole.update();
+				//simule deplacement
+				lPrg.execInstruction();
+				
+				//compute/eval lEnd
+				
+				
+			}
+			
+			
 		} catch (DawaException e) {
 			LOGGER.error("error interpretor", e);;
 		}
 		
-		while (!lEnd) {
-			
-			
-			
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
 		
-				LOGGER.error("error", e);
-			}
-			
-			lConsole.update();
-			//simule deplacement
-			lAvancer.execInstruction();
-			
-			//compute/eval lEnd
-			
-			
-		}
 		
 		
 		

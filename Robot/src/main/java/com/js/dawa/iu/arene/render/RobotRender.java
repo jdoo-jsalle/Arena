@@ -1,6 +1,6 @@
 package com.js.dawa.iu.arene.render;
 
-import com.js.dawa.iu.arene.RobotsProps;
+import com.js.dawa.robot.model.RobotsProps;
 
 public class RobotRender implements CaseRender {
 	

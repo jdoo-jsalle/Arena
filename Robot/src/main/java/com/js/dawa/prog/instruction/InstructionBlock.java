@@ -7,13 +7,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.iu.arene.Robot;
+import com.js.dawa.robot.model.Robot;
+import com.js.dawa.util.DawaException;
 
 public class InstructionBlock implements InstructionLst {
 	
 	private static final Logger LOGGER =  LogManager.getLogger( InstructionBlock.class );
 
-	Args mArgs = new Args();
+	Args mArgs;
 	
 	List<Instruction> mLstInstruction = new ArrayList<>();
 	
@@ -26,7 +27,7 @@ public class InstructionBlock implements InstructionLst {
 
 
 	@Override
-	public void execInstruction() {
+	public void execInstruction() throws DawaException{
 		for (Instruction lInstruction : mLstInstruction) {
 			lInstruction.execInstruction();
 		}

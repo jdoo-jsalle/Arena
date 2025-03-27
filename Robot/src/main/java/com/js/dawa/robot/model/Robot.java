@@ -1,11 +1,10 @@
-package com.js.dawa.iu.arene;
+package com.js.dawa.robot.model;
 
 import java.util.Map;
 
+import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.RobotRender;
-import com.js.dawa.robot.model.Attribut;
-import com.js.dawa.robot.model.Position;
 
 public class Robot implements ObjetArene{
 	
@@ -14,6 +13,8 @@ public class Robot implements ObjetArene{
 	RobotsProps mRobotProps;
 	
 	RobotRender mRobotRender;
+	
+	private DataBoard mRobotData = new DataBoard();//store information for Robot
 
 	
 
@@ -42,19 +43,32 @@ public class Robot implements ObjetArene{
 		return mRobotProps.getLstAttribut();
 	}
 	
-	public void setColorBlocked() {
+	public void setBlocked() {
 		mRobotRender.setColor("DARK_GRAY");
+		mRobotData.setBlocked(true);
+		
 		
 	}
 	
-	public void setColorDeBlocked() {
+	public void setDeBlocked() {
 		mRobotRender.setColor(mRobotProps.getColor());
+		mRobotData.setBlocked(false);
 	}
+	
+	
 
 	
 	public void add (int pX, int pY) {
 		mPosition.addX(pX);
 		mPosition.addY(pY);
+	}
+
+	public DataBoard getRobotData() {
+		return mRobotData;
+	}
+
+	public void setRobotData(DataBoard pRobotData) {
+		this.mRobotData = pRobotData;
 	}
 	
 	

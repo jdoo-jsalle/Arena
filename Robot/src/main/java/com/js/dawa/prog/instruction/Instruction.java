@@ -1,7 +1,7 @@
 package com.js.dawa.prog.instruction;
 
 import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.iu.arene.Robot;
+import com.js.dawa.robot.model.Robot;
 import com.js.dawa.util.DawaException;
 
 
@@ -13,7 +13,7 @@ public interface Instruction {
 	 * execute instruction
 	 * @return
 	 */
-	void execInstruction ();
+	void execInstruction () throws DawaException;
 	
 	void setFlag (String pVal);
 	

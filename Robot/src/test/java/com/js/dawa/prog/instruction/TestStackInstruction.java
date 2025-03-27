@@ -12,21 +12,21 @@ public class TestStackInstruction {
 		
 		StackInstruction lStackInstruction = new StackInstruction();
 		
-		Args lArgs = new Args();
+		Args lArgs = new Args(null);
 		lArgs.setNameInstruction("top");
 		InstructionBlock lInstructionBlock = new InstructionBlock();
 		lInstructionBlock.init(lArgs, null, null);
 		
 		lStackInstruction.add(lInstructionBlock);
 		
-		Args lArgs2 = new Args();
+		Args lArgs2 = new Args(null);
 		lArgs2.setNameInstruction("middle");
 		InstructionBlock lInstructionBlock2 = new InstructionBlock();
 		lInstructionBlock2.init(lArgs2, null, null);
 		
 		lStackInstruction.add(lInstructionBlock2);
 		
-		Args lArgs3 = new Args();
+		Args lArgs3 = new Args(null);
 		lArgs3.setNameInstruction("last");
 		InstructionBlock lInstructionBlock3 = new InstructionBlock();
 		lInstructionBlock3.init(lArgs3, null, null);

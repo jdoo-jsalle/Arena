@@ -1,7 +1,7 @@
 package com.js.dawa.prog.instruction;
 
 import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.iu.arene.Robot;
+import com.js.dawa.robot.model.Robot;
 
 public class InstructionFake implements Instruction {
 	Args mArgs;

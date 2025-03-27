@@ -1,11 +1,21 @@
 package com.js.dawa.prog.instruction;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.iu.arene.Robot;
 import com.js.dawa.robot.model.Position;
+import com.js.dawa.robot.model.Robot;
 import com.js.dawa.util.DawaException;
 
-public class Avancer implements Instruction {
+/**
+ * Avancer (x,y)
+ *    x et y : entier positif ou negatif ou variable ($<var> qui 
+ *    doit être dans son DataBoard
+ */
+public class InsAvancer implements Instruction {
+	
+	private static final Logger LOGGER =  LogManager.getLogger( InsAvancer.class );
 	
 	Args mArgs;
 	int mX =0;
@@ -23,21 +33,25 @@ public class Avancer implements Instruction {
 	}
 
 	@Override
-	public void execInstruction() {
+	public void execInstruction() throws DawaException {
+		verify();
 		Position lPosition = mRobot.getPosition();
-		int lSizeArene = mArene.getAreneProps().getSize();
+		int lSizeArene = 100;
+		if (mArene != null) {
+			lSizeArene = mArene.getAreneProps().getSize();
+		}
 		if (lPosition.getX()+ mX <= lSizeArene &&
 			lPosition.getY()+ mY <= lSizeArene  &&
 			lPosition.getX()+ mX > 0 &&
 			lPosition.getY()+ mY > 0)
 		{
-			mRobot.setColorDeBlocked();
+			mRobot.setDeBlocked();
 			mRobot.add(mX,mY);
 		}
 		else {
-			mRobot.setColorBlocked();
+			mRobot.setBlocked();
 		}
-			
+		
 	
 	}
 	

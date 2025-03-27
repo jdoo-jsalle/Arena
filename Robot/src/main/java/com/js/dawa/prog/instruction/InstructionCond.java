@@ -1,10 +1,13 @@
 package com.js.dawa.prog.instruction;
 
+import javax.script.ScriptException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.iu.arene.Robot;
+import com.js.dawa.robot.model.Robot;
+import com.js.dawa.util.DawaException;
 
 public class InstructionCond implements InstructionLst {
 	
@@ -16,10 +19,13 @@ public class InstructionCond implements InstructionLst {
 	String mFlag;
 	
 	Args mArgs;
+	
+	Robot mRobot;
 
 	@Override
 	public void init(Args pArgsInstruction, Robot pRobot, Arene pArene) {
 		mArgs = pArgsInstruction;
+		mRobot = pRobot;
 
 	}
 	
@@ -34,19 +40,32 @@ public class InstructionCond implements InstructionLst {
 	}
 
 	@Override
-	public void execInstruction() {
+	public void execInstruction() throws DawaException {
+
 		if (execCondition()) {
 			mLstIf.execInstruction();
 		}
 		else {
 			mLstElse.execInstruction();
 		}
+	
 
 	}
 	
 	
-	boolean execCondition() {
-		return false;
+	boolean execCondition()  {
+		boolean lRes = false;
+		
+		try {
+			IfEval lIfEval = new IfEval(mArgs.getArgs(0));
+			lRes =lIfEval.eval(mRobot);
+		}
+		catch (ScriptException le) {
+			LOGGER.debug("error script ",le);
+		}
+		
+		
+		return lRes;
 	}
 
 

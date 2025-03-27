@@ -1,0 +1,56 @@
+package com.js.dawa.prog.instruction;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+
+import com.js.dawa.robot.model.DataBoard;
+import com.js.dawa.robot.model.Position;
+import com.js.dawa.robot.model.Robot;
+import com.js.dawa.robot.model.RobotsProps;
+import com.js.dawa.util.DawaException;
+
+public class TestInsAvancer {
+	
+	 private static final Logger LOGGER =  LogManager.getLogger( TestInsAvancer.class );
+	
+	
+	@Test
+	public void testExecIntructionAvancer () {
+		DataBoard lDataBoard = new DataBoard();
+		lDataBoard.setVariable("depla", "1");
+		
+		Args lArgs = new Args(lDataBoard);
+		lArgs.addArguments("$depla");
+		lArgs.addArguments("2");
+		
+		Robot lRobot = new Robot();
+		lRobot.setRobotData(lDataBoard);
+		lRobot.setPosition(new Position(0, 0));
+		lRobot.init(new RobotsProps());
+		
+		
+		InsAvancer lInsAvancer = new InsAvancer();
+		try {
+			
+			
+			assertEquals(0, lRobot.getPosition().getX());
+			assertEquals(0, lRobot.getPosition().getY());
+			
+			lInsAvancer.init(lArgs, lRobot, null);
+			lInsAvancer.execInstruction();
+			
+			assertEquals(1, lRobot.getPosition().getX());
+			assertEquals(2, lRobot.getPosition().getY());
+		
+		} catch (DawaException e) {
+			
+			LOGGER.error("error",e);
+		}
+		
+		
+	}
+
+}

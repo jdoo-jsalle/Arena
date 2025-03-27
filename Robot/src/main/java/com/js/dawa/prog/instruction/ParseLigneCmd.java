@@ -4,6 +4,7 @@ package com.js.dawa.prog.instruction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.js.dawa.robot.model.Robot;
 import com.js.dawa.util.DawaException;
 
 public class ParseLigneCmd implements ParseLigne {
@@ -14,6 +15,9 @@ public class ParseLigneCmd implements ParseLigne {
 	 StackInstruction mPileInstruction = new StackInstruction();
 	 
 	 InstructionLst mCurrentInstruction;
+	 
+	 private Robot mRobot;
+
 	 
 	 public ParseLigneCmd () {
 		 mPileInstruction.add(mMainLstInstruction);
@@ -56,12 +60,12 @@ public class ParseLigneCmd implements ParseLigne {
 			 
 		}
 		
-		
-		
-		
-		
-		
 	}
+	 
+	 
+    public void setRobot (Robot pRobot) {
+    	mRobot = pRobot;
+    }
 	 
 	Args getArgs (int pNumLigne,String pLigne) throws DawaException {
 		int lDeb = pLigne.indexOf("(");
@@ -71,7 +75,7 @@ public class ParseLigneCmd implements ParseLigne {
 		}
 		String lInstruction = pLigne.substring(0,lDeb).trim();
 		LOGGER.info("instruction : {}", lInstruction);
-		Args lArgs = new Args();
+		Args lArgs = new Args(mRobot.getRobotData());
 		lArgs.setNameInstruction(lInstruction);
 		
 		String lParam = pLigne.substring(lDeb + 1, lEnd).trim();

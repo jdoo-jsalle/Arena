@@ -3,6 +3,7 @@ package com.js.dawa.prog.instruction;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.js.dawa.robot.model.DataBoard;
 import com.js.dawa.util.DawaException;
 
 public class Args {
@@ -10,7 +11,11 @@ public class Args {
 	private String mNameInstruction;
 	private List<String> mLstArgs  = new ArrayList<>();
 	
+	private DataBoard mDataBoard;
 	
+	public Args (DataBoard pDataBoard) {
+		mDataBoard = pDataBoard;
+	}
 	
 	public void addArguments (String pArg) {
 		mLstArgs.add(pArg);
@@ -35,7 +40,11 @@ public class Args {
 	
 	
 	public String getArgs (int pI) {
-		return  mLstArgs.get(pI);
+		String lVar = mLstArgs.get(pI);
+		if (lVar.startsWith("$") && mDataBoard != null) {
+			lVar = mDataBoard.getVariable(lVar.substring(1));
+		}
+		return  lVar;
 	}
 	
 	public int getArgsInt (int pI) throws DawaException{

@@ -1,9 +1,7 @@
-package com.js.dawa.iu.arene;
+package com.js.dawa.robot.model;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.js.dawa.robot.model.Attribut;
 
 public class RobotsProps {
 	
@@ -21,21 +19,43 @@ public class RobotsProps {
 		mLstAttributs = pLstAttributs;
 	}
 	
+	
+	
+	
 	public Map<String, Attribut> getLstAttribut(){
 		return mLstAttributs;
 	}
 	
+	
+	int getIntVal (String pKey) {
+		Attribut lAttr = mLstAttributs.get(pKey);
+		int lRes = 0;
+		if (lAttr != null) {
+			lRes = lAttr.getValueAttribut();
+		}
+		return lRes;
+	}
+	
+	String getStringVal (String pKey) {
+		Attribut lAttr = mLstAttributs.get(pKey);
+		String lRes = "";
+		if (lAttr != null) {
+			lRes = lAttr.getValueAttributString();
+		}
+		return lRes;
+	}
+	
 	public int getPdV () {
-		return mLstAttributs.get(PDV).getValueAttribut();
+		return getIntVal(PDV);
 	}
 	
 	public String getNom () {
-		return mLstAttributs.get(NAME).getValueAttributString();
+		return getStringVal(NAME);
 	}
 	
 	
 	public String getColor() {
-		return mLstAttributs.get(COLOR).getValueAttributString();
+		return getStringVal(COLOR);
 		
 	}
 	
