@@ -104,7 +104,7 @@ public class Launcher {
 			InsAffect lInsAffect1 = new InsAffect();
 			 lArgs = new Args(lRobot.getRobotData());
 			 lArgs.addArguments("depla");
-			 lArgs.addArguments("-1");
+			 lArgs.addArguments("JS:depla * -1");
 			lInsAffect1.init(lArgs, lRobot, lArene);
 			lInstructionCond.addInstructionIf(lInsAffect1);
 		

@@ -57,7 +57,7 @@ public class InstructionCond implements InstructionLst {
 		boolean lRes = false;
 		
 		try {
-			IfEval lIfEval = new IfEval(mArgs.getArgs(0));
+			ScriptJsEval lIfEval = new ScriptJsEval(mArgs.getArgs(0));
 			lRes =lIfEval.eval(mRobot);
 		}
 		catch (ScriptException le) {

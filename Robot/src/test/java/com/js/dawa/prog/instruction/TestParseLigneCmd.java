@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
+import com.js.dawa.robot.model.Robot;
 import com.js.dawa.util.DawaException;
 
 public class TestParseLigneCmd {
@@ -27,7 +28,9 @@ public class TestParseLigneCmd {
 	
 	@Test
 	public void testParse_normal_with_args() {
+		Robot lRobot = new Robot();
 		ParseLigneCmd lParseLigne = new ParseLigneCmd();
+		lParseLigne.setRobot(lRobot);
 		try {
 			Args lArgs = lParseLigne.getArgs(0, "truc (40,bobo)");
 			assertEquals("truc", lArgs.getNameInstruction());
@@ -44,7 +47,9 @@ public class TestParseLigneCmd {
 	
 	@Test
 	public void testParse_normal_without_args() {
+		Robot lRobot = new Robot();
 		ParseLigneCmd lParseLigne = new ParseLigneCmd();
+		lParseLigne.setRobot(lRobot);
 		try {
 			Args lArgs = lParseLigne.getArgs(0, "truc ()");
 			assertEquals(0, lArgs.sizeArgs());

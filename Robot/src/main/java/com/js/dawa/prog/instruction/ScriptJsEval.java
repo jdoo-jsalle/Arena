@@ -1,7 +1,5 @@
 package com.js.dawa.prog.instruction;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -15,15 +13,15 @@ import org.apache.logging.log4j.Logger;
 import com.js.dawa.robot.model.DataBoard;
 import com.js.dawa.robot.model.Robot;
 
-public class IfEval {
+public class ScriptJsEval {
 	
-	 private static final Logger LOGGER =  LogManager.getLogger( IfEval.class );
+	 private static final Logger LOGGER =  LogManager.getLogger( ScriptJsEval.class );
 	 
 	 static ScriptEngineManager factory = new ScriptEngineManager();
      static ScriptEngine engine = factory.getEngineByName("graal.js");
 	 
-	 static String SCRIPT_JS ="function condition (){"
-				+ "if (COND) {"
+	 static String SCRIPT_JS_COND ="function condition (){"
+				+ "if (#CLAUSE#) {"
 				+ "   return true;"
 				+ "}"
 				+ " else {"
@@ -31,20 +29,29 @@ public class IfEval {
 				+ "}"
 				+ "}"
 				+ "condition ();";
+	 
+	 static String SCRIPT_JS_COMPUTE ="function compute (){"
+				+ "    return #CLAUSE#;" 
+				+ "}"
+				+ "compute();";
 	
 	 /**
-	  * $truc == 1 || $machin < 12 (java script syntaxe
+	  * Condition
+	  *   $truc == 1 || $machin < 12 (java script syntaxe
+	  * Compute 
+	  *    12 * $machin * 13 + 1
 	  */
-	String mClauseCondition;
+	String mClause;
 	
-	public IfEval (String pClauseCondition) {
-		mClauseCondition = pClauseCondition;
+	public ScriptJsEval (String pClause) {
+		mClause = pClause;
 		
 	}
 	
-	public String generateScript (DataBoard lDataBoard) {
+	
+	public String generateScript (DataBoard lDataBoard,String pScript) {
 		
-		String lCond = mClauseCondition;
+		String lCond = mClause;
 		Map<String, String> lLstVars = lDataBoard.getLstVar();
 		for (Entry<String, String> le : lLstVars.entrySet()) {
 			String lVar = le.getKey();
@@ -53,16 +60,24 @@ public class IfEval {
 			
 		}
 
-		return SCRIPT_JS.replace("COND", lCond);
+		return pScript.replace("#CLAUSE#", lCond);
 	}
 	
 	
 	public boolean eval (Robot pRobot) throws  ScriptException {
-		String lClause = generateScript(pRobot.getRobotData());
-		LOGGER.debug("Clause is {}", lClause);
+		String lClause = generateScript(pRobot.getRobotData(),SCRIPT_JS_COND);
+		LOGGER.debug("Clause cond is {}", lClause);
 		return ((Boolean)engine.eval(lClause)).booleanValue();
 	}
 	
+	
+	public String compute(Robot pRobot) throws  ScriptException {
+		String lClause = generateScript(pRobot.getRobotData(),SCRIPT_JS_COMPUTE);
+		LOGGER.debug("Clause cond is {}", lClause);
+		return (engine.eval(lClause).toString());
+		
+		
+	}
 	
 
 

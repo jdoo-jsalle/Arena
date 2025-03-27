@@ -11,16 +11,16 @@ import org.junit.Test;
 import com.js.dawa.robot.model.Robot;
 import com.js.dawa.robot.model.DataBoard;
 
-public class TestIfEval {
+public class TestScriptJsEval {
 	
 	@Test
-	public void testGenerateScript () {
+	public void testGenerateScript_cond () {
 		DataBoard lDataBoard = new DataBoard();
 		lDataBoard.setVariable("$truc", "10");
 		lDataBoard.setVariable("$machin", "10");
 		
-		IfEval lIfEval = new IfEval("$truc > 5 && $truc < 10 && $machin == 3");
-		String lScript = lIfEval.generateScript(lDataBoard);
+		ScriptJsEval lIfEval = new ScriptJsEval("$truc > 5 && $truc < 10 && $machin == 3");
+		String lScript = lIfEval.generateScript(lDataBoard,ScriptJsEval.SCRIPT_JS_COND);
 		
 		assertEquals("function condition (){if (10 > 5 && 10 < 10 && 10 == 3) {   return true;} else {   return false;}}condition ();", lScript);
 		
@@ -29,7 +29,7 @@ public class TestIfEval {
 
 	@Test
 	public void testEval_true() {
-		IfEval lIfEval = new IfEval("$truc > 5 && $truc < 10 && $machin == 3");
+		ScriptJsEval lIfEval = new ScriptJsEval("$truc > 5 && $truc < 10 && $machin == 3");
 
 		
 		
@@ -50,7 +50,7 @@ public class TestIfEval {
 	
 	@Test
 	public void testEval_false() {
-		IfEval lIfEval = new IfEval("$truc > 5 && $truc < 10 && $machin == 3");
+		ScriptJsEval lIfEval = new ScriptJsEval("$truc > 5 && $truc < 10 && $machin == 3");
 
 		
 		
@@ -61,6 +61,27 @@ public class TestIfEval {
 		lRobot.setRobotData(lRobotData);
 		try {
 			assertFalse(lIfEval.eval(lRobot));
+		}
+		catch (ScriptException e) {
+			assertTrue (e.getMessage(),false);
+		}
+		
+		
+	}
+	
+	@Test
+	public void testcompute() {
+		ScriptJsEval lIfEval = new ScriptJsEval("$truc * 10 + $machin");
+
+		
+		
+		Robot lRobot = new Robot();
+		DataBoard lRobotData = new DataBoard();
+		lRobotData.setVariable("$truc", "11");
+		lRobotData.setVariable("$machin", "3");
+		lRobot.setRobotData(lRobotData);
+		try {
+			assertEquals("113",lIfEval.compute(lRobot));
 		}
 		catch (ScriptException e) {
 			assertTrue (e.getMessage(),false);

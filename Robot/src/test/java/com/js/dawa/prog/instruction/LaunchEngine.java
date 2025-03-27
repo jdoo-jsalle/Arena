@@ -11,7 +11,28 @@ public class LaunchEngine {
 	
 	 private static final Logger LOGGER =  LogManager.getLogger( LaunchEngine.class );
 	
-	public static void main(String[] args) {
+	 
+	 
+	 void testCompute () {
+		ScriptEngineManager factory = new ScriptEngineManager();
+		ScriptEngine engine = factory.getEngineByName("graal.js");
+		String lClause ="function compute (){"
+				+ "    return 3 * -4;" 
+				+ "}"
+				+ "compute();";
+		
+		try {
+			Object lVal = engine.eval(lClause);
+			LOGGER.info("res {}",lVal);
+		} catch (ScriptException e) {
+			LOGGER.error("error",e);
+		
+		}
+	 }
+	 
+	 
+	 
+	void testCond() {
 		ScriptEngineManager factory = new ScriptEngineManager();
 		ScriptEngine engine = factory.getEngineByName("graal.js");
 		
@@ -34,6 +55,12 @@ public class LaunchEngine {
 		
 		}
 		
+	}
+	
+	public static void main(String[] args) {
+		LaunchEngine lLaunchEngine = new LaunchEngine();
+		lLaunchEngine.testCompute();
+		//lLaunchEngine.testCond();
 	}
 	
 	

@@ -3,10 +3,24 @@ package com.js.dawa.prog.instruction;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.script.ScriptException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.js.dawa.robot.model.DataBoard;
+import com.js.dawa.robot.model.Robot;
 import com.js.dawa.util.DawaException;
 
+/**
+ * Arg 
+ *   value
+ *   $Value => seek value in DataBoard
+ *   JS:Clause => eval javascript clause and resolve it
+ */
 public class Args {
+	
+	private static final Logger LOGGER =  LogManager.getLogger( Args.class );
 
 	private String mNameInstruction;
 	private List<String> mLstArgs  = new ArrayList<>();
@@ -44,12 +58,24 @@ public class Args {
 		if (lVar.startsWith("$") && mDataBoard != null) {
 			lVar = mDataBoard.getVariable(lVar.substring(1));
 		}
+		if (lVar.startsWith("JS:")) {
+			String lClause = lVar.substring("JS:".length());
+			LOGGER.debug("Clause {}", lClause);
+			ScriptJsEval lScriptEval = new ScriptJsEval(lClause);
+			Robot lRobot = new Robot();
+			lRobot.setRobotData(mDataBoard);
+			try {
+				lVar = lScriptEval.compute(lRobot);
+			} catch (ScriptException e) {
+				LOGGER.debug("error",  e);
+			}
+		}
 		return  lVar;
 	}
 	
 	public int getArgsInt (int pI) throws DawaException{
 		String lVal = getArgs(pI);
-		int lRes = -1;
+		int lRes = -1; 
 		try {
 			lRes = Integer.parseInt(lVal);
 		}
