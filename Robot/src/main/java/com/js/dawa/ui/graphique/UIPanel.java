@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.js.dawa.iu.arene.AreneProps;
+import com.js.dawa.iu.arene.Arene;
 import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.iu.arene.render.InfoRender;
 import com.js.dawa.robot.model.Position;
@@ -26,15 +26,18 @@ public class UIPanel extends JPanel {
 	
 	int lSizeCase = 20;
 	
-	List<ObjetArene > mLstCase;	
+	List<ObjetArene> mLstCase;	
+	List<ObjetArene> mLstCaseEphemere;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
 	
-	public void init (AreneProps pAttribut) {
-		mSizeArene = pAttribut.getSize();
+	public void init (Arene pArene) {
+		mSizeArene = pArene.getAreneProps().getSize();
+		mLstCase = pArene.getLstCase();
+		mLstCaseEphemere = pArene.getLstCaseEphemere();
 	}
 	
 	@Override	
@@ -61,23 +64,29 @@ public class UIPanel extends JPanel {
 			drawLineDecal (0,li*lSizeCase,lSizeGrid,li*lSizeCase);
 			
 		}
-		//Affiche Case
+		//Affiche Case (robot)
 		
 		for (ObjetArene lObjetArene : mLstCase) {
-			LOGGER.info("objet Arene {}",lObjetArene);
-			Position lPos = lObjetArene.getPosition();
-			int lx = (lPos.getX() -1)* lSizeCase + mDecal + 5;
-			int ly = (lPos.getY() -1) * lSizeCase + mDecal +12;
-			InfoRender lInfoRender = lObjetArene.getRender().getInfoRender();
-			pg.setColor(lInfoRender.getColorForAwt());
-			pg.drawString(lInfoRender.getString(), lx, ly);
-			
-			
+			print(lObjetArene);
 		}
 		
-		
+		for (ObjetArene lObjetArene : mLstCaseEphemere) {
+			print(lObjetArene);
+		}
 		
 	}
+	
+	
+	void print (ObjetArene pObjetArene) {
+		LOGGER.info("objet Arene {}",pObjetArene);
+		Position lPos = pObjetArene.getPosition();
+		int lx = (lPos.getX() -1)* lSizeCase + mDecal + 5;
+		int ly = (lPos.getY() -1) * lSizeCase + mDecal +12;
+		InfoRender lInfoRender = pObjetArene.getRender().getInfoRender();
+		mg.setColor(lInfoRender.getColorForAwt());
+		mg.drawString(lInfoRender.getString(), lx, ly);
+	}
+	
 	
 	void drawLineDecal (int x1,int y1, int x2, int y2) {
 		mg.drawLine(x1+mDecal, y1+ mDecal, x2+mDecal, y2+ mDecal);
@@ -85,9 +94,7 @@ public class UIPanel extends JPanel {
 	
 	
 	
-	public void setLstCase (List <ObjetArene > pLstCase) {
-		mLstCase = pLstCase;
-	}
+
 	
 	
 

@@ -17,7 +17,7 @@ public class ConsoleGraphique implements Console {
 	 
 	AreneProps mProps;
 	
-	List<ObjetArene> mLstCaseArene;
+	
 	 
 	int getIntProps (String pProps) {
 		return 0;
@@ -40,8 +40,8 @@ public class ConsoleGraphique implements Console {
         //=> variable global      
         
         UIPanel lPanel = new UIPanel();
-        lPanel.init(mProps);
-        lPanel.setLstCase(mLstCaseArene);
+        lPanel.init(pArene);
+    
         frame.add(lPanel);
        
        
@@ -52,7 +52,5 @@ public class ConsoleGraphique implements Console {
 
 
 	
-	public void setListCase (List<ObjetArene> pLstCaseArene) {
-		mLstCaseArene = pLstCaseArene;
-	}
+	
 }

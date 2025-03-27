@@ -25,5 +25,10 @@ public class Position {
 	public void addY (int pY) {
 		mY += pY;
 	}
+	
+	public void addXY (int pX, int pY) {
+		addX(pX);
+		addY(pY);
+	}
 
 }

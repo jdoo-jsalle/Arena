@@ -6,6 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
+import com.js.dawa.iu.arene.Arene;
+import com.js.dawa.iu.arene.AreneProps;
 import com.js.dawa.robot.model.DataBoard;
 import com.js.dawa.robot.model.Position;
 import com.js.dawa.robot.model.Robot;
@@ -33,13 +35,18 @@ public class TestInsAvancer {
 		
 		
 		InsAvancer lInsAvancer = new InsAvancer();
+		Arene lArene = new Arene(null);
+		AreneProps lAreneProp = new AreneProps();
+		lAreneProp.setSize(100);
+		lArene.setAreneProps(lAreneProp);
+		
 		try {
 			
 			
 			assertEquals(0, lRobot.getPosition().getX());
 			assertEquals(0, lRobot.getPosition().getY());
 			
-			lInsAvancer.init(lArgs, lRobot, null);
+			lInsAvancer.init(lArgs, lRobot, lArene);
 			lInsAvancer.execInstruction();
 			
 			assertEquals(1, lRobot.getPosition().getX());

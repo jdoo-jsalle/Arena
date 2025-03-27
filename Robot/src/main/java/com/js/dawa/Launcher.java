@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.js.dawa.iu.arene.Arene;
 import com.js.dawa.iu.arene.AreneProps;
 import com.js.dawa.iu.arene.CaseArene;
+import com.js.dawa.iu.arene.FireBall;
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
 import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.prog.instruction.Args;
@@ -13,6 +14,8 @@ import com.js.dawa.prog.instruction.InsAffect;
 import com.js.dawa.prog.instruction.InsAvancer;
 import com.js.dawa.prog.instruction.InstructionBlock;
 import com.js.dawa.prog.instruction.InstructionCond;
+import com.js.dawa.prog.objet.ComputePosition;
+import com.js.dawa.robot.model.Position;
 import com.js.dawa.robot.model.Robot;
 import com.js.dawa.robot.model.RobotsProps;
 import com.js.dawa.util.DawaException;
@@ -56,8 +59,13 @@ public class Launcher {
 		lCaseArene.setCaseAreneRender(new CaseAreneRenderDefaut());
 		lArene.addObjetArene(22, 20, lCaseArene);
 		
-		
-		lConsole.setListCase(lArene.getLstCase());
+		//Objet Ephemere
+		ComputePosition lComputePosition = new ComputePosition(lArene);
+		FireBall lFireBall = new FireBall();
+		lFireBall.setPosition(new Position(5,5));
+		lComputePosition.addObjet(lFireBall);
+		lArene.setLstCaseEphemere(lComputePosition.getLstObjet());;
+	
 		
 		AreneProps lAreneProps = new AreneProps();
 		lAreneProps.setSize(30);
@@ -125,6 +133,8 @@ public class Launcher {
 				lConsole.update();
 				//simule deplacement
 				lPrg.execInstruction();
+				
+				lComputePosition.computeNewPosition();
 				
 				//compute/eval lEnd
 				

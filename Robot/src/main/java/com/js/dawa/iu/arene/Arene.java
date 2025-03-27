@@ -14,6 +14,8 @@ public class Arene {
 	
 	List<ObjetArene> mLstCaseArene = new ArrayList<ObjetArene>();
 	
+	List<ObjetArene> mLstObjectEphemere = new ArrayList<ObjetArene>();
+	
 	private AreneProps mAreneProps;
 	
 	public Arene (Console pConsole) {
@@ -33,6 +35,14 @@ public class Arene {
 	public List<ObjetArene>  getLstCase (){
 		return mLstCaseArene;
 	}
+	
+	public List<ObjetArene> getLstCaseEphemere(){
+		return mLstObjectEphemere;
+	}
+	
+	public void setLstCaseEphemere (List<ObjetArene> pLst) {
+		mLstObjectEphemere = pLst;
+	}
 
 
 
@@ -47,7 +57,15 @@ public class Arene {
 	}
 	
 	
+	public boolean isPositionInArene (Position pPosition,int pX, int pY) {
+		int lSizeArene = mAreneProps.getSize();
 	
+		return (pPosition.getX()+ pX <= lSizeArene &&
+				pPosition.getY()+ pY <= lSizeArene  &&
+				pPosition.getX()+ pX > 0 &&
+				pPosition.getY()+ pY > 0);
+			
+	}
 
 	
 

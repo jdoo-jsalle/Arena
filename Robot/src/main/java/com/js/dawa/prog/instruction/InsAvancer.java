@@ -36,15 +36,8 @@ public class InsAvancer implements Instruction {
 	public void execInstruction() throws DawaException {
 		verify();
 		Position lPosition = mRobot.getPosition();
-		int lSizeArene = 100;
-		if (mArene != null) {
-			lSizeArene = mArene.getAreneProps().getSize();
-		}
-		if (lPosition.getX()+ mX <= lSizeArene &&
-			lPosition.getY()+ mY <= lSizeArene  &&
-			lPosition.getX()+ mX > 0 &&
-			lPosition.getY()+ mY > 0)
-		{
+		
+		if (mArene != null && mArene.isPositionInArene(lPosition, mX, mY)){
 			mRobot.setDeBlocked();
 			mRobot.add(mX,mY);
 		}
