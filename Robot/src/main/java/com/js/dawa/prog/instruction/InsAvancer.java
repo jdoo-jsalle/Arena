@@ -11,7 +11,7 @@ import com.js.dawa.util.DawaException;
 /**
  * Avancer (x,y)
  *    x et y : entier positif ou negatif ou variable ($<var> qui 
- *    doit être dans son DataBoard
+ *    doit être dans son DataBoard, ou un JS: pour évaluer un javascript
  */
 public class InsAvancer implements Instruction {
 	

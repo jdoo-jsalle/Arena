@@ -25,6 +25,10 @@ public class Args {
 	private String mNameInstruction;
 	private List<String> mLstArgs  = new ArrayList<>();
 	
+	static String JS ="JS:";
+	
+	static String DEBVAR ="$";
+	
 	private DataBoard mDataBoard;
 	
 	public Args (DataBoard pDataBoard) {
@@ -55,11 +59,13 @@ public class Args {
 	
 	public String getArgs (int pI) {
 		String lVar = mLstArgs.get(pI);
-		if (lVar.startsWith("$") && mDataBoard != null) {
+		//manage variable
+		if (lVar.startsWith(DEBVAR) && mDataBoard != null) {
 			lVar = mDataBoard.getVariable(lVar.substring(1));
 		}
-		if (lVar.startsWith("JS:")) {
-			String lClause = lVar.substring("JS:".length());
+		//manage Java Script eval
+		if (lVar.startsWith(JS)) {
+			String lClause = lVar.substring(JS.length());
 			LOGGER.debug("Clause {}", lClause);
 			ScriptJsEval lScriptEval = new ScriptJsEval(lClause);
 			Robot lRobot = new Robot();

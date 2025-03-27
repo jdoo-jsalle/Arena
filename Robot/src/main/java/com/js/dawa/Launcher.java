@@ -1,9 +1,5 @@
 package com.js.dawa;
 
-import java.awt.Color;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +11,6 @@ import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.prog.instruction.Args;
 import com.js.dawa.prog.instruction.InsAffect;
 import com.js.dawa.prog.instruction.InsAvancer;
-import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.prog.instruction.InstructionBlock;
 import com.js.dawa.prog.instruction.InstructionCond;
 import com.js.dawa.robot.model.Robot;
@@ -105,8 +100,8 @@ public class Launcher {
 			 lArgs = new Args(lRobot.getRobotData());
 			 lArgs.addArguments("depla");
 			 lArgs.addArguments("JS:depla * -1");
-			lInsAffect1.init(lArgs, lRobot, lArene);
-			lInstructionCond.addInstructionIf(lInsAffect1);
+			 lInsAffect1.init(lArgs, lRobot, lArene);
+			 lInstructionCond.addInstructionIf(lInsAffect1);
 		
 			
 			
@@ -121,7 +116,7 @@ public class Launcher {
 				
 				
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 			
 					LOGGER.error("error", e);
