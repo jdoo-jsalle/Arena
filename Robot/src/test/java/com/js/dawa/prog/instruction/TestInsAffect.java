@@ -24,7 +24,7 @@ public class TestInsAffect {
 			
 			Robot lRobot = new Robot();
 			
-			Args lArgs = new Args(lRobot.getRobotData());
+			Args lArgs = new Args(lRobot);
 			lArgs.addArguments("depla");
 			lArgs.addArguments("10");
 			

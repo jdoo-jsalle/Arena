@@ -23,12 +23,13 @@ public class TestInsAvancer {
 	public void testExecIntructionAvancer () {
 		DataBoard lDataBoard = new DataBoard();
 		lDataBoard.setVariable("depla", "1");
-		
-		Args lArgs = new Args(lDataBoard);
+		Robot lRobot = new Robot();
+		lRobot.setRobotData(lDataBoard);
+		Args lArgs = new Args(lRobot);
 		lArgs.addArguments("$depla");
 		lArgs.addArguments("2");
 		
-		Robot lRobot = new Robot();
+		 lRobot = new Robot();
 		lRobot.setRobotData(lDataBoard);
 		lRobot.setPosition(new Position(0, 0));
 		lRobot.init(new RobotsProps());

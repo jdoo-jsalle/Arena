@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import com.js.dawa.robot.model.DataBoard;
+import com.js.dawa.robot.model.Robot;
 import com.js.dawa.util.DawaException;
 
 public class TestArgs {
@@ -19,7 +20,9 @@ public class TestArgs {
 	public void test_getArgs () {
 		DataBoard lDataBoard = new DataBoard();
 		lDataBoard.setVariable("depla", "10");
-		Args lArgs = new Args(lDataBoard);
+		Robot lRobot = new Robot();
+		lRobot.setRobotData(lDataBoard);
+		Args lArgs = new Args(lRobot);
 		lArgs.addArguments("$depla");
 		lArgs.addArguments("1");
 		

@@ -75,7 +75,7 @@ public class ParseLigneCmd implements ParseLigne {
 		}
 		String lInstruction = pLigne.substring(0,lDeb).trim();
 		LOGGER.info("instruction : {}", lInstruction);
-		Args lArgs = new Args(mRobot.getRobotData());
+		Args lArgs = new Args(mRobot);
 		lArgs.setNameInstruction(lInstruction);
 		
 		String lParam = pLigne.substring(lDeb + 1, lEnd).trim();

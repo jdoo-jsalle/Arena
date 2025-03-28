@@ -3,12 +3,10 @@ package com.js.dawa.prog.instruction;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.script.ScriptException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.js.dawa.robot.model.DataBoard;
+
 import com.js.dawa.robot.model.Robot;
 import com.js.dawa.util.DawaException;
 
@@ -29,10 +27,12 @@ public class Args {
 	
 	static String DEBVAR ="$";
 	
-	private DataBoard mDataBoard;
+	static String RANDOM ="Rand[";
 	
-	public Args (DataBoard pDataBoard) {
-		mDataBoard = pDataBoard;
+	private Robot mRobot;
+	
+	public Args (Robot pRobot) {
+		mRobot = pRobot;
 	}
 	
 	public void addArguments (String pArg) {
@@ -60,22 +60,24 @@ public class Args {
 	public String getArgs (int pI) {
 		String lVar = mLstArgs.get(pI);
 		//manage variable
-		if (lVar.startsWith(DEBVAR) && mDataBoard != null) {
-			lVar = mDataBoard.getVariable(lVar.substring(1));
+		CmdOnValue lCmdOnValue = null;
+		if (lVar.startsWith(DEBVAR) && mRobot.getRobotData() != null) {
+			lCmdOnValue = new CmdOnValueVariable();
+			
 		}
 		//manage Java Script eval
-		if (lVar.startsWith(JS)) {
-			String lClause = lVar.substring(JS.length());
-			LOGGER.debug("Clause {}", lClause);
-			ScriptJsEval lScriptEval = new ScriptJsEval(lClause);
-			Robot lRobot = new Robot();
-			lRobot.setRobotData(mDataBoard);
-			try {
-				lVar = lScriptEval.compute(lRobot);
-			} catch (ScriptException e) {
-				LOGGER.debug("error",  e);
-			}
+		else if (lVar.startsWith(JS)) {
+			lCmdOnValue = new CmdOnValueJavaScript();
 		}
+		else if (lVar.startsWith(RANDOM)) {
+			
+		}
+		if (lCmdOnValue != null) {
+			lCmdOnValue.init(mRobot);
+			lVar = lCmdOnValue.computeVal(lVar);
+		}
+		
+		
 		return  lVar;
 	}
 	

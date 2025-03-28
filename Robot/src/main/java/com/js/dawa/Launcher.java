@@ -90,7 +90,7 @@ public class Launcher {
 			
 			InstructionBlock lPrg = new InstructionBlock();
 			InsAvancer lAvancer1 = new InsAvancer();
-			Args lArgs = new Args(lRobot.getRobotData());
+			Args lArgs = new Args(lRobot);
 			lArgs.addArguments("$depla");
 			lArgs.addArguments("0");
 			lAvancer1.init(lArgs, lRobot, lArene);
@@ -100,12 +100,12 @@ public class Launcher {
 			//cond
 			
 			
-			lArgs = new Args(lRobot.getRobotData());
+			lArgs = new Args(lRobot);
 			lArgs.addArguments("block == true");
 			lInstructionCond.init(lArgs, lRobot, lArene);
 			
 			InsAffect lInsAffect1 = new InsAffect();
-			 lArgs = new Args(lRobot.getRobotData());
+			 lArgs = new Args(lRobot);
 			 lArgs.addArguments("depla");
 			 lArgs.addArguments("JS:depla * -1");
 			 lInsAffect1.init(lArgs, lRobot, lArene);
