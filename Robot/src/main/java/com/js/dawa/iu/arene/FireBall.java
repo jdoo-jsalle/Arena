@@ -14,12 +14,14 @@ public class FireBall implements ObjetArene {
 	Position mPosition;
 	FireBallRender mRender;
 	boolean mIsDispose = false;
+	private String mColor ="blue";
+
 
 	@Override
 	public CaseRender getRender() {
 		if (mRender == null) {
 			InfoRender lInforInfoRender = new InfoRender();
-			lInforInfoRender.setColor("blue");
+			lInforInfoRender.setColor(mColor);
 			lInforInfoRender.setString("*");
 			mRender = new FireBallRender();
 			mRender.setInfoRender(lInforInfoRender);
@@ -70,6 +72,10 @@ public class FireBall implements ObjetArene {
 	public DataBoard getDataBoard() {
 		//no databoard for firewall
 		return null;
+	}
+	
+	public void setColor (String pColor) {
+		mColor = pColor;
 	}
 
 }

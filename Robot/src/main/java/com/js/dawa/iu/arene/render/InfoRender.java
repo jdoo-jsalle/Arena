@@ -53,6 +53,7 @@ public class InfoRender {
 			return Color.GREEN;
 			
 		}
+		
 		else return Color.BLACK;
 		
 	}
