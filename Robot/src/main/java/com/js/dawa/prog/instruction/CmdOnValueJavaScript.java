@@ -5,16 +5,17 @@ import javax.script.ScriptException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.robot.model.Robot;
 
 
 public class CmdOnValueJavaScript implements CmdOnValue {
 	private static final Logger LOGGER =  LogManager.getLogger( CmdOnValueJavaScript.class );
 
-	Robot mRobot;
+	ObjetArene mRobot;
 
 	@Override
-	public void init(Robot pRobot) {
+	public void init(ObjetArene pRobot) {
 		mRobot = pRobot;
 
 	}

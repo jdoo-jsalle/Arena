@@ -16,6 +16,7 @@ import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.prog.instruction.Args;
 import com.js.dawa.prog.instruction.InsAffect;
 import com.js.dawa.prog.instruction.InsAvancer;
+import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.prog.instruction.InstructionBlock;
 import com.js.dawa.prog.instruction.InstructionCond;
 import com.js.dawa.robot.model.Position;
@@ -55,7 +56,7 @@ public class Launcher {
 
 		lConsole.init(lArene);
 		
-		boolean lEnd = false;
+		
 		
 		
 		
@@ -73,19 +74,19 @@ public class Launcher {
 			List<ModuleArena> lLstModule = new ArrayList<>();
 			lLstModule.add(createDefaultCase(10, 10));
 			lLstModule.add(createDefaultCase(20, 20));
-			lLstModule.add(createFireVall(5, 5));
+			lLstModule.add(createFireBall(lArene));
 			lLstModule.add(createModuleRobotWithHisPrg(lArene));
 			lArene.setLstCase(lLstModule);
 			
 			
 			
-			
+			boolean lEnd = false;
 		
 			
 			//loop
 			while (!lEnd) {
 				
-				
+			
 				
 				try {
 					Thread.sleep(500);
@@ -94,10 +95,15 @@ public class Launcher {
 					LOGGER.error("error", e);
 				}
 				
+				//execute prg
 				for (ModuleArena lModuleArena : lLstModule) {
-					lModuleArena.getInstruction().execInstruction();
+					Instruction lInstruction = lModuleArena.getInstruction();
+					if (lInstruction != null)
+					    lInstruction.execInstruction();
 					
 				}
+				
+				lArene.rmDisposeObjet();
 				
 				
 					
@@ -179,12 +185,22 @@ public class Launcher {
 
 	}
 	
-	ModuleArena createFireVall (int px, int py) {
+	ModuleArena createFireBall (Arene pArene) throws DawaException {
 		FireBall lFireBall = new FireBall();
 		lFireBall.setPosition(new Position(5,5));
 		
+		
+		InsAvancer lAvancer1 = new InsAvancer();
+		Args lArgs = new Args(lFireBall);
+		lArgs.addArguments("1");
+		lArgs.addArguments("1");
+		lAvancer1.init(lArgs, lFireBall, pArene);
+	
+		
 		ModuleArena lModuleArene = new ModuleArena();
 		lModuleArene.setObjetArene(lFireBall);
+		lModuleArene.setInstruction(lAvancer1);
+		
 		
 		return lModuleArene;
 	}

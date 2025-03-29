@@ -19,7 +19,7 @@ public class FireBall implements ObjetArene {
 	public CaseRender getRender() {
 		if (mRender == null) {
 			InfoRender lInforInfoRender = new InfoRender();
-			lInforInfoRender.setColor("cyan");
+			lInforInfoRender.setColor("blue");
 			lInforInfoRender.setString("*");
 			mRender = new FireBallRender();
 			mRender.setInfoRender(lInforInfoRender);

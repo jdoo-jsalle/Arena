@@ -6,8 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-import com.js.dawa.robot.model.Robot;
+import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
 
 /**
@@ -29,9 +28,9 @@ public class Args {
 	
 	static String RANDOM ="Rand[";
 	
-	private Robot mRobot;
+	private ObjetArene mRobot;
 	
-	public Args (Robot pRobot) {
+	public Args (ObjetArene pRobot) {
 		mRobot = pRobot;
 	}
 	
@@ -61,7 +60,7 @@ public class Args {
 		String lVar = mLstArgs.get(pI);
 		//manage variable
 		CmdOnValue lCmdOnValue = null;
-		if (lVar.startsWith(DEBVAR) && mRobot.getRobotData() != null) {
+		if (lVar.startsWith(DEBVAR) && mRobot.getDataBoard() != null) {
 			lCmdOnValue = new CmdOnValueVariable();
 			
 		}

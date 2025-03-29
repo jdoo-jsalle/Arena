@@ -73,7 +73,7 @@ public class Robot implements ObjetArene{
 
 	@Override
 	public void setInArena(boolean pIsInArena) {
-		if (pIsInArena)
+		if (!pIsInArena)
 			setBlocked();
 		else 
 			setDeBlocked();

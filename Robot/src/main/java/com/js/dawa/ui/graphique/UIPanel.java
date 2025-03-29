@@ -27,7 +27,7 @@ public class UIPanel extends JPanel {
 	
 	int lSizeCase = 20;
 	
-	List<ModuleArena> mLstCase;	
+	Arene mArene;
 	/**
 	 * 
 	 */
@@ -35,8 +35,9 @@ public class UIPanel extends JPanel {
 	
 	
 	public void init (Arene pArene) {
+		mArene = pArene;
 		mSizeArene = pArene.getAreneProps().getSize();
-		mLstCase = pArene.getLstCase();
+		
 
 	}
 	
@@ -64,9 +65,11 @@ public class UIPanel extends JPanel {
 			drawLineDecal (0,li*lSizeCase,lSizeGrid,li*lSizeCase);
 			
 		}
-		//Affiche Case (robot and objet)
+		List<ModuleArena >lLstCase = mArene.getLstCase();
 		
-		for (ModuleArena lModuleArene : mLstCase) {
+		//Affiche Case (robot and objet)
+		LOGGER.info("Tot objet {}",lLstCase.size());
+		for (ModuleArena lModuleArene : lLstCase) {
 			print(lModuleArene.getObjetArene());
 		}
 			

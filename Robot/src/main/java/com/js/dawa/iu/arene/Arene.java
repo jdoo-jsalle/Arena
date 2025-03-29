@@ -62,6 +62,20 @@ public class Arene {
 				pPosition.getY()+ pY > 0);
 			
 	}
+	
+	public void rmDisposeObjet () {
+		List<ModuleArena> lLstToDispose = new ArrayList<>();
+		for (ModuleArena lModule : mLstCaseArene) {
+			if (lModule.getObjetArene().isDispose()) {
+				lLstToDispose.add(lModule);
+			}
+			
+		}
+		//rm
+		for (ModuleArena lModule : lLstToDispose ) {
+			mLstCaseArene.remove(lModule);
+		}
+	}
 
 	
 

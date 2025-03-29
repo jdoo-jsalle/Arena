@@ -1,13 +1,13 @@
 package com.js.dawa.prog.instruction;
 
-import com.js.dawa.robot.model.Robot;
+import com.js.dawa.iu.arene.ObjetArene;
 
 public class CmdOnValueVariable implements CmdOnValue{
 
-	Robot mRobot;
+	ObjetArene mRobot;
 	
 	@Override
-	public void init(Robot pRobot) {
+	public void init(ObjetArene pRobot) {
 		mRobot = pRobot;
 		
 	}
@@ -15,7 +15,7 @@ public class CmdOnValueVariable implements CmdOnValue{
 	@Override
 	public String computeVal(String pVal) {
 		//Data name is after fisrt car
-		return mRobot.getRobotData().getVariable(pVal.substring(1));
+		return mRobot.getDataBoard().getVariable(pVal.substring(1));
 		
 	}
 
