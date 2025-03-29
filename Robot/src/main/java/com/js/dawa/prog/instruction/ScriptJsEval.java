@@ -10,8 +10,8 @@ import javax.script.ScriptException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.robot.model.DataBoard;
-import com.js.dawa.robot.model.Robot;
 
 public class ScriptJsEval {
 	
@@ -64,15 +64,15 @@ public class ScriptJsEval {
 	}
 	
 	
-	public boolean eval (Robot pRobot) throws  ScriptException {
-		String lClause = generateScript(pRobot.getRobotData(),SCRIPT_JS_COND);
+	public boolean eval (ObjetArene pRobot) throws  ScriptException {
+		String lClause = generateScript(pRobot.getDataBoard(),SCRIPT_JS_COND);
 		LOGGER.debug("Clause cond is {}", lClause);
 		return ((Boolean)engine.eval(lClause)).booleanValue();
 	}
 	
 	
-	public String compute(Robot pRobot) throws  ScriptException {
-		String lClause = generateScript(pRobot.getRobotData(),SCRIPT_JS_COMPUTE);
+	public String compute(ObjetArene pRobot) throws  ScriptException {
+		String lClause = generateScript(pRobot.getDataBoard(),SCRIPT_JS_COMPUTE);
 		LOGGER.debug("Clause cond is {}", lClause);
 		return (engine.eval(lClause).toString());
 		

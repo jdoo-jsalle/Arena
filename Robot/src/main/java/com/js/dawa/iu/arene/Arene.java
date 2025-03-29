@@ -12,9 +12,7 @@ public class Arene {
 
 	Console mConsole;	
 	
-	List<ObjetArene> mLstCaseArene = new ArrayList<ObjetArene>();
-	
-	List<ObjetArene> mLstObjectEphemere = new ArrayList<ObjetArene>();
+	List<ModuleArena> mLstCaseArene = new ArrayList<>();
 	
 	private AreneProps mAreneProps;
 	
@@ -24,25 +22,23 @@ public class Arene {
 	
 
 	
-	public void addObjetArene (int pX, int pY,ObjetArene pObjetArene) {
+	public void addObjetArene (int pX, int pY,ModuleArena pObjetArene) {
 		Position lPosition = new Position (pX,pY);
-		pObjetArene.setPosition(lPosition);
+		pObjetArene.getObjetArene().setPosition(lPosition);
 		
 		//int lPos = pY * mTotY + pX;
 		mLstCaseArene.add(pObjetArene);
 	}
 	
-	public List<ObjetArene>  getLstCase (){
+	public List<ModuleArena>  getLstCase (){
 		return mLstCaseArene;
 	}
 	
-	public List<ObjetArene> getLstCaseEphemere(){
-		return mLstObjectEphemere;
+	public void setLstCase (List<ModuleArena> pLstModuleArena) {
+		mLstCaseArene = pLstModuleArena;
 	}
 	
-	public void setLstCaseEphemere (List<ObjetArene> pLst) {
-		mLstObjectEphemere = pLst;
-	}
+	
 
 
 

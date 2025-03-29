@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.js.dawa.iu.arene.Arene;
+import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.robot.model.Robot;
 import com.js.dawa.util.DawaException;
 
@@ -20,10 +21,10 @@ public class InstructionCond implements InstructionLst {
 	
 	Args mArgs;
 	
-	Robot mRobot;
+	ObjetArene mRobot;
 
 	@Override
-	public void init(Args pArgsInstruction, Robot pRobot, Arene pArene) {
+	public void init(Args pArgsInstruction, ObjetArene pRobot, Arene pArene) {
 		mArgs = pArgsInstruction;
 		mRobot = pRobot;
 

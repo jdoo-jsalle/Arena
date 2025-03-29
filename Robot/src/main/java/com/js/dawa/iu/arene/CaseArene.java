@@ -7,6 +7,7 @@ import java.util.Map;
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.robot.model.Attribut;
+import com.js.dawa.robot.model.DataBoard;
 import com.js.dawa.robot.model.Position;
 
 public class CaseArene implements ObjetArene{
@@ -38,6 +39,29 @@ public class CaseArene implements ObjetArene{
 	@Override
 	public Map<String, Attribut> getProps() {
 		//nothing
+		return null;
+	}
+
+	@Override
+	public void setInArena(boolean pIsInArena) {
+		//na
+		
+	}
+
+	@Override
+	public boolean isDispose() {
+		return false;
+	}
+
+	@Override
+	public void add(int px, int py) {
+		//objet immobile
+		
+	}
+
+	@Override
+	public DataBoard getDataBoard() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

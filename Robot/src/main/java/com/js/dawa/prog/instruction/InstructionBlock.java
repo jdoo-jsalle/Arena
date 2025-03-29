@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.robot.model.Robot;
+import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
 
 public class InstructionBlock implements InstructionLst {
@@ -20,7 +20,7 @@ public class InstructionBlock implements InstructionLst {
 	
 
 	@Override
-	public void init(Args pArgsInstruction, Robot pRobot, Arene pArene) {
+	public void init(Args pArgsInstruction, ObjetArene pObjetArene, Arene pArene) {
 		mArgs = pArgsInstruction;
 		
 	}

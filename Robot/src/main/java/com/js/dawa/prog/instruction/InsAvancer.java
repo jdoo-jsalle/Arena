@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.js.dawa.iu.arene.Arene;
+import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.robot.model.Position;
 import com.js.dawa.robot.model.Robot;
 import com.js.dawa.util.DawaException;
@@ -20,11 +21,11 @@ public class InsAvancer implements Instruction {
 	Args mArgs;
 	int mX =0;
 	int mY =0;
-	Robot mRobot;
+	ObjetArene mRobot;
 	Arene mArene;
 
 	@Override
-	public void init(Args pArgsInstruction, Robot pRobot,Arene pArene) throws DawaException {
+	public void init(Args pArgsInstruction, ObjetArene pRobot,Arene pArene) throws DawaException {
 		mArgs = pArgsInstruction;
 		mRobot = pRobot;
 		mArene = pArene;
@@ -38,11 +39,11 @@ public class InsAvancer implements Instruction {
 		Position lPosition = mRobot.getPosition();
 		
 		if (mArene != null && mArene.isPositionInArene(lPosition, mX, mY)){
-			mRobot.setDeBlocked();
+			mRobot.setInArena(true);
 			mRobot.add(mX,mY);
 		}
 		else {
-			mRobot.setBlocked();
+			mRobot.setInArena(false);
 		}
 		
 	

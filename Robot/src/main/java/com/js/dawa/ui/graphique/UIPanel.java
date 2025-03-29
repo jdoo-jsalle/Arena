@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.js.dawa.iu.arene.Arene;
+import com.js.dawa.iu.arene.ModuleArena;
 import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.iu.arene.render.InfoRender;
 import com.js.dawa.robot.model.Position;
@@ -26,8 +27,7 @@ public class UIPanel extends JPanel {
 	
 	int lSizeCase = 20;
 	
-	List<ObjetArene> mLstCase;	
-	List<ObjetArene> mLstCaseEphemere;
+	List<ModuleArena> mLstCase;	
 	/**
 	 * 
 	 */
@@ -37,7 +37,7 @@ public class UIPanel extends JPanel {
 	public void init (Arene pArene) {
 		mSizeArene = pArene.getAreneProps().getSize();
 		mLstCase = pArene.getLstCase();
-		mLstCaseEphemere = pArene.getLstCaseEphemere();
+
 	}
 	
 	@Override	
@@ -64,16 +64,12 @@ public class UIPanel extends JPanel {
 			drawLineDecal (0,li*lSizeCase,lSizeGrid,li*lSizeCase);
 			
 		}
-		//Affiche Case (robot)
+		//Affiche Case (robot and objet)
 		
-		for (ObjetArene lObjetArene : mLstCase) {
-			print(lObjetArene);
+		for (ModuleArena lModuleArene : mLstCase) {
+			print(lModuleArene.getObjetArene());
 		}
-		
-		for (ObjetArene lObjetArene : mLstCaseEphemere) {
-			print(lObjetArene);
-		}
-		
+			
 	}
 	
 	

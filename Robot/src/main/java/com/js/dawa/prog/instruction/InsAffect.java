@@ -1,7 +1,7 @@
 package com.js.dawa.prog.instruction;
 
 import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.robot.model.Robot;
+import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
 
 /**
@@ -12,11 +12,11 @@ import com.js.dawa.util.DawaException;
 public class InsAffect implements Instruction {
 	
 	Args mArgs;
-	Robot mRobot;
+	ObjetArene mRobot;
 	Arene mArene;
 
 	@Override
-	public void init(Args pArgsInstruction, Robot pRobot, Arene pArene) throws DawaException {
+	public void init(Args pArgsInstruction, ObjetArene pRobot, Arene pArene) throws DawaException {
 		mArgs = pArgsInstruction;
 		mRobot = pRobot;
 		mArene = pArene;
@@ -28,19 +28,18 @@ public class InsAffect implements Instruction {
 		String lKey = mArgs.getArgs(0);
 		String lVal = mArgs.getArgs(1);
 		//affect au DataBoard du robot
-		mRobot.getRobotData().setVariable(lKey, lVal);
+		mRobot.getDataBoard().setVariable(lKey, lVal);
 
 	}
 
 	@Override
 	public void setFlag(String pVal) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public String dump(String pDecal) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

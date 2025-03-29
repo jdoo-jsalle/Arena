@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.robot.model.Robot;
+import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
 
 /**
@@ -24,7 +24,7 @@ public class InstructionLoop implements InstructionLst {
 	List<Instruction> mLstInstruction = new ArrayList<>();
 
 	@Override
-	public void init(Args pArgsInstruction, Robot pRobot, Arene pArene) throws DawaException {
+	public void init(Args pArgsInstruction, ObjetArene pObjetArene, Arene pArene) throws DawaException {
 		// TODO Auto-generated method stub
 
 	}

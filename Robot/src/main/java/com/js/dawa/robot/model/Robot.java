@@ -70,6 +70,26 @@ public class Robot implements ObjetArene{
 	public void setRobotData(DataBoard pRobotData) {
 		this.mRobotData = pRobotData;
 	}
+
+	@Override
+	public void setInArena(boolean pIsInArena) {
+		if (pIsInArena)
+			setBlocked();
+		else 
+			setDeBlocked();
+		
+	}
+
+	@Override
+	public boolean isDispose() {
+		return false;//Robot never dispose
+	}
+
+	@Override
+	public DataBoard getDataBoard() {
+		
+		return getRobotData();
+	}
 	
 	
 	

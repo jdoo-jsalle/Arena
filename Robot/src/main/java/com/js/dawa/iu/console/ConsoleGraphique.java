@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 
 import com.js.dawa.iu.arene.Arene;
 import com.js.dawa.iu.arene.AreneProps;
-import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.ui.graphique.UIPanel;
 
 public class ConsoleGraphique implements Console {
