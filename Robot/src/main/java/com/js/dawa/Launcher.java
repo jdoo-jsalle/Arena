@@ -16,6 +16,7 @@ import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.prog.instruction.Args;
 import com.js.dawa.prog.instruction.InsAffect;
 import com.js.dawa.prog.instruction.InsAvancer;
+import com.js.dawa.prog.instruction.InsTir;
 import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.prog.instruction.InstructionBlock;
 import com.js.dawa.prog.instruction.InstructionCond;
@@ -175,20 +176,28 @@ public class Launcher {
 		//his prg
 		
 		
-		
+		InstructionBlock lInstructionBlock = new InstructionBlock();
 		
 		InsAvancer lAvancer1 = new InsAvancer();
 		Args lArgs = new Args(lRobot);
 		lArgs.addArguments("Rand[2]");
 		lArgs.addArguments("Rand[2]");
 		lAvancer1.init(lArgs, lRobot, pArene);
-			
 		
-			
+		lInstructionBlock.addInstruction(lAvancer1);
+		
+		InsTir lInsTir = new InsTir();
+		lArgs = new Args(lRobot);
+		lArgs.addArguments("Rand[2]");
+		lArgs.addArguments("Rand[2]");
+		lInsTir.init(lArgs, lRobot, pArene);
+		
+		lInstructionBlock.addInstruction(lInsTir);
+		
 		 
 		 ModuleArena lModuleRobot = new ModuleArena();
 		 lModuleRobot.setObjetArene(lRobot);
-		 lModuleRobot.setInstruction(lAvancer1);
+		 lModuleRobot.setInstruction(lInstructionBlock);
 		 return lModuleRobot;
 		
 	}

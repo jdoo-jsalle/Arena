@@ -12,7 +12,9 @@ public class Arene {
 
 	Console mConsole;	
 	
-	List<ModuleArena> mLstCaseArene = new ArrayList<>();
+	private List<ModuleArena> mLstModuleArene = new ArrayList<>();
+	
+	private List<ModuleArena> mLstModuleArenasTemp = new ArrayList<>();//Add create objet in turn.
 	
 	private AreneProps mAreneProps;
 	
@@ -22,20 +24,24 @@ public class Arene {
 	
 
 	
-	public void addObjetArene (int pX, int pY,ModuleArena pObjetArene) {
-		Position lPosition = new Position (pX,pY);
-		pObjetArene.getObjetArene().setPosition(lPosition);
+	
+	public void addObjetArene (ModuleArena pObjetArene) {
 		
-		//int lPos = pY * mTotY + pX;
-		mLstCaseArene.add(pObjetArene);
+		mLstModuleArenasTemp.add(pObjetArene);
 	}
 	
 	public List<ModuleArena>  getLstCase (){
-		return mLstCaseArene;
+		//put last objet creation in the arena
+		for (ModuleArena lModule : mLstModuleArenasTemp) {
+			mLstModuleArene.add(lModule);
+		}
+		
+		mLstModuleArenasTemp.clear();
+		return mLstModuleArene;
 	}
 	
 	public void setLstCase (List<ModuleArena> pLstModuleArena) {
-		mLstCaseArene = pLstModuleArena;
+		mLstModuleArene = pLstModuleArena;
 	}
 	
 	
@@ -65,7 +71,7 @@ public class Arene {
 	
 	public void rmDisposeObjet () {
 		List<ModuleArena> lLstToDispose = new ArrayList<>();
-		for (ModuleArena lModule : mLstCaseArene) {
+		for (ModuleArena lModule : mLstModuleArene) {
 			if (lModule.getObjetArene().isDispose()) {
 				lLstToDispose.add(lModule);
 			}
@@ -73,7 +79,7 @@ public class Arene {
 		}
 		//rm
 		for (ModuleArena lModule : lLstToDispose ) {
-			mLstCaseArene.remove(lModule);
+			mLstModuleArene.remove(lModule);
 		}
 	}
 
