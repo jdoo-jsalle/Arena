@@ -1,6 +1,5 @@
 package com.js.dawa.iu.arene;
 
-import java.awt.Color;
 import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseRender;
