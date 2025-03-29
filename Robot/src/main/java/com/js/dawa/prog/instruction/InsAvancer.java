@@ -31,7 +31,7 @@ public class InsAvancer implements Instruction {
 		mArene = pArene;
 		verify();
 
-	}
+	} 
 
 	@Override
 	public void execInstruction() throws DawaException {
