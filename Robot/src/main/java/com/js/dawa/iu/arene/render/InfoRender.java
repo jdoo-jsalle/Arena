@@ -49,6 +49,10 @@ public class InfoRender {
 			return Color.YELLOW;
 			
 		}
+		else if (mColor.equals("green")) {
+			return Color.GREEN;
+			
+		}
 		else return Color.BLACK;
 		
 	}

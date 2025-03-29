@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.js.dawa.iu.arene.Arene;
 import com.js.dawa.iu.arene.ObjetArene;
-import com.js.dawa.robot.model.Robot;
 import com.js.dawa.util.DawaException;
 
 public class InstructionCond implements InstructionLst {

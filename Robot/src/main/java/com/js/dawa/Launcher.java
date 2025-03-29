@@ -57,16 +57,6 @@ public class Launcher {
 		lConsole.init(lArene);
 		
 		
-		
-		
-		
-	
-		
-		
-		
-		
-		
-		
 		try {
 
 			
@@ -76,6 +66,7 @@ public class Launcher {
 			lLstModule.add(createDefaultCase(20, 20));
 			lLstModule.add(createFireBall(lArene));
 			lLstModule.add(createModuleRobotWithHisPrg(lArene));
+			lLstModule.add(createModuleRobot2WithAleaDepla(lArene));
 			lArene.setLstCase(lLstModule);
 			
 			
@@ -168,6 +159,36 @@ public class Launcher {
 		 ModuleArena lModuleRobot = new ModuleArena();
 		 lModuleRobot.setObjetArene(lRobot);
 		 lModuleRobot.setInstruction(lPrg);
+		 return lModuleRobot;
+		
+	}
+	
+	ModuleArena createModuleRobot2WithAleaDepla (Arene pArene) throws DawaException {
+		//robot
+		Robot lRobot = new Robot();
+		lRobot.setPosition(new Position(19, 19));
+		RobotsProps lProps = new RobotsProps();
+		lProps.setName("G");
+		lProps.setColor("green");
+		lRobot.init(lProps);
+		
+		//his prg
+		
+		
+		
+		
+		InsAvancer lAvancer1 = new InsAvancer();
+		Args lArgs = new Args(lRobot);
+		lArgs.addArguments("Rand[2]");
+		lArgs.addArguments("Rand[2]");
+		lAvancer1.init(lArgs, lRobot, pArene);
+			
+		
+			
+		 
+		 ModuleArena lModuleRobot = new ModuleArena();
+		 lModuleRobot.setObjetArene(lRobot);
+		 lModuleRobot.setInstruction(lAvancer1);
 		 return lModuleRobot;
 		
 	}

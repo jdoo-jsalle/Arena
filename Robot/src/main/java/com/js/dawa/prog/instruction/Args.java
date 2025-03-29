@@ -26,7 +26,7 @@ public class Args {
 	
 	static String DEBVAR ="$";
 	
-	static String RANDOM ="Rand[";
+	static String RANDOM ="Rand";
 	
 	private ObjetArene mRobot;
 	
@@ -68,8 +68,9 @@ public class Args {
 		else if (lVar.startsWith(JS)) {
 			lCmdOnValue = new CmdOnValueJavaScript();
 		}
+		//manage random generation
 		else if (lVar.startsWith(RANDOM)) {
-			
+			lCmdOnValue = new CmdOnValueRandom();
 		}
 		if (lCmdOnValue != null) {
 			lCmdOnValue.init(mRobot);
