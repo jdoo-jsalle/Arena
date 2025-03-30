@@ -61,8 +61,19 @@ public class CaseArene implements ObjetArene{
 
 	@Override
 	public DataBoard getDataBoard() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isVisible() {
+		//objet invisible
+		return false;
+	}
+
+	@Override
+	public void setVisible(boolean pVisible) {
+		//na
+		
 	}
 
 }

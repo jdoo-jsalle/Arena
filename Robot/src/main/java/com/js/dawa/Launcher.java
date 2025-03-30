@@ -16,6 +16,7 @@ import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.prog.instruction.Args;
 import com.js.dawa.prog.instruction.InsAffect;
 import com.js.dawa.prog.instruction.InsAvancer;
+import com.js.dawa.prog.instruction.InsInvisible;
 import com.js.dawa.prog.instruction.InsTir;
 import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.prog.instruction.InstructionBlock;
@@ -68,6 +69,7 @@ public class Launcher {
 			lLstModule.add(createFireBall(lArene));
 			lLstModule.add(createModuleRobotWithHisPrg(lArene));
 			lLstModule.add(createModuleRobot2WithAleaDepla(lArene));
+			lLstModule.add(createModuleRobot3Hide(lArene));
 			lArene.setLstCase(lLstModule);
 			
 			
@@ -198,6 +200,105 @@ public class Launcher {
 		 ModuleArena lModuleRobot = new ModuleArena();
 		 lModuleRobot.setObjetArene(lRobot);
 		 lModuleRobot.setInstruction(lInstructionBlock);
+		 return lModuleRobot;
+		
+	}
+	
+	
+	ModuleArena createModuleRobot3Hide (Arene pArene) throws DawaException {
+		//robot
+		Robot lRobot = new Robot();
+		lRobot.setPosition(new Position(15, 15));
+		RobotsProps lProps = new RobotsProps();
+		lProps.setName("B");
+		lProps.setColor("blue");
+		lRobot.init(lProps);
+		
+		lRobot.getRobotData().setVariable("wait", "0");
+		lRobot.getRobotData().setVariable("indicateur", "0");
+		
+		//his prg
+		
+		//cond
+		InstructionCond lInstructionCond = new InstructionCond();
+				
+		
+		Args lArgs = new Args(lRobot);
+		lArgs.addArguments("wait == 5");//block : generique name for robot block state
+		lInstructionCond.init(lArgs, lRobot, pArene);
+		
+		//if wait ==0
+		
+		InstructionBlock lInstructionBlock = new InstructionBlock();
+		lInstructionCond.addInstructionIf(lInstructionBlock);
+		
+		
+		InsInvisible lInsInvisible = new InsInvisible();
+		lInsInvisible.init(lArgs, lRobot, pArene);
+		
+		lInstructionBlock.addInstruction(lInsInvisible);
+		
+		//wait = 0
+		InsAffect lInsAffect0 = new InsAffect();
+		lArgs = new Args(lRobot);
+		lArgs.addArguments("wait");
+		lArgs.addArguments("0");
+		lInsAffect0.init(lArgs, lRobot, pArene);
+		lInstructionBlock.addInstruction(lInsAffect0);
+		
+		
+		//if indicateur ==0
+			InstructionCond lCond2 = new InstructionCond();
+			Args lArgs2 = new Args(lRobot);
+			lArgs2.addArguments("indicateur == 0");
+			lCond2.init(lArgs2, lRobot, pArene);
+			//depla alea
+			InsAvancer lAvancer1 = new InsAvancer();
+			Args lArgs3 = new Args(lRobot);
+			lArgs3.addArguments("Rand[2]");
+			lArgs3.addArguments("Rand[2]");
+			lAvancer1.init(lArgs3, lRobot, pArene);
+			lCond2.addInstructionIf(lAvancer1);
+			//indicateur =1
+			InsAffect lInsAffect1 = new InsAffect();
+			lArgs = new Args(lRobot);
+			lArgs.addArguments("indicateur");
+			lArgs.addArguments("1");
+			lInsAffect1.init(lArgs, lRobot, pArene);
+			
+			lCond2.addInstructionIf(lInsAffect1);
+			
+			//else
+			// indicateur =0
+			lInsAffect1 = new InsAffect();
+			lArgs = new Args(lRobot);
+			lArgs.addArguments("indicateur");
+			lArgs.addArguments("0");
+			lInsAffect1.init(lArgs, lRobot, pArene);
+			lCond2.addInstructionElse(lInsAffect1);
+		
+		lInstructionBlock.addInstruction(lCond2);
+		
+		//else
+		lInsAffect1 = new InsAffect();
+		lArgs = new Args(lRobot);
+		lArgs.addArguments("wait");
+		lArgs.addArguments("JS:wait + 1");
+		lInsAffect1.init(lArgs, lRobot, pArene);
+		
+		lInstructionCond.addInstructionElse(lInsAffect1);
+		
+		
+		
+		
+		
+		
+		
+		//
+		 
+		 ModuleArena lModuleRobot = new ModuleArena();
+		 lModuleRobot.setObjetArene(lRobot);
+		 lModuleRobot.setInstruction(lInstructionCond);
 		 return lModuleRobot;
 		
 	}

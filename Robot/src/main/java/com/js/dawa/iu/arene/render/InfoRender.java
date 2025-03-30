@@ -53,6 +53,14 @@ public class InfoRender {
 			return Color.GREEN;
 			
 		}
+		else if (mColor.equals("white")) {
+			return Color.WHITE;
+			
+		}
+		else if (mColor.equals("blue")) {
+			return Color.BLUE;
+			
+		}
 		
 		else return Color.BLACK;
 		

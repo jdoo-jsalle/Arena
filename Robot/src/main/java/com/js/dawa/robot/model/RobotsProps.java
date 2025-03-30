@@ -45,6 +45,16 @@ public class RobotsProps {
 		return lRes;
 	}
 	
+	boolean getBooleanVal (String pKey, boolean pDefaultValue) {
+		Attribut lAttr = mLstAttributs.get(pKey);
+		boolean lRes = pDefaultValue;
+		if (lAttr != null) {
+			String lVal = lAttr.getValueAttributString();
+			lRes = Boolean.getBoolean(lVal);
+		}
+		return lRes;
+	}
+	
 	public int getPdV () {
 		return getIntVal(PDV);
 	}
@@ -59,8 +69,8 @@ public class RobotsProps {
 		
 	}
 	
-	public int getVisibilite () {
-		return 0;
+	public boolean isVisibilite () {
+		return getBooleanVal(VISIBILITE,true);
 	}
 	
 	public void setColor (String pColor) {
@@ -86,10 +96,10 @@ public class RobotsProps {
 	
 	
 	
-	public void setVisibilte (String pVisibilite) {
+	public void setVisibilte (boolean pVisibilite) {
 		Attribut lAttribut = new Attribut();
 		lAttribut.setNameAttribut(VISIBILITE);
-		lAttribut.setValueAttributString(pVisibilite);
+		lAttribut.setValueAttributString(Boolean.toString(pVisibilite));
 		mLstAttributs.put(VISIBILITE, lAttribut);
 	}
 	

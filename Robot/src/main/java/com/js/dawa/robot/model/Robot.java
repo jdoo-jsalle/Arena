@@ -61,6 +61,8 @@ public class Robot implements ObjetArene{
 	public void add (int pX, int pY) {
 		mPosition.addX(pX);
 		mPosition.addY(pY);
+		if (pX  != 0 || pY != 0) //robot move => become visible
+		    setVisible(true);
 	}
 
 	public DataBoard getRobotData() {
@@ -89,6 +91,23 @@ public class Robot implements ObjetArene{
 	public DataBoard getDataBoard() {
 		
 		return getRobotData();
+	}
+
+	@Override
+	public boolean isVisible() {
+		return mRobotProps.isVisibilite();
+	}
+
+	@Override
+	public void setVisible(boolean pVisible) {
+		mRobotProps.setVisibilte(pVisible);
+		if (!pVisible) {
+			mRobotRender.setColor("white");//hide it
+		}
+		else {
+			mRobotRender.setColor(mRobotProps.getColor());
+		}
+		
 	}
 	
 	

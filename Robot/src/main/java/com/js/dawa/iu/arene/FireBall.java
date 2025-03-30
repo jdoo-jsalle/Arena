@@ -78,4 +78,15 @@ public class FireBall implements ObjetArene {
 		mColor = pColor;
 	}
 
+	@Override
+	public boolean isVisible() {
+		return false;
+	}
+
+	@Override
+	public void setVisible(boolean pVisible) {
+		//na
+		
+	}
+
 }

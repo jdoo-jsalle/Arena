@@ -25,5 +25,9 @@ public interface ObjetArene {
 	
 	public DataBoard getDataBoard();
 	
+	public boolean isVisible ();
+	
+	public void setVisible (boolean pVisible);
+	
 
 }
