@@ -1,7 +1,9 @@
-package com.js.dawa.prog.instruction;
+package com.js.dawa.prog.parse;
 
 
 import java.util.Stack;
+
+import com.js.dawa.prog.instruction.InstructionLst;
 
 public class StackInstruction {
 	

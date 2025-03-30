@@ -3,7 +3,7 @@ package com.js.dawa.prog.instruction;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ObjetArene;
 
-public class InstructionFake implements Instruction {
+public class InsFake implements Instruction {
 	Args mArgs;
 
 	@Override
@@ -13,8 +13,8 @@ public class InstructionFake implements Instruction {
 	}
 
 	@Override
-	public void execInstruction() {
-		//fake
+	public InfoExecIns execInstruction() {
+		return new InfoExecIns();
 
 	}
 
@@ -27,12 +27,12 @@ public class InstructionFake implements Instruction {
 	@Override
 	public String dump(String pDecal) {
 		
-		return mArgs.toString();
+		return pDecal + toString();
 	}
 	
 	@Override
 	public String toString () {
-		return mArgs.toString();
+		return "Fake " + mArgs.toString();
 	}
 
 }

@@ -1,9 +1,13 @@
-package com.js.dawa.prog.instruction;
+package com.js.dawa.prog.parse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.Test;
+
+import com.js.dawa.prog.instruction.Args;
+import com.js.dawa.prog.instruction.InstructionBlock;
+import com.js.dawa.prog.parse.StackInstruction;
 
 public class TestStackInstruction {
 	
@@ -35,13 +39,13 @@ public class TestStackInstruction {
 		
 		
 		InstructionBlock l = (InstructionBlock)lStackInstruction.pop();
-		assertEquals ("last",l.mArgs.getNameInstruction());
+		assertEquals ("last",l.getArgs().getNameInstruction());
 		
 		l = (InstructionBlock)lStackInstruction.pop();
-		assertEquals ("middle",l.mArgs.getNameInstruction());
+		assertEquals ("middle",l.getArgs().getNameInstruction());
 		
 		l = (InstructionBlock)lStackInstruction.pop();
-		assertEquals ("top",l.mArgs.getNameInstruction());
+		assertEquals ("top",l.getArgs().getNameInstruction());
 		
 		l = (InstructionBlock)lStackInstruction.pop();
 		assertNull(l);

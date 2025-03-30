@@ -1,7 +1,10 @@
-package com.js.dawa.prog.instruction;
+package com.js.dawa.prog.parse;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.util.DawaException;
 
 public class FabricInstructionFromString {
@@ -11,7 +14,7 @@ public class FabricInstructionFromString {
 		
 		Instruction lIns;
 		try {
-			 Class<?> lClass = Class.forName(pClassName);
+			 Class<?> lClass = Class.forName("com.js.dawa.prog.instruction.Ins" + StringUtils.capitalize(pClassName));
 			 lIns = (Instruction) lClass.getDeclaredConstructor().newInstance();
 		} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException |InstantiationException e) {

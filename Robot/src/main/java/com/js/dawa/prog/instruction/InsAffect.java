@@ -24,11 +24,12 @@ public class InsAffect implements Instruction {
 	}
 
 	@Override
-	public void execInstruction() throws DawaException {
+	public InfoExecIns execInstruction() throws DawaException {
 		String lKey = mArgs.getArgs(0);
 		String lVal = mArgs.getArgs(1);
 		//affect au DataBoard du robot
 		mRobot.getDataBoard().setVariable(lKey, lVal);
+		return new InfoExecIns();
 
 	}
 
@@ -40,7 +41,12 @@ public class InsAffect implements Instruction {
 
 	@Override
 	public String dump(String pDecal) {
-		return null;
+		return pDecal + toString();
+	}
+	
+	@Override
+	public String toString () {
+		return "Affect :  " + mArgs.toString();
 	}
 
 }

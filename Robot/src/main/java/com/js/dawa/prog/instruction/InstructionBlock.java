@@ -20,6 +20,8 @@ public class InstructionBlock implements InstructionLst {
 	
 	int mStep =0;
 	
+	InfoExecIns mRes;
+	
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pObjetArene, Arene pArene) {
@@ -29,18 +31,34 @@ public class InstructionBlock implements InstructionLst {
 
 
 	@Override
-	public void execInstruction() throws DawaException{
+	public InfoExecIns execInstruction() throws DawaException{
 		//exec step by step
-		if (mLstInstruction.size() >0) {//no instruction
-			if (mStep >= mLstInstruction.size()) {
-				mStep = 0;
-			}
-			Instruction lNext = mLstInstruction.get(mStep);
-			
-		
-			lNext.execInstruction();
-			mStep++;
+		if (mStep == 0) {
+			mRes = new InfoExecIns();
 		}
+		if (mLstInstruction.size() >0) {//no instruction
+			Instruction lNext = mLstInstruction.get(mStep);
+			LOGGER.debug("=> {}" + lNext.toString());
+		
+			InfoExecIns lResFils =   lNext.execInstruction();
+			//mRes.add(lResFils.toString());;
+			if (lResFils.isOver()) {
+			    mStep++;
+				if (mStep >= mLstInstruction.size()) {
+					mStep = 0;
+					mRes.setOver(true);
+				}
+				else {
+					mRes.setOver(false);
+				}
+			}
+			else {
+				mRes.setOver(false);
+			}
+			
+		}
+		
+		return mRes;
 		
 		
 	}
@@ -62,11 +80,28 @@ public class InstructionBlock implements InstructionLst {
 
 	@Override
 	public String dump(String pDecal) {
+		StringBuilder lRes = new StringBuilder();
+		if (mArgs != null) {
+			lRes.append(mArgs.toString());
+		}
+		else {
+			lRes.append("<args empty>");
+		}
+		lRes.append("\n");
+		
 		for (Instruction lInstruction : mLstInstruction) {
 			LOGGER.info("{} {}",pDecal, lInstruction.dump(pDecal));
+			lRes.append(pDecal);
+			lRes.append(lInstruction.dump(pDecal));
+			lRes.append("\n");
 		}
 		
-		return mArgs.toString();
+		
+		return lRes.toString();
+	}
+	
+	public Args getArgs() {
+		return mArgs;
 	}
 	
 	

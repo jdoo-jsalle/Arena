@@ -1,4 +1,4 @@
-package com.js.dawa.prog.instruction;
+package com.js.dawa.prog.parse;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import com.js.dawa.model.robot.Robot;
+import com.js.dawa.prog.instruction.Args;
 import com.js.dawa.util.DawaException;
 
 public class TestParseLigneCmd {
@@ -17,7 +18,7 @@ public class TestParseLigneCmd {
 	
 	@Test
 	public void testParse_erreur() {
-		ParseLigneCmd lParseLigne = new ParseLigneCmd();
+		ParseLigneCmd lParseLigne = new ParseLigneCmd(null,null);
 		try {
 			lParseLigne.getArgs(0, "truc");
 		} catch (DawaException e) {
@@ -29,8 +30,8 @@ public class TestParseLigneCmd {
 	@Test
 	public void testParse_normal_with_args() {
 		Robot lRobot = new Robot();
-		ParseLigneCmd lParseLigne = new ParseLigneCmd();
-		lParseLigne.setRobot(lRobot);
+		ParseLigneCmd lParseLigne = new ParseLigneCmd(lRobot,null);
+	
 		try {
 			Args lArgs = lParseLigne.getArgs(0, "truc (40,bobo)");
 			assertEquals("truc", lArgs.getNameInstruction());
@@ -48,8 +49,7 @@ public class TestParseLigneCmd {
 	@Test
 	public void testParse_normal_without_args() {
 		Robot lRobot = new Robot();
-		ParseLigneCmd lParseLigne = new ParseLigneCmd();
-		lParseLigne.setRobot(lRobot);
+		ParseLigneCmd lParseLigne = new ParseLigneCmd(lRobot,null);
 		try {
 			Args lArgs = lParseLigne.getArgs(0, "truc ()");
 			assertEquals(0, lArgs.sizeArgs());

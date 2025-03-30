@@ -26,7 +26,7 @@ public class InsTir implements Instruction {
 	}
 
 	@Override
-	public void execInstruction() throws DawaException {
+	public InfoExecIns execInstruction() throws DawaException {
 		verify();
 		if (mX != 0 ||  mY != 0) {
 			Position lPosObjetArena = mObjetArene.getPosition();
@@ -51,6 +51,7 @@ public class InsTir implements Instruction {
 			mArene.addObjetArene(lModuleFireBall);
 		}
 		//else => pas de vitesse, la fire ball ne part pas
+		return new InfoExecIns();
 
 	}
 
@@ -69,8 +70,12 @@ public class InsTir implements Instruction {
 
 	@Override
 	public String dump(String pDecal) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return pDecal + toString();
+	}
+	
+	public String toString() {
+		return "Tir " + mArgs.toString();
 	}
 
 }

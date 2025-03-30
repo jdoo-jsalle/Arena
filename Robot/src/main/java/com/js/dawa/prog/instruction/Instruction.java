@@ -13,7 +13,7 @@ public interface Instruction {
 	 * execute instruction
 	 * @return
 	 */
-	void execInstruction () throws DawaException;
+	InfoExecIns execInstruction () throws DawaException;
 	
 	void setFlag (String pVal);
 	

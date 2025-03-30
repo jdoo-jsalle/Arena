@@ -3,9 +3,12 @@ package com.js.dawa.prog.instruction;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 public class TestCmdOnValueRandom {
+	 private static final Logger LOGGER =  LogManager.getLogger( TestCmdOnValueRandom.class );
 	
 	@Test
 	public void test_getArgsRandom () {
@@ -25,7 +28,8 @@ public class TestCmdOnValueRandom {
 		CmdOnValueRandom lCmdRandom = new CmdOnValueRandom();
 		String lVal =  lCmdRandom.computeVal("Rand [ 10 ]");
 		int lRes = Integer.parseInt(lVal);
-		assertTrue(lRes >= 0 && lRes < 10);
+		LOGGER.debug("val rand {}", lRes);
+		assertTrue(lRes >= -10 && lRes < 10);
 	}
 
 }

@@ -33,7 +33,7 @@ public class InsAvancer implements Instruction {
 	} 
 
 	@Override
-	public void execInstruction() throws DawaException {
+	public InfoExecIns execInstruction() throws DawaException {
 		verify();
 		Position lPosition = mRobot.getPosition();
 		
@@ -44,6 +44,8 @@ public class InsAvancer implements Instruction {
 		else {
 			mRobot.setInArena(false);
 		}
+		
+		return new InfoExecIns();
 		
 	
 	}
@@ -65,7 +67,12 @@ public class InsAvancer implements Instruction {
 	@Override
 	public String dump(String pDecal) {
 		
-		return mArgs.toString();
+		return pDecal + toString();
+	}
+	
+	@Override
+	public String toString () {
+		return  "Avancer : " + mArgs.toString();
 	}
 
 	

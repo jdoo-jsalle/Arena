@@ -1,10 +1,17 @@
-package com.js.dawa.prog.instruction;
+package com.js.dawa.prog.parse;
 
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.js.dawa.model.robot.Robot;
+import com.js.dawa.model.arene.Arene;
+import com.js.dawa.model.arene.ObjetArene;
+import com.js.dawa.prog.instruction.Args;
+import com.js.dawa.prog.instruction.Instruction;
+import com.js.dawa.prog.instruction.InstructionBlock;
+import com.js.dawa.prog.instruction.InstructionCond;
+import com.js.dawa.prog.instruction.InsFake;
+import com.js.dawa.prog.instruction.InstructionLst;
 import com.js.dawa.util.DawaException;
 
 public class ParseLigneCmd implements ParseLigne {
@@ -16,22 +23,30 @@ public class ParseLigneCmd implements ParseLigne {
 	 
 	 InstructionLst mCurrentInstruction;
 	 
-	 private Robot mRobot;
+	 FabricInstructionFromString mFabricInstruction = new FabricInstructionFromString();
+	 
+	 private ObjetArene mObjetArene;
+	 private Arene mArene;
+	 
+	 int mNumLigne;
+	 
 
 	 
-	 public ParseLigneCmd () {
+	 public ParseLigneCmd (ObjetArene pObjetArene, Arene pArene) {
+		 mObjetArene = pObjetArene;
+		 mArene = pArene;
 		 mPileInstruction.add(mMainLstInstruction);
 		 mCurrentInstruction = mMainLstInstruction;
 	 }
 	
-	 public void parse (int pNumLigne,String pLigne) throws DawaException {
+	 public void parse (String pLigne) throws DawaException {
 		
 		
 		if (pLigne.trim().startsWith("if")) {
-			Args lArgs = getArgs(pNumLigne, pLigne);
+			Args lArgs = getArgs(mNumLigne, pLigne);
 			
 			InstructionLst lInstructionCond = new InstructionCond();
-			lInstructionCond.init(lArgs, null, null);
+			lInstructionCond.init(lArgs, mObjetArene, mArene);
 			lInstructionCond.setFlag("if");
 			mCurrentInstruction.addInstruction(lInstructionCond);
 			mPileInstruction.add(lInstructionCond);
@@ -51,9 +66,16 @@ public class ParseLigneCmd implements ParseLigne {
 		
 		}
 		else {
-			 Args lArgs = getArgs(pNumLigne, pLigne);
-			 Instruction lIns= new InstructionFake();
-			 lIns.init(lArgs, null, null);
+			 Args lArgs = getArgs(mNumLigne, pLigne);
+			 Instruction lIns=null;
+			 try {
+				 lIns= mFabricInstruction.createInstance(lArgs.getNameInstruction());
+			 }
+			 catch (DawaException le) {
+				 LOGGER.debug("Error", le);
+				 lIns = new InsFake();
+			 }
+			 lIns.init(lArgs, mObjetArene, mArene);
 			 mCurrentInstruction.addInstruction(lIns);
 			 
 			 LOGGER.info("<<<Add {} in {}",lIns,mCurrentInstruction);
@@ -62,10 +84,7 @@ public class ParseLigneCmd implements ParseLigne {
 		
 	}
 	 
-	 
-    public void setRobot (Robot pRobot) {
-    	mRobot = pRobot;
-    }
+
 	 
 	Args getArgs (int pNumLigne,String pLigne) throws DawaException {
 		int lDeb = pLigne.indexOf("(");
@@ -75,7 +94,7 @@ public class ParseLigneCmd implements ParseLigne {
 		}
 		String lInstruction = pLigne.substring(0,lDeb).trim();
 		LOGGER.info("instruction : {}", lInstruction);
-		Args lArgs = new Args(mRobot);
+		Args lArgs = new Args(mObjetArene);
 		lArgs.setNameInstruction(lInstruction);
 		
 		String lParam = pLigne.substring(lDeb + 1, lEnd).trim();
@@ -91,6 +110,10 @@ public class ParseLigneCmd implements ParseLigne {
 		
 		return lArgs;
 		
+	}
+	
+	public Instruction getMain() {
+		return mMainLstInstruction;
 	}
 
 }

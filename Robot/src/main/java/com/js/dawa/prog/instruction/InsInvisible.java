@@ -20,8 +20,9 @@ public class InsInvisible implements Instruction {
 	}
 
 	@Override
-	public void execInstruction() throws DawaException {
+	public InfoExecIns execInstruction() throws DawaException {
 		mObjetArene.setVisible(false);
+		return new InfoExecIns();
 		
 	}
 
@@ -33,7 +34,11 @@ public class InsInvisible implements Instruction {
 
 	@Override
 	public String dump(String pDecal) {
-		return null;
+		return pDecal + toString();
+	}
+	
+	public String toString () {
+		return "Invisible " + mArgs.toString();
 	}
 
 }

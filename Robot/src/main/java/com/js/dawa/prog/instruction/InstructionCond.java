@@ -21,6 +21,9 @@ public class InstructionCond implements InstructionLst {
 	Args mArgs;
 	
 	ObjetArene mRobot;
+	
+	boolean mForceIf = false;
+	boolean mForceElse = false;
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pRobot, Arene pArene) {
@@ -40,16 +43,39 @@ public class InstructionCond implements InstructionLst {
 	}
 
 	@Override
-	public void execInstruction() throws DawaException {
-
-		if (execCondition()) {
-			mLstIf.execInstruction();
+	public InfoExecIns execInstruction() throws DawaException {
+		InfoExecIns lInfoExec;
+		
+		if (mForceIf) {
+			lInfoExec = execIf();
+		}
+		else if (mForceElse){
+			lInfoExec = execElse();
 		}
 		else {
-			mLstElse.execInstruction();
+		
+			if (execCondition()) {
+				lInfoExec =  execIf();
+			}
+			else {
+				lInfoExec = execElse();
+			}
 		}
+		return lInfoExec;
 	
 
+	}
+	
+	InfoExecIns execIf () throws DawaException {
+		InfoExecIns lInfoExec = mLstIf.execInstruction();
+		mForceIf = !lInfoExec.isOver();
+		return lInfoExec;
+	}
+	
+	InfoExecIns execElse () throws DawaException {
+		InfoExecIns lInfoExec = mLstElse.execInstruction();
+		mForceElse = !lInfoExec.isOver();
+		return lInfoExec;
 	}
 	
 	
@@ -72,6 +98,9 @@ public class InstructionCond implements InstructionLst {
 
 	@Override
 	public void addInstruction(Instruction pInstruction) {
+		
+		
+		
 		if (mFlag.equals("if")) {
 			addInstructionIf(pInstruction);
 		}

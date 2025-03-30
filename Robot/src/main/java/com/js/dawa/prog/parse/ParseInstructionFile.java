@@ -1,4 +1,4 @@
-package com.js.dawa.prog.instruction;
+package com.js.dawa.prog.parse;
 
 import com.js.dawa.util.DawaException;
 import com.js.dawa.util.In;

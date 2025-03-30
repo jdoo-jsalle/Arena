@@ -30,8 +30,8 @@ public class InstructionLoop implements InstructionLst {
 	}
 
 	@Override
-	public void execInstruction() throws DawaException {
-		// TODO Auto-generated method stub
+	public InfoExecIns execInstruction() throws DawaException {
+		return new InfoExecIns();
 
 	}
 
