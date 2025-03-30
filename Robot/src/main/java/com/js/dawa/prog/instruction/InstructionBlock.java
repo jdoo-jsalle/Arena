@@ -18,6 +18,8 @@ public class InstructionBlock implements InstructionLst {
 	
 	List<Instruction> mLstInstruction = new ArrayList<>();
 	
+	int mStep =0;
+	
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pObjetArene, Arene pArene) {
@@ -28,9 +30,18 @@ public class InstructionBlock implements InstructionLst {
 
 	@Override
 	public void execInstruction() throws DawaException{
-		for (Instruction lInstruction : mLstInstruction) {
-			lInstruction.execInstruction();
+		//exec step by step
+		if (mLstInstruction.size() >0) {//no instruction
+			if (mStep >= mLstInstruction.size()) {
+				mStep = 0;
+			}
+			Instruction lNext = mLstInstruction.get(mStep);
+			
+		
+			lNext.execInstruction();
+			mStep++;
 		}
+		
 		
 	}
 
