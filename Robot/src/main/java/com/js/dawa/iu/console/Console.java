@@ -1,7 +1,7 @@
 package com.js.dawa.iu.console;
 
 
-import com.js.dawa.iu.arene.Arene;
+import com.js.dawa.model.arene.Arene;
 
 public interface Console {
 	

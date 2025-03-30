@@ -1,9 +1,9 @@
-package com.js.dawa.iu.arene;
+package com.js.dawa.model.arene;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.js.dawa.robot.model.Attribut;
+import com.js.dawa.model.robot.Attribut;
 
 public class AreneProps {
 	

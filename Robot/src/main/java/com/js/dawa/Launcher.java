@@ -6,13 +6,16 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.iu.arene.AreneProps;
-import com.js.dawa.iu.arene.CaseArene;
-import com.js.dawa.iu.arene.FireBall;
-import com.js.dawa.iu.arene.ModuleArena;
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
 import com.js.dawa.iu.console.ConsoleGraphique;
+import com.js.dawa.model.arene.Arene;
+import com.js.dawa.model.arene.AreneProps;
+import com.js.dawa.model.arene.CaseArene;
+import com.js.dawa.model.arene.FireBall;
+import com.js.dawa.model.arene.ModuleArena;
+import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.robot.Robot;
+import com.js.dawa.model.robot.RobotsProps;
 import com.js.dawa.prog.instruction.Args;
 import com.js.dawa.prog.instruction.InsAffect;
 import com.js.dawa.prog.instruction.InsAvancer;
@@ -21,9 +24,6 @@ import com.js.dawa.prog.instruction.InsTir;
 import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.prog.instruction.InstructionBlock;
 import com.js.dawa.prog.instruction.InstructionCond;
-import com.js.dawa.robot.model.Position;
-import com.js.dawa.robot.model.Robot;
-import com.js.dawa.robot.model.RobotsProps;
 import com.js.dawa.util.DawaException;
 
 

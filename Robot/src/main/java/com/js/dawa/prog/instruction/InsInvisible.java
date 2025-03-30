@@ -1,7 +1,7 @@
 package com.js.dawa.prog.instruction;
 
-import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.iu.arene.ObjetArene;
+import com.js.dawa.model.arene.Arene;
+import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
 
 public class InsInvisible implements Instruction {

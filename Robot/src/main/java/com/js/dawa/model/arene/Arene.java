@@ -1,11 +1,11 @@
-package com.js.dawa.iu.arene;
+package com.js.dawa.model.arene;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.js.dawa.iu.console.Console;
-import com.js.dawa.robot.model.Position;
+import com.js.dawa.model.robot.Position;
 
 public class Arene {
 	

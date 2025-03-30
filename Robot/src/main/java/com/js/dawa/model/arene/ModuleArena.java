@@ -1,4 +1,4 @@
-package com.js.dawa.iu.arene;
+package com.js.dawa.model.arene;
 
 import com.js.dawa.prog.instruction.Instruction;
 

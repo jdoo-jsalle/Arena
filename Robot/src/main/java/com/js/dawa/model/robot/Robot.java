@@ -1,10 +1,10 @@
-package com.js.dawa.robot.model;
+package com.js.dawa.model.robot;
 
 import java.util.Map;
 
-import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.RobotRender;
+import com.js.dawa.model.arene.ObjetArene;
 
 public class Robot implements ObjetArene{
 	
@@ -102,7 +102,7 @@ public class Robot implements ObjetArene{
 	public void setVisible(boolean pVisible) {
 		mRobotProps.setVisibilte(pVisible);
 		if (!pVisible) {
-			mRobotRender.setColor("white");//hide it
+			mRobotRender.setColor("white");//hide it on screen
 		}
 		else {
 			mRobotRender.setColor(mRobotProps.getColor());

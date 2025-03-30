@@ -1,4 +1,4 @@
-package com.js.dawa.robot.model;
+package com.js.dawa.model.robot;
 
 public class Attribut {
 	

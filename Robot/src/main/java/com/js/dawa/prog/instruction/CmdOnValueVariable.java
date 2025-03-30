@@ -1,6 +1,6 @@
 package com.js.dawa.prog.instruction;
 
-import com.js.dawa.iu.arene.ObjetArene;
+import com.js.dawa.model.arene.ObjetArene;
 
 public class CmdOnValueVariable implements CmdOnValue{
 

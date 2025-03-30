@@ -8,8 +8,8 @@ import javax.script.ScriptException;
 
 import org.junit.Test;
 
-import com.js.dawa.robot.model.Robot;
-import com.js.dawa.robot.model.DataBoard;
+import com.js.dawa.model.robot.DataBoard;
+import com.js.dawa.model.robot.Robot;
 
 public class TestScriptJsEval {
 	

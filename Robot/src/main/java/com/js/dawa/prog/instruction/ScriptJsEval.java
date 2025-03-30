@@ -10,8 +10,8 @@ import javax.script.ScriptException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.js.dawa.iu.arene.ObjetArene;
-import com.js.dawa.robot.model.DataBoard;
+import com.js.dawa.model.arene.ObjetArene;
+import com.js.dawa.model.robot.DataBoard;
 
 public class ScriptJsEval {
 	

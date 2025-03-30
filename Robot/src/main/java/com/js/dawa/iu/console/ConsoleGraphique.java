@@ -3,9 +3,9 @@ package com.js.dawa.iu.console;
 
 import javax.swing.JFrame;
 
-import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.iu.arene.AreneProps;
-import com.js.dawa.ui.graphique.UIPanel;
+import com.js.dawa.iu.graphique.UIPanel;
+import com.js.dawa.model.arene.Arene;
+import com.js.dawa.model.arene.AreneProps;
 
 public class ConsoleGraphique implements Console {
 	

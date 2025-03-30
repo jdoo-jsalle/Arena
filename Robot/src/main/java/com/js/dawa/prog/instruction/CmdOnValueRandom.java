@@ -5,7 +5,7 @@ import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.js.dawa.iu.arene.ObjetArene;
+import com.js.dawa.model.arene.ObjetArene;
 
 public class CmdOnValueRandom implements CmdOnValue {
 	private static final Logger LOGGER =  LogManager.getLogger( CmdOnValueRandom.class );

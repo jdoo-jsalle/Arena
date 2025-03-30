@@ -1,4 +1,4 @@
-package com.js.dawa.ui.graphique;
+package com.js.dawa.iu.graphique;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,11 +9,11 @@ import javax.swing.JPanel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.js.dawa.iu.arene.Arene;
-import com.js.dawa.iu.arene.ModuleArena;
-import com.js.dawa.iu.arene.ObjetArene;
 import com.js.dawa.iu.arene.render.InfoRender;
-import com.js.dawa.robot.model.Position;
+import com.js.dawa.model.arene.Arene;
+import com.js.dawa.model.arene.ModuleArena;
+import com.js.dawa.model.arene.ObjetArene;
+import com.js.dawa.model.robot.Position;
 
 public class UIPanel extends JPanel {
 	

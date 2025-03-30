@@ -4,7 +4,7 @@ package com.js.dawa.prog.instruction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.js.dawa.robot.model.Robot;
+import com.js.dawa.model.robot.Robot;
 import com.js.dawa.util.DawaException;
 
 public class ParseLigneCmd implements ParseLigne {

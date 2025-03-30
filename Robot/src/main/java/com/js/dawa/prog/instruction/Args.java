@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.js.dawa.iu.arene.ObjetArene;
+import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
 
 /**

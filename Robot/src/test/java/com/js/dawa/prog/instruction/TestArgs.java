@@ -6,8 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
-import com.js.dawa.robot.model.DataBoard;
-import com.js.dawa.robot.model.Robot;
+import com.js.dawa.model.robot.DataBoard;
+import com.js.dawa.model.robot.Robot;
 import com.js.dawa.util.DawaException;
 
 public class TestArgs {
