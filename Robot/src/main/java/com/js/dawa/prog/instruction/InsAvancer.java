@@ -45,7 +45,7 @@ public class InsAvancer implements Instruction {
 			mRobot.setInArena(false);
 		}
 		
-		return new InfoExecIns();
+		return new InfoExecIns(this);
 		
 	
 	}

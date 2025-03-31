@@ -40,19 +40,23 @@ class TestInstructionBlock {
 			lParseLigneCmd.parse( "fake (3)");
 			
 			String ldump = lParseLigneCmd.getMain().dump("");
-			assertEquals("<args empty>\n"
+			assertEquals("Block:<args empty>\n"
 					+ "Fake fake : [1]\n"
 					+ "Fake fake : [2]\n"
 					+ "Fake fake : [3]\n", ldump);
 			
 			InfoExecIns lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("",lInfo.dump() );
 			assertTrue(!lInfo.isOver());
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("",lInfo.dump() );
 			assertTrue(!lInfo.isOver());
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("",lInfo.dump() );
 			assertTrue(lInfo.isOver());
 			
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("",lInfo.dump() );
 			assertTrue(!lInfo.isOver());
 			
 			

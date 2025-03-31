@@ -22,7 +22,7 @@ public class InsInvisible implements Instruction {
 	@Override
 	public InfoExecIns execInstruction() throws DawaException {
 		mObjetArene.setVisible(false);
-		return new InfoExecIns();
+		return new InfoExecIns(this);
 		
 	}
 

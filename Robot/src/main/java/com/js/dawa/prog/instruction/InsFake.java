@@ -14,7 +14,7 @@ public class InsFake implements Instruction {
 
 	@Override
 	public InfoExecIns execInstruction() {
-		return new InfoExecIns();
+		return new InfoExecIns(this);
 
 	}
 

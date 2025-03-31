@@ -51,7 +51,7 @@ public class InsTir implements Instruction {
 			mArene.addObjetArene(lModuleFireBall);
 		}
 		//else => pas de vitesse, la fire ball ne part pas
-		return new InfoExecIns();
+		return new InfoExecIns(this);
 
 	}
 

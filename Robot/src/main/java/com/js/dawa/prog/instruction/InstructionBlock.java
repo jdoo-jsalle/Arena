@@ -34,13 +34,15 @@ public class InstructionBlock implements InstructionLst {
 	public InfoExecIns execInstruction() throws DawaException{
 		//exec step by step
 		if (mStep == 0) {
-			mRes = new InfoExecIns();
+			mRes = new InfoExecIns(this);
 		}
 		if (!mLstInstruction.isEmpty()) {//no instruction
 			Instruction lNext = mLstInstruction.get(mStep);
 			LOGGER.debug("=> {}" , lNext);
+			
 		
 			InfoExecIns lResFils =   lNext.execInstruction();
+			mRes.addInfoExecIns(lResFils);
 			if (lResFils.isOver()) {
 			    mStep++;
 				if (mStep >= mLstInstruction.size()) {
@@ -80,12 +82,7 @@ public class InstructionBlock implements InstructionLst {
 	@Override
 	public String dump(String pDecal) {
 		StringBuilder lRes = new StringBuilder();
-		if (mArgs != null) {
-			lRes.append(mArgs.toString());
-		}
-		else {
-			lRes.append("<args empty>");
-		}
+		lRes.append(toString());
 		lRes.append("\n");
 		
 		for (Instruction lInstruction : mLstInstruction) {
@@ -101,9 +98,21 @@ public class InstructionBlock implements InstructionLst {
 	}
 	
 	public Args getArgs() {
+		
 		return mArgs;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder lRes = new StringBuilder("Block:");
+		if (mArgs != null) {
+			lRes.append(mArgs.toString());
+		}
+		else {
+			lRes.append("<args empty>");
+		}
+		return lRes.toString();
+	}
 	
 	
 	

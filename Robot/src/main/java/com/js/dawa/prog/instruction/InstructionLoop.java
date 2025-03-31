@@ -31,13 +31,13 @@ public class InstructionLoop implements InstructionLst {
 
 	@Override
 	public InfoExecIns execInstruction() throws DawaException {
-		return new InfoExecIns();
+		return new InfoExecIns(this);
 
 	}
 
 	@Override
 	public void setFlag(String pVal) {
-		// TODO Auto-generated method stub
+		//na
 
 	}
 

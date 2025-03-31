@@ -29,7 +29,7 @@ public class InsAffect implements Instruction {
 		String lVal = mArgs.getArgs(1);
 		//affect au DataBoard du robot
 		mRobot.getDataBoard().setVariable(lKey, lVal);
-		return new InfoExecIns();
+		return new InfoExecIns(this);
 
 	}
 
