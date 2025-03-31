@@ -14,13 +14,13 @@ import com.js.dawa.model.robot.RobotsProps;
 import com.js.dawa.prog.parse.ParseLigneCmd;
 import com.js.dawa.util.DawaException;
 
-public class TestInstructionBlock {
+class TestInstructionBlock {
 	
 	 private static final Logger LOGGER =  LogManager.getLogger( TestInstructionBlock.class );
 	
 	
 	@Test
-	public void test_executeIntrusction () {
+	void test_executeIntrusction () {
 		Robot lRobot = new Robot();
 
 		lRobot.setPosition(new Position(22, 22));

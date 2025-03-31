@@ -38,7 +38,7 @@ public class LaunchParseLigneFonctionnel {
 			lParseLigneCmd.parse( "  fake (4)");
 			lParseLigneCmd.parse(" endif");
 			
-			LOGGER.info("===> ",lParseLigneCmd.mMainLstInstruction.dump(""));
+			LOGGER.info("===> {}",lParseLigneCmd.mMainLstInstruction.dump(""));
 		
 			for (int li = 0 ;li <30; li++)
 			

@@ -36,12 +36,11 @@ public class InstructionBlock implements InstructionLst {
 		if (mStep == 0) {
 			mRes = new InfoExecIns();
 		}
-		if (mLstInstruction.size() >0) {//no instruction
+		if (!mLstInstruction.isEmpty()) {//no instruction
 			Instruction lNext = mLstInstruction.get(mStep);
-			LOGGER.debug("=> {}" + lNext.toString());
+			LOGGER.debug("=> {}" , lNext);
 		
 			InfoExecIns lResFils =   lNext.execInstruction();
-			//mRes.add(lResFils.toString());;
 			if (lResFils.isOver()) {
 			    mStep++;
 				if (mStep >= mLstInstruction.size()) {
@@ -90,7 +89,8 @@ public class InstructionBlock implements InstructionLst {
 		lRes.append("\n");
 		
 		for (Instruction lInstruction : mLstInstruction) {
-			LOGGER.info("{} {}",pDecal, lInstruction.dump(pDecal));
+			String lDump =  lInstruction.dump(pDecal);
+			LOGGER.info("{} {}",pDecal, lDump);
 			lRes.append(pDecal);
 			lRes.append(lInstruction.dump(pDecal));
 			lRes.append("\n");

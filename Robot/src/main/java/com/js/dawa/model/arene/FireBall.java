@@ -1,5 +1,6 @@
 package com.js.dawa.model.arene;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseRender;
@@ -45,7 +46,7 @@ public class FireBall implements ObjetArene {
 	@Override
 	public Map<String, Attribut> getProps() {
 		//na
-		return null;
+		return new HashMap<>();
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class FireBall implements ObjetArene {
 
 	@Override
 	public void add(int px, int py) {
-		mPosition.addXY(px, py);;
+		mPosition.addXY(px, py);
 		
 	}
 

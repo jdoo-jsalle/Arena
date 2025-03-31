@@ -35,7 +35,7 @@ public class InsAffect implements Instruction {
 
 	@Override
 	public void setFlag(String pVal) {
-		
+		//na
 
 	}
 

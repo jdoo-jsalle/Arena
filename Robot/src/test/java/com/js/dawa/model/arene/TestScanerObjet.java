@@ -9,11 +9,11 @@ import com.js.dawa.model.robot.Position;
 
 
 
-public class TestScanerObjet {
+class TestScanerObjet {
 	
 	
 	@Test
-	public void test_compareProx_in_out () {
+	void test_compareProx_in_out () {
 		
 		Position lpos1 = new Position(10, 12);
 		Position lpos2 = new Position(12, 13);

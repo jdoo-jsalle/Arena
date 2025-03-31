@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.util.DawaException;
 
-public class TestInsAffect {
+class TestInsAffect {
 	
 	 private static final Logger LOGGER =  LogManager.getLogger( TestInsAffect.class );
 	
 	@Test
-	public void testExecInstruction_for_insAffect () {
+	void testExecInstruction_for_insAffect () {
 		InsAffect lInsAffect = new InsAffect();
 		
 		

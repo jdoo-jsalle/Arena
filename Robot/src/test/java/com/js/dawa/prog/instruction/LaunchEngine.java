@@ -60,7 +60,7 @@ public class LaunchEngine {
 	public static void main(String[] args) {
 		LaunchEngine lLaunchEngine = new LaunchEngine();
 		lLaunchEngine.testCompute();
-		//lLaunchEngine.testCond();
+		lLaunchEngine.testCond();
 	}
 	
 	

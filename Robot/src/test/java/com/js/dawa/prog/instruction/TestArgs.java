@@ -10,14 +10,14 @@ import com.js.dawa.model.robot.DataBoard;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.util.DawaException;
 
-public class TestArgs {
+class TestArgs {
 	
 	private static final Logger LOGGER =  LogManager.getLogger( TestArgs.class );
 	
 	
 	
 	@Test
-	public void test_getArgs () {
+	void test_getArgs () {
 		DataBoard lDataBoard = new DataBoard();
 		lDataBoard.setVariable("depla", "10");
 		Robot lRobot = new Robot();

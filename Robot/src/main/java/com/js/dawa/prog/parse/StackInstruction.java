@@ -1,13 +1,14 @@
 package com.js.dawa.prog.parse;
 
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 import com.js.dawa.prog.instruction.InstructionLst;
 
 public class StackInstruction {
 	
-	Stack<InstructionLst> mPileInstruction = new Stack<>();
+	Deque<InstructionLst> mPileInstruction = new ArrayDeque<>();
 	
 	
 	

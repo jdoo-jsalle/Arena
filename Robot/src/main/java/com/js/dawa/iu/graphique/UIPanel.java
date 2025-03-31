@@ -19,7 +19,7 @@ public class UIPanel extends JPanel {
 	
 	private static final Logger LOGGER =  LogManager.getLogger( UIPanel.class );
 	
-	Graphics mg;
+	transient Graphics mg;
 	
 	int mDecal = 100;
 	
@@ -27,7 +27,8 @@ public class UIPanel extends JPanel {
 	
 	int lSizeCase = 20;
 	
-	Arene mArene;
+
+	transient  Arene mArene;
 	/**
 	 * 
 	 */

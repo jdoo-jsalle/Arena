@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import com.js.dawa.prog.instruction.Args;
 import com.js.dawa.prog.instruction.InstructionBlock;
-import com.js.dawa.prog.parse.StackInstruction;
 
 public class TestStackInstruction {
 	

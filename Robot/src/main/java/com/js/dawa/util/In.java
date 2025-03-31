@@ -8,7 +8,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 
@@ -28,9 +29,7 @@ public class In implements AutoCloseable {
 
 	FileReader mFileReader;
 
-	public static final String UTF8 = "UTF8";
 
-	public static final String CP1252 = "Cp1252";
 
 	/**
 	 *
@@ -42,9 +41,9 @@ public class In implements AutoCloseable {
 	 * 
 	 */
 
-	public void open(String p_path) throws DawaException {
+	public void open(String pPath) throws DawaException {
 
-		open(p_path, UTF8);
+		open(pPath, StandardCharsets.UTF_8);
 
 	}
 
@@ -60,17 +59,17 @@ public class In implements AutoCloseable {
 	 * 
 	 */
 
-	public void open(String p_path, String pEncoding) throws DawaException {
+	public void open(String pPath, Charset pEncoding) throws DawaException {
 
 		verify();
 
 		try {
 
-			File lFile = new File(p_path);
+			File lFile = new File(pPath);
 
 			mIn = new BufferedReader(new InputStreamReader(new FileInputStream(lFile), pEncoding));
 
-		} catch (FileNotFoundException | UnsupportedEncodingException le) {
+		} catch (FileNotFoundException  le) {
 
 			throw new DawaException("Erreur In Open", le);
 
@@ -85,14 +84,7 @@ public class In implements AutoCloseable {
 		InputStream li = getClass().getClassLoader().getResourceAsStream(pPath);
 
 		if (li != null) {
-			try {
-				mIn = new BufferedReader(new InputStreamReader(li, UTF8));
-			}
-
-			catch (UnsupportedEncodingException le) {
-				throw new DawaException("Error open in  File", le);
-			}
-
+			mIn = new BufferedReader(new InputStreamReader(li, StandardCharsets.UTF_8));
 		} else {
 			throw new DawaException("Ressource " + pPath + " not exits");
 
@@ -117,13 +109,13 @@ public class In implements AutoCloseable {
 
 	public String readLine() throws DawaException {
 
-		String l_res = null;
+		String lRes = null;
 
 		try {
 
 			if (mIn != null) {
 
-				l_res = mIn.readLine();
+				lRes = mIn.readLine();
 
 			}
 
@@ -133,7 +125,7 @@ public class In implements AutoCloseable {
 
 		}
 
-		return l_res;
+		return lRes;
 
 	}
 

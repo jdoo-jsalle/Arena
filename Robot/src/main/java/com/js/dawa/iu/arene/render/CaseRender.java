@@ -6,6 +6,4 @@ public interface CaseRender {
 	
 	InfoRender getInfoRender();
 	
-	//void executeRender (Graphics g);
-
 }

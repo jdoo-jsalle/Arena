@@ -122,11 +122,11 @@ public class InstructionCond implements InstructionLst {
 	@Override
 	public String dump(String pDecal) {
 		
-		LOGGER.info(pDecal + mArgs.toString());
+		LOGGER.info("{} {}",pDecal , mArgs);
 		mLstIf.dump(pDecal + "--");
-		LOGGER.info(pDecal + "else : ");
+		LOGGER.info("{} {}",pDecal , "else : ");
 		mLstElse.dump(pDecal + "--");
-		LOGGER.info(pDecal + "endif");
+		LOGGER.info("{} {}",pDecal , "endif");
 		
 		return "Cond:";
 	}

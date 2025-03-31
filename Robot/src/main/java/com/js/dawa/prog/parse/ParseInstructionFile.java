@@ -11,11 +11,13 @@ public class ParseInstructionFile {
 
 	
 	void parse (String pPath) throws DawaException{
-		In lIn = new In();
-		lIn.open(pPath);
+		try (In lIn = new In()){
+			lIn.open(pPath);
+			//TODO ..
+		}
 		
 		
-		lIn.close();
+		
 	}
 	
 

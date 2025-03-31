@@ -1,6 +1,7 @@
 package com.js.dawa.model.arene;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public class CaseArene implements ObjetArene{
 	@Override
 	public Map<String, Attribut> getProps() {
 		//nothing
-		return null;
+		return new HashMap<>();
 	}
 
 	@Override

@@ -14,13 +14,13 @@ import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
 import com.js.dawa.util.DawaException;
 
-public class TestInsAvancer {
+class TestInsAvancer {
 	
 	 private static final Logger LOGGER =  LogManager.getLogger( TestInsAvancer.class );
 	
 	
 	@Test
-	public void testExecIntructionAvancer () {
+	void testExecIntructionAvancer () {
 		DataBoard lDataBoard = new DataBoard();
 		lDataBoard.setVariable("depla", "1");
 		Robot lRobot = new Robot();

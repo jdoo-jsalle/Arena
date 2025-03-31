@@ -60,9 +60,6 @@ public class Launcher {
 		
 		
 		try {
-
-			
-		
 			List<ModuleArena> lLstModule = new ArrayList<>();
 			lLstModule.add(createDefaultCase(10, 10));
 			lLstModule.add(createDefaultCase(20, 20));
@@ -71,46 +68,11 @@ public class Launcher {
 			lLstModule.add(createModuleRobot2WithAleaDepla(lArene));
 			lLstModule.add(createModuleRobot3Hide(lArene));
 			lArene.setLstCase(lLstModule);
-			
-			
-			
-			boolean lEnd = false;
 		
-			
-			//loop
-			while (!lEnd) {
-				
-			
-				
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-			
-					LOGGER.error("error", e);
-				}
-				
-				//execute prg
-				for (ModuleArena lModuleArena : lLstModule) {
-					Instruction lInstruction = lModuleArena.getInstruction();
-					if (lInstruction != null)
-					    lInstruction.execInstruction();
-					
-				}
-				
-				lArene.rmDisposeObjet();
-				
-				
-					
-				//compute/eval lEnd
-				
-				lConsole.update();
-				
-				
-			}
-			
+			engineCompute(lConsole, lArene, lLstModule);
 			
 		} catch (DawaException e) {
-			LOGGER.error("error interpretor", e);;
+			LOGGER.error("error interpretor", e);
 		}
 		
 		
@@ -119,6 +81,41 @@ public class Launcher {
 		
 		
 	}
+	
+	
+	void engineCompute (ConsoleGraphique lConsole, Arene lArene, List<ModuleArena> lLstModule) throws DawaException {
+		boolean lEnd = false;
+		
+		
+		//loop
+		//TODO : compute lEnd
+		while (!lEnd) {
+			
+		
+			
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+		
+				LOGGER.error("error", e);
+			}
+			
+			//execute prg
+			for (ModuleArena lModuleArena : lLstModule) {
+				Instruction lInstruction = lModuleArena.getInstruction();
+				if (lInstruction != null)
+				    lInstruction.execInstruction();
+				
+			}
+			
+			lArene.rmDisposeObjet();
+			//compute/eval lEnd
+			lConsole.update();
+		}
+		
+	}
+	
+	
 	
 	ModuleArena createModuleRobotWithHisPrg (Arene pArene) throws DawaException {
 		//robot
@@ -166,6 +163,10 @@ public class Launcher {
 		
 	}
 	
+	String getRandClause (String pVal) {
+		return "Rand [" + pVal + "]";
+	}
+	
 	ModuleArena createModuleRobot2WithAleaDepla (Arene pArene) throws DawaException {
 		//robot
 		Robot lRobot = new Robot();
@@ -182,16 +183,16 @@ public class Launcher {
 		
 		InsAvancer lAvancer1 = new InsAvancer();
 		Args lArgs = new Args(lRobot);
-		lArgs.addArguments("Rand[2]");
-		lArgs.addArguments("Rand[2]");
+		lArgs.addArguments(getRandClause("2"));
+		lArgs.addArguments(getRandClause("2"));
 		lAvancer1.init(lArgs, lRobot, pArene);
 		
 		lInstructionBlock.addInstruction(lAvancer1);
 		
 		InsTir lInsTir = new InsTir();
 		lArgs = new Args(lRobot);
-		lArgs.addArguments("Rand[2]");
-		lArgs.addArguments("Rand[2]");
+		lArgs.addArguments(getRandClause("2"));
+		lArgs.addArguments(getRandClause("2"));
 		lInsTir.init(lArgs, lRobot, pArene);
 		
 		lInstructionBlock.addInstruction(lInsTir);
@@ -206,6 +207,7 @@ public class Launcher {
 	
 	
 	ModuleArena createModuleRobot3Hide (Arene pArene) throws DawaException {
+		 final String INDICATEUR ="indicateur";
 		//robot
 		Robot lRobot = new Robot();
 		lRobot.setPosition(new Position(15, 15));
@@ -215,7 +217,7 @@ public class Launcher {
 		lRobot.init(lProps);
 		
 		lRobot.getRobotData().setVariable("wait", "0");
-		lRobot.getRobotData().setVariable("indicateur", "0");
+		lRobot.getRobotData().setVariable(INDICATEUR, "0");
 		
 		//his prg
 		
@@ -262,7 +264,7 @@ public class Launcher {
 			//indicateur =1
 			InsAffect lInsAffect1 = new InsAffect();
 			lArgs = new Args(lRobot);
-			lArgs.addArguments("indicateur");
+			lArgs.addArguments(INDICATEUR);
 			lArgs.addArguments("1");
 			lInsAffect1.init(lArgs, lRobot, pArene);
 			
@@ -272,7 +274,7 @@ public class Launcher {
 			// indicateur =0
 			lInsAffect1 = new InsAffect();
 			lArgs = new Args(lRobot);
-			lArgs.addArguments("indicateur");
+			lArgs.addArguments(INDICATEUR);
 			lArgs.addArguments("0");
 			lInsAffect1.init(lArgs, lRobot, pArene);
 			lCond2.addInstructionElse(lInsAffect1);

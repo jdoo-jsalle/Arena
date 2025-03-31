@@ -18,6 +18,7 @@ public class ConsoleGraphique implements Console {
 	
 	 
 	int getIntProps (String pProps) {
+		//TODO : remove or process
 		return 0;
 	}
 	
@@ -31,7 +32,7 @@ public class ConsoleGraphique implements Console {
 		mProps = pArene.getAreneProps();
 		// Création de la fenêtre
         frame = new JFrame(mProps.getTitle());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(1500, 1500);
         
         // Création de la zone de texte
