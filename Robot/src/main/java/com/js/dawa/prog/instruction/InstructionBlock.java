@@ -22,28 +22,51 @@ public class InstructionBlock implements InstructionLst {
 	
 	InfoExecIns mRes;
 	
+	static int mIdBlockTot = 0;
+	
+	static void addIdBlockTot() {
+		mIdBlockTot ++;
+	}
+	
+	public static void reinitIdBlock() {
+		mIdBlockTot = 0;
+	}
+	
+	int mIdBlock;
+	
+	
+	public InstructionBlock(){
+		mIdBlock = mIdBlockTot;
+		addIdBlockTot();
+	}
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pObjetArene, Arene pArene) {
-		mArgs = pArgsInstruction;
+		//na
 		
 	}
 
 
 	@Override
 	public InfoExecIns execInstruction() throws DawaException{
+		LOGGER.debug("========= Begin Block {} =====================",mIdBlock);
 		//exec step by step
 		if (mStep == 0) {
 			mRes = new InfoExecIns(this);
 		}
 		if (!mLstInstruction.isEmpty()) {//no instruction
 			Instruction lNext = mLstInstruction.get(mStep);
-			LOGGER.debug("=> {}" , lNext);
+			LOGGER.debug("===> Next :  {} for Block {}" , lNext, mIdBlock);
 			
 		
 			InfoExecIns lResFils =   lNext.execInstruction();
+			
+			LOGGER.debug("==> add ResFils of \"{}\" in Block \"{}\"",lNext.toString(), mIdBlock);
 			mRes.addInfoExecIns(lResFils);
+			LOGGER.debug("==> Res : {}" ,  mRes.dump());
+			
 			if (lResFils.isOver()) {
+				
 			    mStep++;
 				if (mStep >= mLstInstruction.size()) {
 					mStep = 0;
@@ -58,6 +81,8 @@ public class InstructionBlock implements InstructionLst {
 			}
 			
 		}
+		
+		LOGGER.debug("========= End Block {} =====================",mIdBlock);
 		
 		return mRes;
 		
@@ -86,8 +111,6 @@ public class InstructionBlock implements InstructionLst {
 		lRes.append("\n");
 		
 		for (Instruction lInstruction : mLstInstruction) {
-			String lDump =  lInstruction.dump(pDecal);
-			LOGGER.info("{} {}",pDecal, lDump);
 			lRes.append(pDecal);
 			lRes.append(lInstruction.dump(pDecal));
 			lRes.append("\n");
@@ -104,7 +127,7 @@ public class InstructionBlock implements InstructionLst {
 	
 	@Override
 	public String toString() {
-		StringBuilder lRes = new StringBuilder("Block:");
+		StringBuilder lRes = new StringBuilder("Block[" + Integer.toString(mIdBlock) + "]:");
 		if (mArgs != null) {
 			lRes.append(mArgs.toString());
 		}

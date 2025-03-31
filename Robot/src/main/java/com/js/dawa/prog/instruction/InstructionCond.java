@@ -24,6 +24,8 @@ public class InstructionCond implements InstructionLst {
 	
 	boolean mForceIf = false;
 	boolean mForceElse = false;
+	
+	InfoExecIns mInfoExec;
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pRobot, Arene pArene) {
@@ -44,38 +46,46 @@ public class InstructionCond implements InstructionLst {
 
 	@Override
 	public InfoExecIns execInstruction() throws DawaException {
-		InfoExecIns lInfoExec;
-		
+			
 		if (mForceIf) {
-			lInfoExec = execIf();
+			LOGGER.debug("force if");
+			 execIf();
 		}
 		else if (mForceElse){
-			lInfoExec = execElse();
+			LOGGER.debug("force else");
+			execElse();
 		}
 		else {
-		
+			mInfoExec =new InfoExecIns(this);
+			mInfoExec.setOver(false);
+			LOGGER.debug("Eval condition");
 			if (execCondition()) {
-				lInfoExec =  execIf();
+				LOGGER.debug("Exec if on condition");
+				execIf();
 			}
 			else {
-				lInfoExec = execElse();
+				LOGGER.debug("Exec else on condition");
+				execElse();
 			}
 		}
-		return lInfoExec;
+		return mInfoExec;
 	
 
 	}
 	
-	InfoExecIns execIf () throws DawaException {
+	void execIf () throws DawaException {
 		InfoExecIns lInfoExec = mLstIf.execInstruction();
 		mForceIf = !lInfoExec.isOver();
-		return lInfoExec;
+		mInfoExec.addInfoExecIns(lInfoExec);
+		mInfoExec.setOver(!mForceIf);
 	}
 	
-	InfoExecIns execElse () throws DawaException {
+	void execElse () throws DawaException {
 		InfoExecIns lInfoExec = mLstElse.execInstruction();
 		mForceElse = !lInfoExec.isOver();
-		return lInfoExec;
+		mInfoExec.addInfoExecIns(lInfoExec);
+		mInfoExec.setOver(!mForceElse);
+		
 	}
 	
 	
@@ -121,14 +131,16 @@ public class InstructionCond implements InstructionLst {
 
 	@Override
 	public String dump(String pDecal) {
+		StringBuilder lRes = new StringBuilder ();
+		lRes.append(toString());
+		lRes.append("\n");
+		lRes.append(mLstIf.dump(pDecal + "--") );
+		lRes.append("else\n");
+		lRes.append(mLstElse.dump(pDecal + "--"));
+		lRes.append("endif");
+
 		
-		LOGGER.info("{} {}",pDecal , mArgs);
-		mLstIf.dump(pDecal + "--");
-		LOGGER.info("{} {}",pDecal , "else : ");
-		mLstElse.dump(pDecal + "--");
-		LOGGER.info("{} {}",pDecal , "endif");
-		
-		return "Cond:";
+		return lRes.toString();
 	}
 	
 	
