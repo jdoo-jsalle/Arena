@@ -21,6 +21,7 @@ class TestInstructionBlock {
 	
 	@Test
 	void test_executeIntruction () {
+		InstructionBlock.reinitIdBlock();
 		Robot lRobot = new Robot();
 
 		lRobot.setPosition(new Position(22, 22));
@@ -46,17 +47,17 @@ class TestInstructionBlock {
 					+ "Fake fake : [3]\n", ldump);
 			
 			InfoExecIns lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block[0]:<args empty>,Fake fake : [1]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Fake fake : [1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block[0]:<args empty>,Fake fake : [1],Fake fake : [2]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Fake fake : [1]:,Fake fake : [2]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block[0]:<args empty>,Fake fake : [1],Fake fake : [2],Fake fake : [3]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Fake fake : [1]:,Fake fake : [2]:,Fake fake : [3]:",lInfo.toString() );
 			assertTrue(lInfo.isOver());
 			
 			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block[0]:<args empty>,Fake fake : [1]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Fake fake : [1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			
 			
@@ -84,7 +85,7 @@ class TestInstructionBlock {
 		
 		
 		try {
-			lParseLigneCmd.parse( "affect (truc,1)");
+			lParseLigneCmd.parse( "affect (d,1)");
 			lParseLigneCmd.parse( "if (truc==0)");
 			lParseLigneCmd.parse( "  affect (truc,1)");
 			lParseLigneCmd.parse( "  fake (1)");
@@ -97,7 +98,7 @@ class TestInstructionBlock {
 			
 			String ldump = lParseLigneCmd.getMain().dump("");
 			assertEquals("Block[0]:<args empty>\n"
-					+ "Affect :  affect : [truc, 1]\n"
+					+ "Affect :  affect : [d, 1]\n"
 					+ "if : [truc==0]\n"
 					+ "Block[1]:<args empty>\n"
 					+ "----Affect :  affect : [truc, 1]\n"
@@ -112,46 +113,46 @@ class TestInstructionBlock {
 			
 			LOGGER.debug("------ step 1");
 			InfoExecIns lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block[0]:<args empty>,Affect :  affect : [truc, 1]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			LOGGER.debug("------ step 2");
 			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block[0]:<args empty>,Affect :  affect : [truc, 1],if : [truc==0],Block[2]:<args empty>,Affect :  affect : [truc, 0]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			LOGGER.debug("------ step 3");
 			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block[0]:<args empty>,Affect :  affect : [truc, 1]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Fake fake : [3]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			
 			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block[0]:<args empty>,Affect :  affect : [truc, 1],if : [truc==0],Block[2]:<args empty>,Affect :  affect : [truc, 0],Fake fake : [3],Fake fake : [4],Block[2]:<args empty>,Affect :  affect : [truc, 0],Fake fake : [3],Fake fake : [4],Block[2]:<args empty>,Affect :  affect : [truc, 0],Fake fake : [3],Fake fake : [4]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Fake fake : [3]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Fake fake : [3]:,Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Fake fake : [3]:,Fake fake : [4]:",lInfo.toString() );
 			assertTrue(lInfo.isOver());
 			
 
 			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block[0]:<args empty>,Affect :  affect : [truc, 1]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			
 
 			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block:<args empty>,Fake fake : [1]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			
 
 			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block:<args empty>,Fake fake : [1]",lInfo.dump() );
-			assertTrue(!lInfo.isOver());
-			
-			
-
-			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block:<args empty>,Fake fake : [1]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Fake fake : [1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			
 			
 
 			lInfo = lParseLigneCmd.getMain().execInstruction();
-			assertEquals("Block:<args empty>,Fake fake : [1]",lInfo.dump() );
+			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Fake fake : [1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Fake fake : [1]:,Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Fake fake : [1]:,Fake fake : [2]:",lInfo.toString() );
+			assertTrue(lInfo.isOver());
+			
+			
+
+			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			
 			

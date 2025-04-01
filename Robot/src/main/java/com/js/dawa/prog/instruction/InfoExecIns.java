@@ -13,15 +13,17 @@ public class InfoExecIns {
 	
 	private static final Logger LOGGER =  LogManager.getLogger( InfoExecIns.class );
 	
-	List<InfoExecIns> mLstInfoExecIns = new ArrayList<>();
+	StringBuilder mMessage = new StringBuilder();
+	String mComa="";
 	
-	Instruction mIntructionRun;
+	
 	
 	private boolean isOver = true; //default value
 	
 	
 	public InfoExecIns (Instruction pIntruction) {
-		mIntructionRun = pIntruction;
+		mMessage.append(pIntruction.toString());
+		mMessage.append(":");
 	}
 
 	public boolean isOver() {
@@ -34,34 +36,17 @@ public class InfoExecIns {
 	
 	void addInfoExecIns (InfoExecIns pInfoExecIns) {
 		if (LOGGER.isDebugEnabled()) {
-		    LOGGER.debug (")))> add : {}",pInfoExecIns.dump());
+		    LOGGER.debug (")))> add : {}",pInfoExecIns);
 		}
-		mLstInfoExecIns.add(pInfoExecIns);
+		mMessage.append(mComa);
+		mMessage.append(pInfoExecIns.toString());
+		mComa =",";
 	}
 	
-	public String dump() {
-		StringBuilder  lExec = new StringBuilder(mIntructionRun.toString());
-		String lComa =",";
-		if (LOGGER.isDebugEnabled())
-		    LOGGER.debug("****> {}",this);
-		for (InfoExecIns lInfoExec : mLstInfoExecIns) {
-			lExec.append(lComa);
-			lExec.append(lInfoExec.dump());
-			
-	
-		}
-		
-		return lExec.toString();
-		
-	}
 	
 	@Override
 	public String toString() {
-		StringBuilder lRes = new StringBuilder();
-		lRes.append(mIntructionRun.toString());
-		lRes.append("===>");
-		lRes.append(mLstInfoExecIns.toString());
-		return lRes.toString();
+		return mMessage.toString();
 	}
 	
 

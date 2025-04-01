@@ -42,6 +42,8 @@ public class InstructionBlock implements InstructionLst {
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pObjetArene, Arene pArene) {
+		mArgs = pArgsInstruction;
+		
 		//na
 		
 	}
@@ -61,9 +63,9 @@ public class InstructionBlock implements InstructionLst {
 		
 			InfoExecIns lResFils =   lNext.execInstruction();
 			
-			LOGGER.debug("==> add ResFils of \"{}\" in Block \"{}\"",lNext.toString(), mIdBlock);
+			if (LOGGER.isDebugEnabled()) { LOGGER.debug("==> add ResFils of \"{}\" in Block \"{}\"",lNext.toString(), mIdBlock);}
 			mRes.addInfoExecIns(lResFils);
-			LOGGER.debug("==> Res : {}" ,  mRes.dump());
+			if (LOGGER.isDebugEnabled()) {LOGGER.debug("==> Res : {}" ,  mRes.toString());}
 			
 			if (lResFils.isOver()) {
 				
