@@ -96,8 +96,9 @@ public class Launcher {
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
-		
 				LOGGER.error("error", e);
+				Thread.currentThread().interrupt();
+				
 			}
 			
 			//execute prg

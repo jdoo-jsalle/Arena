@@ -2,6 +2,10 @@ package com.js.dawa.prog.instruction;
 
 public class IdBlock {
 	
+	private IdBlock() {
+		//Static call
+	}
+	
 	private static int mIdBlockTot = 0;
 	
 	static void addIdBlockTot() {

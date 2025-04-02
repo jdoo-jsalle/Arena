@@ -55,9 +55,9 @@ public class InstructionBlock implements InstructionLst {
 		
 			InfoExecIns lResFils =   lNext.execInstruction();
 			
-			if (LOGGER.isDebugEnabled()) { LOGGER.debug("==> add ResFils of \"{}\" in Block \"{}\"",lNext.toString(), mIdBlock);}
+			if (LOGGER.isDebugEnabled()) { LOGGER.debug("==> add ResFils of \"{}\" in Block \"{}\"",lNext, mIdBlock);}
 			mRes.addInfoExecIns(lResFils);
-			if (LOGGER.isDebugEnabled()) {LOGGER.debug("==> Res : {}" ,  mRes.toString());}
+			if (LOGGER.isDebugEnabled()) {LOGGER.debug("==> Res : {}" ,  mRes);}
 			
 			if (lResFils.isOver()) {
 				
