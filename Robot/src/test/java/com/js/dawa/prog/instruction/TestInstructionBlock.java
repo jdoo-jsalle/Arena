@@ -21,7 +21,7 @@ class TestInstructionBlock {
 	
 	@Test
 	void test_executeIntruction () {
-		InstructionBlock.reinitIdBlock();
+		IdBlock.reinitIdBlock();
 		Robot lRobot = new Robot();
 
 		lRobot.setPosition(new Position(22, 22));
@@ -70,7 +70,7 @@ class TestInstructionBlock {
 	
 	@Test
 	void test_executeIntruction_with_cond () {
-		InstructionBlock.reinitIdBlock();
+		IdBlock.reinitIdBlock();
 		Robot lRobot = new Robot();
 
 		lRobot.setPosition(new Position(22, 22));

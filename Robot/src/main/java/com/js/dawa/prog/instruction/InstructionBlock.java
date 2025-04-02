@@ -22,22 +22,14 @@ public class InstructionBlock implements InstructionLst {
 	
 	InfoExecIns mRes;
 	
-	static int mIdBlockTot = 0;
 	
-	static void addIdBlockTot() {
-		mIdBlockTot ++;
-	}
-	
-	public static void reinitIdBlock() {
-		mIdBlockTot = 0;
-	}
 	
 	int mIdBlock;
 	
 	
 	public InstructionBlock(){
-		mIdBlock = mIdBlockTot;
-		addIdBlockTot();
+		mIdBlock = IdBlock.getIdBlock();
+	
 	}
 
 	@Override
