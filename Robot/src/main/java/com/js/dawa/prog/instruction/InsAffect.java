@@ -1,5 +1,8 @@
 package com.js.dawa.prog.instruction;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
@@ -10,6 +13,8 @@ import com.js.dawa.util.DawaException;
  * 
  */
 public class InsAffect implements Instruction {
+	
+	private static final Logger LOGGER =  LogManager.getLogger( InsAffect.class );
 	
 	Args mArgs;
 	ObjetArene mRobot;
@@ -29,6 +34,7 @@ public class InsAffect implements Instruction {
 		String lVal = mArgs.getArgs(1);
 		//affect au DataBoard du robot
 		mRobot.getDataBoard().setVariable(lKey, lVal);
+		LOGGER.debug("affect in Board {} : {}", lKey,lVal);
 		return new InfoExecIns(this);
 
 	}

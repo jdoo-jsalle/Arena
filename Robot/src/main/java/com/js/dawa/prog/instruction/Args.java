@@ -64,12 +64,15 @@ public class Args {
 	
 	public int getArgsInt (int pI) throws DawaException{
 		String lVal = getArgs(pI);
-		int lRes = -1; 
-		try {
-			lRes = Integer.parseInt(lVal);
-		}
-		catch (NumberFormatException le) {
-			throw new DawaException("Args " + Integer.toString(pI) + " must be numeric");
+		int lRes = 0; 
+		if (lVal != null) {
+			
+			try {
+				lRes = Integer.parseInt(lVal);
+			}
+			catch (NumberFormatException le) {
+				throw new DawaException("Value \"" + lVal + "\" index :  " + Integer.toString(pI) +" must be numeric");
+			}
 		}
 		return lRes;
 	}

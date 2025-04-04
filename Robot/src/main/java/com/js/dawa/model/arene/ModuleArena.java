@@ -1,11 +1,13 @@
 package com.js.dawa.model.arene;
 
 import com.js.dawa.prog.instruction.Instruction;
+import com.js.dawa.util.DawaException;
 
 public class ModuleArena {
 	
 	 private ObjetArene mObjetArene;
-	 private Instruction mInstruction;
+	 private Instruction mInstructionLoop;
+	 private Instruction mInstructionInit;
 	 
 	 
 	public ObjetArene getObjetArene() {
@@ -14,16 +16,34 @@ public class ModuleArena {
 	public void setObjetArene(ObjetArene pObjetArene) {
 		this.mObjetArene = pObjetArene;
 	}
-	public Instruction getInstruction() {
-		return mInstruction;
+	public Instruction getInstructionLoop() {
+		return mInstructionLoop;
 	}
-	public void setInstruction(Instruction pInstruction) {
-		this.mInstruction = pInstruction;
+	public void setInstructionLoop(Instruction pInstructionLoop) {
+		this.mInstructionLoop = pInstructionLoop;
 	}
 	
 	public boolean isFonctionnel () {
 		Energie lEnergie = mObjetArene.getEnergie();
 		return lEnergie != null && !lEnergie.isEmpty();
 	}
+	public Instruction getInstructionInit() {
+		return mInstructionInit;
+	}
+	public void setInstructionInit(Instruction pInstructionInit) {
+		this.mInstructionInit = pInstructionInit;
+	}
+	
+	public void init () throws DawaException {
+		if (mInstructionInit != null) {
+			mInstructionInit.execInstruction();
+		}
+	}
+	
+
+	
+
+	
+	
 
 }

@@ -16,6 +16,7 @@ public class FireBall implements ObjetArene {
 	FireBallRender mRender;
 	boolean mIsDispose = false;
 	private String mColor ="blue";
+	Energie mEnergie = new Energie(Integer.MAX_VALUE);
 
 
 	@Override
@@ -98,8 +99,7 @@ public class FireBall implements ObjetArene {
 
 	@Override
 	public Energie getEnergie() {
-	    //na
-		return null;
+		return mEnergie;
 	}
 
 }

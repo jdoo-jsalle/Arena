@@ -8,7 +8,13 @@ public class Energie {
 	private int mMax = Integer.MAX_VALUE;
 	private int mMin = 0;
 	
+	public Energie () {
+		//na
+	}
 	
+	public Energie (int pVal) {
+		mTot = pVal;
+	}
 	
 
 	public int getTot() {

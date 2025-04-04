@@ -46,7 +46,7 @@ public class InsTir implements Instruction {
 			
 			ModuleArena lModuleFireBall = new ModuleArena();
 			lModuleFireBall.setObjetArene(lFireBall);
-			lModuleFireBall.setInstruction(lAvancer);
+			lModuleFireBall.setInstructionLoop(lAvancer);
 			
 			mArene.addObjetArene(lModuleFireBall);
 		}

@@ -37,4 +37,8 @@ public class StackInstruction {
 		return peek();
 	}
 
+	
+	void clear () {
+		mPileInstruction.clear();
+	}
 }

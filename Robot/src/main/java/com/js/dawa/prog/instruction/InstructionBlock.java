@@ -33,6 +33,11 @@ public class InstructionBlock implements InstructionLst {
 		mIdBlock = IdBlock.getIdBlock();
 	
 	}
+	
+	public InstructionBlock(int pIdBlock){
+		mIdBlock =pIdBlock;
+	
+	}
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pObjetArene, Arene pArene) {
@@ -42,6 +47,15 @@ public class InstructionBlock implements InstructionLst {
 		
 	}
 
+	/**
+	 * Execute all instruction without step
+	 * @throws DawaException
+	 */
+	public void execAllInstruction () throws DawaException {
+		for (Instruction lInstruction : mLstInstruction){
+			lInstruction.execInstruction();
+		}
+	}
 
 	@Override
 	public InfoExecIns execInstruction() throws DawaException{

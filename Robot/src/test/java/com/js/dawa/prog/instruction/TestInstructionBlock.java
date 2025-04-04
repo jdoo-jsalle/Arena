@@ -23,9 +23,7 @@ class TestInstructionBlock {
 	void test_executeIntruction () {
 		IdBlock.reinitIdBlock();
 		Robot lRobot = new Robot();
-		Args pArgs = new Args(lRobot);
-	
-
+		
 		lRobot.setPosition(new Position(22, 22));
 		RobotsProps lProps = new RobotsProps();
 		lProps.setName("R");
@@ -38,9 +36,17 @@ class TestInstructionBlock {
 		
 		
 		try {
+			lParseLigneCmd.parse("init");
+			lParseLigneCmd.parse("  fake (A)");
+			lParseLigneCmd.parse("endinit");
 			lParseLigneCmd.parse( "fake (1)");
-			lParseLigneCmd.parse( "fake (2)");
+			lParseLigneCmd.parse( "fake (2)"); 
 			lParseLigneCmd.parse( "fake (3)");
+			
+			String ldumpInit = lParseLigneCmd.getInit().dump("");
+			assertEquals("Block[-1]:<args empty>\n"
+					+ "Fake fake : [A]\n", ldumpInit);
+			
 			
 			String ldump = lParseLigneCmd.getMain().dump("");
 			assertEquals("Block[0]:<args empty>\n"

@@ -17,27 +17,24 @@ import com.js.dawa.model.robot.Position;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
 import com.js.dawa.prog.instruction.Args;
-import com.js.dawa.prog.instruction.InsAffect;
 import com.js.dawa.prog.instruction.InsAvancer;
-import com.js.dawa.prog.instruction.InsInvisible;
-import com.js.dawa.prog.instruction.InsTir;
 import com.js.dawa.prog.instruction.Instruction;
-import com.js.dawa.prog.instruction.InstructionBlock;
-import com.js.dawa.prog.instruction.InstructionCond;
+import com.js.dawa.prog.parse.ParseLigneCmd;
 import com.js.dawa.util.DawaException;
+import com.js.dawa.util.DawaRunTimeException;
 
 
 public class Launcher {
 	
 	private static final Logger LOGGER =  LogManager.getLogger( Launcher.class );
 	
-	
+	static String SYNTAX_ERROR = "Syntax Error";
 	
 	public static void main(String[] args) {
 	
 		Launcher lLauncher = new Launcher();
 		lLauncher.view();
-		
+
 
 	}
 	
@@ -64,11 +61,15 @@ public class Launcher {
 			lLstModule.add(createDefaultCase(10, 10));
 			lLstModule.add(createDefaultCase(20, 20));
 			lLstModule.add(createFireBall(lArene));
-			lLstModule.add(createModuleRobotWithHisPrg(lArene));
-			lLstModule.add(createModuleRobot2WithAleaDepla(lArene));
-			lLstModule.add(createModuleRobot3Hide(lArene));
+			lLstModule.add(createModuleRobotRedTransvers(lArene));
+			lLstModule.add(createModuleRobotGreenAvanceAndShoot(lArene));
+			lLstModule.add(createModuleRobotBlueHide(lArene));
 			lArene.setLstCase(lLstModule);
 		
+			for (ModuleArena lModule : lLstModule) {
+				lModule.init();
+			}
+			
 			engineCompute(lConsole, lArene, lLstModule);
 			
 		} catch (DawaException e) {
@@ -104,7 +105,7 @@ public class Launcher {
 			//execute prg
 			for (ModuleArena lModuleArena : lLstModule) {
 				if (lModuleArena.isFonctionnel()) {
-					Instruction lInstruction = lModuleArena.getInstruction();
+					Instruction lInstruction = lModuleArena.getInstructionLoop();
 					if (lInstruction != null)
 					    lInstruction.execInstruction();
 				}
@@ -120,7 +121,7 @@ public class Launcher {
 	
 	
 	
-	ModuleArena createModuleRobotWithHisPrg (Arene pArene) throws DawaException {
+	ModuleArena createModuleRobotRedTransvers (Arene pArene) throws DawaException {
 		//robot
 		Robot lRobot = new Robot();
 		lRobot.setPosition(new Position(22, 22));
@@ -128,49 +129,32 @@ public class Launcher {
 		lProps.setName("R");
 		lProps.setColor("red");
 		lRobot.init(lProps);
+	    ParseLigneCmd lParseLigneCmd = new ParseLigneCmd(lRobot,pArene);
 		
-		lRobot.getRobotData().setVariable("depla", "1");
-		//his prg
-		
-		
-		
-		InstructionBlock lPrg = new InstructionBlock();
-		InsAvancer lAvancer1 = new InsAvancer();
-		Args lArgs = new Args(lRobot);
-		lArgs.addArguments("$depla");
-		lArgs.addArguments("0");
-		lAvancer1.init(lArgs, lRobot, pArene);
-		lPrg.addInstruction(lAvancer1);
-		
-		
-		//cond
-		InstructionCond lInstructionCond = new InstructionCond();
-		
-		lPrg.addInstruction(lInstructionCond);
-		lArgs = new Args(lRobot);
-		lArgs.addArguments("block == true");//block : generique name for robot block state
-		lInstructionCond.init(lArgs, lRobot, pArene);
-		
-		InsAffect lInsAffect1 = new InsAffect();
-		 lArgs = new Args(lRobot);
-		 lArgs.addArguments("depla");
-		 lArgs.addArguments("JS:depla * -1");
-		 lInsAffect1.init(lArgs, lRobot, pArene);
-		 lInstructionCond.addInstructionIf(lInsAffect1);
-		
+		try {
+			lParseLigneCmd.parse("init");
+			lParseLigneCmd.parse("affect (depla,1)");
+			lParseLigneCmd.parse("endinit");
+			lParseLigneCmd.parse("avancer ($depla,0)");
+			lParseLigneCmd.parse("if (block==true)");
+			lParseLigneCmd.parse("    affect (depla,JS:depla * -1)");
+			lParseLigneCmd.parse("endif");
+		}
+		catch (DawaException le) {
+			LOGGER.debug("error", le);
+			throw new DawaRunTimeException(SYNTAX_ERROR);
+		}
 		 
-		 ModuleArena lModuleRobot = new ModuleArena();
-		 lModuleRobot.setObjetArene(lRobot);
-		 lModuleRobot.setInstruction(lPrg);
-		 return lModuleRobot;
+		ModuleArena lModuleRobot = new ModuleArena();
+		lModuleRobot.setObjetArene(lRobot);
+		lModuleRobot.setInstructionLoop(lParseLigneCmd.getMain());
+		lModuleRobot.setInstructionInit(lParseLigneCmd.getInit());
+		return lModuleRobot;
 		
 	}
 	
-	String getRandClause (String pVal) {
-		return "Rand [" + pVal + "]";
-	}
-	
-	ModuleArena createModuleRobot2WithAleaDepla (Arene pArene) throws DawaException {
+
+	ModuleArena createModuleRobotGreenAvanceAndShoot (Arene pArene) throws DawaException {
 		//robot
 		Robot lRobot = new Robot();
 		lRobot.setPosition(new Position(19, 19));
@@ -180,37 +164,32 @@ public class Launcher {
 		lRobot.init(lProps);
 		
 		//his prg
+		ParseLigneCmd lParseLigneCmd = new ParseLigneCmd(lRobot,pArene);
 		
+		try {
 		
-		InstructionBlock lInstructionBlock = new InstructionBlock();
-		
-		InsAvancer lAvancer1 = new InsAvancer();
-		Args lArgs = new Args(lRobot);
-		lArgs.addArguments(getRandClause("2"));
-		lArgs.addArguments(getRandClause("2"));
-		lAvancer1.init(lArgs, lRobot, pArene);
-		
-		lInstructionBlock.addInstruction(lAvancer1);
-		
-		InsTir lInsTir = new InsTir();
-		lArgs = new Args(lRobot);
-		lArgs.addArguments(getRandClause("2"));
-		lArgs.addArguments(getRandClause("2"));
-		lInsTir.init(lArgs, lRobot, pArene);
-		
-		lInstructionBlock.addInstruction(lInsTir);
-		
+			lParseLigneCmd.parse("avancer (Rand[2], Rand[2])");
+			lParseLigneCmd.parse("tir (Rand[2], Rand[2])");
+			
+		}
+		catch (DawaException le) {
+			LOGGER.debug("error", le);
+			throw new DawaRunTimeException(SYNTAX_ERROR);
+		}
 		 
-		 ModuleArena lModuleRobot = new ModuleArena();
-		 lModuleRobot.setObjetArene(lRobot);
-		 lModuleRobot.setInstruction(lInstructionBlock);
+		ModuleArena lModuleRobot = new ModuleArena();
+		lModuleRobot.setObjetArene(lRobot);
+		lModuleRobot.setInstructionLoop(lParseLigneCmd.getMain());
+		lModuleRobot.setInstructionInit(lParseLigneCmd.getInit());
+		
+		
+	
 		 return lModuleRobot;
 		
 	}
 	
 	
-	ModuleArena createModuleRobot3Hide (Arene pArene) throws DawaException {
-		 final String INDICATEUR ="indicateur";
+	ModuleArena createModuleRobotBlueHide (Arene pArene) throws DawaException {
 		//robot
 		Robot lRobot = new Robot();
 		lRobot.setPosition(new Position(15, 15));
@@ -219,92 +198,39 @@ public class Launcher {
 		lProps.setColor("blue");
 		lRobot.init(lProps);
 		
-		lRobot.getRobotData().setVariable("wait", "0");
-		lRobot.getRobotData().setVariable(INDICATEUR, "0");
+		  ParseLigneCmd lParseLigneCmd = new ParseLigneCmd(lRobot,pArene);
 		
-		//his prg
-		
-		//cond
-		InstructionCond lInstructionCond = new InstructionCond();
-				
-		
-		Args lArgs = new Args(lRobot);
-		lArgs.addArguments("wait == 5");//block : generique name for robot block state
-		lInstructionCond.init(lArgs, lRobot, pArene);
-		
-		//if wait ==0
-		
-		InstructionBlock lInstructionBlock = new InstructionBlock();
-		lInstructionCond.addInstructionIf(lInstructionBlock);
-		
-		
-		InsInvisible lInsInvisible = new InsInvisible();
-		lInsInvisible.init(lArgs, lRobot, pArene);
-		
-		lInstructionBlock.addInstruction(lInsInvisible);
-		
-		//wait = 0
-		InsAffect lInsAffect0 = new InsAffect();
-		lArgs = new Args(lRobot);
-		lArgs.addArguments("wait");
-		lArgs.addArguments("0");
-		lInsAffect0.init(lArgs, lRobot, pArene);
-		lInstructionBlock.addInstruction(lInsAffect0);
-		
-		
-		//if indicateur ==0
-			InstructionCond lCond2 = new InstructionCond();
-			Args lArgs2 = new Args(lRobot);
-			lArgs2.addArguments("indicateur == 0");
-			lCond2.init(lArgs2, lRobot, pArene);
-			//depla alea
-			InsAvancer lAvancer1 = new InsAvancer();
-			Args lArgs3 = new Args(lRobot);
-			lArgs3.addArguments("Rand[2]");
-			lArgs3.addArguments("Rand[2]");
-			lAvancer1.init(lArgs3, lRobot, pArene);
-			lCond2.addInstructionIf(lAvancer1);
-			//indicateur =1
-			InsAffect lInsAffect1 = new InsAffect();
-			lArgs = new Args(lRobot);
-			lArgs.addArguments(INDICATEUR);
-			lArgs.addArguments("1");
-			lInsAffect1.init(lArgs, lRobot, pArene);
-			
-			lCond2.addInstructionIf(lInsAffect1);
-			
-			//else
-			// indicateur =0
-			lInsAffect1 = new InsAffect();
-			lArgs = new Args(lRobot);
-			lArgs.addArguments(INDICATEUR);
-			lArgs.addArguments("0");
-			lInsAffect1.init(lArgs, lRobot, pArene);
-			lCond2.addInstructionElse(lInsAffect1);
-		
-		lInstructionBlock.addInstruction(lCond2);
-		
-		//else
-		lInsAffect1 = new InsAffect();
-		lArgs = new Args(lRobot);
-		lArgs.addArguments("wait");
-		lArgs.addArguments("JS:wait + 1");
-		lInsAffect1.init(lArgs, lRobot, pArene);
-		
-		lInstructionCond.addInstructionElse(lInsAffect1);
-		
-		
-		
-		
-		
-		
-		
-		//
+		try {
+			lParseLigneCmd.parse("init");
+			lParseLigneCmd.parse("  affect (wait,0)");
+			lParseLigneCmd.parse("  affect (indicateur,0)");
+			lParseLigneCmd.parse("endinit");
+			lParseLigneCmd.parse("if (wait == 5)");
+			lParseLigneCmd.parse("  invisible ()");
+			lParseLigneCmd.parse("  affect (wait,0)"); 
+			lParseLigneCmd.parse("  if (indicateur == 0)");
+			lParseLigneCmd.parse("    avancer (Rand[2], Rand[2])");
+			lParseLigneCmd.parse("    affect (indicateur,1)");
+			lParseLigneCmd.parse("  else ");
+			lParseLigneCmd.parse("    affect (indicateur,0)");
+			lParseLigneCmd.parse("  endif");
+			lParseLigneCmd.parse("else ");
+			lParseLigneCmd.parse("   affect (wait, JS:wait + 1)");
+			lParseLigneCmd.parse("endif");
+
+		}
+		catch (DawaException le) {
+			LOGGER.debug("error", le);
+			throw new DawaRunTimeException(SYNTAX_ERROR);
+		}
 		 
-		 ModuleArena lModuleRobot = new ModuleArena();
-		 lModuleRobot.setObjetArene(lRobot);
-		 lModuleRobot.setInstruction(lInstructionCond);
-		 return lModuleRobot;
+		ModuleArena lModuleRobot = new ModuleArena();
+		lModuleRobot.setObjetArene(lRobot);
+		lModuleRobot.setInstructionLoop(lParseLigneCmd.getMain());
+		lModuleRobot.setInstructionInit(lParseLigneCmd.getInit());
+		return lModuleRobot;
+		 
+		
 		
 	}
 	
@@ -335,7 +261,7 @@ public class Launcher {
 		
 		ModuleArena lModuleArene = new ModuleArena();
 		lModuleArene.setObjetArene(lFireBall);
-		lModuleArene.setInstruction(lAvancer1);
+		lModuleArene.setInstructionLoop(lAvancer1);
 		
 		
 		return lModuleArene;

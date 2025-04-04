@@ -17,7 +17,8 @@ import com.js.dawa.util.DawaException;
 public class ParseLigneCmd implements ParseLigne {
 	 private static final Logger LOGGER =  LogManager.getLogger( ParseLigneCmd.class );
 	
-	 InstructionBlock mMainLstInstruction = new InstructionBlock();
+	 InstructionBlock mMainLstInstruction = new InstructionBlock();//prg loop
+	 InstructionBlock mInitLstInstruction = new InstructionBlock(-1);//prg init
 	 
 	 StackInstruction mPileInstruction = new StackInstruction();
 	 
@@ -40,9 +41,17 @@ public class ParseLigneCmd implements ParseLigne {
 	 }
 	
 	 public void parse (String pLigne) throws DawaException {
+		if (pLigne.equals ("init")){
+			mPileInstruction.add(mInitLstInstruction);
+			mCurrentInstruction = mInitLstInstruction;
+		}
+		else if (pLigne.equals("endinit")) {
+			 mPileInstruction.clear();
+			 mPileInstruction.add(mMainLstInstruction);
+			 mCurrentInstruction = mMainLstInstruction;
+		}
 		
-		
-		if (pLigne.trim().startsWith("if")) {
+		else if (pLigne.trim().startsWith("if")) {
 			Args lArgs = getArgs(mNumLigne, pLigne);
 			
 			InstructionLst lInstructionCond = new InstructionCond();
@@ -69,11 +78,13 @@ public class ParseLigneCmd implements ParseLigne {
 			 Args lArgs = getArgs(mNumLigne, pLigne);
 			 Instruction lIns=null;
 			 try {
+				 //create the instance instruction
 				 lIns= mFabricInstruction.createInstance(lArgs.getNameInstruction());
 			 }
 			 catch (DawaException le) {
 				 LOGGER.debug("Error", le);
 				 lIns = new InsFake();
+				 //TODO : throw syntax error
 			 }
 			 lIns.init(lArgs, mObjetArene, mArene);
 			 mCurrentInstruction.addInstruction(lIns);
@@ -81,6 +92,8 @@ public class ParseLigneCmd implements ParseLigne {
 			 LOGGER.info("<<<Add {} in {}",lIns,mCurrentInstruction);
 			 
 		}
+		
+		mNumLigne++;
 		
 	}
 	 
@@ -90,7 +103,7 @@ public class ParseLigneCmd implements ParseLigne {
 		int lDeb = pLigne.indexOf("(");
 		int lEnd = pLigne.indexOf(")");
 		if (lDeb == -1 || lEnd == -1) {
-			throw new DawaException("Ligne " + Integer.toString(pNumLigne) + " error must have param beetween ()");
+			throw new DawaException("Ligne #" + Integer.toString(pNumLigne) + " \"" + pLigne + "\" : error must have param beetween ()");
 		}
 		String lInstruction = pLigne.substring(0,lDeb).trim();
 		LOGGER.info("instruction : {}", lInstruction);
@@ -104,7 +117,7 @@ public class ParseLigneCmd implements ParseLigne {
 			
 			for (String lVal : lParams) {
 				LOGGER.info("val : {}", lVal);
-				lArgs.addArguments(lVal);
+				lArgs.addArguments(lVal.trim());
 			}
 		}
 		
@@ -114,6 +127,10 @@ public class ParseLigneCmd implements ParseLigne {
 	
 	public Instruction getMain() {
 		return mMainLstInstruction;
+	}
+	
+	public Instruction getInit () {
+		return mInitLstInstruction;
 	}
 
 }
