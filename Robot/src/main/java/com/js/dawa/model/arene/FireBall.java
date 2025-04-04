@@ -90,4 +90,16 @@ public class FireBall implements ObjetArene {
 		
 	}
 
+	@Override
+	public void setEnergie(Energie pEnergie) {
+		//na
+		
+	}
+
+	@Override
+	public Energie getEnergie() {
+	    //na
+		return null;
+	}
+
 }

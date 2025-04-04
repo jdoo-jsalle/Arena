@@ -21,7 +21,7 @@ public class CmdOnValueJavaScript implements CmdOnValue {
 	@Override
 	public String computeVal(String pVal)  {
 		String lRes="";
-		String lClause = pVal.substring(Args.JS.length());
+		String lClause = pVal.substring(ArgString.JS.length());
 		LOGGER.debug("Clause {}", lClause);
 		ScriptJsEval lScriptEval = new ScriptJsEval(lClause);
 	

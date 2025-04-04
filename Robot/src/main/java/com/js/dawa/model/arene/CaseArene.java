@@ -77,4 +77,16 @@ public class CaseArene implements ObjetArene{
 		
 	}
 
+	@Override
+	public void setEnergie(Energie pEnergie) {
+		//TODO : set like enegy tank ?
+		
+	}
+
+	@Override
+	public Energie getEnergie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

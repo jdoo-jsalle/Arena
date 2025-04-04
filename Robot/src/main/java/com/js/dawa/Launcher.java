@@ -103,9 +103,11 @@ public class Launcher {
 			
 			//execute prg
 			for (ModuleArena lModuleArena : lLstModule) {
-				Instruction lInstruction = lModuleArena.getInstruction();
-				if (lInstruction != null)
-				    lInstruction.execInstruction();
+				if (lModuleArena.isFonctionnel()) {
+					Instruction lInstruction = lModuleArena.getInstruction();
+					if (lInstruction != null)
+					    lInstruction.execInstruction();
+				}
 				
 			}
 			

@@ -22,6 +22,8 @@ public class InstructionBlock implements InstructionLst {
 	
 	InfoExecIns mRes;
 	
+	ObjetArene mObjetArene;
+	
 	
 	
 	int mIdBlock;
@@ -35,7 +37,7 @@ public class InstructionBlock implements InstructionLst {
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pObjetArene, Arene pArene) {
 		mArgs = pArgsInstruction;
-		
+		mObjetArene = pObjetArene;
 		//na
 		
 	}
@@ -43,6 +45,9 @@ public class InstructionBlock implements InstructionLst {
 
 	@Override
 	public InfoExecIns execInstruction() throws DawaException{
+		if (mArgs != null)
+		    mArgs.deductCostToObjectArena();
+				
 		LOGGER.debug("========= Begin Block {} =====================",mIdBlock);
 		//exec step by step
 		if (mStep == 0) {

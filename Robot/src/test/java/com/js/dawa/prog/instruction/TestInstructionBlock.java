@@ -23,6 +23,8 @@ class TestInstructionBlock {
 	void test_executeIntruction () {
 		IdBlock.reinitIdBlock();
 		Robot lRobot = new Robot();
+		Args pArgs = new Args(lRobot);
+	
 
 		lRobot.setPosition(new Position(22, 22));
 		RobotsProps lProps = new RobotsProps();

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.RobotRender;
+import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ObjetArene;
 
 public class Robot implements ObjetArene{
@@ -15,6 +16,8 @@ public class Robot implements ObjetArene{
 	RobotRender mRobotRender;
 	
 	private DataBoard mRobotData = new DataBoard();//store information for Robot
+	
+	Energie mEnergie = new Energie();
 
 	
 
@@ -22,6 +25,7 @@ public class Robot implements ObjetArene{
 	public void init (RobotsProps pRobotProps) {
 		mRobotProps = pRobotProps;
 		mRobotRender = new RobotRender(pRobotProps);
+		mEnergie.setTot(1);
 	}
 	
 	public CaseRender getRender () {
@@ -108,6 +112,17 @@ public class Robot implements ObjetArene{
 			mRobotRender.setColor(mRobotProps.getColor());
 		}
 		
+	}
+
+	@Override
+	public void setEnergie(Energie pEnergie) {
+		mEnergie = pEnergie;
+		
+	}
+
+	@Override
+	public Energie getEnergie() {
+		return mEnergie;
 	}
 	
 	

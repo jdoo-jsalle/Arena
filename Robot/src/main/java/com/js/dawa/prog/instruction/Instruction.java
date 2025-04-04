@@ -7,6 +7,8 @@ import com.js.dawa.util.DawaException;
 
 public interface Instruction {
 	
+	
+	
 	void init(Args pArgsInstruction,ObjetArene pObjetArena,Arene pArene) throws DawaException;
 	
 	/**
@@ -19,4 +21,5 @@ public interface Instruction {
 	
 	String dump (String pDecal);
 
+	
 }

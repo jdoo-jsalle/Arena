@@ -20,18 +20,17 @@ public class Args {
 	private static final Logger LOGGER =  LogManager.getLogger( Args.class );
 
 	private String mNameInstruction;
+	
 	private List<String> mLstArgs  = new ArrayList<>();
 	
-	static String JS ="JS:";
+	private ObjetArene mObjetArene;
 	
-	static String DEBVAR ="$";
+	private ArgString mArgsString;
 	
-	static String RANDOM ="Rand";
+	private int mCostInstruction= 0;
 	
-	private ObjetArene mRobot;
-	
-	public Args (ObjetArene pRobot) {
-		mRobot = pRobot;
+	public Args (ObjetArene pObjetArene) {
+		mObjetArene = pObjetArene;
 	}
 	
 	public void addArguments (String pArg) {
@@ -57,28 +56,10 @@ public class Args {
 	
 	
 	public String getArgs (int pI) {
-		String lVar = mLstArgs.get(pI);
-		//manage variable
-		CmdOnValue lCmdOnValue = null;
-		if (lVar.startsWith(DEBVAR) && mRobot.getDataBoard() != null) {
-			lCmdOnValue = new CmdOnValueVariable();
-			
+		if (mArgsString == null) {
+			mArgsString = new ArgString(mObjetArene,mLstArgs);
 		}
-		//manage Java Script eval
-		else if (lVar.startsWith(JS)) {
-			lCmdOnValue = new CmdOnValueJavaScript();
-		}
-		//manage random generation
-		else if (lVar.startsWith(RANDOM)) {
-			lCmdOnValue = new CmdOnValueRandom();
-		}
-		if (lCmdOnValue != null) {
-			lCmdOnValue.init(mRobot);
-			lVar = lCmdOnValue.computeVal(lVar);
-		}
-		
-		
-		return  lVar;
+		return  mArgsString.getArgs(pI);
 	}
 	
 	public int getArgsInt (int pI) throws DawaException{
@@ -96,6 +77,14 @@ public class Args {
 	@Override
 	public String toString() {
 		return mNameInstruction + " : " + mLstArgs.toString();
+	}
+	
+	public void setCostInstruction (int pCostInstruction) {
+		mCostInstruction = pCostInstruction;
+	}
+	
+	public void deductCostToObjectArena() {
+		mObjetArene.getEnergie().add(-mCostInstruction);
 	}
 	
 	

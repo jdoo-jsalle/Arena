@@ -49,4 +49,6 @@ public class InsAffect implements Instruction {
 		return "Affect :  " + mArgs.toString();
 	}
 
+
+
 }

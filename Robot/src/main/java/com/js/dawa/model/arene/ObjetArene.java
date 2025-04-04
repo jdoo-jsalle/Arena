@@ -29,5 +29,8 @@ public interface ObjetArene {
 	
 	public void setVisible (boolean pVisible);
 	
+	public void setEnergie (Energie pEnergie);
+	
+	public Energie getEnergie ();
 
 }

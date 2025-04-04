@@ -20,5 +20,10 @@ public class ModuleArena {
 	public void setInstruction(Instruction pInstruction) {
 		this.mInstruction = pInstruction;
 	}
+	
+	public boolean isFonctionnel () {
+		Energie lEnergie = mObjetArene.getEnergie();
+		return lEnergie != null && !lEnergie.isEmpty();
+	}
 
 }

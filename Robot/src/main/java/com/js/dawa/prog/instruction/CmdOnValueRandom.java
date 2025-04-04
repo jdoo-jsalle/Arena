@@ -34,7 +34,7 @@ public class CmdOnValueRandom implements CmdOnValue {
 
 	@Override
 	public String computeVal(String pVal) {
-		String lClause = pVal.substring(Args.RANDOM.length());
+		String lClause = pVal.substring(ArgString.RANDOM.length());
 		
 		
 		int lArg = getArgsRandom(lClause);
