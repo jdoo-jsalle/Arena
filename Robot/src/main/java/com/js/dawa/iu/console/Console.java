@@ -8,4 +8,6 @@ public interface Console {
 	
 	void init (Arene pAren);
 	
+	void setText (String pText);
+	
 }

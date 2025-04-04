@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,13 +15,13 @@ import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.model.robot.Position;
 
-public class UIPanel extends JPanel {
+public class UIPanel extends JLabel {
 	
 	private static final Logger LOGGER =  LogManager.getLogger( UIPanel.class );
 	
 	transient Graphics mg;
 	
-	int mDecal = 100;
+	int mDecal = 75;
 	
 	int mSizeArene = 3;
 	
@@ -91,7 +91,7 @@ public class UIPanel extends JPanel {
 	void drawLineDecal (int x1,int y1, int x2, int y2) {
 		mg.drawLine(x1+mDecal, y1+ mDecal, x2+mDecal, y2+ mDecal);
 	}
-	
+
 	
 	
 

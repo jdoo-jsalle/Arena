@@ -11,13 +11,10 @@ import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.AreneProps;
 import com.js.dawa.model.arene.CaseArene;
-import com.js.dawa.model.arene.FireBall;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.robot.Position;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
-import com.js.dawa.prog.instruction.Args;
-import com.js.dawa.prog.instruction.InsAvancer;
 import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.prog.parse.ParseLigneCmd;
 import com.js.dawa.util.DawaException;
@@ -60,7 +57,6 @@ public class Launcher {
 			List<ModuleArena> lLstModule = new ArrayList<>();
 			lLstModule.add(createDefaultCase(10, 10));
 			lLstModule.add(createDefaultCase(20, 20));
-			lLstModule.add(createFireBall(lArene));
 			lLstModule.add(createModuleRobotRedTransvers(lArene));
 			lLstModule.add(createModuleRobotGreenAvanceAndShoot(lArene));
 			lLstModule.add(createModuleRobotBlueHide(lArene));
@@ -90,6 +86,7 @@ public class Launcher {
 		
 		//loop
 		//TODO : compute lEnd
+		int lTour = 1;
 		while (!lEnd) {
 			
 		
@@ -114,6 +111,8 @@ public class Launcher {
 			
 			lArene.rmDisposeObjet();
 			//compute/eval lEnd
+			lConsole.setText("Tourn : " + Integer.toString(lTour));
+			lTour++;
 			lConsole.update();
 		}
 		
@@ -141,7 +140,7 @@ public class Launcher {
 			lParseLigneCmd.parse("endif");
 		}
 		catch (DawaException le) {
-			LOGGER.debug("error", le);
+			LOGGER.debug(SYNTAX_ERROR, le);
 			throw new DawaRunTimeException(SYNTAX_ERROR);
 		}
 		 
@@ -173,7 +172,7 @@ public class Launcher {
 			
 		}
 		catch (DawaException le) {
-			LOGGER.debug("error", le);
+			LOGGER.debug(SYNTAX_ERROR, le);
 			throw new DawaRunTimeException(SYNTAX_ERROR);
 		}
 		 
@@ -220,7 +219,7 @@ public class Launcher {
 
 		}
 		catch (DawaException le) {
-			LOGGER.debug("error", le);
+			LOGGER.debug(SYNTAX_ERROR, le);
 			throw new DawaRunTimeException(SYNTAX_ERROR);
 		}
 		 
@@ -247,24 +246,5 @@ public class Launcher {
 
 	}
 	
-	ModuleArena createFireBall (Arene pArene) throws DawaException {
-		FireBall lFireBall = new FireBall();
-		lFireBall.setPosition(new Position(5,5));
-		
-		
-		InsAvancer lAvancer1 = new InsAvancer();
-		Args lArgs = new Args(lFireBall);
-		lArgs.addArguments("1");
-		lArgs.addArguments("1");
-		lAvancer1.init(lArgs, lFireBall, pArene);
-	
-		
-		ModuleArena lModuleArene = new ModuleArena();
-		lModuleArene.setObjetArene(lFireBall);
-		lModuleArene.setInstructionLoop(lAvancer1);
-		
-		
-		return lModuleArene;
-	}
 
 }
