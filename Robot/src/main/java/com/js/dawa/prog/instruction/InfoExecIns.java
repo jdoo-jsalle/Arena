@@ -14,12 +14,16 @@ public class InfoExecIns {
 	StringBuilder mMessage = new StringBuilder();
 	String mComa="";
 	
+	InfoExecIns mLastInfoExec;
+	
+	Instruction mInstruction;
 	
 	
 	private boolean isOver = true; //default value
 	
 	
 	public InfoExecIns (Instruction pIntruction) {
+		mInstruction = pIntruction;
 		mMessage.append(pIntruction.toString());
 		mMessage.append(":");
 	}
@@ -33,6 +37,7 @@ public class InfoExecIns {
 	}
 	
 	void addInfoExecIns (InfoExecIns pInfoExecIns) {
+		mLastInfoExec = pInfoExecIns;
 		if (LOGGER.isDebugEnabled()) {
 		    LOGGER.debug (")))> add : {}",pInfoExecIns);
 		}
@@ -45,6 +50,19 @@ public class InfoExecIns {
 	@Override
 	public String toString() {
 		return mMessage.toString();
+	}
+	
+	public InfoExecIns getLastInfoExec () {
+		if (mLastInfoExec != null) {
+			return mLastInfoExec.getLastInfoExec();
+		}
+		else {
+			return this;
+		}
+	}
+	
+	public Instruction getInstruction () {
+		return mInstruction;
 	}
 	
 

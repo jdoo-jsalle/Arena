@@ -4,46 +4,36 @@ import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
 
-public class InsInvisible implements Instruction {
-	
-	Args mArgs;
-	int mX =0;
-	ObjetArene mObjetArene;
-	Arene mArene;
+public class InsFuite implements Instruction {
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pObjetArena, Arene pArene) throws DawaException {
-		mArene = pArene;
-		mArgs = pArgsInstruction;
-		mObjetArene = pObjetArena;
-		
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public InfoExecIns execInstruction() throws DawaException {
-		mObjetArene.setVisible(false);
-		return new InfoExecIns(this);
-		
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void setFlag(String pVal) {
-		//na
-		
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public String dump(String pDecal) {
-		return pDecal + toString();
-	}
-	
-	public String toString () {
-		return "Invisible " + mArgs.toString();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Args getArgs() {
-		return mArgs;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

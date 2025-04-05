@@ -78,4 +78,9 @@ public class InsTir implements Instruction {
 		return "Tir " + mArgs.toString();
 	}
 
+	@Override
+	public Args getArgs() {
+		return mArgs;
+	}
+
 }

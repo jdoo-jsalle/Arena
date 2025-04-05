@@ -20,6 +20,8 @@ public interface Instruction {
 	void setFlag (String pVal);
 	
 	String dump (String pDecal);
+	
+	Args getArgs ();
 
 	
 }

@@ -55,6 +55,11 @@ public class InsAffect implements Instruction {
 		return "Affect :  " + mArgs.toString();
 	}
 
+	@Override
+	public Args getArgs() {
+		return mArgs;
+	}
+
 
 
 }

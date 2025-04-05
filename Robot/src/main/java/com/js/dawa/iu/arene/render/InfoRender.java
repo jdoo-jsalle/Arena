@@ -8,6 +8,7 @@ public class InfoRender {
 	private String mColor;
 	
 	
+	
 	public InfoRender (String pString){
 		mString = pString;
 	}

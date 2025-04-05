@@ -35,4 +35,9 @@ public class InsFake implements Instruction {
 		return "Fake " + mArgs.toString();
 	}
 
+	@Override
+	public Args getArgs() {
+		return mArgs;
+	}
+
 }

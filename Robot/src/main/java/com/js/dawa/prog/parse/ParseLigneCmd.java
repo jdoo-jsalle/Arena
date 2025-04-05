@@ -7,10 +7,11 @@ import org.apache.logging.log4j.Logger;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.prog.instruction.Args;
+import com.js.dawa.prog.instruction.CostInstruction;
+import com.js.dawa.prog.instruction.InsFake;
 import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.prog.instruction.InstructionBlock;
 import com.js.dawa.prog.instruction.InstructionCond;
-import com.js.dawa.prog.instruction.InsFake;
 import com.js.dawa.prog.instruction.InstructionLst;
 import com.js.dawa.util.DawaException;
 
@@ -30,6 +31,9 @@ public class ParseLigneCmd implements ParseLigne {
 	 private Arene mArene;
 	 
 	 int mNumLigne;
+	 
+	 
+	 private CostInstruction mCostInstruction;
 	 
 
 	 
@@ -54,8 +58,11 @@ public class ParseLigneCmd implements ParseLigne {
 		else if (pLigne.trim().startsWith("if")) {
 			Args lArgs = getArgs(mNumLigne, pLigne);
 			
+			
 			InstructionLst lInstructionCond = new InstructionCond();
+		
 			lInstructionCond.init(lArgs, mObjetArene, mArene);
+			affectCost(lInstructionCond);
 			lInstructionCond.setFlag("if");
 			mCurrentInstruction.addInstruction(lInstructionCond);
 			mPileInstruction.add(lInstructionCond);
@@ -84,9 +91,11 @@ public class ParseLigneCmd implements ParseLigne {
 			 catch (DawaException le) {
 				 LOGGER.debug("Error", le);
 				 lIns = new InsFake();
-				 //TODO : throw syntax error
+				 //TODO : throw manager error
 			 }
+			
 			 lIns.init(lArgs, mObjetArene, mArene);
+			 affectCost(lIns);
 			 mCurrentInstruction.addInstruction(lIns);
 			 
 			 LOGGER.info("<<<Add {} in {}",lIns,mCurrentInstruction);
@@ -132,5 +141,19 @@ public class ParseLigneCmd implements ParseLigne {
 	public Instruction getInit () {
 		return mInitLstInstruction;
 	}
+
+	public CostInstruction getCostInstruction() {
+		return mCostInstruction;
+	}
+
+	public void setCostInstruction(CostInstruction pCostInstruction) {
+		this.mCostInstruction = pCostInstruction;
+	}
+	
+	void affectCost (Instruction pInstruction) {
+		mCostInstruction.affectCost(pInstruction);
+	}
+	
+	
 
 }

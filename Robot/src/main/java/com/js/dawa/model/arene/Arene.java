@@ -59,7 +59,49 @@ public class Arene {
 	}
 	
 	
-	public boolean isPositionInArene (Position pPosition,int pX, int pY) {
+	
+	public boolean isNewPositionIsOk (ObjetArene pObjetArena, int pX, int pY) {
+		int lNewX = pObjetArena.getPosition().getX() + pX;
+		int lNewY = pObjetArena.getPosition().getY() + pY;
+		
+		
+		
+		int lSizeArene = mAreneProps.getSize();
+		
+		boolean lRes = (lNewX <= lSizeArene &&
+				lNewY <= lSizeArene  &&
+				lNewX > 0 &&
+				lNewY > 0);
+		
+		if (lRes) {
+			//verify objet Present as this place
+			for (ModuleArena lModule : mLstModuleArene) {
+				ObjetArene lObjetTarget = lModule.getObjetArene();
+			
+				if (lObjetTarget != pObjetArena &&
+					lObjetTarget.getPosition().compareProx(lNewX, lNewY, 0)) {
+					 lRes = false;
+					//TODO : evaluate concequence of same presence
+					//TODO : manage rate in the ObjetArena target 
+				}
+				
+			}
+		}
+		
+		return lRes;
+		
+	}
+	
+	/**
+	 * Replace by isNewPositionIsOk
+	 * @param pPosition
+	 * @param pX
+	 * @param pY
+	 * @return
+	 * @deprecated
+	 */
+	@Deprecated
+	public boolean isFuturePositionInArene (Position pPosition,int pX, int pY) {
 		int lSizeArene = mAreneProps.getSize();
 	
 		return (pPosition.getX()+ pX <= lSizeArene &&
@@ -68,6 +110,8 @@ public class Arene {
 				pPosition.getY()+ pY > 0);
 			
 	}
+	
+	
 	
 	public void rmDisposeObjet () {
 		List<ModuleArena> lLstToDispose = new ArrayList<>();

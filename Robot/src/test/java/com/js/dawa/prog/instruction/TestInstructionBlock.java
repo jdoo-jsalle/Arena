@@ -121,45 +121,54 @@ class TestInstructionBlock {
 			
 			LOGGER.debug("------ step 1");
 			InfoExecIns lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("affect", lInfo.getLastInfoExec().getInstruction().getArgs().getNameInstruction());
 			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			LOGGER.debug("------ step 2");
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("affect", lInfo.getLastInfoExec().getInstruction().getArgs().getNameInstruction());
 			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			LOGGER.debug("------ step 3");
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("fake", lInfo.getLastInfoExec().getInstruction().getArgs().getNameInstruction());
 			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Fake fake : [3]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("fake", lInfo.getLastInfoExec().getInstruction().getArgs().getNameInstruction());
 			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Fake fake : [3]:,if : [truc==0]:Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Fake fake : [3]:,Block[2]:<args empty>:Affect :  affect : [truc, 0]:,Fake fake : [3]:,Fake fake : [4]:",lInfo.toString() );
 			assertTrue(lInfo.isOver());
 			
 
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("affect", lInfo.getLastInfoExec().getInstruction().getArgs().getNameInstruction());
 			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			
 
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("affect", lInfo.getLastInfoExec().getInstruction().getArgs().getNameInstruction());
 			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			
 
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("fake", lInfo.getLastInfoExec().getInstruction().getArgs().getNameInstruction());
 			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Fake fake : [1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			
 			
 
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("fake", lInfo.getLastInfoExec().getInstruction().getArgs().getNameInstruction());
 			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Fake fake : [1]:,if : [truc==0]:Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Fake fake : [1]:,Block[1]:<args empty>:Affect :  affect : [truc, 1]:,Fake fake : [1]:,Fake fake : [2]:",lInfo.toString() );
 			assertTrue(lInfo.isOver());
 			
 			
 
 			lInfo = lParseLigneCmd.getMain().execInstruction();
+			assertEquals("affect", lInfo.getLastInfoExec().getInstruction().getArgs().getNameInstruction());
 			assertEquals("Block[0]:<args empty>:Affect :  affect : [d, 1]:",lInfo.toString() );
 			assertTrue(!lInfo.isOver());
 			

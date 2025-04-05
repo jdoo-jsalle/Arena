@@ -25,7 +25,7 @@ public class InstructionLoop implements InstructionLst {
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pObjetArene, Arene pArene) throws DawaException {
-		// TODO Auto-generated method stub
+		//na
 
 	}
 
@@ -43,7 +43,6 @@ public class InstructionLoop implements InstructionLst {
 
 	@Override
 	public String dump(String pDecal) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -51,6 +50,11 @@ public class InstructionLoop implements InstructionLst {
 	public void addInstruction(Instruction pInstruction) {
 		mLstInstruction.add(pInstruction);
 
+	}
+
+	@Override
+	public Args getArgs() {
+		return mArgs;
 	}
 
 }

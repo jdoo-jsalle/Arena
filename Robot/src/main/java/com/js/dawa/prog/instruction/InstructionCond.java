@@ -58,8 +58,12 @@ public class InstructionCond implements InstructionLst {
 		else {
 			mInfoExec =new InfoExecIns(this);
 			mInfoExec.setOver(false);
+			if (mArgs != null) {//cost of if
+				mArgs.deductCostToObjectArena();
+			}
 			LOGGER.debug("Eval condition");
 			if (execCondition()) {
+				
 				LOGGER.debug("Exec if on condition");
 				execIf();
 			}
@@ -146,6 +150,13 @@ public class InstructionCond implements InstructionLst {
 	
 	public String toString () {
 		return mArgs.toString();
+	}
+
+
+
+	@Override
+	public Args getArgs() {
+		return mArgs;
 	}
 
 }

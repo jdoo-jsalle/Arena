@@ -35,7 +35,7 @@ public class Energie {
 	}
 	
 	public boolean isEmpty () {
-		return mTot <0;
+		return mTot <=0;
 		
 	}
 	
@@ -69,6 +69,11 @@ public class Energie {
 		if (mTot < mMin) {
 			mTot = mMin;
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return Integer.toString(mTot);
 	}
 	
 	

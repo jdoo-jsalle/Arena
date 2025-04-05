@@ -23,7 +23,7 @@ class TestParseLigneCmd {
 			lParseLigne.getArgs(0, "truc");
 		} catch (DawaException e) {
 			LOGGER.debug("Error",e);
-			assertEquals("Ligne 0 error must have param beetween ()",e.getMessage());
+			assertEquals("Ligne #0 \"truc\" : error must have param beetween ()",e.getMessage());
 					
 		}
 	}

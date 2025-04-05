@@ -31,6 +31,7 @@ public class InstructionBlock implements InstructionLst {
 	
 	public InstructionBlock(){
 		mIdBlock = IdBlock.getIdBlock();
+		
 	
 	}
 	
@@ -59,46 +60,70 @@ public class InstructionBlock implements InstructionLst {
 
 	@Override
 	public InfoExecIns execInstruction() throws DawaException{
-		if (mArgs != null)
-		    mArgs.deductCostToObjectArena();
-				
+					
 		LOGGER.debug("========= Begin Block {} =====================",mIdBlock);
 		//exec step by step
 		if (mStep == 0) {
 			mRes = new InfoExecIns(this);
-		}
-		if (!mLstInstruction.isEmpty()) {//no instruction
-			Instruction lNext = mLstInstruction.get(mStep);
-			LOGGER.debug("===> Next :  {} for Block {}" , lNext, mIdBlock);
-			
-		
-			InfoExecIns lResFils =   lNext.execInstruction();
-			
-			if (LOGGER.isDebugEnabled()) { LOGGER.debug("==> add ResFils of \"{}\" in Block \"{}\"",lNext, mIdBlock);}
-			mRes.addInfoExecIns(lResFils);
-			if (LOGGER.isDebugEnabled()) {LOGGER.debug("==> Res : {}" ,  mRes);}
-			
-			if (lResFils.isOver()) {
-				
-			    mStep++;
-				if (mStep >= mLstInstruction.size()) {
-					mStep = 0;
-					mRes.setOver(true);
-				}
-				else {
-					mRes.setOver(false);
-				}
+			if (mArgs != null) {//deduct energie fro Block
+				mArgs.deductCostToObjectArena();
 			}
-			else {
-				mRes.setOver(false);
-			}
-			
 		}
+		execInstructionStepByStep();
 		
 		LOGGER.debug("========= End Block {} =====================",mIdBlock);
 		
 		return mRes;
 		
+		
+	}
+	
+	
+	void execInstructionStepByStep () throws DawaException{
+		if (!mLstInstruction.isEmpty()) {//no instruction
+			Instruction lNext = mLstInstruction.get(mStep);
+			LOGGER.debug("===> Next :  {} for Block {}" , lNext, mIdBlock);
+			
+			//exec instruction found, get resutat in lResFils
+			InfoExecIns lResFils =   lNext.execInstruction();
+			
+			//Deduct energie fro last instruction
+			Instruction lLastExec = lResFils.getLastInfoExec().getInstruction();
+			Args lArgsLastExec = lLastExec.getArgs();
+			if (lArgsLastExec != null) {
+				lArgsLastExec.deductCostToObjectArena();
+			}
+			
+			if (LOGGER.isDebugEnabled()) { LOGGER.debug("==> add ResFils of \"{}\" in Block \"{}\"",lNext, mIdBlock);}
+			mRes.addInfoExecIns(lResFils);
+			if (LOGGER.isDebugEnabled()) {LOGGER.debug("==> Res : {}" ,  mRes);}
+			
+			//Compute flag over
+			computeFlagOver(lResFils);
+			
+		}
+	}
+	
+	/**
+	 * 
+	 * @param pInfoExecIns
+	 */
+	void computeFlagOver (InfoExecIns pInfoExecIns) {
+		//Compute flag over
+		if (pInfoExecIns.isOver()) {//block over
+			
+		    mStep++;//increment instruction for ths block
+			if (mStep >= mLstInstruction.size()) {
+				mStep = 0;
+				mRes.setOver(true);
+			}
+			else {
+				mRes.setOver(false);
+			}
+		}
+		else {
+			mRes.setOver(false);
+		}
 		
 	}
 

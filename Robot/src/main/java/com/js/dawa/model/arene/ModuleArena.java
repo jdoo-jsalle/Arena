@@ -9,6 +9,8 @@ public class ModuleArena {
 	 private Instruction mInstructionLoop;
 	 private Instruction mInstructionInit;
 	 
+	 private boolean mIsRobot = false;
+	 
 	 
 	public ObjetArene getObjetArene() {
 		return mObjetArene;
@@ -38,6 +40,14 @@ public class ModuleArena {
 		if (mInstructionInit != null) {
 			mInstructionInit.execInstruction();
 		}
+	}
+	
+	
+	public boolean isRobot() {
+		return mIsRobot;
+	}
+	public void setIsRobot() {
+		this.mIsRobot = true;
 	}
 	
 

@@ -30,5 +30,11 @@ public class Position {
 		addX(pX);
 		addY(pY);
 	}
+	
+	public boolean compareProx (int pX, int pY, int pRayon) {
+		return Math.abs(mX-pX) <= pRayon &&
+				       Math.abs(mY-pY) <= pRayon;
+			
+	}
 
 }

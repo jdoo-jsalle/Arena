@@ -7,14 +7,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
+import com.js.dawa.iu.console.AffichageInfoRobot;
 import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.AreneProps;
 import com.js.dawa.model.arene.CaseArene;
+import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.robot.Position;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
+import com.js.dawa.prog.instruction.CostInstruction;
 import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.prog.parse.ParseLigneCmd;
 import com.js.dawa.util.DawaException;
@@ -27,6 +30,10 @@ public class Launcher {
 	
 	static String SYNTAX_ERROR = "Syntax Error";
 	
+	int LIVE = 10000;
+	
+	CostInstruction mCostInstruction = new CostInstruction();
+	
 	public static void main(String[] args) {
 	
 		Launcher lLauncher = new Launcher();
@@ -35,12 +42,28 @@ public class Launcher {
 
 	}
 	
+	void initCostInstruction () {
+		mCostInstruction.addCost("affect", 0);
+		mCostInstruction.addCost("block", 0);
+		mCostInstruction.addCost("if", 4);
+		mCostInstruction.addCost("avancer", 4);
+		mCostInstruction.addCost("fake", 0);
+		mCostInstruction.addCost("tir", 3);
+		mCostInstruction.addCost("invisible", 20);
+		mCostInstruction.addCost("mine", 10);
+		mCostInstruction.addCost("fuite", 4);
+		mCostInstruction.addCost("poursuite", 4);
+		
+		
+	}
+	
 	
 	void view () {
 		
 		
 		ConsoleGraphique lConsole = new ConsoleGraphique();
 	    Arene lArene = new Arene(lConsole);
+	    initCostInstruction();
 		
 
 		
@@ -57,6 +80,7 @@ public class Launcher {
 			List<ModuleArena> lLstModule = new ArrayList<>();
 			lLstModule.add(createDefaultCase(10, 10));
 			lLstModule.add(createDefaultCase(20, 20));
+			lLstModule.add(createDefaultCase(10, 22));
 			lLstModule.add(createModuleRobotRedTransvers(lArene));
 			lLstModule.add(createModuleRobotGreenAvanceAndShoot(lArene));
 			lLstModule.add(createModuleRobotBlueHide(lArene));
@@ -80,10 +104,10 @@ public class Launcher {
 	}
 	
 	
-	void engineCompute (ConsoleGraphique lConsole, Arene lArene, List<ModuleArena> lLstModule) throws DawaException {
+	void engineCompute (ConsoleGraphique lConsole, Arene pArene, List<ModuleArena> lLstModule) throws DawaException {
 		boolean lEnd = false;
 		
-		
+		AffichageInfoRobot lAffichageInfoRobot = new AffichageInfoRobot(pArene);
 		//loop
 		//TODO : compute lEnd
 		int lTour = 1;
@@ -109,9 +133,19 @@ public class Launcher {
 				
 			}
 			
-			lArene.rmDisposeObjet();
+			pArene.rmDisposeObjet();
 			//compute/eval lEnd
-			lConsole.setText("Tourn : " + Integer.toString(lTour));
+			StringBuilder lText = new StringBuilder();
+			lText.append("<html>");
+			lText.append("Step : " + Integer.toString(lTour));
+			lText.append("<br>");
+			
+			lText.append(lAffichageInfoRobot.getAffichageInfoRobot());
+			lText.append("<br>");
+			lText.append("</html>");
+			
+			lConsole.setText(lText.toString());
+			
 			lTour++;
 			lConsole.update();
 		}
@@ -123,12 +157,19 @@ public class Launcher {
 	ModuleArena createModuleRobotRedTransvers (Arene pArene) throws DawaException {
 		//robot
 		Robot lRobot = new Robot();
+		
 		lRobot.setPosition(new Position(22, 22));
 		RobotsProps lProps = new RobotsProps();
 		lProps.setName("R");
 		lProps.setColor("red");
 		lRobot.init(lProps);
+		
+		Energie lEnergie = new Energie ();
+		lEnergie.setTot(LIVE);
+		lRobot.setEnergie(lEnergie);
+		
 	    ParseLigneCmd lParseLigneCmd = new ParseLigneCmd(lRobot,pArene);
+	    lParseLigneCmd.setCostInstruction(mCostInstruction);
 		
 		try {
 			lParseLigneCmd.parse("init");
@@ -146,6 +187,7 @@ public class Launcher {
 		 
 		ModuleArena lModuleRobot = new ModuleArena();
 		lModuleRobot.setObjetArene(lRobot);
+		lModuleRobot.setIsRobot();
 		lModuleRobot.setInstructionLoop(lParseLigneCmd.getMain());
 		lModuleRobot.setInstructionInit(lParseLigneCmd.getInit());
 		return lModuleRobot;
@@ -156,14 +198,20 @@ public class Launcher {
 	ModuleArena createModuleRobotGreenAvanceAndShoot (Arene pArene) throws DawaException {
 		//robot
 		Robot lRobot = new Robot();
+	
 		lRobot.setPosition(new Position(19, 19));
 		RobotsProps lProps = new RobotsProps();
 		lProps.setName("G");
 		lProps.setColor("green");
 		lRobot.init(lProps);
 		
+		Energie lEnergie = new Energie ();
+		lEnergie.setTot(LIVE);
+		lRobot.setEnergie(lEnergie);
+		
 		//his prg
 		ParseLigneCmd lParseLigneCmd = new ParseLigneCmd(lRobot,pArene);
+		 lParseLigneCmd.setCostInstruction(mCostInstruction);
 		
 		try {
 		
@@ -177,6 +225,7 @@ public class Launcher {
 		}
 		 
 		ModuleArena lModuleRobot = new ModuleArena();
+		lModuleRobot.setIsRobot();
 		lModuleRobot.setObjetArene(lRobot);
 		lModuleRobot.setInstructionLoop(lParseLigneCmd.getMain());
 		lModuleRobot.setInstructionInit(lParseLigneCmd.getInit());
@@ -191,13 +240,19 @@ public class Launcher {
 	ModuleArena createModuleRobotBlueHide (Arene pArene) throws DawaException {
 		//robot
 		Robot lRobot = new Robot();
+		
 		lRobot.setPosition(new Position(15, 15));
 		RobotsProps lProps = new RobotsProps();
 		lProps.setName("B");
 		lProps.setColor("blue");
 		lRobot.init(lProps);
 		
-		  ParseLigneCmd lParseLigneCmd = new ParseLigneCmd(lRobot,pArene);
+		Energie lEnergie = new Energie ();
+		lEnergie.setTot(LIVE);
+		lRobot.setEnergie(lEnergie);
+		
+		ParseLigneCmd lParseLigneCmd = new ParseLigneCmd(lRobot,pArene);
+		lParseLigneCmd.setCostInstruction(mCostInstruction);
 		
 		try {
 			lParseLigneCmd.parse("init");
@@ -225,6 +280,7 @@ public class Launcher {
 		 
 		ModuleArena lModuleRobot = new ModuleArena();
 		lModuleRobot.setObjetArene(lRobot);
+		lModuleRobot.setIsRobot();
 		lModuleRobot.setInstructionLoop(lParseLigneCmd.getMain());
 		lModuleRobot.setInstructionInit(lParseLigneCmd.getInit());
 		return lModuleRobot;
