@@ -10,36 +10,24 @@ import com.js.dawa.model.robot.Attribut;
 import com.js.dawa.model.robot.DataBoard;
 import com.js.dawa.model.robot.Position;
 
-public class FireBall implements ObjetArene {
-	
-	
-	HurtObject mHurtObject = new HurtObject(20);//20 default value, change it in add properties HIT
+public class Mine implements ObjetArene {
+
+	HurtObject mHurtObject = new HurtObject(200);//200 default value, change it in add properties HIT
 	
 	Position mPosition;
 	FireBallRender mRender;
 	boolean mIsDispose = false;
-	private String mColor ="blue";
-	Energie mEnergie = new Energie(Integer.MAX_VALUE);
+	private String mColor ="black";
+	Energie mEnergie = new Energie(0);
 	Map<String, Attribut> mLstAttribut = new HashMap <>();
-
+	ObjetArene mOwner;//owner of the mine
 	
-	public void addAttribut (Attribut pAttribut) {
-		
-		if (pAttribut.getNameAttribut().equals(HurtObject.HIT)) {
-			mHurtObject.setHit(pAttribut.getValueAttribut());
-		}
-		else {
-			mLstAttribut.put(pAttribut.getNameAttribut(), pAttribut);
-		}
-		
-	}
-
 	@Override
 	public CaseRender getRender() {
 		if (mRender == null) {
 			InfoRender lInforInfoRender = new InfoRender();
 			lInforInfoRender.setColor(mColor);
-			lInforInfoRender.setString("*");
+			lInforInfoRender.setString("m");
 			mRender = new FireBallRender();
 			mRender.setInfoRender(lInforInfoRender);
 		}
@@ -49,7 +37,7 @@ public class FireBall implements ObjetArene {
 
 	@Override
 	public Position getPosition() {
-		
+	
 		return mPosition;
 	}
 
@@ -60,64 +48,66 @@ public class FireBall implements ObjetArene {
 	}
 
 	@Override
-	public Map<String, Attribut> getProps() {
-		return 	mLstAttribut;
-	
-	}
-	
+	public void addAttribut(Attribut pAttribut) {
+		if (pAttribut.getNameAttribut().equals(HurtObject.HIT)) {
+			mHurtObject.setHit(pAttribut.getValueAttribut());
+		}
+		else {
+			mLstAttribut.put(pAttribut.getNameAttribut(), pAttribut);
+		}
 
-	
+	}
+
+	@Override
+	public Map<String, Attribut> getProps() {
+		return mLstAttribut;
+	}
 
 	@Override
 	public void setInArena(boolean pIsInArena) {
-		if (!pIsInArena) {//sort de l'arene => dispose objet
-			mIsDispose = true;
-		}
-		
+		//na
+
 	}
 
 	@Override
 	public boolean isDispose() {
 		return mIsDispose;
-		
 	}
 
 	@Override
 	public void add(int px, int py) {
-		mPosition.addXY(px, py);
-		
+		//na : mine is immobile
+
 	}
 
 	@Override
 	public DataBoard getDataBoard() {
-		//no databoard for firewall
+		//no DataBorad
 		return null;
-	}
-	
-	public void setColor (String pColor) {
-		mColor = pColor;
 	}
 
 	@Override
 	public boolean isVisible() {
-		return false;
+		
+		return true;
 	}
 
 	@Override
 	public void setVisible(boolean pVisible) {
 		//na
-		
+
 	}
 
 	@Override
 	public void setEnergie(Energie pEnergie) {
 		//na
-		
+
 	}
 
 	@Override
 	public Energie getEnergie() {
-		return mEnergie;
+		//na
+		return null;
 	}
 
 	@Override
@@ -125,15 +115,30 @@ public class FireBall implements ObjetArene {
 		
 		return mColor;
 	}
+	
+	public void setOwner (ObjetArene pObjeArene) {
+		mOwner = pObjeArene;
+	}
 
 	@Override
 	public boolean  collision(ObjetArene pObjeArene) {
-		mHurtObject.init(this);
-		mHurtObject.collision(pObjeArene);
-		mIsDispose = true;//remove this object
-		mRender.getInfoRender().setString("!");	
-		mRender.getInfoRender().setColor("red");
+		if (pObjeArene == mOwner) {
+			mHurtObject.init(this);
+			mHurtObject.collision(pObjeArene);
+			mRender.getInfoRender().setString("!");	
+			mRender.getInfoRender().setColor("red");
+		}
+		else {
+			mRender.getInfoRender().setString("x");	
+			mRender.getInfoRender().setColor("green");
+		}
+		
+		mIsDispose= true;
 		return false;
+	}
+	
+	public void setColor (String pColor) {
+		mColor = pColor;
 	}
 
 }

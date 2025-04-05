@@ -10,22 +10,26 @@ public class ScanerObjet {
 	Arene mArene;
 	
 	
-	void init (Arene pArene) {
+	public void init (Arene pArene) {
 		mArene = pArene;
 	}
 	
 	
-	List<ObjetArene> detectObjet (ObjetArene pObjetArene, int pRayon){
+	public List<ObjetArene> detectObjet (ObjetArene pObjetArene, int pRayon){
 		
 		List<ObjetArene> lRes = new ArrayList<>();
 		
 		Position lPos1 = pObjetArene.getPosition();
 		
 		for (ModuleArena lModule : mArene.getLstCase()) {
-			Position lPos2 = lModule.getObjetArene().getPosition();
-			if (compareProx(lPos1, lPos2, pRayon) && lModule.getObjetArene().isVisible()) {
-				lRes.add(lModule.getObjetArene());
-				
+			
+			ObjetArene lObjetTarget = lModule.getObjetArene();
+			if (lObjetTarget != pObjetArene) {
+				Position lPos2 = lObjetTarget.getPosition();
+				if (compareProx(lPos1, lPos2, pRayon) && lObjetTarget.isVisible()) {
+					lRes.add(lObjetTarget);//add object detected
+					
+				}
 			}
 		}
 		

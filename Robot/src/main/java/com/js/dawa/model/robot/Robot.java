@@ -25,7 +25,7 @@ public class Robot implements ObjetArene{
 	public void init (RobotsProps pRobotProps) {
 		mRobotProps = pRobotProps;
 		mRobotRender = new RobotRender(pRobotProps);
-		mEnergie.setTot(1);
+		mEnergie.setTot(1);//basic energie
 	}
 	
 	public CaseRender getRender () {
@@ -123,6 +123,24 @@ public class Robot implements ObjetArene{
 	@Override
 	public Energie getEnergie() {
 		return mEnergie;
+	}
+
+	@Override
+	public String getColor() {
+		
+		return mRobotProps.getColor();
+	}
+
+	@Override
+	public void addAttribut(Attribut pAttribut) {
+		//na
+		
+	}
+
+	@Override
+	public boolean collision(ObjetArene pObjeArene) {
+		//na : nothing special happend
+		return true;
 	}
 	
 	

@@ -15,6 +15,8 @@ public interface ObjetArene {
 	public Position getPosition ();
 	public void setPosition (Position pPosition);
 	
+	public void addAttribut (Attribut pAttribut);
+	
 	public Map<String, Attribut>  getProps ();
 	
 	public void setInArena (boolean pIsInArena);
@@ -32,5 +34,9 @@ public interface ObjetArene {
 	public void setEnergie (Energie pEnergie);
 	
 	public Energie getEnergie ();
+	
+	public String getColor ();
+	
+	public boolean collision (ObjetArene pObjeArene);//return if block or not
 
 }

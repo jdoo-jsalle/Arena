@@ -71,7 +71,7 @@ public class Arene {
 		boolean lRes = (lNewX <= lSizeArene &&
 				lNewY <= lSizeArene  &&
 				lNewX > 0 &&
-				lNewY > 0);
+				lNewY > 0);//=> true, is in arena
 		
 		if (lRes) {
 			//verify objet Present as this place
@@ -80,9 +80,15 @@ public class Arene {
 			
 				if (lObjetTarget != pObjetArena &&
 					lObjetTarget.getPosition().compareProx(lNewX, lNewY, 0)) {
-					 lRes = false;
-					//TODO : evaluate concequence of same presence
-					//TODO : manage rate in the ObjetArena target 
+					
+					boolean lTargetIsBlocking = lObjetTarget.collision(pObjetArena);
+					
+					if (lRes) {
+						lRes = !lTargetIsBlocking;
+					}
+					
+					pObjetArena.collision(lObjetTarget);
+					
 				}
 				
 			}

@@ -76,5 +76,8 @@ public class InfoRender {
 	public void setColor(String pColor) {
 		this.mColor = pColor.toLowerCase();
 	}
+	
+	
+	
 
 }

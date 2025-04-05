@@ -13,6 +13,7 @@ public class ArgString {
 	
 	static String RANDOM ="Rand";
 	
+	
 	private List<String> mLstArgs  = new ArrayList<>();
 	
 	ObjetArene mObjetArene;

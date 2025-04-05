@@ -264,6 +264,7 @@ public class Launcher {
 			lParseLigneCmd.parse("  affect (wait,0)"); 
 			lParseLigneCmd.parse("  if (indicateur == 0)");
 			lParseLigneCmd.parse("    avancer (Rand[2], Rand[2])");
+			lParseLigneCmd.parse("    mine ()");
 			lParseLigneCmd.parse("    affect (indicateur,1)");
 			lParseLigneCmd.parse("  else ");
 			lParseLigneCmd.parse("    affect (indicateur,0)");

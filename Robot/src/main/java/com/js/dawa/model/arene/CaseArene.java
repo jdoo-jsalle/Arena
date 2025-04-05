@@ -1,8 +1,6 @@
 package com.js.dawa.model.arene;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
@@ -13,12 +11,21 @@ import com.js.dawa.model.robot.Position;
 
 public class CaseArene implements ObjetArene{
 	
-	List<Attribut> mLstAttribut = new ArrayList<>();
+	HurtObject mHurtObject = new HurtObject(0);//20 default value, change it in add properties HIT
+	
+	Map<String, Attribut> mLstAttribut = new HashMap <>();
 	CaseRender mCaseRender = new CaseAreneRenderDefaut();
 	Position mPosition;
 	
-	void addAttribut (Attribut pAttribut) {
-		mLstAttribut.add(pAttribut);
+	
+	public void addAttribut (Attribut pAttribut) {
+		if (pAttribut.getNameAttribut().equals(HurtObject.HIT)) {
+			mHurtObject.setHit(pAttribut.getValueAttribut());
+		}
+		else {
+			mLstAttribut.put(pAttribut.getNameAttribut(), pAttribut);
+		}
+		
 	}
 	
 	public CaseRender getRender () {
@@ -39,8 +46,7 @@ public class CaseArene implements ObjetArene{
 
 	@Override
 	public Map<String, Attribut> getProps() {
-		//nothing
-		return new HashMap<>();
+		return mLstAttribut;
 	}
 
 	@Override
@@ -85,8 +91,22 @@ public class CaseArene implements ObjetArene{
 
 	@Override
 	public Energie getEnergie() {
-		// TODO Auto-generated method stub
+		//na
 		return null;
+	}
+
+	@Override
+	public String getColor() {
+		//na
+		return null;
+	}
+
+	@Override
+	public boolean  collision(ObjetArene pObjeArene) {
+		mHurtObject.init(this);
+		mHurtObject.collision(pObjeArene);
+		return true;
+		
 	}
 
 }
