@@ -1,0 +1,73 @@
+// Initialisation des variables
+affect(detectionConsecutive, 0)
+affect(modeBerserk, false)
+
+loop:
+
+    scan(4)
+
+    if (detected == true)
+        affect(detectionConsecutive, detectionConsecutive + 1)
+    else
+        affect(detectionConsecutive, 0)
+    endif
+
+    if (detectionConsecutive >= 3)
+        affect(modeBerserk, true)
+    endif
+
+    if (modeBerserk == true)
+
+        invisible()
+        tir(1,0)
+        tir(-1,0)
+        tir(0,1)
+        tir(0,-1)
+        mine()
+        avancer(Rand[2], Rand[2])
+        scan(4)
+
+        if (detected == true)
+            tir(1,0)
+            tir(-1,0)
+            tir(0,1)
+            tir(0,-1)
+        endif
+
+    else
+
+        if (detected == true)
+            tir(1,0)
+            tir(-1,0)
+            tir(0,1)
+            tir(0,-1)
+            mine()
+            invisible()
+            fuite()
+            scan(4)
+
+            if (detected == true)
+                tir(1,0)
+                tir(-1,0)
+                tir(0,1)
+                tir(0,-1)
+            endif
+
+        else
+            poursuite()
+            avancer(Rand[2], Rand[2])
+
+            if (Rand[2] == 1)
+                invisible()
+            endif
+
+            if (Rand[2] == 0)
+                mine()
+            endif
+        endif
+
+        avancer(Rand[2], Rand[2])
+
+    endif
+
+endloop
