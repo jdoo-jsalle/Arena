@@ -1,0 +1,15 @@
+    scan(4)
+
+    if (detected == true)
+        tir(1,0)     // droite
+        tir(-1,0)    // gauche
+        tir(0,1)     // haut
+        tir(0,-1)    // bas
+        mine()       // piéger la zone
+        fuite()      // se repositionner
+    else
+        poursuite()
+        avancer(Rand[2], Rand[2])
+    endif
+
+    avancer(Rand[2], Rand[2])     // comportement erratique
