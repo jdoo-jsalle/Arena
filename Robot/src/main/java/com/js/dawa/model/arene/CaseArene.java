@@ -1,6 +1,8 @@
 package com.js.dawa.model.arene;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
@@ -14,7 +16,9 @@ public class CaseArene implements ObjetArene{
 	HurtObject mHurtObject = new HurtObject(0);//20 default value, change it in add properties HIT
 	
 	Map<String, Attribut> mLstAttribut = new HashMap <>();
-	CaseRender mCaseRender = new CaseAreneRenderDefaut();
+	
+	List<CaseRender> mCaseRender = new ArrayList<>();
+	
 	Position mPosition;
 	
 	
@@ -28,7 +32,10 @@ public class CaseArene implements ObjetArene{
 		
 	}
 	
-	public CaseRender getRender () {
+	public List<CaseRender> getRender () {
+		if (mCaseRender.isEmpty()) {
+			mCaseRender.add(new CaseAreneRenderDefaut());
+		}
 		return mCaseRender;
 	}
 	
@@ -36,8 +43,8 @@ public class CaseArene implements ObjetArene{
 		mPosition = pPosition;
 	}
 	
-	public void setCaseAreneRender (CaseRender pCaseAreneRender) {
-		mCaseRender = pCaseAreneRender;
+	public void addCaseAreneRender (CaseRender pCaseAreneRender) {
+		mCaseRender.add(pCaseAreneRender);
 	}
 	
 	public Position getPosition () {

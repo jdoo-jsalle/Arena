@@ -1,9 +1,10 @@
 package com.js.dawa.model.robot;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseRender;
-import com.js.dawa.iu.arene.render.RobotRender;
 import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ObjetArene;
 
@@ -13,22 +14,27 @@ public class Robot implements ObjetArene{
 	
 	RobotsProps mRobotProps;
 	
-	RobotRender mRobotRender;
+	List<CaseRender>  mRobotRender  = new ArrayList<>();
 	
 	private DataBoard mRobotData = new DataBoard();//store information for Robot
 	
 	Energie mEnergie = new Energie();
-
+	
+	RobotRender mMainRender;
 	
 
 	
 	public void init (RobotsProps pRobotProps) {
 		mRobotProps = pRobotProps;
-		mRobotRender = new RobotRender(pRobotProps);
+		mMainRender = new RobotRender(pRobotProps);
+		mRobotRender.add(mMainRender);
 		mEnergie.setTot(1);//basic energie
+		
 	}
 	
-	public CaseRender getRender () {
+
+	
+	public List<CaseRender> getRender () {
 		return mRobotRender;
 	}
 	
@@ -47,15 +53,19 @@ public class Robot implements ObjetArene{
 		return mRobotProps.getLstAttribut();
 	}
 	
+	public RobotsProps getRobotProps () {
+		return mRobotProps;
+	}
+	
 	public void setBlocked() {
-		mRobotRender.setColor("DARK_GRAY");
+		mMainRender.setBlocked();
 		mRobotData.setBlocked(true);
 		
 		
 	}
 	
 	public void setDeBlocked() {
-		mRobotRender.setColor(mRobotProps.getColor());
+		mMainRender.reinit();
 		mRobotData.setBlocked(false);
 	}
 	
@@ -106,10 +116,10 @@ public class Robot implements ObjetArene{
 	public void setVisible(boolean pVisible) {
 		mRobotProps.setVisibilte(pVisible);
 		if (!pVisible) {
-			mRobotRender.setColor("white");//hide it on screen
+			mMainRender.setHide();
 		}
 		else {
-			mRobotRender.setColor(mRobotProps.getColor());
+			mMainRender.reinit();
 		}
 		
 	}
@@ -139,7 +149,7 @@ public class Robot implements ObjetArene{
 
 	@Override
 	public boolean collision(ObjetArene pObjeArene) {
-		//na : nothing special happend
+		setVisible(true);//collision => make it visible
 		return true;
 	}
 	

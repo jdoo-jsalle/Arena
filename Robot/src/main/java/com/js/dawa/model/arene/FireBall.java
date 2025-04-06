@@ -1,11 +1,14 @@
 package com.js.dawa.model.arene;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.FireBallRender;
 import com.js.dawa.iu.arene.render.InfoRender;
+import com.js.dawa.iu.arene.render.HurtObjetRender;
 import com.js.dawa.model.robot.Attribut;
 import com.js.dawa.model.robot.DataBoard;
 import com.js.dawa.model.robot.Position;
@@ -16,12 +19,13 @@ public class FireBall implements ObjetArene {
 	HurtObject mHurtObject = new HurtObject(20);//20 default value, change it in add properties HIT
 	
 	Position mPosition;
-	FireBallRender mRender;
+	List <CaseRender> mRender;
 	boolean mIsDispose = false;
 	private String mColor ="blue";
 	Energie mEnergie = new Energie(Integer.MAX_VALUE);
 	Map<String, Attribut> mLstAttribut = new HashMap <>();
 
+	ObjetArene mOwner;
 	
 	public void addAttribut (Attribut pAttribut) {
 		
@@ -35,13 +39,15 @@ public class FireBall implements ObjetArene {
 	}
 
 	@Override
-	public CaseRender getRender() {
+	public List<CaseRender> getRender() {
 		if (mRender == null) {
+			mRender = new ArrayList<>();
 			InfoRender lInforInfoRender = new InfoRender();
 			lInforInfoRender.setColor(mColor);
 			lInforInfoRender.setString("*");
-			mRender = new FireBallRender();
-			mRender.setInfoRender(lInforInfoRender);
+			CaseRender lRender = new FireBallRender();
+			lRender.setInfoRender(lInforInfoRender);
+			mRender.add(lRender);
 		}
 		
 		return mRender;
@@ -51,6 +57,10 @@ public class FireBall implements ObjetArene {
 	public Position getPosition() {
 		
 		return mPosition;
+	}
+	
+	public void setOwner (ObjetArene pObjeArene) {
+		mOwner = pObjeArene;
 	}
 
 	@Override
@@ -128,12 +138,17 @@ public class FireBall implements ObjetArene {
 
 	@Override
 	public boolean  collision(ObjetArene pObjeArene) {
-		mHurtObject.init(this);
-		mHurtObject.collision(pObjeArene);
-		mIsDispose = true;//remove this object
-		mRender.getInfoRender().setString("!");	
-		mRender.getInfoRender().setColor("red");
+		if (mOwner != pObjeArene) {//not hurt by his own fireball
+			mHurtObject.init(this);
+			mHurtObject.collision(pObjeArene);
+			HurtObjetRender lObjetHurt = new HurtObjetRender();
+			pObjeArene.getRender().add(lObjetHurt);
+			mIsDispose = true;//remove this object
+		}
+		
+		
 		return false;
+		
 	}
 
 }

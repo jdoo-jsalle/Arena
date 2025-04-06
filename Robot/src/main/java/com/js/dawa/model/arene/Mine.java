@@ -1,11 +1,14 @@
 package com.js.dawa.model.arene;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.FireBallRender;
 import com.js.dawa.iu.arene.render.InfoRender;
+import com.js.dawa.iu.arene.render.HurtObjetRender;
 import com.js.dawa.model.robot.Attribut;
 import com.js.dawa.model.robot.DataBoard;
 import com.js.dawa.model.robot.Position;
@@ -15,7 +18,7 @@ public class Mine implements ObjetArene {
 	HurtObject mHurtObject = new HurtObject(200);//200 default value, change it in add properties HIT
 	
 	Position mPosition;
-	FireBallRender mRender;
+	List<CaseRender> mRender;
 	boolean mIsDispose = false;
 	private String mColor ="black";
 	Energie mEnergie = new Energie(0);
@@ -23,13 +26,15 @@ public class Mine implements ObjetArene {
 	ObjetArene mOwner;//owner of the mine
 	
 	@Override
-	public CaseRender getRender() {
+	public List<CaseRender> getRender() {
 		if (mRender == null) {
+			mRender = new ArrayList<>();
 			InfoRender lInforInfoRender = new InfoRender();
 			lInforInfoRender.setColor(mColor);
-			lInforInfoRender.setString("m");
-			mRender = new FireBallRender();
-			mRender.setInfoRender(lInforInfoRender);
+			lInforInfoRender.setString("°");
+			CaseRender lRender = new FireBallRender();
+			lRender.setInfoRender(lInforInfoRender);
+			mRender.add(lRender);
 		}
 		
 		return mRender;
@@ -122,16 +127,14 @@ public class Mine implements ObjetArene {
 
 	@Override
 	public boolean  collision(ObjetArene pObjeArene) {
-		if (pObjeArene == mOwner) {
+		if (pObjeArene != mOwner) {
 			mHurtObject.init(this);
 			mHurtObject.collision(pObjeArene);
-			mRender.getInfoRender().setString("!");	
-			mRender.getInfoRender().setColor("red");
+			
+			HurtObjetRender lObjetHurt = new HurtObjetRender();
+			pObjeArene.getRender().add(lObjetHurt);
 		}
-		else {
-			mRender.getInfoRender().setString("x");	
-			mRender.getInfoRender().setColor("green");
-		}
+		
 		
 		mIsDispose= true;
 		return false;

@@ -31,7 +31,6 @@ public class InsMine implements Instruction {
 		Mine lMine = new Mine();
 		lMine.setPosition(lPosition);
 		lMine.setColor(mObjetArene.getColor());
-		lMine.setColor(mObjetArene.getColor());
 		lMine.setOwner(mObjetArene);
 		
 			

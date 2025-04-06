@@ -2,6 +2,7 @@ package com.js.dawa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +34,8 @@ public class Launcher {
 	int LIVE = 10000;
 	
 	CostInstruction mCostInstruction = new CostInstruction();
+	
+	static Random mRandom = new Random();
 	
 	public static void main(String[] args) {
 	
@@ -78,9 +81,9 @@ public class Launcher {
 		
 		try {
 			List<ModuleArena> lLstModule = new ArrayList<>();
-			lLstModule.add(createDefaultCase(10, 10));
-			lLstModule.add(createDefaultCase(20, 20));
-			lLstModule.add(createDefaultCase(10, 22));
+			
+			createDefaultCase(lArene, lLstModule);
+
 			lLstModule.add(createModuleRobotRedTransvers(lArene));
 			lLstModule.add(createModuleRobotGreenAvanceAndShoot(lArene));
 			lLstModule.add(createModuleRobotBlueHide(lArene));
@@ -95,10 +98,6 @@ public class Launcher {
 		} catch (DawaException e) {
 			LOGGER.error("error interpretor", e);
 		}
-		
-		
-		
-		
 		
 		
 	}
@@ -290,16 +289,30 @@ public class Launcher {
 		
 	}
 	
-	ModuleArena createDefaultCase (int px, int py) {
-		CaseArene lCaseArene = new CaseArene();//case defaut
-		lCaseArene.setCaseAreneRender(new CaseAreneRenderDefaut());
-		lCaseArene.setPosition(new Position(px, py));
+	void createDefaultCase (Arene pArene,List<ModuleArena> pLstModule) {
+		int lSize = pArene.getAreneProps().getSize();
 		
-		 ModuleArena lModuleRobot = new ModuleArena();
-		 lModuleRobot.setObjetArene(lCaseArene);
+		
+		
+		for (int li = 1; li < lSize; li++) {
+			for (int lj = 1; lj < lSize; lj++) {
+			
+				if (mRandom.nextInt(100) < 20) { //1 chance sur 5 to add an obstacle
+					CaseArene lCaseArene = new CaseArene();//case defaut
+					lCaseArene.addCaseAreneRender(new CaseAreneRenderDefaut());
+					lCaseArene.setPosition(new Position(li, lj));
+					
+					ModuleArena lModuleRobot = new ModuleArena();
+					lModuleRobot.setObjetArene(lCaseArene);
+					pLstModule.add(lModuleRobot);
+				}
+			}
+		}
+				
+			
+		
 		 
 		 
-		 return lModuleRobot;
 
 	}
 	

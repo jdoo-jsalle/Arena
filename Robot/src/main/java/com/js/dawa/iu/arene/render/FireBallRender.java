@@ -17,4 +17,11 @@ public class FireBallRender implements CaseRender {
 		
 	}
 
+
+	@Override
+	public void reinit() {
+		//na reinit
+		
+	}
+
 }

@@ -11,4 +11,16 @@ public class CaseAreneRenderEmpty implements CaseRender {
 		return mInfoRender;
 	}
 
+	@Override
+	public void setInfoRender(InfoRender pInfoRender) {
+		mInfoRender = pInfoRender;
+		
+	}
+
+	@Override
+	public void reinit() {
+		//na
+		
+	}
+
 }

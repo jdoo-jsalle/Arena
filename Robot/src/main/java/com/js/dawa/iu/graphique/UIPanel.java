@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.InfoRender;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ModuleArena;
@@ -80,18 +81,25 @@ public class UIPanel extends JLabel {
 	void print (ObjetArene pObjetArene) {
 		LOGGER.info("objet Arene {}",pObjetArene);
 		Position lPos = pObjetArene.getPosition();
-		int lx = (lPos.getX() -1)* lSizeCase + mDecal + 5;
-		int ly = (lPos.getY() -1) * lSizeCase + mDecal +12;
-		InfoRender lInfoRender = pObjetArene.getRender().getInfoRender();
-		mg.setColor(lInfoRender.getColorForAwt());
-		mg.drawString(lInfoRender.getString(), lx, ly);
+		int lx = (lPos.getX() -1)* lSizeCase + mDecal + 6;
+		int ly = (lPos.getY() -1) * lSizeCase + mDecal +15;
+		for (CaseRender lRender : pObjetArene.getRender() ) {
+			InfoRender lInfoRender = lRender.getInfoRender();
+			mg.setColor(lInfoRender.getColorForAwt());
+			mg.drawString(lInfoRender.getString(), lx, ly);
+		}
+		//remove secondary Render
+		pObjetArene.getRender().removeIf( n -> n.isSecondary());
 	}
 	
 	
 	void drawLineDecal (int x1,int y1, int x2, int y2) {
 		mg.drawLine(x1+mDecal, y1+ mDecal, x2+mDecal, y2+ mDecal);
 	}
-
+	
+	
+	
+	
 	
 	
 

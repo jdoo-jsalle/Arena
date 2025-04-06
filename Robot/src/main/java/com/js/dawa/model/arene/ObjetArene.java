@@ -1,5 +1,6 @@
 package com.js.dawa.model.arene;
 
+import java.util.List;
 import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseRender;
@@ -10,9 +11,10 @@ import com.js.dawa.model.robot.Position;
 public interface ObjetArene {
 	
 	
-	public CaseRender getRender ();
+	public List<CaseRender> getRender ();
 	
 	public Position getPosition ();
+	
 	public void setPosition (Position pPosition);
 	
 	public void addAttribut (Attribut pAttribut);

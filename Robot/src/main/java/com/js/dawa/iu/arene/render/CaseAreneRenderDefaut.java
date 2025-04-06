@@ -9,4 +9,16 @@ public class CaseAreneRenderDefaut implements CaseRender {
 		return mInfoRender;
 	}
 
+	@Override
+	public void setInfoRender(InfoRender pInfoRender) {
+		mInfoRender = pInfoRender;
+		
+	}
+
+	@Override
+	public void reinit() {
+		//na
+		
+	}
+
 }
