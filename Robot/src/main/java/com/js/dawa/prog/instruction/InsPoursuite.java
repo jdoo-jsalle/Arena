@@ -5,35 +5,42 @@ import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
 
 public class InsPoursuite implements Instruction {
+	
+	ObjetArene mObjetArene;
+	Arene mArene;
+	Args mArgs;
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pObjetArena, Arene pArene) throws DawaException {
-		// TODO Auto-generated method stub
+		mArene = pArene;
+		mArgs = pArgsInstruction;
+		mObjetArene = pObjetArena;
 
 	}
 
 	@Override
 	public InfoExecIns execInstruction() throws DawaException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		return new InfoExecIns(this);
 	}
 
 	@Override
 	public void setFlag(String pVal) {
-		// TODO Auto-generated method stub
+		//na
 
 	}
 
 	@Override
 	public String dump(String pDecal) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "Poursuite";
 	}
 
 	@Override
 	public Args getArgs() {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return mArgs;
 	}
 
 }

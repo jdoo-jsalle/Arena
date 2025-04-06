@@ -36,5 +36,9 @@ public class Position {
 				       Math.abs(mY-pY) <= pRayon;
 			
 	}
+	
+	public String toString() {
+		return "X : " + Integer.toString(mX)  + " Y : " + Integer.toString(mY);
+	}
 
 }

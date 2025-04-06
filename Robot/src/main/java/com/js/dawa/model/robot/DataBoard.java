@@ -55,6 +55,7 @@ public class DataBoard {
 	}
 	
 	public ObjetArene getFirstRobotInLstObjetDetected () {
+		
 		ObjetArene lRes = null;
 		if (mLstObjetArene != null) {
 			for (ObjetArene lO : mLstObjetArene) {

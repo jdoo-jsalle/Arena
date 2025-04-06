@@ -21,6 +21,8 @@ public class CaseArene implements ObjetArene{
 	
 	Position mPosition;
 	
+	boolean mIsVisible = true;
+	
 	
 	public void addAttribut (Attribut pAttribut) {
 		if (pAttribut.getNameAttribut().equals(HurtObject.HIT)) {
@@ -80,19 +82,18 @@ public class CaseArene implements ObjetArene{
 
 	@Override
 	public boolean isVisible() {
-		//objet invisible
-		return false;
+		return mIsVisible;
 	}
 
 	@Override
 	public void setVisible(boolean pVisible) {
-		//na
+		mIsVisible = pVisible;
 		
 	}
 
 	@Override
 	public void setEnergie(Energie pEnergie) {
-		//TODO : set like enegy tank ?
+		//TODO : set something like energy tank ?
 		
 	}
 
@@ -104,16 +105,19 @@ public class CaseArene implements ObjetArene{
 
 	@Override
 	public String getColor() {
-		//na
-		return null;
+		return "black";
 	}
 
 	@Override
 	public boolean  collision(ObjetArene pObjeArene) {
 		mHurtObject.init(this);
 		mHurtObject.collision(pObjeArene);
-		return true;
+		return true;//keep objet after collision
 		
+	}
+	
+	public String toString() {
+		return "CaseArene " + mPosition.toString() + " Visible : " + Boolean.toString(mIsVisible);
 	}
 
 }

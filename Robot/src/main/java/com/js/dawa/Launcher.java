@@ -48,7 +48,7 @@ public class Launcher {
 	void initCostInstruction () {
 		mCostInstruction.addCost("affect", 0);
 		mCostInstruction.addCost("block", 0);
-		mCostInstruction.addCost("if", 4);
+		mCostInstruction.addCost("if", 1);
 		mCostInstruction.addCost("avancer", 4);
 		mCostInstruction.addCost("fake", 0);
 		mCostInstruction.addCost("tir", 3);

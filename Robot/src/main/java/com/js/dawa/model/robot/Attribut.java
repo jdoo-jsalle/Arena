@@ -24,5 +24,9 @@ public class Attribut {
 	public void setValueAttributString(String pValueAttributString) {
 		this.mValueAttributString = pValueAttributString;
 	}
+	
+	public String toString() {
+		return mNameAttribut + " str : " + mValueAttributString + " int : " + Integer.toString(mValueAttribut);
+	}
 
 }

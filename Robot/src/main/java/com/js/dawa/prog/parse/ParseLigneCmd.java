@@ -151,7 +151,8 @@ public class ParseLigneCmd implements ParseLigne {
 	}
 	
 	void affectCost (Instruction pInstruction) {
-		mCostInstruction.affectCost(pInstruction);
+		if (mCostInstruction != null)
+		   mCostInstruction.affectCost(pInstruction);
 	}
 	
 	

@@ -29,7 +29,7 @@ public class InsScan implements Instruction {
 	@Override
 	public InfoExecIns execInstruction() throws DawaException {
 		
-		List<ObjetArene>  lLstObjetDetetec = mScaner.detectObjet(mObjetArene, mRange);
+		List<ObjetArene>  lLstObjetDetetec = mScaner.detectObjet(mObjetArene, mRange, true);
 		mObjetArene.getDataBoard().setListObjetDetected(lLstObjetDetetec);
 		
 		return new InfoExecIns(this);

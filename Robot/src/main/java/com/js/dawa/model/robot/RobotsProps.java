@@ -3,7 +3,13 @@ package com.js.dawa.model.robot;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 public class RobotsProps {
+	
+	private static final Logger LOGGER =  LogManager.getLogger( RobotsProps.class );
 	
 	static String PDV = "PDV";
 	static String NAME ="NAME";
@@ -50,7 +56,8 @@ public class RobotsProps {
 		boolean lRes = pDefaultValue;
 		if (lAttr != null) {
 			String lVal = lAttr.getValueAttributString();
-			lRes = Boolean.getBoolean(lVal);
+			lRes = Boolean.parseBoolean(lVal);
+			LOGGER.debug("Val \"{}\" => res \"{}\"",lVal, lRes);
 		}
 		return lRes;
 	}
@@ -100,7 +107,13 @@ public class RobotsProps {
 		Attribut lAttribut = new Attribut();
 		lAttribut.setNameAttribut(VISIBILITE);
 		lAttribut.setValueAttributString(Boolean.toString(pVisibilite));
+		LOGGER.debug("Val boolean : {}",lAttribut.getValueAttributString());
 		mLstAttributs.put(VISIBILITE, lAttribut);
+	}
+	
+	
+	public String toString() {
+		return mLstAttributs.toString();
 	}
 	
 

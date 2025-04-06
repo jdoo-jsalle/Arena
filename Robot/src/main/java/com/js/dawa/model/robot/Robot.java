@@ -109,7 +109,7 @@ public class Robot implements ObjetArene{
 
 	@Override
 	public boolean isVisible() {
-		return mRobotProps.isVisibilite();
+		return  mRobotProps != null && mRobotProps.isVisibilite();
 	}
 
 	@Override
@@ -151,6 +151,10 @@ public class Robot implements ObjetArene{
 	public boolean collision(ObjetArene pObjeArene) {
 		setVisible(true);//collision => make it visible
 		return true;
+	}
+	
+	public String toString() {
+		return "Robot : " + mPosition + " props : " + mRobotProps.toString() + " is visible : " + isVisible();
 	}
 	
 	
