@@ -40,5 +40,24 @@ public class Position {
 	public String toString() {
 		return "X : " + Integer.toString(mX)  + " Y : " + Integer.toString(mY);
 	}
+	
+	public Position getVector (Position pPosition) {
+		int lVx = pPosition.getX()-mX;
+		int lVy = pPosition.getY()-mY;
+		
+		lVx = lVx == 0 ? 0 : (Math.abs(lVx)/lVx);
+		lVy = lVy == 0 ? 0 : (Math.abs(lVy)/lVy);
+		
+		return new Position(lVx,lVy);
+		
+	}
+	
+	public double distance (Position pPosition) {
+		int lDisX = mX - pPosition.getX();
+		int lDisY = mY - pPosition.getY();
+		
+		
+		return Math.sqrt(lDisX * lDisX + lDisY * lDisY);
+	}
 
 }

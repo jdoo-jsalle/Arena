@@ -51,7 +51,7 @@ public class UIPanel extends JLabel {
 		int lSizeGrid = mSizeArene * lSizeCase;
 		
 		
-		pg.setColor(Color.BLUE);
+		pg.setColor(Color.GRAY);
 		
 		for (int li = 0; li < mSizeArene; li++) {
 			String lOrdonne = Integer.toString(li+1);
@@ -79,7 +79,7 @@ public class UIPanel extends JLabel {
 	
 	
 	void print (ObjetArene pObjetArene) {
-		LOGGER.info("objet Arene {}",pObjetArene);
+		//LOGGER.debug("objet Arene {}",pObjetArene);
 		Position lPos = pObjetArene.getPosition();
 		int lx = (lPos.getX() -1)* lSizeCase + mDecal + 6;
 		int ly = (lPos.getY() -1) * lSizeCase + mDecal +15;

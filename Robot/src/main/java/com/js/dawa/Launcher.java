@@ -178,6 +178,13 @@ public class Launcher {
 			lParseLigneCmd.parse("if (block==true)");
 			lParseLigneCmd.parse("    affect (depla,JS:depla * -1)");
 			lParseLigneCmd.parse("endif");
+			lParseLigneCmd.parse("scan(4)");
+			lParseLigneCmd.parse("if (detected==true)");
+			lParseLigneCmd.parse("  tir (Rand[2], Rand[2]) ");
+			lParseLigneCmd.parse("else");
+			lParseLigneCmd.parse("  poursuite()");
+			lParseLigneCmd.parse("endif");
+			
 		}
 		catch (DawaException le) {
 			LOGGER.debug(SYNTAX_ERROR, le);

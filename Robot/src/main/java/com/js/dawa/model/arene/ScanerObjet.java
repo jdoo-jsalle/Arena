@@ -53,5 +53,36 @@ public class ScanerObjet {
 	}
 	
 	
+	public ObjetArene getNearestObjet (ObjetArene pObjetArene) {
+		double lMax = Double.MAX_VALUE;
+		ObjetArene lRes = null;
+		for (ModuleArena lModule : mArene.getLstCase()) {
+			if (lModule.isRobot()) {
+				ObjetArene lRobot = lModule.getObjetArene();
+				if (lRobot != pObjetArene) {
+					LOGGER.debug("For Robot {}",lRobot);
+					if (lRobot.isVisible()) {
+						double lDis = lRobot.getPosition().distance(pObjetArene.getPosition());
+						LOGGER.debug("\t dis is {}", lDis);
+						if (lDis < lMax) {
+							lRes = lRobot;
+							lMax = lDis;
+						}
+					}
+				}
+			}
+		}
+		if (lRes != null) {
+		   LOGGER.debug("Nearest Robot {}",lRes);
+		}
+		else {
+			LOGGER.debug("Neared Robot not found");
+		}
+		
+		return lRes;
+		
+	}
+	
+	
 	
 }

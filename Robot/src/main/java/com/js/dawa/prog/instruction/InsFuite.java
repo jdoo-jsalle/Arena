@@ -6,34 +6,54 @@ import com.js.dawa.util.DawaException;
 
 public class InsFuite implements Instruction {
 
+	ObjetArene mRobot;
+	Arene mArene;
+	Args mArgs;
+	
+	DeplaOnOtherObject mDepla;
+
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pObjetArena, Arene pArene) throws DawaException {
-		// TODO Auto-generated method stub
+		mArene = pArene;
+		mArgs = pArgsInstruction;
+		mRobot = pObjetArena;
+		mDepla = new DeplaOnOtherObject(mRobot, mArene);
 
 	}
 
 	@Override
 	public InfoExecIns execInstruction() throws DawaException {
-		// TODO Auto-generated method stub
-		return null;
+		//recupt Last detectes robot
+		mDepla.escape();
+		return new InfoExecIns(this);
 	}
 
 	@Override
 	public void setFlag(String pVal) {
-		// TODO Auto-generated method stub
+		//na
 
 	}
 
 	@Override
 	public String dump(String pDecal) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return toString();
 	}
 
 	@Override
 	public Args getArgs() {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return mArgs;
 	}
+	
+	
+	public String toString() {
+		String lNearestLabel = "<nothing>";
+		if (mDepla.getNearest() != null) {
+			lNearestLabel = mDepla.getNearest().toString();
+		}
+		return "Fuite : nearest :  " + lNearestLabel ;
+	}
+
 
 }
