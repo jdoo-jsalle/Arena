@@ -23,9 +23,9 @@ import com.js.dawa.util.DawaException;
 import com.js.dawa.util.DawaRunTimeException;
 
 
-public class Launcher {
+public class LauncherDemo {
 	
-	private static final Logger LOGGER =  LoggerFactory.getLogger( Launcher.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( LauncherDemo.class );
 	
 	static String SYNTAX_ERROR = "Syntax Error";
 	
@@ -41,7 +41,7 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 	
-		Launcher lLauncher = new Launcher();
+		LauncherDemo lLauncher = new LauncherDemo();
 		lLauncher.view();
 
 
