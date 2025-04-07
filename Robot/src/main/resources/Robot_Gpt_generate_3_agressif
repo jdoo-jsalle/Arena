@@ -1,3 +1,4 @@
+loop
     scan(4)
 
     if (detected == true)
@@ -30,3 +31,4 @@
     endif
 
     avancer(Rand[2], Rand[2])    // déplacement permanent pour rester insaisissable
+endloop

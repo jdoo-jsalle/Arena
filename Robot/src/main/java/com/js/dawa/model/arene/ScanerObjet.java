@@ -59,16 +59,15 @@ public class ScanerObjet {
 		for (ModuleArena lModule : mArene.getLstCase()) {
 			if (lModule.isRobot()) {
 				ObjetArene lRobot = lModule.getObjetArene();
-				if (lRobot != pObjetArene) {
+				if (lRobot != pObjetArene && lRobot.isVisible()) {
 					LOGGER.debug("For Robot {}",lRobot);
-					if (lRobot.isVisible()) {
-						double lDis = lRobot.getPosition().distance(pObjetArene.getPosition());
-						LOGGER.debug("\t dis is {}", lDis);
-						if (lDis < lMax) {
-							lRes = lRobot;
-							lMax = lDis;
-						}
+					double lDis = lRobot.getPosition().distance(pObjetArene.getPosition());
+					LOGGER.debug("\t dis is {}", lDis);
+					if (lDis < lMax) {
+						lRes = lRobot;
+						lMax = lDis;
 					}
+					
 				}
 			}
 		}

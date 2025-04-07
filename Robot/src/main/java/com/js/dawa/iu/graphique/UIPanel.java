@@ -79,7 +79,6 @@ public class UIPanel extends JLabel {
 	
 	
 	void print (ObjetArene pObjetArene) {
-		//LOGGER.debug("objet Arene {}",pObjetArene);
 		Position lPos = pObjetArene.getPosition();
 		int lx = (lPos.getX() -1)* lSizeCase + mDecal + 6;
 		int ly = (lPos.getY() -1) * lSizeCase + mDecal +15;

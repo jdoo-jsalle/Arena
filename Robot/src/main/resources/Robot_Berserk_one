@@ -9,34 +9,36 @@
 #9. TT si oui TC si non TR
 #10 AL
 
-poursuite()
-avancer (Rand[2], Rand[2])
-poursuite()
-scan (4)
-if (detected == true)
-    tir (1,0)
-    tir (-1,0)
-else
-   poursuite ()
-endif
-if (detected == true)
-    tir (0,1)
-    tir (0,-1)
-else
-   poursuite ()
-endif
-if (detected == true)
-    tir (1,0)
-    tir (-1,0)
-else 
-  avancer (Rand[2], Rand[2])
-endif
-avancer (Rand[2], Rand[2])
-if (detected == true)
-    tir (1,0)
-    tir (-1,0)
-else 
-    tir (0,1)
-    tir (0,-1)
-endif
-avancer (Rand[2], Rand[2])
+loop
+	poursuite()
+	avancer (Rand[2], Rand[2])
+	poursuite()
+	scan (4)
+	if (detected == true)
+	    tir (1,0)
+	    tir (-1,0)
+	else
+	   poursuite ()
+	endif
+	if (detected == true)
+	    tir (0,1)
+	    tir (0,-1)
+	else
+	   poursuite ()
+	endif
+	if (detected == true)
+	    tir (1,0)
+	    tir (-1,0)
+	else 
+	  avancer (Rand[2], Rand[2])
+	endif
+	avancer (Rand[2], Rand[2])
+	if (detected == true)
+	    tir (1,0)
+	    tir (-1,0)
+	else 
+	    tir (0,1)
+	    tir (0,-1)
+	endif
+	avancer (Rand[2], Rand[2])
+endloop

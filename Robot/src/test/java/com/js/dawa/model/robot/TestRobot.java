@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class TestRobot {
+class TestRobot {
 	
 	@Test
 	void test_visible() {

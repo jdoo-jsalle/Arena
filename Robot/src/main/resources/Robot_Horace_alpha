@@ -9,41 +9,42 @@
 #9. AL
 #10 TT si oui MI si non PS
 
-
-fuite ()
-scan (4)
-if (detected == true)
-  mine ()
-else
-  poursuite()
-endif
-if (detected == true)
-  mine ()
-else
-  fuite ()
-endif
-if (detected == true)
-   tir (1,0)
-   tir (-1,0)
-else
-    avancer (Rand[2], Rand[2])
-endif
-avancer (Rand[2], Rand[2])
-fuite ()
-if (detected == true)
-   tir (0,1)
-   tir (0,-1)
-else
-   fuite ()
-endif
-if (detected == true)
-   fuite ()
-else
-   poursuite ()
-endif
-avancer (Rand[2], Rand[2])
-if (detected == true)
-  mine ()
-else
-  poursuite ()
-endif
+loop
+	fuite ()
+	scan (4)
+	if (detected == true)
+	  mine ()
+	else
+	  poursuite()
+	endif
+	if (detected == true)
+	  mine ()
+	else
+	  fuite ()
+	endif
+	if (detected == true)
+	   tir (1,0)
+	   tir (-1,0)
+	else
+	    avancer (Rand[2], Rand[2])
+	endif
+	avancer (Rand[2], Rand[2])
+	fuite ()
+	if (detected == true)
+	   tir (0,1)
+	   tir (0,-1)
+	else
+	   fuite ()
+	endif
+	if (detected == true)
+	   fuite ()
+	else
+	   poursuite ()
+	endif
+	avancer (Rand[2], Rand[2])
+	if (detected == true)
+	  mine ()
+	else
+	  poursuite ()
+	endif
+endloop

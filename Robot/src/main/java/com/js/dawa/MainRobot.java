@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 public class MainRobot {
 	
-	private static final Logger LOGGER =  LoggerFactory.getLogger( Launcher.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( MainRobot.class );
 	
 	public static void main(String[] args) {
 		

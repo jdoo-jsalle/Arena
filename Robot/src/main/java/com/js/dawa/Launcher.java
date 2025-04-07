@@ -37,6 +37,10 @@ public class Launcher {
 	
 	static Random mRandom = new Random();
 	
+	static String IF ="If";
+	static String ELSE ="else";
+	static String END_IF ="endif";
+	
 	public static void main(String[] args) {
 	
 		Launcher lLauncher = new Launcher();
@@ -180,13 +184,13 @@ public class Launcher {
 			lParseLigneCmd.parse("avancer ($depla,0)");
 			lParseLigneCmd.parse("if (block==true)");
 			lParseLigneCmd.parse("    affect (depla,JS:depla * -1)");
-			lParseLigneCmd.parse("endif");
+			lParseLigneCmd.parse(END_IF);
 			lParseLigneCmd.parse("scan(4)");
 			lParseLigneCmd.parse("if (detected==true)");
 			lParseLigneCmd.parse("  tir (Rand[2], Rand[2]) ");
-			lParseLigneCmd.parse("else");
+			lParseLigneCmd.parse(ELSE);
 			lParseLigneCmd.parse("  poursuite()");
-			lParseLigneCmd.parse("endif");
+			lParseLigneCmd.parse(END_IF);
 			
 		}
 		catch (DawaException le) {
@@ -278,9 +282,9 @@ public class Launcher {
 			lParseLigneCmd.parse("  else ");
 			lParseLigneCmd.parse("    affect (indicateur,0)");
 			lParseLigneCmd.parse("  endif");
-			lParseLigneCmd.parse("else ");
+			lParseLigneCmd.parse(ELSE);
 			lParseLigneCmd.parse("   affect (wait, JS:wait + 1)");
-			lParseLigneCmd.parse("endif");
+			lParseLigneCmd.parse(END_IF);
 
 		}
 		catch (DawaException le) {
