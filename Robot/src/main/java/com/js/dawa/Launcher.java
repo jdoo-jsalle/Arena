@@ -2,17 +2,14 @@ package com.js.dawa;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
 import com.js.dawa.iu.console.AffichageInfoRobot;
 import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.AreneProps;
-import com.js.dawa.model.arene.CaseArene;
 import com.js.dawa.model.arene.CreateDefaultCase;
 import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ModuleArena;

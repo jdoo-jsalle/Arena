@@ -1,6 +1,7 @@
 package com.js.dawa.prog;
 
 import java.io.File;
+import java.util.List;
 
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.CreateDefaultCase;
@@ -39,7 +40,9 @@ public class ParserDirParams {
 			
 			mParserAreneProps = new ParserAreneProps();
 			mParserAreneProps.parseAreneProps(lFile.getAbsolutePath());
-			mArene = mParserAreneProps.mArene;
+			mArene = mParserAreneProps.getArene();
+			
+			
 			parsePrg();
 			addObstacle(mParserAreneProps.mValPercent);
 		
@@ -54,7 +57,7 @@ public class ParserDirParams {
 	
 	void addObstacle (String pValPercent) {
 		CreateDefaultCase lCreate = new CreateDefaultCase();
-		lCreate.createDefaultCase(mArene, mArene.getLstCase(), Integer.parseInt(pValPercent));
+		lCreate.createDefaultCase(mArene, mArene.getLstCaseMain(), Integer.parseInt(pValPercent));
 	}
 
 	
@@ -97,5 +100,13 @@ public class ParserDirParams {
 			
 		}
 		
+	}
+	
+	public Arene getArene () {
+		return mArene;
+	}
+	
+	public List<ModuleArena> getLstCase (){
+		return mParserAreneProps.mLstModuleArena;
 	}
 }

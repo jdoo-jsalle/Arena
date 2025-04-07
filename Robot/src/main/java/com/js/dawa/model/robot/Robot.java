@@ -29,6 +29,7 @@ public class Robot implements ObjetArene{
 		mMainRender = new RobotRender(pRobotProps);
 		mRobotRender.add(mMainRender);
 		mEnergie.setTot(1);//basic energie
+		setVisible(true);
 		
 	}
 	

@@ -26,7 +26,7 @@ public class ScanerObjet {
 		
 		Position lPos1 = pObjetArene.getPosition();
 		
-		for (ModuleArena lModule : mArene.getLstCase()) {
+		for (ModuleArena lModule : mArene.getLstCaseMain()) {
 			if (lModule.isRobot() || !pOnlyRobot) {
 				ObjetArene lObjetTarget = lModule.getObjetArene();
 				if (lObjetTarget != pObjetArene) {
@@ -56,7 +56,7 @@ public class ScanerObjet {
 	public ObjetArene getNearestObjet (ObjetArene pObjetArene) {
 		double lMax = Double.MAX_VALUE;
 		ObjetArene lRes = null;
-		for (ModuleArena lModule : mArene.getLstCase()) {
+		for (ModuleArena lModule : mArene.getLstCaseMain()) {
 			if (lModule.isRobot()) {
 				ObjetArene lRobot = lModule.getObjetArene();
 				if (lRobot != pObjetArene && lRobot.isVisible()) {

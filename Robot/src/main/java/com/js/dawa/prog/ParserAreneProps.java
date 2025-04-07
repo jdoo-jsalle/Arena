@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.AreneProps;
+import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ModuleArena;
+import com.js.dawa.model.robot.Position;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
 import com.js.dawa.util.DawaException;
@@ -23,91 +25,115 @@ public class ParserAreneProps {
 	
 	int LIVE = 10000;
 	
+	int ARENE_SIZE = 30;
+	
 	List<ModuleArena> mLstModuleArena = new ArrayList<>();
 	
-	Arene mArene;
+	private Arene mArene;
 	
 	String mValPercent="100";
 	
-	void parseAreneProps (String pPath) throws DawaException {
-		
-		initArene();
+	int mPv = LIVE;
 	
+	int mSizeArene = ARENE_SIZE;
+	
+	ModuleArena mCurrentModuleArena = null;
+	
+	Robot mCurrentRobot =null;
+	
+	void parseAreneProps (String pPath) throws DawaException {
+		initArene();
 		
 		try (In lIn = new In()){
-			
 			lIn.open(pPath);
 			String lLigne = lIn.readLine();
 			
-			ModuleArena lCurrentModuleArena = null;
-			Robot lCurrentRobot =null;
-			
-			
-			
 			while (lLigne != null) {
 				lLigne = lLigne.trim();
-				
-				if (lLigne.equals("[Robot]")) {
-					lCurrentModuleArena = new ModuleArena();
-					lCurrentModuleArena.setIsRobot();
-					mLstModuleArena.add(lCurrentModuleArena);
-					Robot lRobot = new Robot();
-					RobotsProps lRobotProps = new RobotsProps();
-					lRobotProps.setPdv(LIVE);
-					lRobot.init(lRobotProps);
-					lCurrentRobot = lRobot;
-					
-					lCurrentModuleArena.setObjetArene(lRobot);
-				}
-				else if (lLigne.startsWith("Arene.obstacle")) {
-					mValPercent = getProperties(lLigne);
-				}
-				else if (lLigne.startsWith("Name:")) {
-					if (lCurrentRobot == null) throw new DawaException (FILE_PARA_MALFORMED);
-					lCurrentRobot.getRobotProps().setName(getProperties(lLigne));
-				}
-				else if (lLigne.startsWith("Color:")) {
-					if (lCurrentRobot == null) throw new DawaException (FILE_PARA_MALFORMED);
-					lCurrentRobot.getRobotProps().setColor(getProperties(lLigne));
-				}
-				else if (lLigne.startsWith("Prg:")) {
-					if (lCurrentModuleArena == null) throw new DawaException (FILE_PARA_MALFORMED);
-					lCurrentModuleArena.setNamePrg(getProperties(lLigne));
-				}
-				else {
-					LOGGER.info("Ligne {} not processed",lLigne);
-				}
-				
-				
+				parseLigne (lLigne);
 				lLigne = lIn.readLine();//new line
 			}//enwhile
 		}//end try
 		
+		initAreneSize();
 		mArene.setLstCase(mLstModuleArena);
+		LOGGER.info("Found {} robot(s)",mLstModuleArena.size());
 		
 	
 	}
 	
+	
+	void parseLigne (String pLigne) throws DawaException{
+		if (pLigne.equals("[Robot]")) {
+			mCurrentModuleArena = new ModuleArena();
+			mCurrentModuleArena.setIsRobot();
+			mLstModuleArena.add(mCurrentModuleArena);
+			Robot lRobot = new Robot();
+			RobotsProps lRobotProps = new RobotsProps();
+			
+			
+			lRobot.init(lRobotProps);
+			lRobot.setEnergie(new Energie (mPv));
+			mCurrentRobot = lRobot;
+			
+			mCurrentModuleArena.setObjetArene(lRobot);
+		}
+		else if (pLigne.startsWith("Arene.obstacle")) {
+			mValPercent = getProperties(pLigne);
+		}
+		else if (pLigne.startsWith("Arene.energie")) {
+			mPv = Integer.parseInt(getProperties(pLigne));
+			LOGGER.debug("Energie {}",mPv);
+		}
+		else if (pLigne.startsWith("Arene.size")) {
+			mSizeArene = Integer.parseInt(getProperties(pLigne));
+		}
+		else if (pLigne.startsWith("Name:")) {
+			verify(mCurrentRobot);
+			mCurrentRobot.getRobotProps().setName(getProperties(pLigne));
+		}
+		else if (pLigne.startsWith("Color:")) {
+			verify(mCurrentRobot);
+			mCurrentRobot.getRobotProps().setColor(getProperties(pLigne));
+		}
+		else if (pLigne.startsWith("Prg:")) {
+			verify(mCurrentModuleArena);
+			mCurrentModuleArena.setNamePrg(getProperties(pLigne));
+		}
+		else if (pLigne.startsWith("Pos:")) {
+			verify(mCurrentRobot);
+			Position lPos = convertInPos (getProperties(pLigne));
+			mCurrentRobot.setPosition(lPos);
+			
+		}
+		else {
+			LOGGER.info("Ligne {} not processed",pLigne);
+		}
+		
+	}
+	
+	
+	void verify (Object pObjet) throws DawaException{
+		if (pObjet == null) throw new DawaException (FILE_PARA_MALFORMED);
+	}
 	
 	void initArene () {
 		ConsoleGraphique lConsole = new ConsoleGraphique();
 		
 	    mArene = new Arene(lConsole);
-	 
+	    mArene.setLstCase(mLstModuleArena);
 		
 		AreneProps lAreneProps = new AreneProps();
-		lAreneProps.setSize(30);
+		lAreneProps.setSize(ARENE_SIZE);
 		lAreneProps.setTitle("Arene");
+	
 		
 		mArene.setAreneProps(lAreneProps);
 	}
 	
-	
-	
-	
-	
-
-	
+	void initAreneSize () {
+		mArene.getAreneProps().setSize(mSizeArene);
+	}
 	
 	
 	String getProperties (String pLigne) {
@@ -115,8 +141,21 @@ public class ParserAreneProps {
 		return pLigne.substring(lPos+1);
 	}
 	
+	Position convertInPos (String pLigne) {
+		String[] lVal = pLigne.split(",");
+		int lX= Integer.parseInt(lVal[0]);
+		int lY= Integer.parseInt(lVal[1]);
+		
+		return new Position(lX,lY);
+		
+	}
+	
 	public String toString () {
 		return mLstModuleArena.toString();
+	}
+	
+	public Arene getArene () {
+		return mArene;
 	}
 
 }

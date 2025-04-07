@@ -9,6 +9,12 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.js.dawa.prog.ParserDirParams;
+import com.js.dawa.util.DawaException;
+
+/**
+ * Launch the MaintRobot.main whith dirvalue argument : -D
+ */
 public class MainRobot {
 	
 	
@@ -20,9 +26,10 @@ public class MainRobot {
 		MainRobot lMainRobot = new MainRobot();
 		try {
 			lMainRobot.verifyArgs(args);
+			lMainRobot.execAreneGame();
 			
 			
-		} catch (ParseException e) {
+		} catch (ParseException | DawaException e) {
 			LOGGER.error("Error Main",e);
 		}
 		
@@ -49,9 +56,16 @@ public class MainRobot {
 		LOGGER.info("Directory is {}",mDirectory);
 		
 		
-		
-		
 	}
+	
+	void execAreneGame () throws DawaException {
+		ParserDirParams lPaserDireParams = new ParserDirParams();
+		lPaserDireParams.parseDirParams(mDirectory);
+		
+		EngineViewer lEngineViewer = new EngineViewer();
+		lEngineViewer.execEngineViewer(lPaserDireParams.getArene());
+	}
+
 	
 	
 	

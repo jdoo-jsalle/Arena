@@ -67,7 +67,7 @@ public class UIPanel extends JLabel {
 			drawLineDecal (0,li*lSizeCase,lSizeGrid,li*lSizeCase);
 			
 		}
-		List<ModuleArena >lLstCase = mArene.getLstCase();
+		List<ModuleArena >lLstCase = mArene.getLstCaseMain();
 		
 		//Affiche Case (robot and objet)
 		LOGGER.debug("Tot objet {}",lLstCase.size());
@@ -80,6 +80,7 @@ public class UIPanel extends JLabel {
 	
 	void print (ObjetArene pObjetArene) {
 		Position lPos = pObjetArene.getPosition();
+		LOGGER.debug("Post object {}",lPos);
 		int lx = (lPos.getX() -1)* lSizeCase + mDecal + 6;
 		int ly = (lPos.getY() -1) * lSizeCase + mDecal +15;
 		for (CaseRender lRender : pObjetArene.getRender() ) {

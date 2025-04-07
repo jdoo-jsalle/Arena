@@ -19,7 +19,7 @@ public class AffichageInfoRobot {
 	
 	public String getAffichageInfoRobot() {
 		StringBuilder lRes = new StringBuilder();
-		List<ModuleArena> lLst = mArene.getLstCase();
+		List<ModuleArena> lLst = mArene.getLstCaseMain();
 		String lComa ="";
 		for (ModuleArena lModuleArena : lLst) {
 			if (lModuleArena.isRobot()) {

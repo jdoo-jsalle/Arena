@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.js.dawa.iu.console.Console;
-import com.js.dawa.model.robot.Position;
 
 public class Arene {
 	
 
-	Console mConsole;	
+	private Console mConsole;	
 	
 	private List<ModuleArena> mLstModuleArene = new ArrayList<>();
 	
@@ -30,13 +29,18 @@ public class Arene {
 		mLstModuleArenasTemp.add(pObjetArene);
 	}
 	
-	public List<ModuleArena>  getLstCase (){
+	public void updateListCase (){
 		//put last objet creation in the arena
 		for (ModuleArena lModule : mLstModuleArenasTemp) {
 			mLstModuleArene.add(lModule);
 		}
 		
 		mLstModuleArenasTemp.clear();
+		
+	}
+	
+	
+	public List<ModuleArena> getLstCaseMain (){
 		return mLstModuleArene;
 	}
 	
@@ -98,25 +102,6 @@ public class Arene {
 		
 	}
 	
-	/**
-	 * Replace by isNewPositionIsOk
-	 * @param pPosition
-	 * @param pX
-	 * @param pY
-	 * @return
-	 * @deprecated
-	 */
-	@Deprecated
-	public boolean isFuturePositionInArene (Position pPosition,int pX, int pY) {
-		int lSizeArene = mAreneProps.getSize();
-	
-		return (pPosition.getX()+ pX <= lSizeArene &&
-				pPosition.getY()+ pY <= lSizeArene  &&
-				pPosition.getX()+ pX > 0 &&
-				pPosition.getY()+ pY > 0);
-			
-	}
-	
 	
 	
 	public void rmDisposeObjet () {
@@ -131,6 +116,10 @@ public class Arene {
 		for (ModuleArena lModule : lLstToDispose ) {
 			mLstModuleArene.remove(lModule);
 		}
+	}
+	
+	public Console getConsole () {
+		return mConsole;
 	}
 
 	
