@@ -1,3 +1,11 @@
-PathPrgToScan="....."
+PathPrgToScan=C:\moi\git\Arena\Robot\src\main\resources
 #Arene.obstacle : max 100.
 Arene.obstacle=90
+[Robot]
+Name:G
+Color:green
+Prg:Robot_Berserk_one
+[Robot]
+Name:R
+Color:red
+Prg:Robot_Gpt_generate_1

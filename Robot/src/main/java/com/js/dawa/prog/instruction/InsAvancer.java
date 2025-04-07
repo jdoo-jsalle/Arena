@@ -1,7 +1,7 @@
 package com.js.dawa.prog.instruction;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ObjetArene;
@@ -14,7 +14,7 @@ import com.js.dawa.util.DawaException;
  */
 public class InsAvancer implements Instruction {
 	
-	private static final Logger LOGGER =  LogManager.getLogger( InsAvancer.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( InsAvancer.class );
 	
 	Args mArgs;
 	int mX =0;

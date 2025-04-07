@@ -2,13 +2,13 @@ package com.js.dawa.prog.instruction;
 
 import javax.script.ScriptException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.js.dawa.model.arene.ObjetArene;
 
 public class CmdOnValueJavaScript implements CmdOnValue {
-	private static final Logger LOGGER =  LogManager.getLogger( CmdOnValueJavaScript.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( CmdOnValueJavaScript.class );
 
 	ObjetArene mRobot;
 
@@ -30,7 +30,7 @@ public class CmdOnValueJavaScript implements CmdOnValue {
 			lRes = lScriptEval.compute(mRobot);
 		} catch (ScriptException e) {
 			LOGGER.debug("error",  e);
-			
+			//TODO..
 		}
 		return lRes;
 	}

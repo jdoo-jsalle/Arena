@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
 import com.js.dawa.iu.console.AffichageInfoRobot;
@@ -27,7 +27,7 @@ import com.js.dawa.util.DawaRunTimeException;
 
 public class Launcher {
 	
-	private static final Logger LOGGER =  LogManager.getLogger( Launcher.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( Launcher.class );
 	
 	static String SYNTAX_ERROR = "Syntax Error";
 	
@@ -64,6 +64,9 @@ public class Launcher {
 	void view () {
 		
 		
+		
+		LOGGER.info("Begin Arena java version {}",System.getProperty("java.version"));
+		LOGGER.debug("debug mode is active");
 		ConsoleGraphique lConsole = new ConsoleGraphique();
 	    Arene lArene = new Arene(lConsole);
 	    initCostInstruction();

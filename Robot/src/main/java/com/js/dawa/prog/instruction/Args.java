@@ -3,8 +3,8 @@ package com.js.dawa.prog.instruction;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
@@ -17,7 +17,7 @@ import com.js.dawa.util.DawaException;
  */
 public class Args {
 	
-	private static final Logger LOGGER =  LogManager.getLogger( Args.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( Args.class );
 
 	private String mNameInstruction;
 	

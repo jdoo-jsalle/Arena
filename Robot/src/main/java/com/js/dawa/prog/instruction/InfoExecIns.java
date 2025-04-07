@@ -1,15 +1,14 @@
 package com.js.dawa.prog.instruction;
 
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * resultat system of an instruction
  */
 public class InfoExecIns {
 	
-	private static final Logger LOGGER =  LogManager.getLogger( InfoExecIns.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( InfoExecIns.class );
 	
 	StringBuilder mMessage = new StringBuilder();
 	String mComa="";

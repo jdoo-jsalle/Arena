@@ -2,13 +2,13 @@ package com.js.dawa.prog.instruction;
 
 import java.util.Random;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.js.dawa.model.arene.ObjetArene;
 
 public class CmdOnValueRandom implements CmdOnValue {
-	private static final Logger LOGGER =  LogManager.getLogger( CmdOnValueRandom.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( CmdOnValueRandom.class );
 	ObjetArene mObjetArene;
 	static Random randomNumbers = new Random();
 
@@ -23,7 +23,7 @@ public class CmdOnValueRandom implements CmdOnValue {
 		int lStart = pClause.indexOf("[");
 		int lEnd = pClause.indexOf("]");
 		String lVal = pClause.substring(lStart+1,lEnd).trim();
-		LOGGER.info("Args Random : \"{}\"", lVal);
+		LOGGER.debug("Args Random : \"{}\"", lVal);
 		return Integer.parseInt(lVal);
 
 	
@@ -41,7 +41,7 @@ public class CmdOnValueRandom implements CmdOnValue {
 		int lVal = randomNumbers.nextInt(lArg);
 		int lSigne = randomNumbers.nextInt(2);//on assigne un chiffre négatif au hasard
 		if (lSigne == 0) lVal = lVal * -1;
-		LOGGER.info("Args generate : \"{}\"", lVal);
+		LOGGER.debug("Args generate : \"{}\"", lVal);
 		return Integer.toString(lVal);
 	}
 

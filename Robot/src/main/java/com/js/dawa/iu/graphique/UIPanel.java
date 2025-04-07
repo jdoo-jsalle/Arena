@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.swing.JLabel;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.InfoRender;
@@ -18,7 +18,7 @@ import com.js.dawa.model.robot.Position;
 
 public class UIPanel extends JLabel {
 	
-	private static final Logger LOGGER =  LogManager.getLogger( UIPanel.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( UIPanel.class );
 	
 	transient Graphics mg;
 	
@@ -70,7 +70,7 @@ public class UIPanel extends JLabel {
 		List<ModuleArena >lLstCase = mArene.getLstCase();
 		
 		//Affiche Case (robot and objet)
-		LOGGER.info("Tot objet {}",lLstCase.size());
+		LOGGER.debug("Tot objet {}",lLstCase.size());
 		for (ModuleArena lModuleArene : lLstCase) {
 			print(lModuleArene.getObjetArene());
 		}

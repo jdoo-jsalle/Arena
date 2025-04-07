@@ -1,8 +1,7 @@
 package com.js.dawa.prog.instruction;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.util.DawaException;
@@ -14,7 +13,7 @@ import com.js.dawa.util.DawaException;
  */
 public class InsAffect implements Instruction {
 	
-	private static final Logger LOGGER =  LogManager.getLogger( InsAffect.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( InsAffect.class );
 	
 	Args mArgs;
 	ObjetArene mRobot;

@@ -3,8 +3,8 @@ package com.js.dawa.prog.instruction;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Test;
 
 import com.js.dawa.model.robot.Robot;
@@ -12,7 +12,7 @@ import com.js.dawa.util.DawaException;
 
 class TestInsAffect {
 	
-	 private static final Logger LOGGER =  LogManager.getLogger( TestInsAffect.class );
+	 private static final Logger LOGGER =  LoggerFactory.getLogger( TestInsAffect.class );
 	
 	@Test
 	void testExecInstruction_for_insAffect () {

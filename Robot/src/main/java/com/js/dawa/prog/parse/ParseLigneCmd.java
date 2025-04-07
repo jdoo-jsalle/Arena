@@ -1,8 +1,8 @@
 package com.js.dawa.prog.parse;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ObjetArene;
@@ -16,7 +16,7 @@ import com.js.dawa.prog.instruction.InstructionLst;
 import com.js.dawa.util.DawaException;
 
 public class ParseLigneCmd implements ParseLigne {
-	 private static final Logger LOGGER =  LogManager.getLogger( ParseLigneCmd.class );
+	 private static final Logger LOGGER =  LoggerFactory.getLogger( ParseLigneCmd.class );
 	
 	 InstructionBlock mMainLstInstruction = new InstructionBlock();//prg loop
 	 InstructionBlock mInitLstInstruction = new InstructionBlock(-1);//prg init
@@ -32,8 +32,9 @@ public class ParseLigneCmd implements ParseLigne {
 	 
 	 int mNumLigne;
 	 
-	 
 	 private CostInstruction mCostInstruction;
+	 
+	 private LignePrg mLignePrg = new LignePrg();
 	 
 
 	 
@@ -45,18 +46,21 @@ public class ParseLigneCmd implements ParseLigne {
 	 }
 	
 	 public void parse (String pLigne) throws DawaException {
-		if (pLigne.equals ("init")){
+		String lLigne =  mLignePrg.getValue(pLigne);
+		 
+		 
+		if (lLigne.equals ("init")){
 			mPileInstruction.add(mInitLstInstruction);
 			mCurrentInstruction = mInitLstInstruction;
 		}
-		else if (pLigne.equals("endinit")) {
+		else if (lLigne.equals("endinit")) {
 			 mPileInstruction.clear();
 			 mPileInstruction.add(mMainLstInstruction);
 			 mCurrentInstruction = mMainLstInstruction;
 		}
 		
-		else if (pLigne.trim().startsWith("if")) {
-			Args lArgs = getArgs(mNumLigne, pLigne);
+		else if (lLigne.trim().startsWith("if")) {
+			Args lArgs = getArgs(mNumLigne, lLigne);
 			
 			
 			InstructionLst lInstructionCond = new InstructionCond();
@@ -66,23 +70,26 @@ public class ParseLigneCmd implements ParseLigne {
 			lInstructionCond.setFlag("if");
 			mCurrentInstruction.addInstruction(lInstructionCond);
 			mPileInstruction.add(lInstructionCond);
-			LOGGER.info(">>>Pop {}",lInstructionCond);
+			LOGGER.debug(">>>Pop {}",lInstructionCond);
 			mCurrentInstruction = lInstructionCond;
 			
 		}
-		else if (pLigne.trim().startsWith("else")){
+		else if (lLigne.trim().startsWith("else")){
 			mCurrentInstruction.setFlag("else");
 		
 		}
-		else if (pLigne.trim().startsWith("endif")) {
+		else if (lLigne.trim().startsWith("endif")) {
 			//depile
 			mCurrentInstruction = mPileInstruction.popAndPeek();
-			LOGGER.info("<<<depop {}",mCurrentInstruction);
+			LOGGER.debug("<<<depop {}",mCurrentInstruction);
 			
 		
 		}
+		else if (lLigne.trim().startsWith("#")){
+			//skip comment
+		}
 		else {
-			 Args lArgs = getArgs(mNumLigne, pLigne);
+			 Args lArgs = getArgs(mNumLigne, lLigne);
 			 Instruction lIns=null;
 			 try {
 				 //create the instance instruction
@@ -98,7 +105,7 @@ public class ParseLigneCmd implements ParseLigne {
 			 affectCost(lIns);
 			 mCurrentInstruction.addInstruction(lIns);
 			 
-			 LOGGER.info("<<<Add {} in {}",lIns,mCurrentInstruction);
+			 LOGGER.debug("<<<Add {} in {}",lIns,mCurrentInstruction);
 			 
 		}
 		
@@ -115,17 +122,17 @@ public class ParseLigneCmd implements ParseLigne {
 			throw new DawaException("Ligne #" + Integer.toString(pNumLigne) + " \"" + pLigne + "\" : error must have param beetween ()");
 		}
 		String lInstruction = pLigne.substring(0,lDeb).trim();
-		LOGGER.info("instruction : {}", lInstruction);
+		LOGGER.debug("instruction : {}", lInstruction);
 		Args lArgs = new Args(mObjetArene);
 		lArgs.setNameInstruction(lInstruction);
 		
 		String lParam = pLigne.substring(lDeb + 1, lEnd).trim();
 		if (!lParam.isEmpty()) {
-			LOGGER.info("Param : \"{}\"", lParam);
+			LOGGER.debug("Param : \"{}\"", lParam);
 			String [] lParams = lParam.split(",",0);
 			
 			for (String lVal : lParams) {
-				LOGGER.info("val : {}", lVal);
+				LOGGER.debug("val : {}", lVal);
 				lArgs.addArguments(lVal.trim());
 			}
 		}

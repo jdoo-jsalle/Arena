@@ -7,15 +7,16 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.model.robot.DataBoard;
 
 public class ScriptJsEval {
 	
-	 private static final Logger LOGGER =  LogManager.getLogger( ScriptJsEval.class );
+	 private static final Logger LOGGER =  LoggerFactory.getLogger( ScriptJsEval.class );
 	 
 	 static ScriptEngineManager factory = new ScriptEngineManager();
      static ScriptEngine engine = factory.getEngineByName("graal.js");

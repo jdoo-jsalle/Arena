@@ -3,12 +3,12 @@ package com.js.dawa.prog.instruction;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Test;
 
 class TestCmdOnValueRandom {
-	 private static final Logger LOGGER =  LogManager.getLogger( TestCmdOnValueRandom.class );
+	 private static final Logger LOGGER =  LoggerFactory.getLogger( TestCmdOnValueRandom.class );
 	
 	@Test
 	void test_getArgsRandom () {

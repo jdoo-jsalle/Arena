@@ -3,8 +3,8 @@ package com.js.dawa.prog.parse;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Test;
 
 import com.js.dawa.model.robot.Robot;
@@ -13,7 +13,7 @@ import com.js.dawa.util.DawaException;
 
 class TestParseLigneCmd {
 	
-	 private static final Logger LOGGER =  LogManager.getLogger( TestParseLigneCmd.class );
+	 private static final Logger LOGGER =  LoggerFactory.getLogger( TestParseLigneCmd.class );
 	
 	
 	@Test

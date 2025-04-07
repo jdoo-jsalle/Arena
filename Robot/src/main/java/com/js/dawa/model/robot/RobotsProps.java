@@ -3,13 +3,13 @@ package com.js.dawa.model.robot;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class RobotsProps {
 	
-	private static final Logger LOGGER =  LogManager.getLogger( RobotsProps.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( RobotsProps.class );
 	
 	static String PDV = "PDV";
 	static String NAME ="NAME";
