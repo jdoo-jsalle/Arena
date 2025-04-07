@@ -16,6 +16,8 @@ public class ParserAreneProps {
 	
 	private static final Logger LOGGER =  LoggerFactory.getLogger( ParserAreneProps.class );
 	
+	static String FILE_PARA_MALFORMED = "File param is malformed";
+	
 	List<ModuleArena> mLstModuleArena = new ArrayList<>();
 	
 	void parseAreneProps (String pPath) throws DawaException {
@@ -42,15 +44,15 @@ public class ParserAreneProps {
 					lCurrentModuleArena.setObjetArene(lRobot);
 				}
 				else if (lLigne.startsWith("Name:")) {
-					verifyIsNull(lCurrentRobot);
+					if (lCurrentRobot == null) throw new DawaException (FILE_PARA_MALFORMED);
 					lCurrentRobot.getRobotProps().setName(getProperties(lLigne));
 				}
 				else if (lLigne.startsWith("Color:")) {
-					verifyIsNull(lCurrentRobot);
+					if (lCurrentRobot == null) throw new DawaException (FILE_PARA_MALFORMED);
 					lCurrentRobot.getRobotProps().setColor(getProperties(lLigne));
 				}
 				else if (lLigne.startsWith("Prg:")) {
-					verifyIsNull(lCurrentModuleArena);
+					if (lCurrentModuleArena == null) throw new DawaException (FILE_PARA_MALFORMED);
 					lCurrentModuleArena.setNamePrg(getProperties(lLigne));
 				}
 				else {
@@ -66,9 +68,7 @@ public class ParserAreneProps {
 		}
 	}
 	
-	void verifyIsNull (Object pObjet) throws DawaException{
-		if (pObjet == null) throw new DawaException ("File param is malformed");
-	}
+	
 	
 	
 	String getProperties (String pLigne) {
