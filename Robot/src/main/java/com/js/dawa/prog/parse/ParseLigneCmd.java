@@ -85,7 +85,7 @@ public class ParseLigneCmd implements ParseLigne {
 			
 		
 		}
-		else if (lLigne.trim().startsWith("#")){
+		else if (mLignePrg.isSkipable()){
 			//skip comment
 		}
 		else {

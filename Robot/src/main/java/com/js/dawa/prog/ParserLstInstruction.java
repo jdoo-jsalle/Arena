@@ -4,7 +4,7 @@ public class ParserLstInstruction {
 	
 	
 	
-	void parse (String pPath) {
+	public void parse (String pPath) {
 		//return LstInstruction ?
 	}
 

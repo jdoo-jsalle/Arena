@@ -5,7 +5,9 @@ import com.js.dawa.util.DawaException;
 
 public class ModuleArena {
 	
+	 
 	 private ObjetArene mObjetArene;
+	 private String mNamePrg;
 	 private Instruction mInstructionLoop;
 	 private Instruction mInstructionInit;
 	 
@@ -50,6 +52,18 @@ public class ModuleArena {
 		this.mIsRobot = true;
 	}
 	
+
+	public String getNamePrg() {
+		return mNamePrg;
+	}
+	public void setNamePrg(String pNamePrg) {
+		this.mNamePrg = pNamePrg;
+	}
+	
+	@Override
+	public String toString() {
+		return mObjetArene.toString();
+	}
 
 	
 

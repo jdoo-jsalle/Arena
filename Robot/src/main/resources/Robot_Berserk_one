@@ -20,12 +20,14 @@ loop
 	else
 	   poursuite ()
 	endif
+	scan (4)
 	if (detected == true)
 	    tir (0,1)
 	    tir (0,-1)
 	else
 	   poursuite ()
 	endif
+	scan (4)
 	if (detected == true)
 	    tir (1,0)
 	    tir (-1,0)
@@ -33,6 +35,7 @@ loop
 	  avancer (Rand[2], Rand[2])
 	endif
 	avancer (Rand[2], Rand[2])
+	scan (4)
 	if (detected == true)
 	    tir (1,0)
 	    tir (-1,0)
@@ -40,5 +43,6 @@ loop
 	    tir (0,1)
 	    tir (0,-1)
 	endif
+	
 	avancer (Rand[2], Rand[2])
 endloop

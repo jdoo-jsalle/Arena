@@ -22,6 +22,8 @@ loop
 	else
 	  fuite ()
 	endif
+	
+	scan (4)
 	if (detected == true)
 	   tir (1,0)
 	   tir (-1,0)
@@ -30,18 +32,24 @@ loop
 	endif
 	avancer (Rand[2], Rand[2])
 	fuite ()
+	
+	scan (4)
 	if (detected == true)
 	   tir (0,1)
 	   tir (0,-1)
 	else
 	   fuite ()
 	endif
+	
+	scan (4)
 	if (detected == true)
 	   fuite ()
 	else
 	   poursuite ()
 	endif
 	avancer (Rand[2], Rand[2])
+	
+	scan (4)
 	if (detected == true)
 	  mine ()
 	else

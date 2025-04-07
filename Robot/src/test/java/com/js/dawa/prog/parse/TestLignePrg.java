@@ -27,7 +27,21 @@ class TestLignePrg {
     	assertNull(lLignePrg.getValue(null));
     	
     }
-	
+    
+    
+    @ParameterizedTest
+    @CsvSource({
+        "  , true",
+        "#truc, true     ",
+        "truc , false",
+        "loop , true",
+        "endloop, true"
+    })
+    void test_verify (String pValue, boolean pAttempt) {
+    	LignePrg lLignePrg = new LignePrg();
+    	lLignePrg.getValue(pValue);
+    	assertEquals(pAttempt, lLignePrg.isSkipable());
+    }
 
 	
 
