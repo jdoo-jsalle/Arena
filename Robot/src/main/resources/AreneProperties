@@ -1,0 +1,3 @@
+PathPrgToScan="....."
+#Arene.obstacle : max 100.
+Arene.obstacle=90

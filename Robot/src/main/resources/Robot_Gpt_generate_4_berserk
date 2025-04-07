@@ -1,13 +1,15 @@
 // Initialisation des variables
-affect(detectionConsecutive, 0)
-affect(modeBerserk, false)
+init
+	affect(detectionConsecutive, 0)
+	affect(modeBerserk, false)
+endinit
 
 loop:
 
     scan(4)
 
     if (detected == true)
-        affect(detectionConsecutive, detectionConsecutive + 1)
+        affect(detectionConsecutive, JS:detectionConsecutive + 1)
     else
         affect(detectionConsecutive, 0)
     endif
