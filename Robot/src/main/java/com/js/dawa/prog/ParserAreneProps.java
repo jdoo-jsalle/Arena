@@ -6,6 +6,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.js.dawa.iu.console.ConsoleGraphique;
+import com.js.dawa.model.arene.Arene;
+import com.js.dawa.model.arene.AreneProps;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
@@ -18,9 +21,18 @@ public class ParserAreneProps {
 	
 	static String FILE_PARA_MALFORMED = "File param is malformed";
 	
+	int LIVE = 10000;
+	
 	List<ModuleArena> mLstModuleArena = new ArrayList<>();
 	
+	Arene mArene;
+	
+	String mValPercent="100";
+	
 	void parseAreneProps (String pPath) throws DawaException {
+		
+		initArene();
+	
 		
 		try (In lIn = new In()){
 			
@@ -29,6 +41,8 @@ public class ParserAreneProps {
 			
 			ModuleArena lCurrentModuleArena = null;
 			Robot lCurrentRobot =null;
+			
+			
 			
 			while (lLigne != null) {
 				lLigne = lLigne.trim();
@@ -39,9 +53,14 @@ public class ParserAreneProps {
 					mLstModuleArena.add(lCurrentModuleArena);
 					Robot lRobot = new Robot();
 					RobotsProps lRobotProps = new RobotsProps();
+					lRobotProps.setPdv(LIVE);
 					lRobot.init(lRobotProps);
 					lCurrentRobot = lRobot;
+					
 					lCurrentModuleArena.setObjetArene(lRobot);
+				}
+				else if (lLigne.startsWith("Arene.obstacle")) {
+					mValPercent = getProperties(lLigne);
 				}
 				else if (lLigne.startsWith("Name:")) {
 					if (lCurrentRobot == null) throw new DawaException (FILE_PARA_MALFORMED);
@@ -61,13 +80,33 @@ public class ParserAreneProps {
 				
 				
 				lLigne = lIn.readLine();//new line
-			}
-			
-			
-			
-		}
+			}//enwhile
+		}//end try
+		
+		mArene.setLstCase(mLstModuleArena);
+		
+	
 	}
 	
+	
+	void initArene () {
+		ConsoleGraphique lConsole = new ConsoleGraphique();
+		
+	    mArene = new Arene(lConsole);
+	 
+		
+		AreneProps lAreneProps = new AreneProps();
+		lAreneProps.setSize(30);
+		lAreneProps.setTitle("Arene");
+		
+		mArene.setAreneProps(lAreneProps);
+	}
+	
+	
+	
+	
+	
+
 	
 	
 	

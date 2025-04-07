@@ -13,6 +13,7 @@ import com.js.dawa.iu.console.ConsoleGraphique;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.AreneProps;
 import com.js.dawa.model.arene.CaseArene;
+import com.js.dawa.model.arene.CreateDefaultCase;
 import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.robot.Position;
@@ -35,7 +36,7 @@ public class Launcher {
 	
 	CostInstruction mCostInstruction = new CostInstruction();
 	
-	static Random mRandom = new Random();
+
 	
 	static String IF ="If";
 	static String ELSE ="else";
@@ -304,29 +305,10 @@ public class Launcher {
 	}
 	
 	void createDefaultCase (Arene pArene,List<ModuleArena> pLstModule) {
-		int lSize = pArene.getAreneProps().getSize();
 		
-		
-		
-		for (int li = 1; li < lSize; li++) {
-			for (int lj = 1; lj < lSize; lj++) {
-			
-				if (mRandom.nextInt(100) < 20) { //1 chance sur 5 to add an obstacle
-					CaseArene lCaseArene = new CaseArene();//case defaut
-					lCaseArene.addCaseAreneRender(new CaseAreneRenderDefaut());
-					lCaseArene.setPosition(new Position(li, lj));
-					
-					ModuleArena lModuleRobot = new ModuleArena();
-					lModuleRobot.setObjetArene(lCaseArene);
-					pLstModule.add(lModuleRobot);
-				}
-			}
-		}
-				
-			
-		
-		 
-		 
+		CreateDefaultCase lCreate = new CreateDefaultCase();
+		lCreate.createDefaultCase(pArene, pLstModule, 20);
+	 
 
 	}
 	
