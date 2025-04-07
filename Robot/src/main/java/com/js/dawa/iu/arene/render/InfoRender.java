@@ -30,6 +30,10 @@ public class InfoRender {
 			return Color.RED;
 			
 		}
+		else if (mColor.equals("orange")) {
+			return Color.ORANGE;
+			
+		}
 		else if (mColor.equals("pink")) {
 			return Color.PINK;
 			
