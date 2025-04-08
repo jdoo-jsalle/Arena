@@ -12,7 +12,7 @@ public class ParserDirParamsLauncher {
 	public static void main(String[] args) {
 		ParserDirParams lPaserDireParams = new ParserDirParams();
 		try {
-			lPaserDireParams.parseDirParams("./src/main/resources/");
+			lPaserDireParams.parseDirParams("./src/main/resources/","Arene.properties");
 		} catch (DawaException e) {
 		    LOGGER.error("Error",e);
 		}

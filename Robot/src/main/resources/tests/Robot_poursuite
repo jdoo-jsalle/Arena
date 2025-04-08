@@ -1,0 +1,3 @@
+loop
+	poursuite()
+endloop

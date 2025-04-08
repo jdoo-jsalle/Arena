@@ -33,7 +33,7 @@ public class InfoRender {
 		if (mColorAwt == null) {	
 		
 			try {
-				Field field = Class.forName("java.awt.Color").getField(mColor.toLowerCase());
+				Field field = Class.forName("java.awt.Color").getField(mColor.toUpperCase());
 				
 				mColorAwt = (Color)field.get(null);
 			} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException 

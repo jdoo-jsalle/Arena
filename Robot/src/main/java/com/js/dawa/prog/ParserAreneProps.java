@@ -69,10 +69,13 @@ public class ParserAreneProps {
 			mCurrentModuleArena.setIsRobot();
 			mLstModuleArena.add(mCurrentModuleArena);
 			Robot lRobot = new Robot();
+		
 			RobotsProps lRobotProps = new RobotsProps();
+			lRobotProps.setName("?");
 			
 			
 			lRobot.init(lRobotProps);
+			lRobot.setInArena(true);
 			lRobot.setEnergie(new Energie (mPv));
 			mCurrentRobot = lRobot;
 			

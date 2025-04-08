@@ -12,4 +12,6 @@ public interface Console {
 	
 	void update();//update affichage
 	
+	void close ();
+	
 }

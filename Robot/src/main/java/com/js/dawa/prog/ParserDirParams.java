@@ -13,7 +13,7 @@ import com.js.dawa.util.In;
 
 public class ParserDirParams {
 	
-	static String ARENE_PROPERTIES = "Arene.properties";
+	
 	
 	ParserAreneProps mParserAreneProps;
 	
@@ -30,13 +30,13 @@ public class ParserDirParams {
 	 * @param pPath
 	 * @throws DawaException
 	 */
-	public void parseDirParams (String pPath) throws DawaException{
+	public void parseDirParams (String pPath, String pFileArena) throws DawaException{
 		initCostInstruction();
 		mPath = pPath;
 	
 		File lDir = new File (pPath);
 		if (lDir.isDirectory()) {
-			File lFile = new File (pPath  + ARENE_PROPERTIES);
+			File lFile = new File (pPath  + pFileArena);
 			
 			mParserAreneProps = new ParserAreneProps();
 			mParserAreneProps.parseAreneProps(lFile.getAbsolutePath());

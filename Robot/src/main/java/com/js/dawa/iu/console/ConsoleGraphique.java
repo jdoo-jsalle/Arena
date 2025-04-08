@@ -73,6 +73,15 @@ public class ConsoleGraphique implements Console {
 	}
 
 
+	@Override
+	public void close() {
+		if (frame != null) {
+			frame.dispose();
+		}
+		
+	}
+
+
 	
 	
 }

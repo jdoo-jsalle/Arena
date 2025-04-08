@@ -18,6 +18,8 @@ public class EngineViewer {
 	
 	ListInfoEnd mLstInfoEnd = new ListInfoEnd();
 	
+	Console mConsole;
+	
 	
 	public void execEngineViewer (Arene pArene) throws DawaException {
 		pArene.getConsole().init(pArene);
@@ -37,7 +39,7 @@ public class EngineViewer {
 	void engineCompute (Arene pArene) throws DawaException {
 		boolean lEnd = false;
 		
-		Console lConsole = pArene.getConsole();
+		mConsole = pArene.getConsole();
 		
 		
 		AffichageInfoRobot lAffichageInfoRobot = new AffichageInfoRobot(pArene);
@@ -64,14 +66,20 @@ public class EngineViewer {
 			pArene.rmDisposeObjet();
 			//compute/eval lEnd
 			
-			affichageCurrent(lTour, lAffichageInfoRobot, lConsole);
+			affichageCurrent(lTour, lAffichageInfoRobot, mConsole);
 			lTour++;
-			lConsole.update();
+			mConsole.update();
 		}
 		LOGGER.info("End");
-		afficheEnd(lConsole);
-		lConsole.update();//last console update
+		afficheEnd(mConsole);
+		mConsole.update();//last console update
 		
+	}
+	
+	public void dispose() {
+		if (mConsole != null) {
+			mConsole.close();
+		}
 	}
 	
 	

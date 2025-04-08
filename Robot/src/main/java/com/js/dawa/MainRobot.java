@@ -19,6 +19,9 @@ public class MainRobot {
 	
 	
 	String mDirectory;
+	String mFileArena;
+	
+	static String ARENE_PROPERTIES = "Arene.properties";
 	
 	private static final Logger LOGGER =  LoggerFactory.getLogger( MainRobot.class );
 	
@@ -49,21 +52,42 @@ public class MainRobot {
 		
 		lOptions.addOption(lFolder);
 		
+		Option lFile = Option.builder("F")
+				.longOpt("Arene*.properties")
+				.argName("ARENA")
+				.desc("Arena Properties File")
+				.hasArg()
+				.required(false)
+				.build();
+		
+		lOptions.addOption(lFile);
+		
 		CommandLineParser parser = new DefaultParser();
 		CommandLine cmd = parser.parse(lOptions, pArgs);
 		
 		mDirectory = cmd.getOptionValue("D");
-		LOGGER.info("Directory is {}",mDirectory);
+		if (!mDirectory.endsWith("/")) {
+			mDirectory = mDirectory + "/";
+		}
+		
+		mFileArena = cmd.getOptionValue("F");
+		if (mFileArena == null) {
+			mFileArena = ARENE_PROPERTIES;
+		}
+		
+		
+		LOGGER.info("Directory is {} {}",mDirectory, mFileArena);
 		
 		
 	}
 	
 	void execAreneGame () throws DawaException {
 		ParserDirParams lPaserDireParams = new ParserDirParams();
-		lPaserDireParams.parseDirParams(mDirectory);
+		lPaserDireParams.parseDirParams(mDirectory,mFileArena);
 		
 		EngineViewer lEngineViewer = new EngineViewer();
 		lEngineViewer.execEngineViewer(lPaserDireParams.getArene());
+		lEngineViewer.dispose();
 	}
 
 	

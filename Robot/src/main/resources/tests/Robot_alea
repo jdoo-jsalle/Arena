@@ -1,0 +1,3 @@
+loop
+	avancer(Rand[2], Rand[2])
+endloop
