@@ -12,6 +12,7 @@ public class ModuleArena {
 	 private Instruction mInstructionInit;
 	 
 	 private boolean mIsRobot = false;
+	 private boolean mIsOver = false;
 	 
 	 
 	public ObjetArene getObjetArene() {
@@ -63,6 +64,13 @@ public class ModuleArena {
 	@Override
 	public String toString() {
 		return mObjetArene.toString();
+	}
+	
+	public boolean isOver() {
+		return mIsOver;
+	}
+	public void setOver(boolean pIsOver) {
+		this.mIsOver = pIsOver;
 	}
 
 	
