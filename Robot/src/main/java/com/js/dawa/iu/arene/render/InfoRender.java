@@ -1,11 +1,18 @@
 package com.js.dawa.iu.arene.render;
 
 import java.awt.Color;
+import java.lang.reflect.Field;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class InfoRender {
 	
 	private String mString;
 	private String mColor;
+	private Color mColorAwt;
+	
+	private static final Logger LOGGER =  LoggerFactory.getLogger( InfoRender.class );
 	
 	
 	
@@ -23,53 +30,24 @@ public class InfoRender {
 	
 	
 	public Color getColorForAwt () {
-		if (mColor == null) {
-			return Color.BLUE;
-		}
-		else if (mColor.equals("red")) {
-			return Color.RED;
-			
-		}
-		else if (mColor.equals("orange")) {
-			return Color.ORANGE;
-			
-		}
-		else if (mColor.equals("pink")) {
-			return Color.PINK;
-			
-		}
-		else if (mColor.equals("cyan")) {
-			return Color.CYAN;
-			
-		}
-		else if (mColor.equals("gray")) {
-			return Color.GRAY;
-			
-		}
-		else if (mColor.equals("dark_gray")) {
-			return Color.DARK_GRAY;
-			
-		}
-		else if (mColor.equals("yellow")) {
-			return Color.YELLOW;
-			
-		}
-		else if (mColor.equals("green")) {
-			return Color.GREEN;
-			
-		}
-		else if (mColor.equals("white")) {
-			return Color.WHITE;
-			
-		}
-		else if (mColor.equals("blue")) {
-			return Color.BLUE;
-			
-		}
+		if (mColorAwt == null) {	
 		
-		else return Color.BLACK;
-		
+			try {
+				Field field = Class.forName("java.awt.Color").getField(mColor.toLowerCase());
+				
+				mColorAwt = (Color)field.get(null);
+			} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException 
+					|  NoSuchFieldException| SecurityException  e) {
+					LOGGER.debug("error",e);
+					mColorAwt = Color.black;
+			}
+		}
+		 
+		 return mColorAwt;
+
+	        
 	}
+	
 	
 	public void setString(String pString) {
 		this.mString = pString;
@@ -78,6 +56,7 @@ public class InfoRender {
 		return mColor;
 	}
 	public void setColor(String pColor) {
+		mColorAwt = null;
 		this.mColor = pColor.toLowerCase();
 	}
 	
