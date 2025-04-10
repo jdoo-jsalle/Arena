@@ -1,5 +1,7 @@
 package com.js.dawa;
 
+import javax.swing.JOptionPane;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -87,6 +89,9 @@ public class MainRobot {
 		
 		EngineViewer lEngineViewer = new EngineViewer();
 		lEngineViewer.execEngineViewer(lPaserDireParams.getArene());
+		
+		JOptionPane.showConfirmDialog(null, 
+	                "Game is over", "Arene", JOptionPane.DEFAULT_OPTION);
 		lEngineViewer.dispose();
 	}
 
