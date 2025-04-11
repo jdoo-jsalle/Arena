@@ -56,8 +56,8 @@ public class Position {
 		int lDisX = mX - pPosition.getX();
 		int lDisY = mY - pPosition.getY();
 		
-		
-		return Math.sqrt(lDisX * lDisX + lDisY * lDisY);
+		//*1D for cast in to double
+		return Math.sqrt(lDisX * lDisX * 1D + lDisY * lDisY * 1D);
 	}
 
 }
