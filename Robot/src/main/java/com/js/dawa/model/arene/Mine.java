@@ -129,17 +129,24 @@ public class Mine implements ObjetArene {
 
 	@Override
 	public boolean  collision(ObjetArene pObjeArene) {
-		if (pObjeArene != mOwner) {
+		if (pObjeArene.getOwner() != mOwner) {
 			mHurtObject.init(this);
 			mHurtObject.collision(pObjeArene);
 			
 			HurtObjetRender lObjetHurt = new HurtObjetRender();
 			pObjeArene.getRender().add(lObjetHurt);
+			mIsDispose= true;
 		}
+
 		
 		
-		mIsDispose= true;
+		
 		return false;
+	}
+	
+	@Override
+	public ObjetArene getOwner () {
+		return mOwner;
 	}
 	
 	public void setColor (String pColor) {

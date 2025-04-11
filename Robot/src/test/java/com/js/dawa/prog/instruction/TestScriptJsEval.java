@@ -13,10 +13,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 import com.js.dawa.model.robot.DataBoard;
 import com.js.dawa.model.robot.Robot;
 
-public class TestScriptJsEval {
+class TestScriptJsEval {
 	
 	@Test
-	public void testGenerateScript_cond () {
+	void testGenerateScript_cond () {
 		DataBoard lDataBoard = new DataBoard();
 		lDataBoard.setVariable("$truc", "10");
 		lDataBoard.setVariable("$machin", "10");
@@ -33,7 +33,7 @@ public class TestScriptJsEval {
 	
 	
 	@Test
-	public void testEval_true() {
+	 void testEval_true() {
 		ScriptJsEval lIfEval = new ScriptJsEval("$truc > 5 && $truc < 10 && $machin == 3");
 
 		
@@ -58,7 +58,7 @@ public class TestScriptJsEval {
        "$truc_missing > 5 && $truc < 10 && $machin == 3, $truc, 11, $machin, 3",
     })
 	
-	public void testEval_false(String pCond,String pVar1, String pVal1, String pVar2, String pVal2) {
+	void testEval_false(String pCond,String pVar1, String pVal1, String pVar2, String pVal2) {
 		ScriptJsEval lIfEval = new ScriptJsEval(pCond);
 
 		
@@ -76,7 +76,7 @@ public class TestScriptJsEval {
 	}
 	
 	@Test
-	public void testcompute() {
+	void testcompute() {
 		ScriptJsEval lIfEval = new ScriptJsEval("$truc * 10 + $machin");
 
 		

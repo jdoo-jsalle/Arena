@@ -42,5 +42,9 @@ public interface ObjetArene {
 	public String getColor ();
 	
 	public boolean collision (ObjetArene pObjeArene);//return if block or not
+	
+	default ObjetArene getOwner() {
+		  return this;
+	}
 
 }

@@ -138,7 +138,7 @@ public class FireBall implements ObjetArene {
 
 	@Override
 	public boolean  collision(ObjetArene pObjeArene) {
-		if (mOwner != pObjeArene) {//not hurt by his own fireball
+		if (mOwner != pObjeArene.getOwner()) {//not hurt by his own fireball
 			mHurtObject.init(this);
 			mHurtObject.collision(pObjeArene);
 			HurtObjetRender lObjetHurt = new HurtObjetRender();
@@ -149,6 +149,11 @@ public class FireBall implements ObjetArene {
 		
 		return false;
 		
+	}
+	
+	@Override
+	public ObjetArene getOwner () {
+		return mOwner;
 	}
 
 }

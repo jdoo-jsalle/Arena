@@ -169,9 +169,11 @@ public class Robot implements ObjetArene{
 		return true;
 	}
 	
+	
 	public String toString() {
 		return "Robot : " + mPosition + " props : " + mRobotProps.toString() + " is visible : " + isVisible();
 	}
+	
 	
 	
 	

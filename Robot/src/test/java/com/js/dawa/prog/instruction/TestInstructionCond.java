@@ -1,6 +1,5 @@
 package com.js.dawa.prog.instruction;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,12 +7,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import com.js.dawa.model.robot.Robot;
 
-public class TestInstructionCond {
+class TestInstructionCond {
 	
 	 @ParameterizedTest
      @CsvSource({
-        "$i, 1, $i < 10, true",
-        "$j, 1, $i < 10, false"//var $j is missing
+        "i, 1, i < 10, true",
+        "j, 1, i < 10, false"//var $j is missing
      })
 	void test_instruction_cond(String pVariable, String pValeur, String pCond, boolean pAttempt) {
 		InstructionCond lInstructionCond = new InstructionCond();
