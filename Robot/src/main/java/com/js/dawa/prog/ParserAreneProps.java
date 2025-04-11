@@ -67,9 +67,10 @@ public class ParserAreneProps {
 		if (pLigne.equals("[Robot]")) {
 			
 			if (mCurrentRobot != null) {
-				mCurrentRobot.init();//renit with founded information
+				mCurrentRobot.reInit();//renit with founded information
 			}
 			
+			//next robot
 			mCurrentModuleArena = new ModuleArena();
 			mCurrentModuleArena.setIsRobot();
 			mLstModuleArena.add(mCurrentModuleArena);

@@ -1,7 +1,5 @@
 package com.js.dawa.prog.instruction;
 
-import javax.script.ScriptException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -98,20 +96,9 @@ public class InstructionCond implements InstructionLst {
 	
 	
 	boolean execCondition()  {
-		boolean lRes = false;
-		
-		try {
-			ScriptJsEval lIfEval = new ScriptJsEval(mArgs.getArgs(0));
-			lRes =lIfEval.eval(mRobot);
-		}
-		catch (ScriptException le) {
-			LOGGER.debug("error script ",le);
-		}
-		
-		
-		return lRes;
+		ScriptJsEval lIfEval = new ScriptJsEval(mArgs.getArgs(0));
+		return lIfEval.eval(mRobot);
 	}
-
 
 
 	@Override

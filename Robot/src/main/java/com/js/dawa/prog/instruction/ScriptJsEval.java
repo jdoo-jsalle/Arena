@@ -66,10 +66,19 @@ public class ScriptJsEval {
 	}
 	
 	
-	public boolean eval (ObjetArene pRobot) throws  ScriptException {
-		String lClause = generateScript(pRobot.getDataBoard(),SCRIPT_JS_COND);
-		LOGGER.debug("Clause cond is {}", lClause);
-		return ((Boolean)engine.eval(lClause)).booleanValue();
+	public boolean eval (ObjetArene pRobot)  {
+		
+		
+	    boolean lRes = false;
+		try {
+			String lClause = generateScript(pRobot.getDataBoard(),SCRIPT_JS_COND);
+			LOGGER.debug("Clause cond is {}", lClause);
+			lRes = ((Boolean)engine.eval(lClause)).booleanValue();
+		}
+		catch (ScriptException le) {
+			LOGGER.debug("warning, cond is invalid, js script error, return false, correct robot prg Error",le);
+		}
+		return lRes;
 	}
 	
 	

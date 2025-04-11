@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import javax.script.ScriptException;
 
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import com.js.dawa.model.robot.DataBoard;
 import com.js.dawa.model.robot.Robot;
@@ -25,8 +27,11 @@ public class TestScriptJsEval {
 		assertEquals("function condition (){if (10 > 5 && 10 < 10 && 10 == 3) {   return true;} else {   return false;}}condition ();", lScript);
 		
 	}
-
-
+	
+	
+	
+	
+	
 	@Test
 	public void testEval_true() {
 		ScriptJsEval lIfEval = new ScriptJsEval("$truc > 5 && $truc < 10 && $machin == 3");
@@ -38,33 +43,34 @@ public class TestScriptJsEval {
 		lRobotData.setVariable("$truc", "9");
 		lRobotData.setVariable("$machin", "3");
 		lRobot.setRobotData(lRobotData);
-		try {
-			assertTrue(lIfEval.eval(lRobot));
-		}
-		catch (ScriptException e) {
-			assertTrue (e.getMessage(),false);
-		}
+		assertTrue(lIfEval.eval(lRobot));
+	
 		
 		
 	}
 	
-	@Test
-	public void testEval_false() {
-		ScriptJsEval lIfEval = new ScriptJsEval("$truc > 5 && $truc < 10 && $machin == 3");
+
+
+    @ParameterizedTest
+    @CsvSource({
+       "$truc > 5 && $truc < 10 && $machin == 3, $truc, 11, $machin, 3",
+       "$troc > 5 && $truc < 10 && $machin == 3, $truc, 11, $machin, 3",
+       "$truc_missing > 5 && $truc < 10 && $machin == 3, $truc, 11, $machin, 3",
+    })
+	
+	public void testEval_false(String pCond,String pVar1, String pVal1, String pVar2, String pVal2) {
+		ScriptJsEval lIfEval = new ScriptJsEval(pCond);
 
 		
 		
 		Robot lRobot = new Robot();
 		DataBoard lRobotData = new DataBoard();
-		lRobotData.setVariable("$truc", "11");
-		lRobotData.setVariable("$machin", "3");
+		lRobotData.setVariable(pVar1, pVal1);
+		lRobotData.setVariable(pVar2, pVal2);
 		lRobot.setRobotData(lRobotData);
-		try {
-			assertFalse(lIfEval.eval(lRobot));
-		}
-		catch (ScriptException e) {
-			assertTrue (e.getMessage(),false);
-		}
+		 assertFalse(lIfEval.eval(lRobot));
+		
+		
 		
 		
 	}

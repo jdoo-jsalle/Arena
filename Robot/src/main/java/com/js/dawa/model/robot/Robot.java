@@ -31,12 +31,14 @@ public class Robot implements ObjetArene{
 			mRobotRender.add(mMainRender);
 			
 		}
-		init();
+		reInit();
 		
 	}
 	
-	public void init () {
-	
+	public void reInit () {
+		if (mMainRender != null) {
+			mMainRender.reinit();
+		}
 		setVisible(true);
 	}
 	

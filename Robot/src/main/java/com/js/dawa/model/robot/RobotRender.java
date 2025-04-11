@@ -12,8 +12,7 @@ public class RobotRender implements CaseRender {
 	
 	public RobotRender (RobotsProps pRobotProps) {
 		mRobotProps = pRobotProps;
-		reinit();
-		
+			
 	}
 	
 	

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.util.DawaException;
@@ -48,8 +50,16 @@ class TestInsAffect {
 		
 	}
 	
-	@Test
-	void testExecInstruction_for_insAffect_from_variable () {
+    @ParameterizedTest
+     @CsvSource({
+        "15, $valeur, 15",
+        "15, JS: valeur, 15",//JS:valeur is equivalent to $valeur
+        "15, JS:valeur, 15",
+        "15, JS: valeur * 2, 30",
+        "bidule, $valeur, bidule",
+        "bidule, JS: 'valeur' + '_bidule1', bidule_bidule1"
+     })
+	void testExecInstruction_for_insAffect_from_variable_js_ok (String pValeur,String pVariable, String pAttemp) {
 			try {
 				//first affect
 				InsAffect lInsAffect = new InsAffect();
@@ -60,21 +70,21 @@ class TestInsAffect {
 				//second affect to valeur
 				Args lArgs =new Args (mRobot);
 				lArgs.addArguments("valeur");
-				lArgs.addArguments("15");
+				lArgs.addArguments(pValeur);
 						
 				lInsAffect.init(lArgs, mRobot, null);
 				lInsAffect.execInstruction();
-				assertEquals("15", mRobot.getRobotData().getVariable("valeur"));
+				assertEquals(pValeur, mRobot.getRobotData().getVariable("valeur"));
 		 
 				//surcharge by valeur
 				 lArgs =new Args (mRobot);
 				 lArgs.addArguments("depla");
-				 lArgs.addArguments("$valeur");
+				 lArgs.addArguments(pVariable);
 				 //exec
 				 lInsAffect.init(lArgs, mRobot, null);
 				 lInsAffect.execInstruction();
 				 
-				 assertEquals("15", mRobot.getRobotData().getVariable("depla"));
+				 assertEquals(pAttemp, mRobot.getRobotData().getVariable("depla"));
 			
 			} catch (DawaException e) {
 				
@@ -113,6 +123,12 @@ class TestInsAffect {
 		
 		
 	}
+	
+	
+	
+		
+		
+		
 
 
 }
