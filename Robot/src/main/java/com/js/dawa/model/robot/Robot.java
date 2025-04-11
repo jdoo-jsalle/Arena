@@ -26,11 +26,24 @@ public class Robot implements ObjetArene{
 	
 	public void init (RobotsProps pRobotProps) {
 		mRobotProps = pRobotProps;
-		mMainRender = new RobotRender(pRobotProps);
-		mRobotRender.add(mMainRender);
-		mEnergie.setTot(1);//basic energie
-		setVisible(true);
+		if (mRobotProps != null) {
+			mMainRender = new RobotRender(mRobotProps);
+			mRobotRender.add(mMainRender);
+			
+		}
+		init();
 		
+	}
+	
+	public void init () {
+	
+		setVisible(true);
+	}
+	
+
+	
+	public void setRobotProps (RobotsProps pRobotProps) {
+		mRobotProps = pRobotProps;
 	}
 	
 

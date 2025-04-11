@@ -27,6 +27,7 @@ public class ScanerObjet {
 		Position lPos1 = pObjetArene.getPosition();
 		
 		for (ModuleArena lModule : mArene.getLstCaseMain()) {
+			LOGGER.debug("  is robot {}, OnlyRobot {}",lModule.isRobot() ,pObjetArene);
 			if (lModule.isRobot() || !pOnlyRobot) {
 				ObjetArene lObjetTarget = lModule.getObjetArene();
 				if (lObjetTarget != pObjetArene) {

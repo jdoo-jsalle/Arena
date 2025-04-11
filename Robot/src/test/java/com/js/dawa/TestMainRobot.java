@@ -18,7 +18,7 @@ class TestMainRobot {
 		String [] lArgs = new String[] {"-D","PATH_DIR"};
 		try {
 			lMainRobot.verifyArgs(lArgs);
-			assertEquals("PATH_DIR", lMainRobot.mDirectory);
+			assertEquals("PATH_DIR/", lMainRobot.mDirectory);
 		} catch (ParseException e) {
 			LOGGER.error("error",e);
 		}

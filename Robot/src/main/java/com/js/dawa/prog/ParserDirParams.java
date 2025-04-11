@@ -66,7 +66,7 @@ public class ParserDirParams {
 		mCostInstruction.addCost("block", 0);
 		mCostInstruction.addCost("if", 1);
 		mCostInstruction.addCost("avancer", 4);
-		mCostInstruction.addCost("fake", 0);
+		mCostInstruction.addCost("fake", 20);
 		mCostInstruction.addCost("tir", 3);
 		mCostInstruction.addCost("invisible", 20);
 		mCostInstruction.addCost("mine", 10);

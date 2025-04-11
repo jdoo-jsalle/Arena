@@ -135,13 +135,6 @@
     	     <artifactId>commons-cli</artifactId>
              <version>1.4</version>
 		</dependency>
-		
-		
-
-
-		
-	
-		
    </dependencies>
   
   
@@ -154,7 +147,7 @@
             <configuration>
                 <archive>
                     <manifest>
-                        <mainClass>com.js.dawa.Launcher</mainClass>
+                        <mainClass>com.js.dawa.MainRobot</mainClass>
                     </manifest>
                 </archive>
                 <descriptorRefs>
@@ -170,7 +163,12 @@
                     </goals>
                 </execution>
             </executions>
+           
         </plugin>
+        
+        
+        
+        
     </plugins>
 </build>
   

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,6 +55,8 @@ class TestScanerObjet {
 	void test_detectObjet_one_objet_out_of_range_in_range_visible_and_not_visible () {
 		Arene lArene = new Arene(null);
 		
+		List<ModuleArena> lLstObjetArena = new ArrayList<>();
+		lArene.setLstCase(lLstObjetArena);
 		
 		CaseArene lCaseArene = new CaseArene();
 		lCaseArene.setPosition(new Position (20,20));
@@ -64,7 +67,7 @@ class TestScanerObjet {
 		lModule.setIsRobot();
 		
 		//add Module to Arena
-		lArene.addObjetArene(lModule);
+		lLstObjetArena.add(lModule);
 		
 		//create Module Robot
 		Robot lRobot = new Robot();
@@ -73,19 +76,25 @@ class TestScanerObjet {
 		lModuleRobot.setObjetArene(lRobot);
 		lModuleRobot.setIsRobot();
 		
+		
+		
 		//add Robot to Arena
-		lArene.addObjetArene(lModuleRobot);
+		lLstObjetArena.add(lModuleRobot);
 		
 		//test Scanner
 		ScanerObjet lScanerObjet = new ScanerObjet();
 		lScanerObjet.init(lArene);
 		
 		
+		
+		
 		//first scan to 2
 		List<ObjetArene> lRes = lScanerObjet.detectObjet(lRobot, 2, false);
 		assertTrue(lRes.isEmpty());
+		
 		//second scan to 10 (all object)
 		lRes = lScanerObjet.detectObjet(lRobot, 10, false);
+		assertFalse(lRes.isEmpty());
 		assertEquals(lCaseArene, lRes.get(0));
 		
 		
@@ -102,6 +111,8 @@ class TestScanerObjet {
 	@Test
 	void detect_only_robot () {
 		Arene lArene = new Arene(null);
+		List<ModuleArena> lLstObjetArena = new ArrayList<>();
+		lArene.setLstCase(lLstObjetArena);
 		
 		
 		CaseArene lCaseArene = new CaseArene();
@@ -113,7 +124,7 @@ class TestScanerObjet {
 
 		
 		//add Module to Arena
-		lArene.addObjetArene(lModule);
+		lLstObjetArena.add(lModule);
 		
 		//create Module Robot
 		Robot lRobot = new Robot();
@@ -123,7 +134,7 @@ class TestScanerObjet {
 		lModuleRobot.setIsRobot();
 		
 		//add Robot to Arena
-		lArene.addObjetArene(lModuleRobot);
+		lLstObjetArena.add(lModuleRobot);
 		
 		//create another Robot
 		//create Module Robot
@@ -138,7 +149,7 @@ class TestScanerObjet {
 		lRobot2.init(lRobotProps);
 		
 		//add Robot to Arena
-		lArene.addObjetArene(lModuleRobot);
+		lLstObjetArena.add(lModuleRobot);
 
 		
 		

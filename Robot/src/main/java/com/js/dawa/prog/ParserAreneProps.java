@@ -65,6 +65,11 @@ public class ParserAreneProps {
 	
 	void parseLigne (String pLigne) throws DawaException{
 		if (pLigne.equals("[Robot]")) {
+			
+			if (mCurrentRobot != null) {
+				mCurrentRobot.init();//renit with founded information
+			}
+			
 			mCurrentModuleArena = new ModuleArena();
 			mCurrentModuleArena.setIsRobot();
 			mLstModuleArena.add(mCurrentModuleArena);
@@ -72,9 +77,10 @@ public class ParserAreneProps {
 		
 			RobotsProps lRobotProps = new RobotsProps();
 			lRobotProps.setName("?");
-			
-			
 			lRobot.init(lRobotProps);
+			
+			
+			
 			lRobot.setInArena(true);
 			lRobot.setEnergie(new Energie (mPv));
 			mCurrentRobot = lRobot;
