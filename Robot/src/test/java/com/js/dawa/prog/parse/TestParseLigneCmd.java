@@ -37,8 +37,8 @@ class TestParseLigneCmd {
 			Args lArgs = lParseLigne.getArgs(0, "truc (40,bobo)");
 			assertEquals("truc", lArgs.getNameInstruction());
 			assertEquals(2, lArgs.sizeArgs());
-			assertEquals("bobo",lArgs.getArgs(1) );
-			assertEquals("40",lArgs.getArgs(0) );
+			assertEquals("bobo",lArgs.getArgsWithSub(1) );
+			assertEquals("40",lArgs.getArgsWithSub(0) );
 			
 		} catch (DawaException e) {
 			LOGGER.debug("error",  e);

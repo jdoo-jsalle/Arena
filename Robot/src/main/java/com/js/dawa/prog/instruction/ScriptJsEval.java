@@ -57,6 +57,7 @@ public class ScriptJsEval {
 		for (Entry<String, String> le : lLstVars.entrySet()) {
 			String lVar = le.getKey();
 			String lValue = le.getValue();
+			LOGGER.debug("found key {} with value {}",lVar,lValue);
 			lCond = lCond.replace(lVar, lValue);
 			
 		}

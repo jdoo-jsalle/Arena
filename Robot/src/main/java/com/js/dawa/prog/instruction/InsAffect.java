@@ -30,7 +30,7 @@ public class InsAffect implements Instruction {
 	@Override
 	public InfoExecIns execInstruction() throws DawaException {
 		String lKey = mArgs.getArgs(0);
-		String lVal = mArgs.getArgs(1);
+		String lVal = mArgs.getArgsWithSub(1);
 		//affect au DataBoard du robot
 		mRobot.getDataBoard().setVariable(lKey, lVal);
 		LOGGER.debug("affect in Board {} : {}", lKey,lVal);

@@ -11,6 +11,8 @@ public class InfoRender {
 	private String mString;
 	private String mColor;
 	private Color mColorAwt;
+	private String mFont ="PLAIN";
+	private int mSizePolice =14;
 	
 	private static final Logger LOGGER =  LoggerFactory.getLogger( InfoRender.class );
 	
@@ -38,7 +40,7 @@ public class InfoRender {
 				mColorAwt = (Color)field.get(null);
 			} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException 
 					|  NoSuchFieldException| SecurityException  e) {
-					LOGGER.debug("error",e);
+					LOGGER.debug("error with color \"" + mColor +"\"",e);
 					mColorAwt = Color.black;
 			}
 		}
@@ -46,6 +48,14 @@ public class InfoRender {
 		 return mColorAwt;
 
 	        
+	}
+	
+	public int getFontAwt() {
+		
+		
+		return FontRenderForAwt.getFont(mFont);
+		
+		
 	}
 	
 	
@@ -58,6 +68,23 @@ public class InfoRender {
 	public void setColor(String pColor) {
 		mColorAwt = null;
 		this.mColor = pColor.toLowerCase();
+	}
+	
+	public void setFont (String pFont) {
+		mFont = pFont;
+	}
+	
+	
+	public String getFont () {
+		return mFont;
+	}
+
+	public int getSizePolice() {
+		return mSizePolice;
+	}
+
+	public void setSizePolice(int pSizePolice) {
+		this.mSizePolice = pSizePolice;
 	}
 	
 	

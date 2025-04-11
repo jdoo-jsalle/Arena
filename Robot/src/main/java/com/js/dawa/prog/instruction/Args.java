@@ -54,8 +54,11 @@ public class Args {
 		return mLstArgs.size();
 	}
 	
+	public String getArgs(int pI) {
+		return mLstArgs.get(pI);
+	}
 	
-	public String getArgs (int pI) {
+	public String getArgsWithSub (int pI) {
 		if (mArgsString == null) {
 			mArgsString = new ArgString(mObjetArene,mLstArgs);
 		}
@@ -63,7 +66,7 @@ public class Args {
 	}
 	
 	public int getArgsInt (int pI) throws DawaException{
-		String lVal = getArgs(pI);
+		String lVal = getArgsWithSub(pI);
 		int lRes = 0; 
 		if (lVal != null) {
 			

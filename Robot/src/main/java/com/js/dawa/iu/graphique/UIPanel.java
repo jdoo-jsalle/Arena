@@ -1,6 +1,7 @@
 package com.js.dawa.iu.graphique;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.List;
 
@@ -47,6 +48,8 @@ public class UIPanel extends JLabel {
 	public void paint (Graphics pg) {
 		super.paint(pg);
 		mg = pg;
+		
+		
 	
 		int lSizeGrid = mSizeArene * lSizeCase;
 		
@@ -84,9 +87,17 @@ public class UIPanel extends JLabel {
 		int lx = (lPos.getX() -1)* lSizeCase + mDecal + 6;
 		int ly = (lPos.getY() -1) * lSizeCase + mDecal +15;
 		for (CaseRender lRender : pObjetArene.getRender() ) {
+			int lVal = lRender.getInfoRender().getFontAwt() ;
+			if (lVal!= 0) {
+				mg.setFont(mg.getFont().deriveFont(lVal,lRender.getInfoRender().getSizePolice()));
+			}
 			InfoRender lInfoRender = lRender.getInfoRender();
 			mg.setColor(lInfoRender.getColorForAwt());
 			mg.drawString(lInfoRender.getString(), lx, ly);
+			
+			if (lVal!= 0) {
+				mg.setFont(mg.getFont().deriveFont(Font.PLAIN,14));
+			}
 		}
 		//remove secondary Render
 		pObjetArene.getRender().removeIf( n -> n.isSecondary());

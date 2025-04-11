@@ -1,0 +1,18 @@
+init
+	affect ($i,0)
+	affect ($j,0)
+endinit
+loop
+    if ( $i < 5)
+       mine()
+       avancer (1,0)
+       affect ($i,JS:$i+1)
+    else 
+       if ( $j < 5)
+           avancer (1,0)
+           affect ($j,JS:$j+1)
+       else
+           tir (-1,0) 
+       endif
+    endif
+endloop
