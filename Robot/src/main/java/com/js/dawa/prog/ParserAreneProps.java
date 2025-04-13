@@ -48,12 +48,13 @@ public class ParserAreneProps {
 			lIn.open(pPath);
 			String lLigne = lIn.readLine();
 			
-			while (lLigne != null) {
+		while (lLigne != null) {
 				lLigne = lLigne.trim();
 				parseLigne (lLigne);
 				lLigne = lIn.readLine();//new line
 			}//enwhile
 		}//end try
+		mCurrentRobot.reInit();
 		
 		initAreneSize();
 		mArene.setLstCase(mLstModuleArena);

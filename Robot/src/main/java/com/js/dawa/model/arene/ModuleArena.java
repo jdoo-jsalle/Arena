@@ -36,13 +36,14 @@ public class ModuleArena {
 		return mInstructionInit;
 	}
 	public void setInstructionInit(Instruction pInstructionInit) {
-		this.mInstructionInit = pInstructionInit;
+		mInstructionInit = pInstructionInit;
 	}
 	
 	public void init () throws DawaException {
 		if (mInstructionInit != null) {
 			mInstructionInit.execInstruction();
 		}
+	
 	}
 	
 	

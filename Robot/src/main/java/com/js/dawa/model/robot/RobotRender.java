@@ -15,13 +15,9 @@ public class RobotRender implements CaseRender {
 			
 	}
 	
-	
-	
-	
 
 	@Override
 	public InfoRender getInfoRender() {
-		
 		return  mInfoRender;
 	}
 	
@@ -29,10 +25,7 @@ public class RobotRender implements CaseRender {
 	@Override
 	public void setInfoRender(InfoRender pInfoRender) {
 		mInfoRender = pInfoRender;
-		
 	}
-
-
 
 	@Override
 	public void reinit() {

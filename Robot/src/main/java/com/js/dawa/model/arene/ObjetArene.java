@@ -46,5 +46,9 @@ public interface ObjetArene {
 	default ObjetArene getOwner() {
 		  return this;
 	}
+	
+	default void reinit () {
+	 //na
+	}
 
 }
