@@ -149,5 +149,10 @@ public class InstructionCond implements InstructionLst {
 	public Args getArgs() {
 		return mArgs;
 	}
+	
+	@Override
+	public boolean isOver() {
+		return mInfoExec!= null && mInfoExec.isOver();
+	}
 
 }

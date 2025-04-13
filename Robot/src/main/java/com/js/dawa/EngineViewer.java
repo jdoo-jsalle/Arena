@@ -85,13 +85,14 @@ public class EngineViewer {
 	
 	boolean  executePrg (int pTour, List <ModuleArena> lLstModule) throws DawaException {
 		int ltotRun = 0;
+		
 		for (ModuleArena lModuleArena : lLstModule) {
 			if (! lModuleArena.isOver()) {
 				if (lModuleArena.isFonctionnel()) {
 					if (lModuleArena.isRobot()) {
 					    ltotRun ++;
 					}
-					Instruction lInstruction = lModuleArena.getInstructionLoop();
+					Instruction lInstruction = lModuleArena.getInstructions();
 					if (lInstruction != null)
 					    lInstruction.execInstruction();
 				}
@@ -101,7 +102,6 @@ public class EngineViewer {
 					
 				}
 			}
-			
 			
 		}
 		

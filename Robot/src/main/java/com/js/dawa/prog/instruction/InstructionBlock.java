@@ -176,6 +176,11 @@ public class InstructionBlock implements InstructionLst {
 		return lRes.toString();
 	}
 	
+	@Override
+	public boolean isOver() {
+		return mRes!= null && mRes.isOver();
+	}
+	
 	
 	
 	

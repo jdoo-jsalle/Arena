@@ -36,4 +36,8 @@ public interface Instruction {
 	Args getArgs ();
 
 	
+	default boolean isOver () {
+		return true;
+	}
+	
 }

@@ -14,6 +14,9 @@ public class ModuleArena {
 	 private boolean mIsRobot = false;
 	 private boolean mIsOver = false;
 	 
+	 private boolean mInitPhase=true;
+	 
+	 
 	 
 	public ObjetArene getObjetArene() {
 		return mObjetArene;
@@ -21,6 +24,20 @@ public class ModuleArena {
 	public void setObjetArene(ObjetArene pObjetArene) {
 		this.mObjetArene = pObjetArene;
 	}
+	
+	
+	public Instruction getInstructions () {
+		mInitPhase = !mInstructionInit.isOver();
+		
+		if(mInitPhase) {
+			return mInstructionInit;
+		}
+		else {
+			return mInstructionLoop;
+		}
+	}
+	
+	
 	public Instruction getInstructionLoop() {
 		return mInstructionLoop;
 	}

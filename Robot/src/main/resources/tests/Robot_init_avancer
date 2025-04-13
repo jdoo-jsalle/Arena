@@ -1,7 +1,8 @@
 init
   mine()
   avancer (1,0)
+  avancer (1,0)
 endinit
 loop
-	fake();
+	avancer (0,1)
 endloop
