@@ -117,6 +117,9 @@ public class ParserAreneProps {
 			mCurrentRobot.setPosition(lPos);
 			
 		}
+		else if (pLigne.startsWith("#")) {
+			//na: skipcomment
+		}
 		else {
 			LOGGER.info("Ligne {} not processed",pLigne);
 		}
