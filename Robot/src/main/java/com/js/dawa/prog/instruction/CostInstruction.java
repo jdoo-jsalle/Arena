@@ -23,6 +23,10 @@ public class CostInstruction {
 		lArgsInstruction.setCostInstruction(lCost);
 	}
 	
+	public Map<String, Integer> getLstCostInst (){
+		return mLstCostInst;
+	}
+	
 
 
 }

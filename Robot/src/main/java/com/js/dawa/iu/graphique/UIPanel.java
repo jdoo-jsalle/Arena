@@ -23,11 +23,11 @@ public class UIPanel extends JLabel {
 	
 	transient Graphics mg;
 	
-	int mDecal = 75;
+	int mDecal = 40;
 	
-	int mSizeArene = 3;
+	int mSizeArene = 4;
 	
-	int lSizeCase = 20;
+	int lSizeCase = 22;
 	
 
 	transient  Arene mArene;
