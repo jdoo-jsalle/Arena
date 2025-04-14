@@ -14,8 +14,7 @@ public class ModuleArena {
 	 private boolean mIsRobot = false;
 	 private boolean mIsOver = false;
 	 
-	 private boolean mInitPhase=true;
-	 
+		 
 	 
 	 
 	public ObjetArene getObjetArene() {
@@ -27,7 +26,7 @@ public class ModuleArena {
 	
 	
 	public Instruction getInstructions () {
-		mInitPhase = !mInstructionInit.isOver();
+		boolean mInitPhase = mInstructionInit != null && !mInstructionInit.isOver();
 		
 		if(mInitPhase) {
 			return mInstructionInit;

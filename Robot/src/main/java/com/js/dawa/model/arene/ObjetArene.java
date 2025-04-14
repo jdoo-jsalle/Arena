@@ -47,7 +47,7 @@ public interface ObjetArene {
 		  return this;
 	}
 	
-	default void reinit () {
+	default void reInit () {
 	 //na
 	}
 

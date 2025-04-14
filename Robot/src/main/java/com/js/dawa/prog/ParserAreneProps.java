@@ -33,6 +33,8 @@ public class ParserAreneProps {
 	
 	String mValPercent="100";
 	
+	String mPathCost;
+	
 	int mPv = LIVE;
 	
 	int mSizeArene = ARENE_SIZE;
@@ -95,6 +97,9 @@ public class ParserAreneProps {
 		else if (pLigne.startsWith("Arene.energie")) {
 			mPv = Integer.parseInt(getProperties(pLigne));
 			LOGGER.debug("Energie {}",mPv);
+		}
+		else if (pLigne.startsWith("Arene.cost")) {
+			mPathCost = getProperties(pLigne);
 		}
 		else if (pLigne.startsWith("Arene.size")) {
 			mSizeArene = Integer.parseInt(getProperties(pLigne));

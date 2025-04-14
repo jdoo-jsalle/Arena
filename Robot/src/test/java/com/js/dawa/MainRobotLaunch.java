@@ -7,10 +7,10 @@ public class MainRobotLaunch {
 		
 		
 		
-		//String [] lArgs = new String [] {"-D", "./src/main/resources/"};
+		String [] lArgs = new String [] {"-D", "./src/main/resources/"};
 		//String [] lArgs = new String [] {"-D", "./src/main/resources/tests/","-F","Arene_tir_own_mine.properties"};
 		//String [] lArgs = new String [] {"-D", "./src/main/resources/tests/","-F","Arene_Fake.properties"};
-		String [] lArgs = new String [] {"-D", "./src/main/resources/tests/","-F","Arene_init.properties"};
+		//String [] lArgs = new String [] {"-D", "./src/main/resources/tests/","-F","Arene_init.properties"};
 		MainRobot.main(lArgs);
 	}
 

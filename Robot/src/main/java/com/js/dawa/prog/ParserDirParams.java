@@ -13,15 +13,13 @@ import com.js.dawa.util.In;
 
 public class ParserDirParams {
 	
-	
-	
 	ParserAreneProps mParserAreneProps;
-	
-	CostInstruction mCostInstruction = new CostInstruction();
 	
 	String mPath;
 	
 	Arene mArene;
+	
+	CostInstruction mCostInstruction;
 	
 	/**
 	 * Reader dir params
@@ -31,7 +29,7 @@ public class ParserDirParams {
 	 * @throws DawaException
 	 */
 	public void parseDirParams (String pPath, String pFileArena) throws DawaException{
-		initCostInstruction();
+		
 		mPath = pPath;
 	
 		File lDir = new File (pPath);
@@ -40,8 +38,12 @@ public class ParserDirParams {
 			
 			mParserAreneProps = new ParserAreneProps();
 			mParserAreneProps.parseAreneProps(lFile.getAbsolutePath());
+			//seek Cost instruction
 			mArene = mParserAreneProps.getArene();
 			
+			ParserCostInstruction lParserCost = new ParserCostInstruction(mPath);
+			lParserCost.loadCost( mParserAreneProps.mPathCost);
+			mCostInstruction =lParserCost.mCostInstruction;
 			
 			parsePrg();
 			addObstacle(mParserAreneProps.mValPercent);
@@ -61,20 +63,7 @@ public class ParserDirParams {
 	}
 
 	
-	void initCostInstruction () {
-		mCostInstruction.addCost("affect", 0);
-		mCostInstruction.addCost("block", 0);
-		mCostInstruction.addCost("if", 1);
-		mCostInstruction.addCost("avancer", 4);
-		mCostInstruction.addCost("fake", 2);
-		mCostInstruction.addCost("tir", 3);
-		mCostInstruction.addCost("invisible", 20);
-		mCostInstruction.addCost("mine", 10);
-		mCostInstruction.addCost("fuite", 4);
-		mCostInstruction.addCost("poursuite", 4);
-		
-		
-	}
+
 	
 	void parsePrg () throws DawaException {
 		for (ModuleArena lmodule : mParserAreneProps.mLstModuleArena) {

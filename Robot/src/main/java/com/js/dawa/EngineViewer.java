@@ -82,7 +82,13 @@ public class EngineViewer {
 		}
 	}
 	
-	
+	/**
+	 * return true if battle run
+	 * @param pTour
+	 * @param lLstModule
+	 * @return
+	 * @throws DawaException
+	 */
 	boolean  executePrg (int pTour, List <ModuleArena> lLstModule) throws DawaException {
 		int ltotRun = 0;
 		
@@ -105,7 +111,7 @@ public class EngineViewer {
 			
 		}
 		
-		return ltotRun > 0;//last robot
+		return ltotRun > 1;//last robot
 	}
 	
 	
