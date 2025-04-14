@@ -65,9 +65,9 @@ public class LauncherDemo {
 	
 	void view () {
 		
+		String lJavaVersion = System.getProperty("java.version");
 		
-		
-		LOGGER.info("Begin Arena java version {}",System.getProperty("java.version"));
+		LOGGER.info("Begin Arena java version {}",lJavaVersion);
 		LOGGER.debug("debug mode is active");
 		ConsoleGraphique lConsole = new ConsoleGraphique();
 	    Arene lArene = new Arene(lConsole);

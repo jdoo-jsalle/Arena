@@ -35,6 +35,7 @@ public class Robot implements ObjetArene{
 		
 	}
 	
+	@Override
 	public void reInit () {
 		if (mMainRender != null) {
 			mMainRender.reinit();
