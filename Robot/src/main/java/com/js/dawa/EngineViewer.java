@@ -92,11 +92,13 @@ public class EngineViewer {
 	boolean  executePrg (int pTour, List <ModuleArena> lLstModule) throws DawaException {
 		int ltotRun = 0;
 		
+		ModuleArena lLast = null;
 		for (ModuleArena lModuleArena : lLstModule) {
 			if (! lModuleArena.isOver()) {
 				if (lModuleArena.isFonctionnel()) {
 					if (lModuleArena.isRobot()) {
 					    ltotRun ++;
+					    lLast = lModuleArena;
 					}
 					Instruction lInstruction = lModuleArena.getInstructions();
 					if (lInstruction != null)
@@ -110,8 +112,14 @@ public class EngineViewer {
 			}
 			
 		}
+		boolean lContinue = ltotRun > 1;//Stay one robot ?
+		if (!lContinue) {
+			mLstInfoEnd.addInfo(lLast,pTour+1);
+		}
 		
-		return ltotRun > 1;//last robot
+		
+		
+		return lContinue;//last robot
 	}
 	
 	

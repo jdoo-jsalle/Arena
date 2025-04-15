@@ -16,6 +16,7 @@ public class ListInfoEnd {
 			InfoEnd lInfoEnd = new InfoEnd();
 			lInfoEnd.mModule = pModuleArena;
 			lInfoEnd.mTour = pTour;
+			
 			mLstEnd.add(lInfoEnd);
 		}
 		
