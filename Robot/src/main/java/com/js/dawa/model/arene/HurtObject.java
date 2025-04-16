@@ -30,7 +30,7 @@ public class HurtObject {
 	public void collision (ObjetArene pObjetArene) {
 		Energie lEnergie = pObjetArene.getEnergie();
 		if (lEnergie != null)
-		   pObjetArene.getEnergie().add(-mHit);
+		   pObjetArene.getEnergie().addDamage(mHit);
 		
 	}
 
