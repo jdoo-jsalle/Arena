@@ -56,11 +56,6 @@ public class InsTir implements Instruction {
 
 	}
 
-	@Override
-	public void setFlag(String pVal) {
-		//na
-
-	}
 	
 	void verify () throws DawaException {
 		//1:int (x) 2:int (y)

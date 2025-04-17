@@ -19,12 +19,6 @@ public class InsFake implements Instruction {
 	}
 
 	@Override
-	public void setFlag(String pVal) {
-		//fake
-
-	}
-
-	@Override
 	public String dump(String pDecal) {
 		
 		return pDecal + toString();

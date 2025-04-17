@@ -14,6 +14,10 @@ public class ModuleArena {
 	 private boolean mIsRobot = false;
 	 private boolean mIsOver = false;
 	 
+	 
+	 public int getTotLoop () {
+		 return mInstructionLoop.getTotLoop();
+	 }
 		 
 	 
 	 

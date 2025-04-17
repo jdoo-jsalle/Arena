@@ -28,11 +28,6 @@ public class InsFuite implements Instruction {
 		return new InfoExecIns(this);
 	}
 
-	@Override
-	public void setFlag(String pVal) {
-		//na
-
-	}
 
 	@Override
 	public String dump(String pDecal) {

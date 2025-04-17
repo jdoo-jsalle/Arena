@@ -29,7 +29,9 @@ public interface Instruction {
 	 * for internal manage.
 	 * @param pVal
 	 */
-	void setFlag (String pVal);
+	default void setFlag (String pVal) {
+		//na
+	};
 	
 	String dump (String pDecal);
 	
@@ -39,5 +41,11 @@ public interface Instruction {
 	default boolean isOver () {
 		return true;
 	}
+	
+	default int getTotLoop () {
+		return 1;
+	}
+	
+
 	
 }

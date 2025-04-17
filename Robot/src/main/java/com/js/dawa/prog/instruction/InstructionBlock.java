@@ -26,9 +26,9 @@ public class InstructionBlock implements InstructionLst {
 	
 	ObjetArene mObjetArene;
 	
-	
-	
 	int mIdBlock;
+	
+	int mTotLoop;
 	
 	
 	public InstructionBlock(){
@@ -116,6 +116,7 @@ public class InstructionBlock implements InstructionLst {
 		    mStep++;//increment instruction for ths block
 			if (mStep >= mLstInstruction.size()) {
 				mStep = 0;
+				mTotLoop++;
 				mRes.setOver(true);
 			}
 			else {
@@ -181,7 +182,9 @@ public class InstructionBlock implements InstructionLst {
 		return mRes!= null && mRes.isOver();
 	}
 	
-	
+	public int getTotLoop () {
+		return mTotLoop;
+	}
 	
 	
 }

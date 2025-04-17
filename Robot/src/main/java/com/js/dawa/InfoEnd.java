@@ -23,10 +23,17 @@ public class InfoEnd {
 			lLEnergie = " (Energie Left : " + Integer.toString(lEnergie.getTot()) + ")";
 			
 		}
-		double lAverageByTurn = lEnergie.averageSpendByTurn(mTour);
-		double lAverageDamageByTurn = lEnergie.averageDamageByTurn(mTour);
+		double lAverageSpendByTurn = lEnergie.averageSpendByTurn(mTour);
+		double lAverageDamageByLoop = lEnergie.averageDamageByTurn(mModule.getTotLoop());
+		double lAverageSpendByLoop = lEnergie.averageSpendByTurn(mModule.getTotLoop());
 		DecimalFormat decimalFormat = new DecimalFormat("0.0");
-		return ((Robot)mModule.getObjetArene()).getRobotProps().getNom() + " : in " + Integer.toString(mTour) + " t." + lLEnergie + "( " + decimalFormat.format(lAverageByTurn) +  " e/t)" +  "( " + decimalFormat.format(lAverageDamageByTurn) +  " -d/t)" ;
+		return ((Robot)mModule.getObjetArene()).getRobotProps().getNom() + " : in " + 
+				Integer.toString(mTour) + " t." +
+				Integer.toString(mModule.getTotLoop()) + " b." +
+				 lLEnergie + 
+				"( " + decimalFormat.format(lAverageSpendByTurn) +  " e./t.)" + 
+				"( " + decimalFormat.format(lAverageSpendByLoop) +  " e./b.)" + 
+				"( " + decimalFormat.format(lAverageDamageByLoop) +  " -d./b.)" ;
 	}
 	
 	
