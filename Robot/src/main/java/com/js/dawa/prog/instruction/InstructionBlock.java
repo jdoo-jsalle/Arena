@@ -182,6 +182,7 @@ public class InstructionBlock implements InstructionLst {
 		return mRes!= null && mRes.isOver();
 	}
 	
+	@Override
 	public int getTotLoop () {
 		return mTotLoop;
 	}

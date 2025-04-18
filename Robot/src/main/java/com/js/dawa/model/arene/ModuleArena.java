@@ -10,6 +10,7 @@ public class ModuleArena {
 	 private String mNamePrg;
 	 private Instruction mInstructionLoop;
 	 private Instruction mInstructionInit;
+	 private Instruction mEmergencyStep;//Emergency step
 	 
 	 private boolean mIsRobot = false;
 	 private boolean mIsOver = false;
@@ -38,6 +39,12 @@ public class ModuleArena {
 		else {
 			return mInstructionLoop;
 		}
+	}
+	
+	public void execInstruction () throws DawaException {
+		Instruction lInstruction = getInstructions();
+		if (lInstruction != null)
+		    lInstruction.execInstruction();
 	}
 	
 	

@@ -113,7 +113,6 @@ public class LauncherDemo {
 		
 		AffichageInfoRobot lAffichageInfoRobot = new AffichageInfoRobot(pArene);
 		//loop
-		//TODO : compute lEnd
 		int lTour = 1;
 		while (!lEnd) {
 			

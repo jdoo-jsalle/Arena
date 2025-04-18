@@ -9,7 +9,6 @@ import com.js.dawa.iu.console.AffichageInfoRobot;
 import com.js.dawa.iu.console.Console;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ModuleArena;
-import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.util.DawaException;
 
 public class EngineViewer {
@@ -90,7 +89,7 @@ public class EngineViewer {
 	 * @throws DawaException
 	 */
 	boolean  executePrg (int pTour, List <ModuleArena> lLstModule) throws DawaException {
-		int ltotRun = 0;
+		int ltotRun = 0; 
 		
 		ModuleArena lLast = null;
 		for (ModuleArena lModuleArena : lLstModule) {
@@ -100,9 +99,8 @@ public class EngineViewer {
 					    ltotRun ++;
 					    lLast = lModuleArena;
 					}
-					Instruction lInstruction = lModuleArena.getInstructions();
-					if (lInstruction != null)
-					    lInstruction.execInstruction();
+					lModuleArena.execInstruction();
+					
 				}
 				else {
 					lModuleArena.setOver(true);
@@ -116,9 +114,6 @@ public class EngineViewer {
 		if (!lContinue) {
 			mLstInfoEnd.addInfo(lLast,pTour+1);
 		}
-		
-		
-		
 		return lContinue;//last robot
 	}
 	

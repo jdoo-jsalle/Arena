@@ -31,7 +31,7 @@ public interface Instruction {
 	 */
 	default void setFlag (String pVal) {
 		//na
-	};
+	}
 	
 	String dump (String pDecal);
 	
