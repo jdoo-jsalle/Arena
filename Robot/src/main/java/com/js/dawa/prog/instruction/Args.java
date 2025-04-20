@@ -74,6 +74,7 @@ public class Args {
 				lRes = Integer.parseInt(lVal);
 			}
 			catch (NumberFormatException le) {
+				LOGGER.debug ("erreur int parse");
 				throw new DawaException("Value \"" + lVal + "\" index :  " + Integer.toString(pI) +" must be numeric");
 			}
 		}

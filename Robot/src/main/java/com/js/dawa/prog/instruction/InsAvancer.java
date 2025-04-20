@@ -34,7 +34,7 @@ public class InsAvancer implements Instruction {
 	@Override
 	public InfoExecIns execInstruction() throws DawaException {
 		verify();
-				
+		LOGGER.debug("go {},{}",mX,mY);
 		if (mArene != null && mArene.isNewPositionIsOk(mRobot, mX, mY)){
 			mRobot.setInArena(true);
 			mRobot.add(mX,mY);

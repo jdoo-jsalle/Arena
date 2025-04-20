@@ -209,9 +209,11 @@ public class InstructionBlock implements InstructionLst {
 		
 	}
 	
+	
 	@Override
-	public void setEmergencyInstruction(Instruction pInstruction) {
-		 
+	public boolean isEmpty () {
+		return mLstInstruction.isEmpty();
 	}
+
 	
 }

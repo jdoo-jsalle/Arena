@@ -92,7 +92,7 @@ public class ModuleArena {
 	}
 	
 	public void replaceInstruction () {
-		if ( mInstructionEmergency !=null) {
+		if ( mInstructionEmergency !=null && ! mInstructionEmergency.isEmpty()) {
 			mInstructionLoop.replaceInstructionCurrent(mInstructionEmergency);
 		}
 	}

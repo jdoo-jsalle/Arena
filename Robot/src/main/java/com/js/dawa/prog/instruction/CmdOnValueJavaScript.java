@@ -30,8 +30,7 @@ public class CmdOnValueJavaScript implements CmdOnValue {
 			lRes = lScriptEval.compute(mRobot);
 		} catch (ScriptException e) {
 			LOGGER.debug("error",  e);
-			//TODO..
-		}
+					}
 		return lRes;
 	}
 

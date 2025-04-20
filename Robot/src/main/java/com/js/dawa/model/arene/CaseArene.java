@@ -93,7 +93,7 @@ public class CaseArene implements ObjetArene{
 
 	@Override
 	public void setEnergie(Energie pEnergie) {
-		//TODO : set something like energy tank ?
+		//na : set something like energy tank ?
 		
 	}
 

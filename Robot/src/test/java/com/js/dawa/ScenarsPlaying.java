@@ -2,7 +2,7 @@ package com.js.dawa;
 
 import java.io.File;
 
-public class ScenarsTest {
+public class ScenarsPlaying {
 	
 	static String PATH = "./src/main/resources/tests";
 	
@@ -22,7 +22,7 @@ public class ScenarsTest {
 	
 	
 	public static void main(String[] args) {
-		ScenarsTest lScenarsTest = new ScenarsTest();
+		ScenarsPlaying lScenarsTest = new ScenarsPlaying();
 		lScenarsTest.getAreneProperties();
 		
 	}

@@ -59,6 +59,10 @@ public interface Instruction {
 	default void setEmergencyInstruction(Instruction pInstruction) {
 		//na
 	}
+	
+	default boolean isEmpty () {
+		return false;
+	}
 
 	
 }
