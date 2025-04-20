@@ -46,6 +46,19 @@ public interface Instruction {
 		return 1;
 	}
 	
+	/**
+	 * return true, if list of instruction
+	 * @param pInstruction
+	 * @return
+	 */
+	default boolean replaceInstructionCurrent (Instruction pInstruction) {
+		return true;
+	}
+	
+	
+	default void setEmergencyInstruction(Instruction pInstruction) {
+		//na
+	}
 
 	
 }

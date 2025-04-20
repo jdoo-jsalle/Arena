@@ -131,6 +131,8 @@ public class ParserAreneProps {
 		
 	}
 	
+
+	
 	
 	void verify (Object pObjet) throws DawaException{
 		if (pObjet == null) throw new DawaException (FILE_PARA_MALFORMED);

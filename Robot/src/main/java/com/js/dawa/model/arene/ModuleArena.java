@@ -1,5 +1,7 @@
 package com.js.dawa.model.arene;
 
+
+import com.js.dawa.model.robot.Robot;
 import com.js.dawa.prog.instruction.Instruction;
 import com.js.dawa.util.DawaException;
 
@@ -10,7 +12,8 @@ public class ModuleArena {
 	 private String mNamePrg;
 	 private Instruction mInstructionLoop;
 	 private Instruction mInstructionInit;
-	 private Instruction mEmergencyStep;//Emergency step
+	 private Instruction mInstructionEmergency;
+
 	 
 	 private boolean mIsRobot = false;
 	 private boolean mIsOver = false;
@@ -48,6 +51,9 @@ public class ModuleArena {
 	}
 	
 	
+	
+	
+	
 	public Instruction getInstructionLoop() {
 		return mInstructionLoop;
 	}
@@ -71,6 +77,24 @@ public class ModuleArena {
 			mInstructionInit.execInstruction();
 		}
 	
+	}
+	
+	Robot getRobot () {
+		return (Robot)mObjetArene;
+	}
+	
+	public void setInstructionEmergency(Instruction pInstructionLst) {
+		mInstructionEmergency = pInstructionLst;
+		if (isRobot()) {
+		    getRobot().getRobotProps().setModule(this);
+		}
+		
+	}
+	
+	public void replaceInstruction () {
+		if ( mInstructionEmergency !=null) {
+			mInstructionLoop.replaceInstructionCurrent(mInstructionEmergency);
+		}
 	}
 	
 	
@@ -100,6 +124,9 @@ public class ModuleArena {
 	public void setOver(boolean pIsOver) {
 		this.mIsOver = pIsOver;
 	}
+	
+	
+	
 
 	
 

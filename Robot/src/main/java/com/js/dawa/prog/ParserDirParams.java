@@ -84,6 +84,7 @@ public class ParserDirParams {
 				
 				lmodule.setInstructionInit(lParseLigneCmd.getInit());
 				lmodule.setInstructionLoop(lParseLigneCmd.getMain());
+				lmodule.setInstructionEmergency (lParseLigneCmd.getEmergency());
 				
 			}
 			

@@ -76,9 +76,13 @@ public class ScriptJsEval {
 			lRes = ((Boolean)engine.eval(lClause)).booleanValue();
 		}
 		catch (ScriptException le) {
-			LOGGER.debug("warning, cond is invalid for objet [" + pRobot.toString() + "], js script error, return false, correct robot prg Error",le);
+			LOGGER.debug("warning, cond is invalid for objet [" + getObjetAreneString(pRobot) + "], js script error, return false, correct robot prg Error",le);
 		}
 		return lRes;
+	}
+	
+	String getObjetAreneString (ObjetArene pObjet) {
+		return pObjet != null ? pObjet.toString() : "is null";
 	}
 	
 	

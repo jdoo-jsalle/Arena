@@ -188,4 +188,30 @@ public class InstructionBlock implements InstructionLst {
 	}
 	
 	
+	@Override
+	public boolean replaceInstructionCurrent (Instruction pInstruction) {
+		Instruction lInstruction = mLstInstruction.get(mStep);
+		boolean lRes= false;
+		if (lInstruction != null) {
+			boolean lResInstruction = lInstruction.replaceInstructionCurrent(pInstruction);
+			if (lResInstruction) {
+				mLstInstruction.set(mStep, pInstruction);
+			}
+		}
+		else {
+			lRes = true;
+		}
+		
+			
+		
+		
+		return lRes;
+		
+	}
+	
+	@Override
+	public void setEmergencyInstruction(Instruction pInstruction) {
+		 
+	}
+	
 }

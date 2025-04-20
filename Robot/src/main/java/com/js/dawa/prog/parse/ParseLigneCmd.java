@@ -20,12 +20,15 @@ public class ParseLigneCmd implements ParseLigne {
 	
 	 InstructionBlock mMainLstInstruction = new InstructionBlock();//prg loop
 	 InstructionBlock mInitLstInstruction = new InstructionBlock(-1);//prg init
+	 InstructionBlock mEmergencyLstInstruction = new InstructionBlock(-1);//prg emergency
 	 
 	 StackInstruction mPileInstruction = new StackInstruction();
 	 
 	 InstructionLst mCurrentInstruction;
 	 
-	 FabricInstructionFromString mFabricInstruction = new FabricInstructionFromString();
+	 static FabricInstructionFromString mFabricInstruction = new FabricInstructionFromString();
+	 
+	
 	 
 	 private ObjetArene mObjetArene;
 	 private Arene mArene;
@@ -47,13 +50,18 @@ public class ParseLigneCmd implements ParseLigne {
 	
 	 public void parse (String pLigne) throws DawaException {
 		String lLigne =  mLignePrg.getValue(pLigne);
+		if (lLigne.equals ("initemergency")){
+			mPileInstruction.clear();
+			mPileInstruction.add(mEmergencyLstInstruction);
+			mCurrentInstruction = mEmergencyLstInstruction;
+		}
 		 
-		 
-		if (lLigne.equals ("init")){
+		else if (lLigne.equals ("init")){
+			mPileInstruction.clear();
 			mPileInstruction.add(mInitLstInstruction);
 			mCurrentInstruction = mInitLstInstruction;
 		}
-		else if (lLigne.equals("endinit")) {
+		else if (lLigne.startsWith("end")) {
 			 mPileInstruction.clear();
 			 mPileInstruction.add(mMainLstInstruction);
 			 mCurrentInstruction = mMainLstInstruction;
@@ -147,6 +155,10 @@ public class ParseLigneCmd implements ParseLigne {
 	
 	public Instruction getInit () {
 		return mInitLstInstruction;
+	}
+	
+	public Instruction getEmergency () {
+		return mEmergencyLstInstruction;
 	}
 
 	public CostInstruction getCostInstruction() {

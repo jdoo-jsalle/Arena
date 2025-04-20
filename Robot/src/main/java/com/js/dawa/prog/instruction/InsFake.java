@@ -5,6 +5,17 @@ import com.js.dawa.model.arene.ObjetArene;
 
 public class InsFake implements Instruction {
 	Args mArgs;
+	
+	
+	public InsFake () {
+		//na
+	}
+	
+	public InsFake (String pKey, String pVal) {
+		mArgs=new Args(null);
+		mArgs.addArguments(pKey);
+		mArgs.addArguments(pVal);
+	}
 
 	@Override
 	public void init(Args pArgsInstruction, ObjetArene pRobot, Arene pArene) {

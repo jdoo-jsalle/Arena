@@ -11,11 +11,13 @@ public class DataBoard {
 	static String BLOCK = "block";
 	
 	static String DETECTED = "detected";
-
 	
+
 	private Map<String, String> mLstData = new HashMap<>();
 	
 	private List<ObjetArene> mLstObjetArene;
+	
+	
 	
 	public boolean isBlocked() {
 		String lVal =mLstData.get(BLOCK);
@@ -68,6 +70,8 @@ public class DataBoard {
 		return lRes;
 		
 	}
+	
+
 	
 	
 

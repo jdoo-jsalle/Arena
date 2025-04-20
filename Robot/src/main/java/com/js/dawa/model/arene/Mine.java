@@ -136,8 +136,11 @@ public class Mine implements ObjetArene {
 			HurtObjetRender lObjetHurt = new HurtObjetRender();
 			pObjeArene.getRender().add(lObjetHurt);
 			mIsDispose= true;
+			ModuleArena lModuleArena = pObjeArene.getModule();
+			if (lModuleArena != null) {
+				lModuleArena.replaceInstruction();//replace instruction courante
+			}
 		}
-
 		
 		
 		

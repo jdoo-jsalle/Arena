@@ -50,5 +50,10 @@ public interface ObjetArene {
 	default void reInit () {
 	 //na
 	}
+	
+	
+	default ModuleArena getModule() {
+		return null;
+	}
 
 }

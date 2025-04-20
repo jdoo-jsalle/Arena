@@ -6,6 +6,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.js.dawa.model.arene.ModuleArena;
+
+
 
 public class RobotsProps {
 	
@@ -16,6 +19,7 @@ public class RobotsProps {
 	static String COLOR= "COLOR";
 	static String VISIBILITE ="visibilite";
 	
+	ModuleArena mModule;	
 	
 	
 	private Map<String, Attribut> mLstAttributs = new HashMap<>(3);
@@ -116,5 +120,13 @@ public class RobotsProps {
 		return mLstAttributs.toString();
 	}
 	
+	
+	public void setModule (ModuleArena pModule) {
+		mModule = pModule;
+	}
+	
+	public ModuleArena getModule () {
+		return mModule;
+	}
 
 }

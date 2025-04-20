@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.model.arene.Energie;
+import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
 
 public class Robot implements ObjetArene{
@@ -170,9 +171,15 @@ public class Robot implements ObjetArene{
 		return true;
 	}
 	
-	
+	@Override
 	public String toString() {
-		return "Robot : " + mPosition + " props : " + mRobotProps.toString() + " is visible : " + isVisible();
+		String lRobotProps= mRobotProps != null ? mRobotProps.toString() :" [robot props is null]";
+		return "Robot : " + mPosition + " props : " + lRobotProps + " is visible : " + isVisible();
+	}
+	
+	@Override
+	public ModuleArena getModule() {
+		return  mRobotProps != null ? mRobotProps.getModule() :null;
 	}
 	
 	

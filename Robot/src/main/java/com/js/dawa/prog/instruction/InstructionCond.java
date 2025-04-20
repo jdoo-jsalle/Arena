@@ -140,19 +140,33 @@ public class InstructionCond implements InstructionLst {
 	
 	
 	public String toString () {
-		return mArgs.toString();
+		return  mArgs !=null ?  mArgs.toString() : "if <args empty>";
 	}
-
 
 
 	@Override
 	public Args getArgs() {
-		return mArgs;
+		return mArgs ;
 	}
 	
 	@Override
 	public boolean isOver() {
 		return mInfoExec!= null && mInfoExec.isOver();
+	}
+	
+	@Override
+	public boolean replaceInstructionCurrent (Instruction pInstruction) {
+		
+		boolean lRes= false;
+		if (mForceIf)
+			mLstIf.replaceInstructionCurrent(pInstruction);
+		else if (mForceElse)
+			mLstElse.replaceInstructionCurrent(pInstruction);
+		else 
+			lRes = true;
+		
+		
+		return lRes;
 	}
 
 }
