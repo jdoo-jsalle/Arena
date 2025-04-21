@@ -7,12 +7,12 @@ public class MainRobotLaunch {
 		
 		
 		String [][] lArgs = new String [][] {
-			 new String [] {"-D", "./src/main/resources/"},
-			 new String [] {"-D", "./src/main/resources/tests/","-F","Arene_tir_own_mine.properties"},
-			 new String [] {"-D", "./src/main/resources/tests/","-F","Arene_mine.properties"},
-			 new String [] {"-D", "./src/main/resources/tests/","-F","Arene_mine2.properties"},
-			 new String [] {"-D", "./src/main/resources/tests/","-F","Arene_Fake.properties"},
-			 new String [] {"-D", "./src/main/resources/tests/","-F","Arene_init.properties"}
+			 new String [] {"-D", "./src/exemple/"},
+			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_tir_own_mine.properties"},
+			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_mine.properties"},
+			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_mine2.properties"},
+			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_Fake.properties"},
+			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_init.properties"}
 			 
 		};
 		

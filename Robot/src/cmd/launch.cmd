@@ -1,0 +1,1 @@
+java -classpath Robot-1.0.0.jar;lib\* com.js.dawa.MainRobot -D Robot-1.0.0\src\exemple
