@@ -1,0 +1,58 @@
+RoboId:
+	pos (x,y)
+	name (toto)
+	symbole (T)
+	ptv (100)
+	energie (100)
+endRobotId.
+affect (x,[rand|chiffre])
+	positionne une valeur dans la variable x.
+	
+si ( cond ) alors
+   instruction ()
+sinon 
+   instruction ()
+finsinon
+
+avancer(x,y) 
+	x = sur l'axe des x (positif ou négatif)
+	y = sur l'axe des y (positif ou négatif)
+	
+tirer (P, x,y) 
+	tire en direction relative x,y avec la puissance P
+
+frapper (F,x,y) 
+	frappe en direction relative x,y, avec la force F (valeur abs de x et y < 1)
+	
+lancerMine (F,x,y)
+	pose une mine en direction relative, avec la puissance F
+	
+bloquer(t,F) : active bouclier pendant t tour, avec F de défense
+reparer(Degats) : repart "degats"
+	=> on peut réparer x dégat par tour
+	
+Camoufler (t) : réduit la visibilité pendant t
+
+scan (x,y) => donne info sur case x,y en relatif
+
+ramasse (x,y)
+	ramasse l'objet à l'endroit relatif x,y
+	x,y en absolue pas supérieur à 1
+	
+autre : 
+
+boucle
+tant que X > n
+fin tant
+
+et X=formule mathématique
+rand (X) : renvois une valeur entre 0 et X au hasard)
+
+
+propriété robot
+  energie
+  point de vie
+  
+
+
+	

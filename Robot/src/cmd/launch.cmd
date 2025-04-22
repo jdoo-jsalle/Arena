@@ -1,0 +1,1 @@
+java -classpath %~dp0Robot-1.0.0.jar;%~dp0lib\* com.js.dawa.MainRobot -D %~dp0exemple
