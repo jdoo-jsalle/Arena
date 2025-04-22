@@ -17,7 +17,7 @@ public class MainRobotLaunch {
 		};
 		
 		
-		MainRobot.main(lArgs[3]);
+		MainRobot.main(lArgs[0]);
 	}
 
 }

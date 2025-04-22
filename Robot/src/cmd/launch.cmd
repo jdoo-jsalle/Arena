@@ -1,1 +1,1 @@
-java -classpath Robot-1.0.0.jar;lib\* com.js.dawa.MainRobot -D Robot-1.0.0\src\exemple
+java -classpath %~dp0Robot-1.0.0.jar;%~dp0lib\* com.js.dawa.MainRobot -D %~dp0exemple
