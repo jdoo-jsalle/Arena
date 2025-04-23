@@ -1,7 +1,10 @@
 package com.js.dawa.model.robot;
 
+import java.awt.Graphics2D;
+
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.InfoRender;
+import com.js.dawa.iu.arene.render.RenderString;
 
 public class RobotRender implements CaseRender {
 	
@@ -45,7 +48,15 @@ public class RobotRender implements CaseRender {
 	
 	public void setHurt () {
 		mInfoRender.setString("!*!");
-		mInfoRender.setColor("red");
+		mInfoRender.setColor("red"); 
+	} 
+
+
+	@Override
+	public void paint(Graphics2D pGraphics,int pX,int pY) {
+		RenderString lRenderString = new RenderString();
+		lRenderString.paint(pGraphics, new Position( pX,pY), mInfoRender);
+		
 	}
 
 }

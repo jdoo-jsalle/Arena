@@ -48,14 +48,10 @@ public class InfoRender {
 		 return mColorAwt;
 
 	        
-	}
+	} 
 	
 	public int getFontAwt() {
-		
-		
 		return FontRenderForAwt.getFont(mFont);
-		
-		
 	}
 	
 	

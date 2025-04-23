@@ -24,11 +24,7 @@ public class ConsoleGraphique implements Console {
 	
 	JLabel mText;
 	
-	
-	
-	public void update() {
-		frame.repaint();
-	}
+	UpdateImageThread mThread;
 	
 	
 	@Override
@@ -37,9 +33,9 @@ public class ConsoleGraphique implements Console {
 		// Création de la fenêtre
         frame = new JFrame(mProps.getTitle());
         frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(1500, 700);
+        frame.setSize(1500, 800);
         
-        Container lPanel = frame.getContentPane();
+        Container lPanel = frame.getContentPane(); 
         lPanel.setLayout(new BorderLayout());
         
         
@@ -62,6 +58,8 @@ public class ConsoleGraphique implements Console {
         // Affichage de la fenêtre
         frame.pack();
         frame.setVisible(true);
+
+    
     
 	}
 
@@ -79,6 +77,18 @@ public class ConsoleGraphique implements Console {
 			frame.dispose();
 		}
 		
+	}
+
+
+	@Override
+	public void start() {
+		mThread = new UpdateImageThread(frame);
+		mThread.start();
+		
+	}
+	
+	public void end() {
+		mThread.setEnd();
 	}
 
 

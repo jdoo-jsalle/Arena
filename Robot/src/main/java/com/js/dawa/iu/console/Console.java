@@ -10,8 +10,10 @@ public interface Console {
 	
 	void setText (String pText);
 	
-	void update();//update affichage
-	
 	void close ();
+	
+	void start ();
+	
+	void end();
 	
 }

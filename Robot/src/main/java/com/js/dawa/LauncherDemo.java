@@ -150,7 +150,7 @@ public class LauncherDemo {
 			lConsole.setText(lText.toString());
 			
 			lTour++;
-			lConsole.update();
+			
 		}
 		
 	}

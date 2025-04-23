@@ -39,13 +39,14 @@ public class EngineViewer {
 		boolean lEnd = false;
 		
 		mConsole = pArene.getConsole();
+		mConsole.start();
 		
 		
 		AffichageInfoRobot lAffichageInfoRobot = new AffichageInfoRobot(pArene);
 		//loop
 		int lTour = 1;
 		while (!lEnd) {
-			
+			LOGGER.debug("Main loop");
 		
 			
 			try {
@@ -67,12 +68,12 @@ public class EngineViewer {
 			
 			affichageCurrent(lTour, lAffichageInfoRobot, mConsole);
 			lTour++;
-			mConsole.update();
+			
 		}
 		LOGGER.info("End");
-		afficheEnd(mConsole);
-		mConsole.update();//last console update
+		afficheEnd(mConsole); 
 		
+		mConsole.end();
 	}
 	
 	public void dispose() {

@@ -1,75 +1,75 @@
 package com.js.dawa.iu.graphique;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.js.dawa.iu.arene.render.CaseRender;
-import com.js.dawa.iu.arene.render.InfoRender;
+import com.js.dawa.iu.arene.render.GridPattern;
+import com.js.dawa.iu.arene.render.GridPatternSquare;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.model.robot.Position;
 
-public class UIPanel extends JLabel {
+public class UIPanel extends JPanel{
 	
 	private static final Logger LOGGER =  LoggerFactory.getLogger( UIPanel.class );
 	
-	transient Graphics mg;
 	
-	int mDecal = 40;
+	private transient BufferedImage buffer;
+	private transient Graphics2D g2;
 	
-	int mSizeArene = 4;
 	
-	int lSizeCase = 22;
-	
+	transient GridPattern mGridPattern = new GridPatternSquare();
 
 	transient  Arene mArene;
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; 
+	
+	
 	
 	
 	public void init (Arene pArene) {
 		mArene = pArene;
-		mSizeArene = pArene.getAreneProps().getSize();
-		
+		mGridPattern.init(pArene);
+	
 
 	}
 	
 	@Override	
 	public void paint (Graphics pg) {
+		LOGGER.debug("UIPanel.paint");
 		super.paint(pg);
-		mg = pg;
 		
 		
+		if (buffer == null) {
+			buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        }
+		//clear
+		g2 = buffer.createGraphics();
 	
-		int lSizeGrid = mSizeArene * lSizeCase;
+		g2.fillRect(0, 0, getWidth(), getHeight());
 		
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		g2.setFont(getFont());
 		
-		pg.setColor(Color.GRAY);
-		
-		for (int li = 0; li < mSizeArene; li++) {
-			String lOrdonne = Integer.toString(li+1);
-			pg.drawString(lOrdonne, li * lSizeCase + mDecal+5, 0 +mDecal -5);
-			pg.drawString(lOrdonne,0 + (mDecal-20), li * lSizeCase + mDecal +12);
-		}
-		
-		for (int li =0; li< mSizeArene+1;li++) {
-			drawLineDecal (li*lSizeCase,0,li*lSizeCase,lSizeGrid);
-		}
-		
-		for (int li =0; li< mSizeArene+1;li++) {
-			drawLineDecal (0,li*lSizeCase,lSizeGrid,li*lSizeCase);
+		g2.setColor(Color.gray);
 			
-		}
+		
+		mGridPattern.paint(g2);
+		
 		List<ModuleArena >lLstCase = mArene.getLstCaseMain();
 		
 		//Affiche Case (robot and objet)
@@ -77,6 +77,11 @@ public class UIPanel extends JLabel {
 		for (ModuleArena lModuleArene : lLstCase) {
 			print(lModuleArene.getObjetArene());
 		}
+		
+		pg.drawImage(buffer, 0, 0, this);
+		g2.dispose();
+	
+		
 			
 	}
 	
@@ -84,29 +89,18 @@ public class UIPanel extends JLabel {
 	void print (ObjetArene pObjetArene) {
 		Position lPos = pObjetArene.getPosition();
 		LOGGER.debug("Post object {}",lPos);
-		int lx = (lPos.getX() -1)* lSizeCase + mDecal + 6;
-		int ly = (lPos.getY() -1) * lSizeCase + mDecal +15;
+
+		Position lTranslate = mGridPattern.transform(lPos);
+		
 		for (CaseRender lRender : pObjetArene.getRender() ) {
-			int lVal = lRender.getInfoRender().getFontAwt() ;
-			if (lVal!= 0) {
-				mg.setFont(mg.getFont().deriveFont(lVal,lRender.getInfoRender().getSizePolice()));
-			}
-			InfoRender lInfoRender = lRender.getInfoRender();
-			mg.setColor(lInfoRender.getColorForAwt());
-			mg.drawString(lInfoRender.getString(), lx, ly);
-			
-			if (lVal!= 0) {
-				mg.setFont(mg.getFont().deriveFont(Font.PLAIN,14));
-			}
+			lRender.paint(g2, lTranslate.getX(), lTranslate.getY());
 		}
 		//remove secondary Render
 		pObjetArene.getRender().removeIf( n -> n.isSecondary());
 	}
 	
 	
-	void drawLineDecal (int x1,int y1, int x2, int y2) {
-		mg.drawLine(x1+mDecal, y1+ mDecal, x2+mDecal, y2+ mDecal);
-	}
+
 	
 	
 	
