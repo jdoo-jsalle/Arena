@@ -3,7 +3,7 @@ package com.js.dawa.iu.arene.render;
 import java.awt.Graphics2D;
 
 import com.js.dawa.model.arene.Arene;
-import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.position.Position;
 
 public class GridPatternSquare implements GridPattern {
 	
@@ -51,8 +51,8 @@ public class GridPatternSquare implements GridPattern {
 
 	@Override
 	public Position transform(Position pPosition) {
-		int lx = (pPosition.getX() -1)*  mSizeCase + mDecal + 6;
-		int ly = (pPosition.getY() -1) * mSizeCase + mDecal +15;
+		double lx = (pPosition.getX() -1)*  mSizeCase + mDecal + 6;
+		double ly = (pPosition.getY() -1) * mSizeCase + mDecal +15;
 		return new Position(lx, ly);
 	}
 

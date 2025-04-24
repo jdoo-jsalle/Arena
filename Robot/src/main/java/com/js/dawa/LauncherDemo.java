@@ -13,7 +13,7 @@ import com.js.dawa.model.arene.AreneProps;
 import com.js.dawa.model.arene.CreateDefaultCase;
 import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ModuleArena;
-import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.position.Position;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
 import com.js.dawa.prog.instruction.CostInstruction;

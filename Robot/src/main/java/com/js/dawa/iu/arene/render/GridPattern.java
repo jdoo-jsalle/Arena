@@ -3,7 +3,7 @@ package com.js.dawa.iu.arene.render;
 import java.awt.Graphics2D;
 
 import com.js.dawa.model.arene.Arene;
-import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.position.Position;
 
 public interface GridPattern {
 	

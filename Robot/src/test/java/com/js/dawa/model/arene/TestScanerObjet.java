@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.position.Position;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
 

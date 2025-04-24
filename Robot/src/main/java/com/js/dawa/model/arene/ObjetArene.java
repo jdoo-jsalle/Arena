@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.js.dawa.iu.arene.render.CaseRender;
+import com.js.dawa.model.position.Position;
 import com.js.dawa.model.robot.Attribut;
 import com.js.dawa.model.robot.DataBoard;
-import com.js.dawa.model.robot.Position;
 
 public interface ObjetArene {
 	
@@ -25,7 +25,7 @@ public interface ObjetArene {
 	
 	public boolean isDispose ();
 	
-	public void add (int px, int py);
+	public void add (double px, double py);
 	
 	public DataBoard getDataBoard();
 	

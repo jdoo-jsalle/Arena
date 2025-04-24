@@ -4,7 +4,7 @@ import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.FireBall;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
-import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.position.Position;
 import com.js.dawa.util.DawaException;
 
 public class InsTir implements Instruction {

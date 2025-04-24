@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.js.dawa.iu.arene.render.CaseAreneRenderDefaut;
-import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.position.Position;
 
 public class CreateDefaultCase {
 	

@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.AreneProps;
+import com.js.dawa.model.position.Position;
 import com.js.dawa.model.robot.DataBoard;
-import com.js.dawa.model.robot.Position;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
 import com.js.dawa.util.DawaException;

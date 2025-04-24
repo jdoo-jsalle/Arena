@@ -6,7 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.position.Position;
 
 public class ScanerObjet {
 	

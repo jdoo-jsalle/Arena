@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.InfoRender;
 import com.js.dawa.iu.arene.render.RenderString;
+import com.js.dawa.model.position.Position;
 
 public class RobotRender implements CaseRender {
 	

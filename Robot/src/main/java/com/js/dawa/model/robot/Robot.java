@@ -8,6 +8,7 @@ import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
+import com.js.dawa.model.position.Position;
 
 public class Robot implements ObjetArene{
 	
@@ -90,7 +91,7 @@ public class Robot implements ObjetArene{
 	
 
 	
-	public void add (int pX, int pY) {
+	public void add (double pX, double pY) {
 		mPosition.addX(pX);
 		mPosition.addY(pY);
 		if (pX  != 0 || pY != 0) //robot move => become visible

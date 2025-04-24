@@ -64,9 +64,9 @@ public class Arene {
 	
 	
 	
-	public boolean isNewPositionIsOk (ObjetArene pObjetArena, int pX, int pY) {
-		int lNewX = pObjetArena.getPosition().getX() + pX;
-		int lNewY = pObjetArena.getPosition().getY() + pY;
+	public boolean isNewPositionIsOk (ObjetArene pObjetArena, double pX, double pY) {
+		double lNewX = pObjetArena.getPosition().getX() + pX;
+		double lNewY = pObjetArena.getPosition().getY() + pY; 
 		
 		
 		

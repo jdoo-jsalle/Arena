@@ -1,4 +1,4 @@
-package com.js.dawa.model.robot;
+package com.js.dawa.model.position;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

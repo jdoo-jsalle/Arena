@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.js.dawa.model.arene.Arene;
-import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.position.Position;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
 import com.js.dawa.util.DawaException;

@@ -19,7 +19,7 @@ import com.js.dawa.iu.arene.render.GridPatternSquare;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
-import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.position.Position;
 
 public class UIPanel extends JPanel{
 	
@@ -95,7 +95,7 @@ public class UIPanel extends JPanel{
 		Position lTranslate = mGridPattern.transform(lPos);
 		
 		for (CaseRender lRender : pObjetArene.getRender() ) {
-			lRender.paint(g2, lTranslate.getX(), lTranslate.getY());
+			lRender.paint(g2, lTranslate.getXi(), lTranslate.getYi());
 		}
 		//remove obsolete Render
 		pObjetArene.getRender().removeIf( n -> n.isObsolete());

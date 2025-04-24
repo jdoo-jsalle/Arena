@@ -3,7 +3,7 @@ package com.js.dawa.prog.instruction;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.model.arene.ScanerObjet;
-import com.js.dawa.model.robot.Position;
+import com.js.dawa.model.position.Position;
 
 public class DeplaOnOtherObject {
 	
@@ -38,8 +38,8 @@ public class DeplaOnOtherObject {
 		ObjetArene lNearObjet = mScanner.getNearestObjet(mRobot);
 		if (lNearObjet != null) {
 			Position lRes = mRobot.getPosition().getVector(lNearObjet.getPosition());
-			int lX = lRes.getX() * pDir; //inverse if necessary)
-			int lY = lRes.getY() * pDir; //idem
+			double lX = lRes.getX() * pDir; //inverse if necessary)
+			double lY = lRes.getY() * pDir; //idem
 			
 			if (mArene != null && mArene.isNewPositionIsOk(mRobot, lX, lY)){
 				mRobot.setInArena(true);
