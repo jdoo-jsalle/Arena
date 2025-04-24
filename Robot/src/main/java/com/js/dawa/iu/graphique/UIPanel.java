@@ -58,7 +58,7 @@ public class UIPanel extends JPanel{
 			buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         }
 		//clear
-		g2 = buffer.createGraphics();
+		g2 = buffer.createGraphics();  
 	
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		
@@ -97,10 +97,10 @@ public class UIPanel extends JPanel{
 		for (CaseRender lRender : pObjetArene.getRender() ) {
 			lRender.paint(g2, lTranslate.getX(), lTranslate.getY());
 		}
-		//remove secondary Render
-		pObjetArene.getRender().removeIf( n -> n.isSecondary());
+		//remove obsolete Render
+		pObjetArene.getRender().removeIf( n -> n.isObsolete());
 	}
-	
+	 
 	
 
 	

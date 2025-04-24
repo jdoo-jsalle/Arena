@@ -93,17 +93,6 @@ public class Mine implements ObjetArene {
 		return null;
 	}
 
-	@Override
-	public boolean isVisible() {
-		
-		return true;
-	}
-
-	@Override
-	public void setVisible(boolean pVisible) {
-		//na
-
-	}
 
 	@Override
 	public void setEnergie(Energie pEnergie) {
@@ -138,13 +127,13 @@ public class Mine implements ObjetArene {
 			mIsDispose= true;
 			ModuleArena lModuleArena = pObjeArene.getModule();
 			if (lModuleArena != null) {
-				lModuleArena.replaceInstruction();//replace instruction courante
+				lModuleArena.replaceInstruction();//replace instruction courrante
 			}
 		}
 		
 		
 		
-		return false;
+		return true;//removed in all the case.
 	}
 	
 	@Override

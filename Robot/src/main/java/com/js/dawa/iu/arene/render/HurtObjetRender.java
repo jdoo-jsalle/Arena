@@ -7,9 +7,10 @@ import com.js.dawa.model.robot.Position;
 public class HurtObjetRender implements CaseRender{
 	
 	InfoRender mInfoRender = new InfoRender();
-	
+	long mTimeStart;
 	
 	public HurtObjetRender () {
+		mTimeStart = System.currentTimeMillis();
 		reinit();
 	}
 
@@ -37,8 +38,8 @@ public class HurtObjetRender implements CaseRender{
 	}
 	
 	@Override
-	public boolean isSecondary () {
-		return true;
+	public boolean isObsolete () {
+		return System.currentTimeMillis() - mTimeStart > 1000;//obsolete in 1 second
 	}
 
 	@Override

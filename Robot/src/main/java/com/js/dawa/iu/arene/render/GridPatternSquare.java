@@ -19,19 +19,25 @@ public class GridPatternSquare implements GridPattern {
 		
 	}
 
+	/**
+	 * print a square grid pattern
+	 * with mSizeArene long size
+	 */
 	@Override
 	public void paint(Graphics2D pGraphics) {
 		int lSizeGrid = mSizeArene * mSizeCase;
 		for (int li = 0; li < mSizeArene; li++) {
+			//print number of range/column grid
 			String lOrdonne = Integer.toString(li+1);
 			pGraphics.drawString(lOrdonne, li * mSizeCase + mDecal+5, 0 +mDecal -5);
 			pGraphics.drawString(lOrdonne,0 + (mDecal-20), li * mSizeCase + mDecal +12);
 		}
 		
+		//draw horizontal line
 		for (int li =0; li< mSizeArene+1;li++) {
 			drawLineDecal (pGraphics,  li*mSizeCase,0,li*mSizeCase,lSizeGrid);
 		}
-		
+		//draw vertical line
 		for (int li =0; li< mSizeArene+1;li++) {
 			drawLineDecal (pGraphics,0,li*mSizeCase,lSizeGrid,li*mSizeCase);
 			

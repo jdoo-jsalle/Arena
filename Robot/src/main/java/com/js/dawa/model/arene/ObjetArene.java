@@ -33,7 +33,9 @@ public interface ObjetArene {
 		return true;
 	}
 	
-	public void setVisible (boolean pVisible);
+	default void setVisible (boolean pVisible) {
+		//na
+	}
 	
 	public void setEnergie (Energie pEnergie);
 	

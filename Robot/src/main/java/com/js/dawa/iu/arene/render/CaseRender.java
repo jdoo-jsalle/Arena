@@ -9,7 +9,7 @@ public interface CaseRender {
 	void reinit();
 	void paint (Graphics2D pGraphics, int pX, int pY);
 	
-	default boolean isSecondary () {
+	default boolean isObsolete () {
 		return false;
 	} 
 	
