@@ -3,12 +3,20 @@ package com.js.dawa.model.position;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class WayOfPosition {
+	
+	private static final Logger LOGGER =  LoggerFactory.getLogger( WayOfPosition.class );
 	
 	
 	List<Position> mLstPos  = new ArrayList<>();
 	
-	int mtotPixBySeconde = 15;
+	int mtotPixBySeconde = 20;//mtotPixBySecon=> coresponding to 1 for robot depla
+	int mLaps  = 200;//ms
+	long mNow;
 	
 	long mStart;
 	
@@ -21,33 +29,50 @@ public class WayOfPosition {
 		
 	}
 	
-	Position computeNext () {
+	public Position computeNext () {
 		
-		long mNow = System.currentTimeMillis();
-		long lTime = mNow - mStart;
-		long lDistance = mtotPixBySeconde * lTime /1000;
-		mStart = mNow;//refresh time
-		
-		return compute (lDistance);
+		mNow = System.currentTimeMillis();
+		long lDuration = mNow - mStart;
+		LOGGER.debug("durations is {}",lDuration);
+		return compute (lDuration);
 		
 	}
 	
-	Position compute (double pDistance) {
+	
+	double getDistanceForTheDuration (double pDuration) {
+		return  pDuration /mLaps;
+	}
+	
+	Position computeNext (double pDuration) {
+		double lDistance = getDistanceForTheDuration(pDuration);
+		return compute(lDistance);
+	}
+	
+	Position compute (double pDistanceRapport) {
 		
 		Position lPos = null;
 		
 		//get the two firt point
 		if (mLstPos.size() > 1) {
+			
+		
+			
+			
 			Position lFirst = mLstPos.get(0);
 			Position lFormer = mLstPos.get(1);
 			double lDis = lFirst.distance(lFormer);
+			double lDistance = lDis*pDistanceRapport;
+			
+			LOGGER.debug("dis parc {} ; dis total {}",lDistance,lDis);
 			
 			//compute tot Pixel accross during last time tag
 		
-			if (pDistance > lDis) {
+			if (lDistance >= lDis) {
 				//consomer la première position
 				mLstPos.remove(0);
-				lPos = compute (pDistance-lDis);
+				mStart = System.currentTimeMillis();
+				//lPos = compute ((lDis-lDistance)*pDistanceRapport/lDistance);
+				lPos=mLstPos.get(0);
 				
 			}
 			else {
@@ -59,21 +84,28 @@ public class WayOfPosition {
 				//Distance beetween the thwo point is hypothenus.
 				//Dis accrossed is the new hypothnus, on the Distance/
 				//compute x0 and y0 the point where is after dis accrossed
-				double x0 =-(pDistance * (lPos2.getX()-lPos1.getX())/lDis)/lPos2.getX();
-				double y0 =-(pDistance * (lPos2.getY()-lPos1.getY())/lDis)/lPos2.getY();
+				double x0 =(lDistance * (lPos2.getX()-lPos1.getX())/lDis)+lPos1.getX() ;
+				double y0 =(lDistance * (lPos2.getY()-lPos1.getY())/lDis)+lPos1.getY() ;
+				LOGGER.debug("x0 :{} y0 : {}",x0,y0);
 				//new position for Pos1
-				lPos1.setXY(x0, y0);
-				lPos = lPos1;
+				
+				lPos = new Position (x0,y0);
 			}
 			
 		}
 		else {
 			if (mLstPos.size() == 1) {
+				mStart = System.currentTimeMillis();
 				lPos = mLstPos.get(0);
 			}
 		}
 		
 		return lPos;
+	}
+	
+	
+	public int getTotPos() {
+		return mLstPos.size();
 	}
 
 }

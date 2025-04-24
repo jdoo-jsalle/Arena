@@ -15,6 +15,10 @@ public interface ObjetArene {
 	
 	public Position getPosition ();
 	
+	default Position getPositionScreen() {
+		return getPosition();
+	}
+
 	public void setPosition (Position pPosition);
 	
 	public void addAttribut (Attribut pAttribut);

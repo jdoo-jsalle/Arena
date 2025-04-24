@@ -51,7 +51,7 @@ public class GridPatternSquare implements GridPattern {
 
 	@Override
 	public Position transform(Position pPosition) {
-		double lx = (pPosition.getX() -1)*  mSizeCase + mDecal + 6;
+		double lx = (pPosition.getX() -1) * mSizeCase + mDecal + 6;
 		double ly = (pPosition.getY() -1) * mSizeCase + mDecal +15;
 		return new Position(lx, ly);
 	}

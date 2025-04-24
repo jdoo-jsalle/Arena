@@ -75,5 +75,8 @@ public class Position {
 		//*1D for cast in to double
 		return Math.sqrt(lDisX * lDisX * 1D + lDisY * lDisY * 1D);
 	}
-
+	
+	public Position clonePosition () {
+		return new Position(mY, mX);
+	}
 }

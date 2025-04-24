@@ -33,7 +33,7 @@ public class UpdateImageThread implements Runnable{
 			LOGGER.debug("loop repaint");
 			mFrame.repaint();
 			try {
-				Thread.sleep(41);
+				Thread.sleep(81);
 			}
 			catch (InterruptedException le) {
 				LOGGER.debug("error",le);

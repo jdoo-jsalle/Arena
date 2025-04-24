@@ -9,6 +9,7 @@ import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.model.position.Position;
+import com.js.dawa.model.position.WayOfPosition;
 
 public class Robot implements ObjetArene{
 	
@@ -23,6 +24,8 @@ public class Robot implements ObjetArene{
 	Energie mEnergie = new Energie();
 	
 	RobotRender mMainRender;
+	
+	WayOfPosition mWayOfPosition = new WayOfPosition();
 	
 
 	
@@ -60,6 +63,7 @@ public class Robot implements ObjetArene{
 	
 	public void setPosition (Position pPosition) {
 		mPosition = pPosition;
+		mWayOfPosition.addPosition(mPosition.clonePosition());
 	}
 
 	@Override
@@ -92,10 +96,16 @@ public class Robot implements ObjetArene{
 
 	
 	public void add (double pX, double pY) {
-		mPosition.addX(pX);
-		mPosition.addY(pY);
+		mPosition.addXY(pX,pY);
+		mWayOfPosition.addPosition(mPosition.clonePosition());
+		
 		if (pX  != 0 || pY != 0) //robot move => become visible
 		    setVisible(true);
+	}
+	
+	@Override
+	public Position getPositionScreen() {
+		return mWayOfPosition.computeNext();
 	}
 
 	public DataBoard getRobotData() {

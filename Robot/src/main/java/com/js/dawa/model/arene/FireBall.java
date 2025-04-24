@@ -10,6 +10,7 @@ import com.js.dawa.iu.arene.render.FireBallRender;
 import com.js.dawa.iu.arene.render.InfoRender;
 import com.js.dawa.iu.arene.render.HurtObjetRender;
 import com.js.dawa.model.position.Position;
+import com.js.dawa.model.position.WayOfPosition;
 import com.js.dawa.model.robot.Attribut;
 import com.js.dawa.model.robot.DataBoard;
 
@@ -24,7 +25,9 @@ public class FireBall implements ObjetArene {
 	private String mColor ="blue";
 	Energie mEnergie = new Energie(Integer.MAX_VALUE);
 	Map<String, Attribut> mLstAttribut = new HashMap <>();
-
+	
+	WayOfPosition mWayOfPosition = new WayOfPosition();
+	
 	ObjetArene mOwner;
 	
 	public void addAttribut (Attribut pAttribut) {
@@ -66,6 +69,7 @@ public class FireBall implements ObjetArene {
 	@Override
 	public void setPosition(Position pPosition) {
 		mPosition = pPosition;
+		mWayOfPosition.addPosition(mPosition.clonePosition());
 
 	}
 
@@ -95,7 +99,12 @@ public class FireBall implements ObjetArene {
 	@Override
 	public void add(double px, double py) {
 		mPosition.addXY(px, py);
+		mWayOfPosition.addPosition(mPosition.clonePosition());
 		
+	}
+	
+	public Position getPositionScreen() {
+		return mWayOfPosition.computeNext();
 	}
 
 	@Override
