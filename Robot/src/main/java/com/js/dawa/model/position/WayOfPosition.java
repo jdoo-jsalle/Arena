@@ -54,6 +54,11 @@ public class WayOfPosition {
 				Position lPos1 = mLstPos.get(0);
 				Position lPos2 = mLstPos.get(1);
 				//compute new position of x1,y1, for accrossed distance
+				//cos(a) = (x2-x1)/hyp
+				//sin(a) = (y2-x1)/hyp.
+				//Distance beetween the thwo point is hypothenus.
+				//Dis accrossed is the new hypothnus, on the Distance/
+				//compute x0 and y0 the point where is after dis accrossed
 				double x0 =-(pDistance * (lPos2.getX()-lPos1.getX())/lDis)/lPos2.getX();
 				double y0 =-(pDistance * (lPos2.getY()-lPos1.getY())/lDis)/lPos2.getY();
 				//new position for Pos1
