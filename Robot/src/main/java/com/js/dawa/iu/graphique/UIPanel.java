@@ -1,6 +1,7 @@
 package com.js.dawa.iu.graphique;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -63,7 +64,8 @@ public class UIPanel extends JPanel{
 		
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		g2.setFont(getFont());
+		
+		g2.setFont(new Font("TimesRoman", Font.PLAIN, 12));
 		
 		g2.setColor(Color.gray);
 			
