@@ -10,7 +10,7 @@ import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.model.position.Position;
 import com.js.dawa.model.position.WayOfPosition;
-import com.js.dawa.model.position.WayOfPositionClassic;
+import com.js.dawa.model.position.WayOfPositionSquare;
 
 public class Robot implements ObjetArene{
 	
@@ -26,11 +26,14 @@ public class Robot implements ObjetArene{
 	
 	RobotRender mMainRender;
 	
-	WayOfPosition mWayOfPosition = new WayOfPositionClassic();
+	WayOfPosition mWayOfPosition = new WayOfPositionSquare();
+	
+	boolean mIsPrgBlock=false;
 	
 
 	
 	public void init (RobotsProps pRobotProps) {
+		mWayOfPosition.init(this);
 		mRobotProps = pRobotProps;
 		if (mRobotProps != null) {
 			mMainRender = new RobotRender(mRobotProps);
@@ -192,6 +195,16 @@ public class Robot implements ObjetArene{
 	@Override
 	public ModuleArena getModule() {
 		return  mRobotProps != null ? mRobotProps.getModule() :null;
+	}
+	
+	@Override
+	public boolean isPrgBlock () {
+		return mIsPrgBlock;
+	}
+	
+	@Override
+	public void setPrgBlock(boolean pPrgBlock) {
+		mIsPrgBlock = pPrgBlock;
 	}
 	
 	

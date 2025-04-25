@@ -11,7 +11,7 @@ import com.js.dawa.iu.arene.render.InfoRender;
 import com.js.dawa.iu.arene.render.HurtObjetRender;
 import com.js.dawa.model.position.Position;
 import com.js.dawa.model.position.WayOfPosition;
-import com.js.dawa.model.position.WayOfPositionClassic;
+import com.js.dawa.model.position.WayOfPositionSquare;
 import com.js.dawa.model.robot.Attribut;
 import com.js.dawa.model.robot.DataBoard;
 
@@ -27,9 +27,12 @@ public class FireBall implements ObjetArene {
 	Energie mEnergie = new Energie(Integer.MAX_VALUE);
 	Map<String, Attribut> mLstAttribut = new HashMap <>();
 	
-	WayOfPosition mWayOfPosition = new WayOfPositionClassic();
+	WayOfPosition mWayOfPosition = new WayOfPositionSquare();
 	
 	ObjetArene mOwner;
+	
+	
+	boolean mIsPrgBlock = false;
 	
 	public void addAttribut (Attribut pAttribut) {
 		
@@ -52,6 +55,7 @@ public class FireBall implements ObjetArene {
 			CaseRender lRender = new FireBallRender();
 			lRender.setInfoRender(lInforInfoRender);
 			mRender.add(lRender);
+			
 		}
 		
 		return mRender;
@@ -65,7 +69,14 @@ public class FireBall implements ObjetArene {
 	
 	public void setOwner (ObjetArene pObjeArene) {
 		mOwner = pObjeArene;
+		
 	}
+	
+	@Override
+	public void reInit () {
+		mWayOfPosition.init(this);
+	}
+		
 
 	@Override
 	public void setPosition(Position pPosition) {
@@ -165,6 +176,16 @@ public class FireBall implements ObjetArene {
 	@Override
 	public ObjetArene getOwner () {
 		return mOwner;
+	}
+	
+	@Override
+	public boolean isPrgBlock () {
+		return mIsPrgBlock;
+	}
+	
+	@Override
+	public void setPrgBlock(boolean pPrgBlock) {
+		mIsPrgBlock = pPrgBlock;
 	}
 
 }

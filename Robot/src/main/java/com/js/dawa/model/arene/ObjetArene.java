@@ -61,5 +61,13 @@ public interface ObjetArene {
 	default ModuleArena getModule() {
 		return null;
 	}
+	
+	default boolean isPrgBlock () {
+		return false;
+	}
+	
+	default void setPrgBlock(boolean pPrgBlock) {
+		//na
+	}
 
 }

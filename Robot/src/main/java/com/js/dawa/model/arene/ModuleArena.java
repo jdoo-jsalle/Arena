@@ -45,9 +45,11 @@ public class ModuleArena {
 	}
 	
 	public void execInstruction () throws DawaException {
-		Instruction lInstruction = getInstructions();
-		if (lInstruction != null)
-		    lInstruction.execInstruction();
+		if (!mObjetArene.isPrgBlock()) {
+			Instruction lInstruction = getInstructions();
+			if (lInstruction != null  )
+			    lInstruction.execInstruction();
+		}
 	}
 	
 	

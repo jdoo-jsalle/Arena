@@ -6,30 +6,34 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.js.dawa.model.arene.ObjetArene;
+
 
 public class WayOfPositionSquare implements WayOfPosition{
 	
 	private static final Logger LOGGER =  LoggerFactory.getLogger( WayOfPositionSquare.class );
 	
+	List<Position> mLstPos  = new ArrayList<>(2);
 	
-	List<Position> mLstPos  = new ArrayList<>();
-	
-	long mNow;
-	
+	ObjetArene mObjetArene;
+		
 	long mStart;
+	
+	@Override
+	public void init(ObjetArene pObjetArena) {
+		mObjetArene = pObjetArena;
+	}
 	
 	
 	public void addPosition (Position pPosition) {
-		if (mLstPos.isEmpty()) {
-			mStart = System.currentTimeMillis();
-		}
+		mStart = System.currentTimeMillis();
 		mLstPos.add(pPosition);
 	}
 	
 	public Position computeNext () {
 		
-		mNow = System.currentTimeMillis();
-		long lDuration = mNow - mStart;
+		long lNow = System.currentTimeMillis();
+		long lDuration = lNow - mStart;
 		LOGGER.debug("durations is {}",lDuration);
 		return computeNext (lDuration);
 		
@@ -48,6 +52,7 @@ public class WayOfPositionSquare implements WayOfPosition{
 		
 		//get the two firt point
 		if (mLstPos.size() > 1) {
+			mObjetArene.setPrgBlock(true);
 			Position lFirst = mLstPos.get(0);
 			Position lFormer = mLstPos.get(1);
 			double lDisTotal = lFirst.distance(lFormer);
@@ -58,11 +63,10 @@ public class WayOfPositionSquare implements WayOfPosition{
 			//compute tot Pixel accross during last time tag
 		
 			if (lDistance >= lDisTotal) {
+				mObjetArene.setPrgBlock(false);
 				//consomer la première position
 				mLstPos.remove(0);
-				double lRest = (lDistance-lDisTotal)/lDisTotal*pDistanceRapport ;
-				//mStart = System.currentTimeMillis()  - ((long)lRest*1000);
-				lPos=compute ( lRest );
+				return mLstPos.get(0);
 				
 			}
 			else {
@@ -85,8 +89,8 @@ public class WayOfPositionSquare implements WayOfPosition{
 		}
 		else {
 			if (mLstPos.size() == 1) {
-				mStart = System.currentTimeMillis();
 				lPos = mLstPos.get(0);
+				mObjetArene.setPrgBlock(false);
 			}
 		}
 		
