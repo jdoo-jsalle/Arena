@@ -10,6 +10,7 @@ import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
 import com.js.dawa.model.position.Position;
 import com.js.dawa.model.position.WayOfPosition;
+import com.js.dawa.model.position.WayOfPositionClassic;
 
 public class Robot implements ObjetArene{
 	
@@ -25,7 +26,7 @@ public class Robot implements ObjetArene{
 	
 	RobotRender mMainRender;
 	
-	WayOfPosition mWayOfPosition = new WayOfPosition();
+	WayOfPosition mWayOfPosition = new WayOfPositionClassic();
 	
 
 	

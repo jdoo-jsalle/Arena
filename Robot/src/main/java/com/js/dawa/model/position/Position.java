@@ -77,6 +77,6 @@ public class Position {
 	}
 	
 	public Position clonePosition () {
-		return new Position(mY, mX);
+		return new Position(mX, mY);
 	}
 }

@@ -10,14 +10,14 @@ class TestWayOfPosition {
 	
 	@Test
 	void testGetDistanceForTheDuration () {
-		WayOfPosition lWayOfPosition = new WayOfPosition();
+		WayOfPositionSquare lWayOfPosition = new WayOfPositionSquare();
 		assertEquals(0.25, lWayOfPosition.getDistanceForTheDuration(50));
 	}
 	
 	@Test
 	void testComputeNext_twoPosition () {
 		
-		WayOfPosition lWayOfPosition = new WayOfPosition();
+		WayOfPositionSquare lWayOfPosition = new WayOfPositionSquare();
 		Position lPosition1 = new Position (0,0);
 		lWayOfPosition.addPosition(lPosition1);
 		Position lPosition2 = new Position (100,0);
@@ -55,7 +55,7 @@ class TestWayOfPosition {
 	@Test
 	void testComputeNext_threePosition () {
 		
-		WayOfPosition lWayOfPosition = new WayOfPosition();
+		WayOfPositionSquare lWayOfPosition = new WayOfPositionSquare();
 		Position lPosition1 = new Position (0,0);
 		lWayOfPosition.addPosition(lPosition1);
 		Position lPosition2 = new Position (100,0);

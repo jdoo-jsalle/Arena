@@ -7,11 +7,11 @@ import com.js.dawa.iu.arene.render.GridPatternSquare;
 
 public class LaunchWayOfPosition {
 	
-	private static final Logger LOGGER =  LoggerFactory.getLogger( WayOfPosition.class );
+	private static final Logger LOGGER =  LoggerFactory.getLogger( WayOfPositionSquare.class );
 	
 	
 	public static void main(String[] args) {
-		WayOfPosition lWay = new WayOfPosition();
+		WayOfPositionSquare lWay = new WayOfPositionSquare();
 		
 		
 		Position lPos1 = new Position(10, 10);
