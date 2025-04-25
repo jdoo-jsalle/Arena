@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.FireBallRender;
 import com.js.dawa.iu.arene.render.InfoRender;
 import com.js.dawa.model.position.Position;
+import com.js.dawa.model.position.WayOfPosition;
+import com.js.dawa.model.position.WayOfPositionSquare;
 import com.js.dawa.model.robot.Attribut;
 import com.js.dawa.model.robot.DataBoard;
+import com.js.dawa.util.TimerWaiting;
 
 public class Explosion implements ObjetArene {
 	
@@ -18,15 +22,17 @@ public class Explosion implements ObjetArene {
 	
 	List<CaseRender> mRender;
 	
-	Position mPosition;
+	TimerWaiting mTimer;
+	
+	WayOfPosition mWayOfPosition = new WayOfPositionSquare();
 
 	@Override
 	public List<CaseRender> getRender() {
 		if (mRender == null) {
 			mRender = new ArrayList<>();
 			InfoRender lInforInfoRender = new InfoRender();
-			lInforInfoRender.setColor("orange");
-			lInforInfoRender.setString("^");
+			lInforInfoRender.setColor("red");
+			lInforInfoRender.setString("*");
 			CaseRender lRender = new FireBallRender();
 			lRender.setInfoRender(lInforInfoRender);
 			mRender.add(lRender);
@@ -39,13 +45,12 @@ public class Explosion implements ObjetArene {
 	@Override
 	public Position getPosition() {
 		
-		return mPosition;
+		return mWayOfPosition.computeNext();
 	}
 
 	@Override
 	public void setPosition(Position pPosition) {
-		mPosition = pPosition;
-
+		mWayOfPosition.addPosition(pPosition);
 	}
 
 	@Override
@@ -68,11 +73,12 @@ public class Explosion implements ObjetArene {
 
 	@Override
 	public boolean isDispose() {
-		if (mStart == -1) {
-			mStart = System.currentTimeMillis();
+		if (mTimer ==null) {
+			mTimer = new TimerWaiting (1000);
 		}
+	
 		
-		return  System.currentTimeMillis() - mStart > 500;
+		return  mTimer.isOver();
 	}
 
 	@Override
@@ -106,6 +112,10 @@ public class Explosion implements ObjetArene {
 	public boolean collision(ObjetArene pObjeArene) {
 		//no collision
 		return false;
+	}
+	
+	public void init() {
+		mWayOfPosition.init(this);
 	}
 
 }

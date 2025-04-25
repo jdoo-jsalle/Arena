@@ -52,6 +52,8 @@ public class ScriptJsEval {
 	
 	public String generateScript (DataBoard lDataBoard,String pScript) {
 		
+		
+		
 		String lCond = mClause;
 		Map<String, String> lLstVars = lDataBoard.getLstVar();
 		for (Entry<String, String> le : lLstVars.entrySet()) {
@@ -66,18 +68,21 @@ public class ScriptJsEval {
 	}
 	
 	
-	public boolean eval (ObjetArene pRobot)  {
+	public boolean eval (ObjetArene pRobot) throws  ScriptException  {
 		
 		
 	    boolean lRes = false;
-		try {
+	    try {
 			String lClause = generateScript(pRobot.getDataBoard(),SCRIPT_JS_COND);
 			LOGGER.debug("Clause cond is {}", lClause);
 			lRes = ((Boolean)engine.eval(lClause)).booleanValue();
-		}
-		catch (ScriptException le) {
-			LOGGER.debug("warning, cond is invalid for objet [" + getObjetAreneString(pRobot) + "], js script error, return false, correct robot prg Error",le);
-		}
+	    }
+	    catch (ScriptException le) {
+	    	LOGGER.error("error script",le);
+	    	
+	    }
+
+		
 		return lRes;
 	}
 	
@@ -87,9 +92,19 @@ public class ScriptJsEval {
 	
 	
 	public String compute(ObjetArene pRobot) throws  ScriptException {
-		String lClause = generateScript(pRobot.getDataBoard(),SCRIPT_JS_COMPUTE);
-		LOGGER.debug("Clause cond is {}", lClause);
-		return (engine.eval(lClause).toString());
+		String lRes= "";
+		try {
+			String lClause = generateScript(pRobot.getDataBoard(),SCRIPT_JS_COMPUTE);
+			LOGGER.debug("Clause cond is {}", lClause);
+			lRes = (engine.eval(lClause).toString());
+		 }
+	    catch (ScriptException le) {
+	    	LOGGER.error("error script",le);
+	    	
+	    }
+		
+		return lRes;
+				
 		
 		
 	}

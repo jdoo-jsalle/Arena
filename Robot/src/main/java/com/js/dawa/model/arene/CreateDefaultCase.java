@@ -14,7 +14,7 @@ public class CreateDefaultCase {
 		int lSize = pArene.getAreneProps().getSize();
 		
 		CaseAreneRenderDefaut lDefautRender = new CaseAreneRenderDefaut();
-		lDefautRender.getInfoRender().setColor("grey");
+		lDefautRender.getInfoRender().setColor("gray");
 		
 		for (int li = 1; li < lSize; li++) {
 			for (int lj = 1; lj < lSize; lj++) {

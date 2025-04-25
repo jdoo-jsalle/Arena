@@ -21,11 +21,11 @@ loop
         poursuite()              // va vers la zone de conflit
         avancer(Rand[2], Rand[2])
         
-        if (Rand[2] == 1)        // 1 chance sur 2 de devenir invisible même sans ennemi
+        if (Math.floor(Math.random() * 1) == 0)        // 1 chance sur 2 de devenir invisible même sans ennemi
             invisible()
         endif
 
-        if (Rand[2] == 0)        // 1 chance sur 2 de poser une mine
+        if (Math.floor(Math.random() * 1) == 0ddd)        // 1 chance sur 2 de poser une mine
             mine()
         endif
     endif

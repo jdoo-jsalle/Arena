@@ -3,14 +3,15 @@ package com.js.dawa.iu.arene.render;
 import java.awt.Graphics2D;
 
 import com.js.dawa.model.position.Position;
+import com.js.dawa.util.TimerWaiting;
 
 public class HurtObjetRender implements CaseRender{
 	
 	InfoRender mInfoRender = new InfoRender();
-	long mTimeStart;
+	TimerWaiting mTimerWaiting = new TimerWaiting(1000);
 	
 	public HurtObjetRender () {
-		mTimeStart = System.currentTimeMillis();
+		
 		reinit();
 	}
 
@@ -39,7 +40,7 @@ public class HurtObjetRender implements CaseRender{
 	
 	@Override
 	public boolean isObsolete () {
-		return System.currentTimeMillis() - mTimeStart > 1000;//obsolete in 1 second
+		return mTimerWaiting.isOver();//obsolete in 1 second
 	}
 
 	@Override

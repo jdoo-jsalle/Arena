@@ -11,10 +11,10 @@ loop
 	else
 	    poursuite()
 	    avancer(Rand[2], Rand[2])
-	    if (Rand[2] == 1)     // Probabilité d’utiliser l’invisibilité même sans détection
+	    if (Math.floor(Math.random() * 1) == 0)     // Probabilité d’utiliser l’invisibilité même sans détection
 	        invisible()
 	    endif
-	    if (Rand[2] == 0)     // Piège aléatoire
+	    if (Math.floor(Math.random() * 1) == 0)     // Piège aléatoire
 	        mine()
 	    endif
 	endif

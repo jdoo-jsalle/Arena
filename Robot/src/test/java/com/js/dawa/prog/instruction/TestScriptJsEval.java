@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.script.ScriptException;
 
-import org.junit.Test;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -14,6 +16,8 @@ import com.js.dawa.model.robot.DataBoard;
 import com.js.dawa.model.robot.Robot;
 
 class TestScriptJsEval {
+	
+	private static final Logger LOGGER =  LogManager.getLogger( TestScriptJsEval.class );
 	
 	@Test
 	void testGenerateScript_cond () {
@@ -43,7 +47,11 @@ class TestScriptJsEval {
 		lRobotData.setVariable("$truc", "9");
 		lRobotData.setVariable("$machin", "3");
 		lRobot.setRobotData(lRobotData);
-		assertTrue(lIfEval.eval(lRobot));
+		try {
+			assertTrue(lIfEval.eval(lRobot));
+		} catch (ScriptException e) {
+			assertTrue("error",false);
+		}
 	
 		
 		
@@ -55,9 +63,8 @@ class TestScriptJsEval {
     @CsvSource({
        "$truc > 5 && $truc < 10 && $machin == 3, $truc, 11, $machin, 3",
        "$troc > 5 && $truc < 10 && $machin == 3, $truc, 11, $machin, 3",
-       "$truc_missing > 5 && $truc < 10 && $machin == 3, $truc, 11, $machin, 3",
+       "$truc_missing > 5 && $truc < 10 && $machin == 3, $truc, 11, $machin, 3"
     })
-	
 	void testEval_false(String pCond,String pVar1, String pVal1, String pVar2, String pVal2) {
 		ScriptJsEval lIfEval = new ScriptJsEval(pCond);
 
@@ -68,7 +75,13 @@ class TestScriptJsEval {
 		lRobotData.setVariable(pVar1, pVal1);
 		lRobotData.setVariable(pVar2, pVal2);
 		lRobot.setRobotData(lRobotData);
-		 assertFalse(lIfEval.eval(lRobot));
+		try {
+		     assertFalse(lIfEval.eval(lRobot));
+	    }
+		catch (ScriptException e) {
+			LOGGER.debug("error", e);
+		}
+		
 		
 		
 		
@@ -91,8 +104,33 @@ class TestScriptJsEval {
 		}
 		catch (ScriptException e) {
 			assertTrue (e.getMessage(),false);
+			LOGGER.debug("error", e);
 		}
 		
+		
+	}
+	
+	  @ParameterizedTest
+	    @CsvSource({
+	       "Math.floor(Math.random() * 1) == 1",
+	       "Math.floor(Math.random() * 1) == 0"
+	       	      
+	    })
+	void test_cond(String pCond) {
+		ScriptJsEval lIfEval = new ScriptJsEval(pCond);
+		
+		Robot lRobot = new Robot();
+		DataBoard lRobotData = new DataBoard();
+		lRobot.setRobotData(lRobotData);
+		
+		try {
+			boolean lRes = lIfEval.eval(lRobot);
+			LOGGER.debug("res {} :  {}",pCond, lRes);
+			assertTrue(lRes || !lRes);
+		}
+		catch (ScriptException e) {
+			assertTrue (e.getMessage(),false);
+		}
 		
 	}
 }

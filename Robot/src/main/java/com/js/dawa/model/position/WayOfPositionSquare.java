@@ -19,6 +19,8 @@ public class WayOfPositionSquare implements WayOfPosition{
 		
 	long mStart;
 	
+	
+	
 	@Override
 	public void init(ObjetArene pObjetArena) {
 		mObjetArene = pObjetArena;
@@ -52,7 +54,7 @@ public class WayOfPositionSquare implements WayOfPosition{
 		
 		//get the two firt point
 		if (mLstPos.size() > 1) {
-			mObjetArene.setPrgBlock(true);
+			setPrgBlock(true);
 			Position lFirst = mLstPos.get(0);
 			Position lFormer = mLstPos.get(1);
 			double lDisTotal = lFirst.distance(lFormer);
@@ -63,7 +65,7 @@ public class WayOfPositionSquare implements WayOfPosition{
 			//compute tot Pixel accross during last time tag
 		
 			if (lDistance >= lDisTotal) {
-				mObjetArene.setPrgBlock(false);
+				setPrgBlock(false);
 				//consomer la première position
 				mLstPos.remove(0);
 				return mLstPos.get(0);
@@ -90,11 +92,17 @@ public class WayOfPositionSquare implements WayOfPosition{
 		else {
 			if (mLstPos.size() == 1) {
 				lPos = mLstPos.get(0);
-				mObjetArene.setPrgBlock(false);
+				setPrgBlock(false);
 			}
 		}
 		
 		return lPos;
+	}
+	
+	void setPrgBlock (boolean pBlock) {
+		if (mObjetArene!= null)
+			mObjetArene.setPrgBlock(pBlock);
+			
 	}
 	
 

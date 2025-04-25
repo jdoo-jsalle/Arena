@@ -111,13 +111,7 @@
 		    <scope>test</scope>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine -->
-		<dependency>
-		    <groupId>org.junit.vintage</groupId>
-		    <artifactId>junit-vintage-engine</artifactId>
-		    <version>5.13.0-M2</version>
-		    <scope>test</scope>
-		</dependency>
+
 		
 		<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher -->
 		<dependency>

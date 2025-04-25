@@ -1,5 +1,6 @@
 package com.js.dawa.model.robot;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import com.js.dawa.iu.arene.render.CaseRender;
@@ -44,7 +45,7 @@ public class RobotRender implements CaseRender {
 	}
 	
 	public void setHide () {
-		mInfoRender.setColor("white");
+		mInfoRender.setColor("gray");
 	}
 	
 	public void setHurt () {

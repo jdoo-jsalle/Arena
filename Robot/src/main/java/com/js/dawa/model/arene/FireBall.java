@@ -174,6 +174,8 @@ public class FireBall implements ObjetArene {
 			
 			Explosion lExplosion = new Explosion();
 			lExplosion.setPosition(mPosition);
+			lExplosion.setPosition(pObjeArene.getPosition());
+			lExplosion.init();
 			
 			ModuleArena lModule = new ModuleArena();
 			lModule.setObjetArene(lExplosion);

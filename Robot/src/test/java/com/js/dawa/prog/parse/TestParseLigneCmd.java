@@ -63,6 +63,24 @@ class TestParseLigneCmd {
 		}
 	}
 	
+	@Test
+	void testParse_cond_whit_comment() {
+	
+		Robot lRobot = new Robot();
+		ParseLigneCmd lParseLigne = new ParseLigneCmd(lRobot,null);
+		try {
+			Args lArgs = lParseLigne.getArgs(0, 	"if (Math.floor(Math.random() * 1) == 0)     // Probabilité d’utiliser l’invisibilité même sans détection");
+			assertEquals(1, lArgs.sizeArgs());
+			assertEquals("Math.floor(Math.random() * 1) == 0", lArgs.getArgs(0));
+		
+			
+		} catch (DawaException e) {
+			LOGGER.debug("error",e);
+			assertFalse(e.getMessage(),true);
+					
+		}
+	}
+	
 	
 
 }

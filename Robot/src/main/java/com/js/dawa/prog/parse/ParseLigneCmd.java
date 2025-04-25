@@ -125,7 +125,7 @@ public class ParseLigneCmd implements ParseLigne {
 	 
 	Args getArgs (int pNumLigne,String pLigne) throws DawaException {
 		int lDeb = pLigne.indexOf("(");
-		int lEnd = pLigne.indexOf(")");
+		int lEnd = pLigne.lastIndexOf(")");
 		if (lDeb == -1 || lEnd == -1) {
 			throw new DawaException("Ligne #" + Integer.toString(pNumLigne) + " \"" + pLigne + "\" : error must have param beetween ()");
 		}
