@@ -31,8 +31,16 @@ public class FireBall implements ObjetArene {
 	
 	ObjetArene mOwner;
 	
+	Arene mArene;
+	
 	
 	boolean mIsPrgBlock = false;
+	
+	public void init (Arene pArene) {
+		mArene = pArene;
+		mWayOfPosition.init(this);
+		
+	}
 	
 	public void addAttribut (Attribut pAttribut) {
 		
@@ -72,10 +80,7 @@ public class FireBall implements ObjetArene {
 		
 	}
 	
-	@Override
-	public void reInit () {
-		mWayOfPosition.init(this);
-	}
+
 		
 
 	@Override
@@ -166,6 +171,14 @@ public class FireBall implements ObjetArene {
 			HurtObjetRender lObjetHurt = new HurtObjetRender();
 			pObjeArene.getRender().add(lObjetHurt);
 			mIsDispose = true;//remove this object
+			
+			Explosion lExplosion = new Explosion();
+			lExplosion.setPosition(mPosition);
+			
+			ModuleArena lModule = new ModuleArena();
+			lModule.setObjetArene(lExplosion);
+			mArene.addObjetArene(lModule);
+			
 		}
 		
 		

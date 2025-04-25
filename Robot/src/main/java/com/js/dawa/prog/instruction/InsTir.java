@@ -38,7 +38,7 @@ public class InsTir implements Instruction {
 			lFireBall.setPosition(lPosition);
 			lFireBall.setColor(mObjetArene.getColor());
 			lFireBall.setOwner(mObjetArene);
-			lFireBall.reInit();
+			lFireBall.init(mArene);
 			
 			InsAvancer lAvancer = new InsAvancer();
 			Args lArgs = new Args(lFireBall);
