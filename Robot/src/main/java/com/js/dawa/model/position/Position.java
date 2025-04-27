@@ -79,4 +79,9 @@ public class Position {
 	public Position clonePosition () {
 		return new Position(mX, mY);
 	}
+	
+	public void multByscalaire (double pVal) {
+		mX = mX*pVal;
+		mY = mY*pVal;
+	}
 }

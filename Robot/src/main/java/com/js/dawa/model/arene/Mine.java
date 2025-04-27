@@ -124,16 +124,16 @@ public class Mine implements ObjetArene {
 			
 			HurtObjetRender lObjetHurt = new HurtObjetRender();
 			pObjeArene.getRender().add(lObjetHurt);
-			mIsDispose= true;
+			
 			ModuleArena lModuleArena = pObjeArene.getModule();
 			if (lModuleArena != null) {
 				lModuleArena.replaceInstruction();//replace instruction courrante
 			}
 		}
 		
+		mIsDispose= true;//dispose in all the case
 		
-		
-		return true;//removed in all the case.
+		return false;//don't block.
 	}
 	
 	@Override

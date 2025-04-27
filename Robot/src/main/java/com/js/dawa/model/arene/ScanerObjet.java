@@ -28,9 +28,9 @@ public class ScanerObjet {
 		
 		for (ModuleArena lModule : mArene.getLstCaseMain()) {
 			LOGGER.debug("  is robot {}, OnlyRobot {}",lModule.isRobot() ,pObjetArene);
-			if (lModule.isRobot() || !pOnlyRobot) {
+			if ( (lModule.isRobot() && lModule.isFonctionnel()) || !pOnlyRobot) {
 				ObjetArene lObjetTarget = lModule.getObjetArene();
-				if (lObjetTarget != pObjetArene) {
+				if (lObjetTarget != pObjetArene ) {
 					LOGGER.debug("found objet {} ",lObjetTarget);
 					Position lPos2 = lObjetTarget.getPosition();
 					if (compareProx(lPos1, lPos2, pRayon) && lObjetTarget.isVisible()) {
