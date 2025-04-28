@@ -5,10 +5,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.js.dawa.model.robot.Robot;
 
 class TestMine {
+	
+	
 	
 	
 	@Test
@@ -19,11 +23,11 @@ class TestMine {
 		Mine lMine = new Mine ();
 		lMine.mOwner = lRobot;
 		
-		assertFalse(lMine.mIsDispose);
+		assertFalse(lMine.isDispose());
 		
 		lMine.collision(lRobot);
 		
-		assertFalse(lMine.mIsDispose);
+		assertTrue(lMine.mTimer != null);
 
 		
 		Robot lOtherRobot = new Robot();
@@ -31,7 +35,7 @@ class TestMine {
 		lMine.collision(lOtherRobot);
 		
 	
-		assertTrue(lMine.mIsDispose);
+		assertTrue(lMine.mTimer != null);
 	}
 	
 	@Test
@@ -42,16 +46,18 @@ class TestMine {
 		Mine lMine = new Mine ();
 		lMine.mOwner = lRobot;
 		
-		assertFalse(lMine.mIsDispose);
+		assertFalse(lMine.isDispose());
 		
-		lMine.collision(lRobot);
 		
-		assertFalse(lMine.mIsDispose);
 
 		FireBall lFireBall = new FireBall ();
 		lFireBall.mOwner = lRobot;
 		lMine.collision(lFireBall);
-		assertFalse(lMine.mIsDispose);
+		assertFalse(lMine.isDispose());
+		
+		lMine.collision(lRobot);
+		
+		assertTrue(lMine.mTimer != null);
 		
 		
 		

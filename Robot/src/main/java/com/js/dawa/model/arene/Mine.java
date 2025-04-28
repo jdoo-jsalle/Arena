@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.FireBallRender;
 import com.js.dawa.iu.arene.render.InfoRender;
@@ -12,18 +15,22 @@ import com.js.dawa.iu.arene.render.HurtObjetRender;
 import com.js.dawa.model.position.Position;
 import com.js.dawa.model.robot.Attribut;
 import com.js.dawa.model.robot.DataBoard;
+import com.js.dawa.model.robot.Robot;
+import com.js.dawa.util.TimerWaiting;
 
 public class Mine implements ObjetArene {
+	
+	private static final Logger LOGGER =  LoggerFactory.getLogger( Mine.class );
 
 	HurtObject mHurtObject = new HurtObject(200);//200 default value, change it in add properties HIT
 	
 	Position mPosition;
 	List<CaseRender> mRender;
-	boolean mIsDispose = false;
 	private String mColor ="black";
 	Energie mEnergie = new Energie(0);
 	Map<String, Attribut> mLstAttribut = new HashMap <>();
 	ObjetArene mOwner;//owner of the mine
+	TimerWaiting mTimer;
 	
 	@Override
 	public List<CaseRender> getRender() {
@@ -78,7 +85,8 @@ public class Mine implements ObjetArene {
 
 	@Override
 	public boolean isDispose() {
-		return mIsDispose;
+		return (mTimer != null && mTimer.isOver());
+
 	}
 
 	@Override
@@ -131,7 +139,14 @@ public class Mine implements ObjetArene {
 			}
 		}
 		
-		mIsDispose= true;//dispose in all the case
+		if( mTimer == null ) {
+		   LOGGER.debug("objet Arene instanceof {} owner : {}",pObjeArene.getClass(),pObjeArene.getOwner());
+		   if (pObjeArene instanceof Robot ){//|| (pObjeArene instanceof FireBall && pObjeArene.getOwner() != mOwner)) {
+	          mTimer = new TimerWaiting(500);//dispose in all the case
+	          LOGGER.debug("set timer");
+		   }
+		}
+		
 		
 		return false;//don't block.
 	}

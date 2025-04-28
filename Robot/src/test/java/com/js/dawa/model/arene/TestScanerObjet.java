@@ -139,6 +139,7 @@ class TestScanerObjet {
 		//create another Robot
 		//create Module Robot
 		Robot lRobot2 = new Robot();
+		lRobot2.setEnergie(new Energie (1000));
 		lRobot2.setPosition(new Position (15,15));
 		lModuleRobot = new ModuleArena();
 		lModuleRobot.setObjetArene(lRobot2);
@@ -162,7 +163,7 @@ class TestScanerObjet {
 		assertEquals(2, lRes.size());
 		
 		
-		//detect only objet
+		//detect only robot (fonctional)
 		lRes = lScanerObjet.detectObjet(lRobot, 10, true);
 		assertEquals(1, lRes.size());
 		assertEquals(lRobot2, lRes.get(0));
