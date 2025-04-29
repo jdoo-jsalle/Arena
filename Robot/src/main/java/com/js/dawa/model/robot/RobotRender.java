@@ -1,6 +1,5 @@
 package com.js.dawa.model.robot;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 import com.js.dawa.iu.arene.render.CaseRender;

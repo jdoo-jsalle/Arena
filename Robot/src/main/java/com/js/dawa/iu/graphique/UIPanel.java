@@ -90,11 +90,10 @@ public class UIPanel extends JPanel{
 	
 	void print (ObjetArene pObjetArene) {
 		Position lPos = pObjetArene.getPositionScreen();
-		//LOGGER.debug("Pos object {} is {}",pObjetArene,lPos);
 
 		Position lTranslate = mGridPattern.transform(lPos);
 		
-		LOGGER.debug("Pos object {}  => trans {}" + pObjetArene,lPos,lTranslate);
+		LOGGER.debug("Pos object {}  => trans {}" , lPos ,lTranslate);
 		
 		for (CaseRender lRender : pObjetArene.getRender() ) {
 			lRender.paint(g2, lTranslate.getXi(), lTranslate.getYi());

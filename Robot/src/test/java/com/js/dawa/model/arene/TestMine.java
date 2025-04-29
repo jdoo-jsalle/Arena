@@ -2,11 +2,10 @@ package com.js.dawa.model.arene;
 
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import com.js.dawa.model.robot.Robot;
 
@@ -27,7 +26,7 @@ class TestMine {
 		
 		lMine.collision(lRobot);
 		
-		assertTrue(lMine.mTimer != null);
+		assertNotNull(lMine.mTimer);
 
 		
 		Robot lOtherRobot = new Robot();
@@ -35,7 +34,7 @@ class TestMine {
 		lMine.collision(lOtherRobot);
 		
 	
-		assertTrue(lMine.mTimer != null);
+		assertNotNull(lMine.mTimer );
 	}
 	
 	@Test
@@ -57,7 +56,7 @@ class TestMine {
 		
 		lMine.collision(lRobot);
 		
-		assertTrue(lMine.mTimer != null);
+		assertNotNull(lMine.mTimer);
 		
 		
 		

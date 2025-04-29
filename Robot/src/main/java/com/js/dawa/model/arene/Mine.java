@@ -141,7 +141,7 @@ public class Mine implements ObjetArene {
 		
 		if( mTimer == null ) {
 		   LOGGER.debug("objet Arene instanceof {} owner : {}",pObjeArene.getClass(),pObjeArene.getOwner());
-		   if (pObjeArene instanceof Robot ){//|| (pObjeArene instanceof FireBall && pObjeArene.getOwner() != mOwner)) {
+		   if ((pObjeArene instanceof Robot ) || (pObjeArene instanceof FireBall && pObjeArene.getOwner() != mOwner)) {
 	          mTimer = new TimerWaiting(500);//dispose in all the case
 	          LOGGER.debug("set timer");
 		   }
