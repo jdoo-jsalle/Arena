@@ -2,6 +2,9 @@ package com.js.dawa.iu.arene.render;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +16,7 @@ public class InfoRender {
 	private Color mColorAwt;
 	private String mFont ="PLAIN";
 	private int mSizePolice =14;
+	private List<String> mDecorteur;
 	
 	private static final Logger LOGGER =  LoggerFactory.getLogger( InfoRender.class );
 	
@@ -83,6 +87,18 @@ public class InfoRender {
 		this.mSizePolice = pSizePolice;
 	}
 	
+	
+	public List<String> getDecorateur() {
+		return mDecorteur;
+	}
+	
+	public void addDecorateur (String pDecorateur) {
+		if (mDecorteur==null) {
+			mDecorteur = new ArrayList<>();
+			
+		}
+		mDecorteur.add(pDecorateur);
+	}
 	
 	
 

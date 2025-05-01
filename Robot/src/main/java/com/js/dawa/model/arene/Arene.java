@@ -11,11 +11,13 @@ public class Arene {
 
 	private Console mConsole;	
 	
-	private List<ModuleArena> mLstModuleArene = new ArrayList<>();
+
 	
 	private List<ModuleArena> mLstModuleArenasTemp = new ArrayList<>();//Add create objet in turn.
 	
 	private AreneProps mAreneProps;
+	
+	AreneLstObjet mAreneLstObject= new AreneLstObjet();
 	
 	public Arene (Console pConsole) {
 		mConsole = pConsole;
@@ -30,10 +32,13 @@ public class Arene {
 	}
 	
 	public void updateListCase (){
-		//put last objet creation in the arena
-		for (ModuleArena lModule : mLstModuleArenasTemp) {
-			mLstModuleArene.add(lModule);
+		synchronized (mAreneLstObject.getLstCaseMain()) {
+			//put last objet creation in the arena
+			for (ModuleArena lModule : mLstModuleArenasTemp) {
+				mAreneLstObject.getLstCaseMain().add(lModule);
+			}
 		}
+	
 		
 		mLstModuleArenasTemp.clear();
 		
@@ -41,11 +46,11 @@ public class Arene {
 	
 	
 	public List<ModuleArena> getLstCaseMain (){
-		return mLstModuleArene;
+		return mAreneLstObject.getLstCaseMain();
 	}
 	
 	public void setLstCase (List<ModuleArena> pLstModuleArena) {
-		mLstModuleArene = pLstModuleArena;
+		mAreneLstObject.setLstCase(pLstModuleArena);
 	}
 	
 	
@@ -79,7 +84,7 @@ public class Arene {
 		
 		if (lRes) {
 			//verify objet Present as this place
-			for (ModuleArena lModule : mLstModuleArene) {
+			for (ModuleArena lModule : mAreneLstObject.getLstCaseMain()) {
 				ObjetArene lObjetTarget = lModule.getObjetArene();
 			
 				if (lObjetTarget != pObjetArena &&
@@ -106,7 +111,7 @@ public class Arene {
 	
 	public void rmDisposeObjet () {
 		List<ModuleArena> lLstToDispose = new ArrayList<>();
-		for (ModuleArena lModule : mLstModuleArene) {
+		for (ModuleArena lModule : mAreneLstObject.getLstCaseMain()) {
 			if (lModule.getObjetArene().isDispose()) {
 				lLstToDispose.add(lModule);
 			}
@@ -114,7 +119,7 @@ public class Arene {
 		}
 		//rm
 		for (ModuleArena lModule : lLstToDispose ) {
-			mLstModuleArene.remove(lModule);
+			mAreneLstObject.getLstCaseMain().remove(lModule);
 		}
 	}
 	

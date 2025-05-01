@@ -59,5 +59,9 @@ public class RobotRender implements CaseRender {
 		lRenderString.paint(pGraphics, new Position( pX,pY), mInfoRender);
 		
 	}
+	
+	public void addDecorateur (String pVal) {
+		mInfoRender.addDecorateur(pVal);
+	}
 
 }

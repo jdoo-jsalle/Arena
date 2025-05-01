@@ -69,5 +69,9 @@ public interface ObjetArene {
 	default void setPrgBlock(boolean pPrgBlock) {
 		//na
 	}
+	
+	default void setOver () {
+		//na
+	}
 
 }

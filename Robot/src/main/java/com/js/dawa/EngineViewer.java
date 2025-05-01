@@ -1,7 +1,5 @@
 package com.js.dawa;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,8 +56,8 @@ public class EngineViewer {
 			}
 			
 			//execute prg
-			List <ModuleArena> lLstModule = pArene.getLstCaseMain();
-			lEnd = !executePrg(lTour, lLstModule);
+
+			lEnd = !executePrg(lTour,pArene);
 			
 			pArene.updateListCase();//send object create in the tour to in main liste
 			
@@ -89,11 +87,11 @@ public class EngineViewer {
 	 * @return
 	 * @throws DawaException
 	 */
-	boolean  executePrg (int pTour, List <ModuleArena> lLstModule) throws DawaException {
+	boolean  executePrg (int pTour,Arene pArene) throws DawaException {
 		int ltotRun = 0; 
 		
 		ModuleArena lLast = null;
-		for (ModuleArena lModuleArena : lLstModule) {
+		for (ModuleArena lModuleArena : pArene.getLstCaseMain()) {
 			if (! lModuleArena.isOver()) {
 				if (lModuleArena.isFonctionnel()) {
 					if (lModuleArena.isRobot()) {

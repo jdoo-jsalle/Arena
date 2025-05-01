@@ -125,6 +125,9 @@ public class ModuleArena {
 	}
 	public void setOver(boolean pIsOver) {
 		this.mIsOver = pIsOver;
+		if (pIsOver) {
+			mObjetArene.setOver();
+		}
 	}
 	
 	

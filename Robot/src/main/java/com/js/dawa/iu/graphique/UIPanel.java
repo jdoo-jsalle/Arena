@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -72,13 +71,14 @@ public class UIPanel extends JPanel{
 		
 		mGridPattern.paint(g2);
 		
-		List<ModuleArena >lLstCase = mArene.getLstCaseMain();
-		
+
 		//Affiche Case (robot and objet)
-		LOGGER.debug("Tot objet {}",lLstCase.size());
-		for (ModuleArena lModuleArene : lLstCase) {
-			print(lModuleArene.getObjetArene());
-		}
+		LOGGER.debug("Tot objet {}", mArene.getLstCaseMain().size());
+		synchronized (mArene.getLstCaseMain()) {
+			for (ModuleArena lModuleArene : mArene.getLstCaseMain()) {
+				print(lModuleArene.getObjetArene());
+			}
+	     }
 		
 		pg.drawImage(buffer, 0, 0, this);
 		g2.dispose();

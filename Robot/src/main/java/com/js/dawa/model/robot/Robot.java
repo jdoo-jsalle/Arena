@@ -207,6 +207,13 @@ public class Robot implements ObjetArene{
 		mIsPrgBlock = pPrgBlock;
 	}
 	
+	@Override
+	public void setOver() {
+		mMainRender.addDecorateur("X");
+		
+		
+	}
+	
 	
 	
 	
