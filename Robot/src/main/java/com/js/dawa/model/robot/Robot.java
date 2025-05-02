@@ -214,6 +214,10 @@ public class Robot implements ObjetArene{
 		
 	}
 	
+	@Override
+	public String getName() {
+		return mRobotProps.getNom();
+	}
 	
 	
 	

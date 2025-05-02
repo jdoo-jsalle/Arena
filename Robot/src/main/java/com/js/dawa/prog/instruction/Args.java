@@ -75,7 +75,7 @@ public class Args {
 			}
 			catch (NumberFormatException le) {
 				LOGGER.debug ("erreur int parse");
-				throw new DawaException("Value \"" + lVal + "\" index :  " + Integer.toString(pI) +" must be numeric");
+				throw new DawaException("Var \"" + lVal + "\" index : \"" + Integer.toString(pI) +"\" must be numeric");
 			}
 		}
 		return lRes;

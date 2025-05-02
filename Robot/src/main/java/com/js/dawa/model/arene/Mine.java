@@ -39,6 +39,7 @@ public class Mine implements ObjetArene {
 			InfoRender lInforInfoRender = new InfoRender();
 			lInforInfoRender.setColor(mColor);
 			lInforInfoRender.setString("+");
+		
 			lInforInfoRender.setFont("BOLD");
 			lInforInfoRender.setSizePolice(15);
 			CaseRender lRender = new FireBallRender();

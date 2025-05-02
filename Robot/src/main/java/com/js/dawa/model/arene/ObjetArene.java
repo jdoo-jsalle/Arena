@@ -73,5 +73,9 @@ public interface ObjetArene {
 	default void setOver () {
 		//na
 	}
+	
+	default String getName() {
+		return "";
+	}
 
 }
