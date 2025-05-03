@@ -35,18 +35,58 @@ public class InfoRender {
 	}
 	
 	
+	
+	
+	Color getFromRgb () {
+		Color lRes = Color.black;
+		int lPos1 = mColor.indexOf("[");
+		int lPos0 = mColor.lastIndexOf("]");
+		if (lPos0 != -1) {
+			String [] lRgb = mColor.substring(lPos1+1,lPos0).split(",");
+			if (lRgb.length ==3) {
+				int[] lRgbf = new int[3];
+				int l=0;
+				for (String lF : lRgb) {
+					try {
+					   int lC = Integer.parseInt(lF);
+					   if (lC <0 || lC > 255){
+						   lC=0;
+					   }
+					   lRgbf[l]=lC;
+					}
+					catch (NumberFormatException le	) {
+						lRgbf[l]=0;
+						LOGGER.debug("error in translate color",le);
+					}
+					LOGGER.debug("val {} : {}",l,lRgbf[l]);
+					l++;
+				}
+				lRes= new Color (lRgbf[0],lRgbf[1],lRgbf[2]);
+			}
+			
+		}
+		return lRes;
+	}
+	
+	
 	public Color getColorForAwt () {
 		if (mColorAwt == null) {	
-		
-			try {
-				Field field = Class.forName("java.awt.Color").getField(mColor.toUpperCase());
+			
+			LOGGER.debug("color {}",mColor);
+			if (mColor.toUpperCase().startsWith("C[") ){
 				
-				mColorAwt = (Color)field.get(null);
-			} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException 
-					|  NoSuchFieldException| SecurityException  e) {
-					LOGGER.debug("error with color \"" + mColor +"\"",e);
-					mColorAwt = Color.black;
+				mColorAwt = getFromRgb();
 			}
+			else
+				try {
+					Field field = Class.forName("java.awt.Color").getField(mColor.toUpperCase());
+					
+					mColorAwt = (Color)field.get(null);
+				} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException 
+						|  NoSuchFieldException| SecurityException  e) {
+						LOGGER.debug("error with color \"" + mColor +"\"",e);
+						mColorAwt = Color.black;
+				}
 		}
 		 
 		 return mColorAwt;
