@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class TestInfoRender {
+class TestColorRender {
 	
 	@Test
 	void testColor () {
@@ -29,7 +29,7 @@ class TestInfoRender {
         "C[12,-13,500]; java.awt.Color[r=12,g=0,b=0]"
     },delimiter =';')
 	void testColorRgb(String pColor,String pColorAttempt) {
-		InfoRender lInfoRender = new InfoRender();
+		ColorRender lInfoRender = new ColorRender();
 		lInfoRender.setColor(pColor);
 		Color lRes = lInfoRender.getFromRgb();
 		assertEquals(pColorAttempt, lRes.toString());

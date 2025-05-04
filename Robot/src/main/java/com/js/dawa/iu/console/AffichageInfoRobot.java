@@ -2,6 +2,7 @@ package com.js.dawa.iu.console;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.js.dawa.iu.arene.render.ColorRender;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.robot.Robot;
@@ -22,9 +23,11 @@ public class AffichageInfoRobot {
 		for (ModuleArena lModuleArena : mArene.getLstCaseMain()) {
 			if (lModuleArena.isRobot()) {
 				Robot lRobot = (Robot)lModuleArena.getObjetArene();
-				
+				String lColor = lRobot.getColor();
+				ColorRender lcolorRender = new ColorRender();
+				lcolorRender.setColor(lColor); 
 				lRes.append(lComa);
-				lRes.append("<span style=\"color:" + lRobot.getColor() + ";\">");
+				lRes.append("<span style=\"color:" + lcolorRender.convertToHex() + ";\">");
 				lRes.append(lRobot.getRobotProps().getNom());
 				lRes.append(" : ");
 				

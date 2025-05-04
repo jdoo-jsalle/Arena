@@ -3,6 +3,7 @@ package com.js.dawa;
 
 import java.text.DecimalFormat;
 
+import com.js.dawa.iu.arene.render.ColorRender;
 import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.robot.Robot;
@@ -28,8 +29,11 @@ public class InfoEnd {
 		double lAverageSpendByLoop = lEnergie.averageSpendByTurn(mModule.getTotLoop());
 		DecimalFormat decimalFormat = new DecimalFormat("0.0");
 		Robot lRobot = ((Robot)mModule.getObjetArene());
+		String lColor = lRobot.getColor();
+		ColorRender lcolorRender = new ColorRender();
+		lcolorRender.setColor(lColor);
 		return 
-				"<span style=\"color:" + lRobot.getColor() + ";\">" +
+				"<span style=\"color:" + lcolorRender.convertToHex()  + ";\">" +
 				
 				lRobot.getRobotProps().getNom() + " : in " + 
 				Integer.toString(mTour) + " t." +
