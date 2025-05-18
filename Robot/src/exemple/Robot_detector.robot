@@ -1,25 +1,41 @@
 // Initialisation des variables
 init
-	affect(x, 0)
-	affect(y, 0)
-	affect(z, 1)
+	affect(x, 1)
+	affect(y, 1)
+	affect(nd,0)
+	affect(dep,0)
+	affect(tor,1)
 endinit
 loop
-
-   if (x < 10) 
-      avancer (1,0)
-      mine ()
-      affect (x,JS:x+1)
-   else
-      if (y < 10)
-         avancer (0,1)
-         affect (y,JS:y+1)
-      else
-         avancer ($z,0)
-         affect (z,JS:z*-1)
-      endif
+   scan(4)
+   if (detected== false)
+      affect (nd,JS:nd+1)
+   else 
+     poursuite()
+     tir (1,0)
+     tir (0,1)
+     tir (-1,0)
+     tir (0,-1)
+   endif
+   if (nd > 3)
+       if (dep < 5)
+           avancer ($x,$y)
+          // mine()
+           affect (dep,JS:dep+1)
+           if (block == true)
+               if (tor == 0) 
+                   affect (x,JS:x*-1)
+                   affect (tor,1)
+               else 
+                   affect (y,JS:y*-1)
+                   affect (tor,0)
+               endif
+           endif
+       endif
+       if (dep >=5)
+          affect (dep,0)
+          affect (nd,0)
+       endif
    endif
 endloop
-    
- 
   

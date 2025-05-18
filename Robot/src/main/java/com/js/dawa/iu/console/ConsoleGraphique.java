@@ -42,7 +42,7 @@ public class ConsoleGraphique implements Console {
         
         UIPanel lPanelArene = new UIPanel();
         lPanelArene.init(pArene);
-        lPanelArene.setPreferredSize(new Dimension(1400,700));
+        lPanelArene.setPreferredSize(new Dimension(700,700));
       
       
         lPanel.add(lPanelArene,BorderLayout.CENTER);

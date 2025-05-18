@@ -57,6 +57,7 @@ public class RobotRender implements CaseRender {
 	public void paint(Graphics2D pGraphics,int pX,int pY) {
 		RenderString lRenderString = new RenderString();
 		lRenderString.paint(pGraphics, new Position( pX,pY), mInfoRender);
+		pGraphics.drawOval(pX+5, pY+5, 10, 10);//circle
 		
 	}
 	

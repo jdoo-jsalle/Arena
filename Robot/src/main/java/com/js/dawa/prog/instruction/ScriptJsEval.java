@@ -72,13 +72,15 @@ public class ScriptJsEval {
 		
 		
 	    boolean lRes = false;
+	    String lClause ="";
 	    try {
-			String lClause = generateScript(pRobot.getDataBoard(),SCRIPT_JS_COND);
+			lClause = generateScript(pRobot.getDataBoard(),SCRIPT_JS_COND);
 			LOGGER.debug("Clause cond is {}", lClause);
 			lRes = ((Boolean)engine.eval(lClause)).booleanValue();
 	    }
 	    catch (ScriptException le) {
-	    	LOGGER.error("error script",le);
+	    	LOGGER.info("Script is : {}",lClause);
+	    	LOGGER.error("error script " ,le);
 	    	
 	    }
 

@@ -48,7 +48,7 @@ public class EngineViewer {
 		
 			
 			try {
-				Thread.sleep(200);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				LOGGER.error("error", e);
 				Thread.currentThread().interrupt();

@@ -104,7 +104,8 @@ public class InstructionCond implements InstructionLst {
 			lRes = lIfEval.eval(mRobot);
 		}
 		catch(ScriptException le) {
-			LOGGER.debug("Error eval for robot " + mRobot,le);
+			LOGGER.debug("error",le);
+			LOGGER.info("Error eval for robot {}  cond is {}" , mRobot,mArgs.getArgs(0));
 		}
 		return lRes;
 	}
