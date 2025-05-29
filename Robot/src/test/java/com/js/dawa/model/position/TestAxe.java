@@ -29,7 +29,7 @@ class TestAxe {
 	  
 	  @ParameterizedTest
 	     @CsvSource({
-	        "0,0",
+	        "0,360",
 	        "1,45",
 	        "2,90",
 	        "3,135",
@@ -37,7 +37,7 @@ class TestAxe {
 	        "5,225",
 	        "6,270",
 	        "7,315",
-	        "8,0"
+	        "8,360"
      
 	     })
 	void testConvertDegre_huit (int pDir, int pDegre) {
@@ -49,13 +49,13 @@ class TestAxe {
 	  
 	  @ParameterizedTest
 	     @CsvSource({
-	        "0,0",
+	        "0,360",
 	        "1,60",
 	        "2,120",
 	        "3,180",
 	        "4,240",
 	        "5,300",
-	        "6,0"
+	        "6,360"
 	       
   
 	     })

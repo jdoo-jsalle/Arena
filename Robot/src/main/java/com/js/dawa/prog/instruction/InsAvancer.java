@@ -38,6 +38,7 @@ public class InsAvancer implements Instruction {
 		if (mArene != null && mArene.isNewPositionIsOk(mRobot, mX, mY)){
 			mRobot.setInArena(true);
 			mRobot.add(mX,mY);
+			LOGGER.debug("new position {}",mRobot.getPosition());
 		}
 		else {
 			mRobot.setInArena(false);

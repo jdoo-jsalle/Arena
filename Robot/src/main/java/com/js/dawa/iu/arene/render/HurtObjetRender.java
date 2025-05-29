@@ -44,9 +44,9 @@ public class HurtObjetRender implements CaseRender{
 	}
 
 	@Override
-	public void paint(Graphics2D pGraphics,int pX,int pY) {
+	public void paint(Graphics2D pGraphics,Position lPositions) {
 		RenderString lRenderString = new RenderString();
-		lRenderString.paint(pGraphics, new Position( pX,pY), mInfoRender);
+		lRenderString.paint(pGraphics, lPositions, mInfoRender);
 		
 	}
 

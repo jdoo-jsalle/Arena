@@ -5,8 +5,15 @@ public class Position {
 	double mX;
 	double mY;
 	
+	Axe mAxe = new Axe(8);
+	
 	public Position (int pX, int pY) {
 		setXY(pX,pY);
+	}
+	
+	public Position (double pX, double pY, Axe pAxe) {
+		setXY(pX,pY);
+		mAxe = pAxe;
 	}
 	
 	public Position (double pX, double pY) {
@@ -54,7 +61,7 @@ public class Position {
 	}
 	
 	public String toString() {
-		return "X : " + Double.toString(mX)  + " Y : " + Double.toString(mY);
+		return "X : " + Double.toString(mX)  + " Y : " + Double.toString(mY) + " rotation " + mAxe.toString();
 	}
 	
 	public Position getVector (Position pPosition) {
@@ -64,7 +71,7 @@ public class Position {
 		lVx = lVx == 0 ? 0 : (Math.abs(lVx)/lVx);
 		lVy = lVy == 0 ? 0 : (Math.abs(lVy)/lVy);
 		
-		return new Position(lVx,lVy);
+		return new Position(lVx,lVy,mAxe);
 		
 	}
 	
@@ -77,11 +84,20 @@ public class Position {
 	}
 	
 	public Position clonePosition () {
-		return new Position(mX, mY);
+
+		return new Position (mX,mY,mAxe);
 	}
 	
 	public void multByscalaire (double pVal) {
 		mX = mX*pVal;
 		mY = mY*pVal;
+	}
+	
+	public Axe getAxe () {
+		return mAxe;
+	}
+	
+	public void setAxe (Axe pAxe) {
+		mAxe = pAxe;
 	}
 }

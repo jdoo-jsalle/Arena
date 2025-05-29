@@ -53,7 +53,7 @@ public class GridPatternSquare implements GridPattern {
 	public Position transform(Position pPosition) {
 		double lx = (pPosition.getX() -1) * mSizeCase + mDecal ;
 		double ly = (pPosition.getY() -1) * mSizeCase + mDecal ;
-		return new Position(lx, ly);
+		return  new Position(lx, ly,pPosition.getAxe());
 	}
 
 

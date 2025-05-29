@@ -85,7 +85,8 @@ public class WayOfPositionSquare implements WayOfPosition{
 				LOGGER.debug("x0 :{} y0 : {}",x0,y0);
 				//new position for Pos1
 				
-				lPos = new Position (x0,y0);
+				lPos = new Position (x0,y0,lFirst.getAxe());//new intermediary position
+		
 			}
 			
 		}
@@ -107,7 +108,7 @@ public class WayOfPositionSquare implements WayOfPosition{
 	
 
 	double getDistanceForTheDuration (double pDuration) {
-		return  pDuration  /1000;
+		return  pDuration  /1000;//milliseconde
 	}
 	
 	

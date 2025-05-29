@@ -1,9 +1,12 @@
 package com.js.dawa.model.position;
 
 
+
 import com.js.dawa.util.DawaRunTimeException;
 
 public class Axe {
+	
+	
 	
 	private int mDir =0;
 	private int mTotAngle=8;
@@ -32,6 +35,10 @@ public class Axe {
 			throw new DawaRunTimeException("tot angle must be > 0");
 		}
 			
+	}
+	
+	public String toString () {
+		return Integer.toString(mDir);
 	}
 
 
@@ -62,12 +69,12 @@ public class Axe {
 	}
 	
 	double convertDegree () {
-		return  mDir * 360d / mTotAngle;
+		return  mDir == 0 ? 360d : mDir * 360d / mTotAngle;
 	}
 	
-	Position getVector () {
+	public Position getVector () {
 		
-		double lAngle = 2* Math.PI/ convertDegree();
+		double lAngle = Math.toRadians(convertDegree());
 		double lx = Math.cos(lAngle);
 		double ly = Math.sin(lAngle);
 		return new Position (lx,ly);

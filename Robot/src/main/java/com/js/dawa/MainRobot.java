@@ -27,6 +27,10 @@ public class MainRobot {
 	
 	private static final Logger LOGGER =  LoggerFactory.getLogger( MainRobot.class );
 	
+	/**
+	 * Launch Arene here
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		MainRobot lMainRobot = new MainRobot();
 		try {

@@ -11,6 +11,7 @@ import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.AreneProps;
 import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ModuleArena;
+import com.js.dawa.model.position.Axe;
 import com.js.dawa.model.position.Position;
 import com.js.dawa.model.robot.Robot;
 import com.js.dawa.model.robot.RobotsProps;
@@ -27,6 +28,8 @@ public class ParserAreneProps {
 	
 	int ARENE_SIZE = 30;
 	
+	int ARENE_HEDGE = 8;
+	
 	List<ModuleArena> mLstModuleArena = new ArrayList<>();
 	
 	private Arene mArene;
@@ -38,6 +41,8 @@ public class ParserAreneProps {
 	int mPv = LIVE;
 	
 	int mSizeArene = ARENE_SIZE;
+	
+	int mHedgeArene = ARENE_HEDGE;
 	
 	ModuleArena mCurrentModuleArena = null;
 	
@@ -104,6 +109,10 @@ public class ParserAreneProps {
 		else if (pLigne.startsWith("Arene.size")) {
 			mSizeArene = Integer.parseInt(getProperties(pLigne));
 		}
+		else if (pLigne.startsWith("Arene.hedge")) {
+			mHedgeArene = Integer.parseInt(getProperties(pLigne));
+			mArene.getAreneProps().setSize(ARENE_SIZE);
+		}
 		else if (pLigne.startsWith("Name:")) {
 			verify(mCurrentRobot);
 			mCurrentRobot.getRobotProps().setName(getProperties(pLigne));
@@ -119,7 +128,10 @@ public class ParserAreneProps {
 		else if (pLigne.startsWith("Pos:")) {
 			verify(mCurrentRobot);
 			Position lPos = convertInPos (getProperties(pLigne));
+			Axe lAxe = new Axe (mHedgeArene);
+			lPos.setAxe(lAxe);
 			mCurrentRobot.setPosition(lPos);
+			
 			
 		}
 		else if (pLigne.startsWith("#")) {
@@ -154,6 +166,7 @@ public class ParserAreneProps {
 	
 	void initAreneSize () {
 		mArene.getAreneProps().setSize(mSizeArene);
+		mArene.getAreneProps().setHedgeSide(mHedgeArene);
 	}
 	
 	

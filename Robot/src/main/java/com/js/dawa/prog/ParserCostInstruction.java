@@ -26,6 +26,8 @@ public class ParserCostInstruction {
 		mCostInstruction.addCost("mine", 10);
 		mCostInstruction.addCost("fuite", 4);
 		mCostInstruction.addCost("poursuite", 4);
+		//
+		mCostInstruction.addCost("rotate", 1);
 		
 		
 	}

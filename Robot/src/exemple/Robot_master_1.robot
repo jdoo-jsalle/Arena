@@ -19,6 +19,7 @@ loop
          affect (z,JS:z*-1)
       endif
    endif
+   rotate (1)
 endloop
     
  

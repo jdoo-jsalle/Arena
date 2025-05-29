@@ -9,6 +9,7 @@ public class AreneProps {
 	
 	static String SIZE = "SIZE";
 	static String TITLE ="TITLE";
+	static String HEDGE_SIZE ="HEDGE_SIZE";
 	
 	
 	
@@ -31,6 +32,10 @@ public class AreneProps {
 		return mLstAttributs.get(TITLE).getValueAttributString();
 	}
 	
+	public int getHedgeSize () {
+		return mLstAttributs.get(HEDGE_SIZE).getValueAttribut();
+	}
+	
 	public void setSize (int pSize) {
 		Attribut lAttribut = new Attribut();
 		lAttribut.setValueAttribut(pSize);
@@ -42,5 +47,11 @@ public class AreneProps {
 		lAttribut.setValueAttributString(pTitle);
 		mLstAttributs.put (TITLE,lAttribut);
 		
+	}
+	
+	public void setHedgeSide (int pHedgeSize) {
+		Attribut lAttribut = new Attribut();
+		lAttribut.setValueAttribut(pHedgeSize);
+		mLstAttributs.put (HEDGE_SIZE,lAttribut);
 	}
 }
