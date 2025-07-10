@@ -12,12 +12,13 @@ public class MainRobotLaunch {
 			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_mine.properties"},
 			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_mine2.properties"},
 			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_Fake.properties"},
-			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_init.properties"}
+			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_init.properties"},
+			 new String [] {"-D", "./src/exemple/tests/","-F","Arene_boid.properties"}
 			 
 		};
 		
 		
-		MainRobot.main(lArgs[0]);
+		MainRobot.main(lArgs[6]);
 	}
 
 }
