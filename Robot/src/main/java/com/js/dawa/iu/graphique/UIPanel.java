@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.GridPattern;
-import com.js.dawa.iu.arene.render.GridPatternSquare;
+import com.js.dawa.iu.arene.render.GridPatternHex;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
@@ -29,7 +29,7 @@ public class UIPanel extends JPanel{
 	private transient Graphics2D g2;
 	
 	
-	transient GridPattern mGridPattern = new GridPatternSquare();
+	transient GridPattern mGridPattern = new GridPatternHex();
 
 	transient  Arene mArene;
 	/**

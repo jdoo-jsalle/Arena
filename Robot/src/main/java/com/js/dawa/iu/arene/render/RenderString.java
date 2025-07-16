@@ -9,8 +9,11 @@ import com.js.dawa.model.position.Position;
 public class RenderString {
 	
 	
-	static int decalX = 6;//for center letter
-	static int decalY = 15;
+	//static int decalX = 6;//for center letter
+	//static int decalY = 15;
+	
+	static int decalX = 0;//for center letter hexa
+	static int decalY = 0;
 	
 	public void paint (Graphics2D pGraphics, Position pPosition, InfoRender pInfoRender) {
 		Position lPosition = pPosition;

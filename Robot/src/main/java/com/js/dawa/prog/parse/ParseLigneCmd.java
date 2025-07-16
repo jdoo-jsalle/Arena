@@ -89,6 +89,7 @@ public class ParseLigneCmd implements ParseLigne {
 		else if (lLigne.trim().startsWith("endif")) {
 			//depile
 			mCurrentInstruction = mPileInstruction.popAndPeek();
+			mCurrentInstruction.setFlag("if");//issue #32
 			LOGGER.debug("<<<depop {}",mCurrentInstruction);
 			
 		
