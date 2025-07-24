@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.js.dawa.iu.arene.render.CaseRender;
 import com.js.dawa.iu.arene.render.GridPattern;
 import com.js.dawa.iu.arene.render.GridPatternHex;
+import com.js.dawa.iu.arene.render.GridPatternSquare;
 import com.js.dawa.model.arene.Arene;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.arene.ObjetArene;
@@ -24,7 +25,7 @@ import com.js.dawa.model.position.Position;
  * UIPanel : panneau graphique principal pour l'affichage de l'arène et des robots.
  * Gère le rendu de la grille, des objets et des robots sur un buffer pour éviter le scintillement.
  */
-public class UIPanel extends JPanel{
+public class UIPanel extends JPanel implements ManageBuffer{
 	
 	private static final Logger LOGGER =  LoggerFactory.getLogger( UIPanel.class );
 	
@@ -33,7 +34,7 @@ public class UIPanel extends JPanel{
 	private transient Graphics2D g2;
 	
 	// Grille utilisée pour l'affichage (hexagonale par défaut)
-	transient GridPattern mGridPattern = new GridPatternHex();
+	transient GridPattern mGridPattern = new GridPatternSquare();
 
 	// Référence à l'arène à afficher
 	transient  Arene mArene;
@@ -51,16 +52,8 @@ public class UIPanel extends JPanel{
 		mGridPattern.init(pArene);
 	}
 	
-	/**
-	 * Méthode de rendu principale appelée par Swing.
-	 * Utilise un buffer pour dessiner la grille et les objets, puis affiche le buffer à l'écran.
-	 * @param pg le contexte graphique fourni par Swing
-	 */
-	@Override	
-	public void paint (Graphics pg) {
-		LOGGER.debug("UIPanel.paint");
-		super.paint(pg);
-		
+	
+	public void updateBuffer () {
 		// Création du buffer si nécessaire
 		if (buffer == null) {
 			buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -86,9 +79,25 @@ public class UIPanel extends JPanel{
 				print(lModuleArene.getObjetArene());
 			 }
 	     }
+		
+		g2.dispose();
+		
+	}
+	
+	/**
+	 * Méthode de rendu principale appelée par Swing.
+	 * Utilise un buffer pour dessiner la grille et les objets, puis affiche le buffer à l'écran.
+	 * @param pg le contexte graphique fourni par Swing
+	 */
+	@Override	
+	protected void paintComponent (Graphics pg) {
+		LOGGER.debug("UIPanel.paint");
+		super.paintComponent(pg);
+		
+		updateBuffer();
 		// Affiche le buffer à l'écran
 		pg.drawImage(buffer, 0, 0, this);
-		g2.dispose();
+	
 	}
 	
 	/**

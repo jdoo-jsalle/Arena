@@ -25,7 +25,7 @@ public class ConsoleGraphique implements Console {
 	JLabel mText;
 	
 	UpdateImageThread mThread;
-	
+	UIPanel mPanelArene;
 	
 	@Override
 	public void init (Arene pArene) {
@@ -40,12 +40,12 @@ public class ConsoleGraphique implements Console {
         
         
         
-        UIPanel lPanelArene = new UIPanel();
-        lPanelArene.init(pArene);
-        lPanelArene.setPreferredSize(new Dimension(700,700));
+         mPanelArene= new UIPanel();
+         mPanelArene.init(pArene);
+         mPanelArene.setPreferredSize(new Dimension(700,700));
       
       
-        lPanel.add(lPanelArene,BorderLayout.CENTER);
+        lPanel.add(mPanelArene,BorderLayout.CENTER);
    
         
         // Création de la zone de texte

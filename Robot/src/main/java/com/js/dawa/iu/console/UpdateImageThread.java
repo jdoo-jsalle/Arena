@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.js.dawa.iu.graphique.ManageBuffer;
+
 public class UpdateImageThread implements Runnable{
 	
 	private static final Logger LOGGER =  LoggerFactory.getLogger( UpdateImageThread.class );
@@ -17,6 +19,7 @@ public class UpdateImageThread implements Runnable{
 	
 	UpdateImageThread (JFrame pLabel){
 		mFrame = pLabel;
+
 	}
 	
 	void start (){
@@ -31,6 +34,7 @@ public class UpdateImageThread implements Runnable{
 	public void run() {
 		while (!mEnd) {
 			LOGGER.debug("loop repaint");
+			
 			mFrame.repaint();
 			try {
 				Thread.sleep(41);

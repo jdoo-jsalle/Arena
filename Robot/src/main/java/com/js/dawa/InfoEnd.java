@@ -8,27 +8,20 @@ import com.js.dawa.model.arene.Energie;
 import com.js.dawa.model.arene.ModuleArena;
 import com.js.dawa.model.robot.Robot;
 
-/**
- * Classe représentant les informations de fin de partie pour un robot donné.
- * Permet d'afficher un résumé des performances du robot (énergie, nombre de tours, dégâts, etc.).
- */
 public class InfoEnd {
 	
-	/** Numéro du tour où le robot a été éliminé ou a gagné */
+	
 	int mTour;
 	
-	/** ModuleArena associé (robot et ses propriétés) */
 	ModuleArena mModule;
 	
-	/**
-	 * Retourne une chaîne HTML résumant les statistiques du robot à la fin de la partie.
-	 * @return Statistiques formatées (nom, énergie, moyenne par tour, dégâts, etc.)
-	 */
+	
+	
 	public String toString () {
 		String lLEnergie ="";
 		Energie lEnergie = mModule.getObjetArene().getEnergie();
 		if (!lEnergie.isEmpty()) {
-			lLEnergie = " (Energie restante : " + Integer.toString(lEnergie.getTot()) + ")";
+			lLEnergie = " (Energie Left : " + Integer.toString(lEnergie.getTot()) + ")";
 			
 		}
 		double lAverageSpendByTurn = lEnergie.averageSpendByTurn(mTour);
@@ -42,7 +35,7 @@ public class InfoEnd {
 		return 
 				"<span style=\"color:" + lcolorRender.convertToHex()  + ";\">" +
 				
-				lRobot.getRobotProps().getNom() + " : en " + 
+				lRobot.getRobotProps().getNom() + " : in " + 
 				Integer.toString(mTour) + " t." +
 				Integer.toString(mModule.getTotLoop()) + " b." +
 				 lLEnergie + 

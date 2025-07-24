@@ -19,9 +19,7 @@ public class GridPatternHex implements GridPattern {
 
     @Override
     public void paint(Graphics2D g) {
-        double w = Math.sqrt(3) * mSizeCase;
-        double h = 2 * mSizeCase;
-        for (int r = 0; r < mSizeArene; r++) {
+         for (int r = 0; r < mSizeArene; r++) {
             for (int q = 0; q < mSizeArene; q++) {
                 Position pos = transform(new Position(q + 1, r + 1));
                 Polygon hex = hexagon((int) pos.getX(), (int) pos.getY(), mSizeCase);
